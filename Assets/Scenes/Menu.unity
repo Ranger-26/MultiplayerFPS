@@ -456,18 +456,23 @@ MonoBehaviour:
   autoStartServerBuild: 1
   serverTickRate: 64
   offlineScene: Assets/Scenes/Menu.unity
-  onlineScene: Assets/Scenes/Game.unity
+  onlineScene: Assets/Scenes/Lobby.unity
   transport: {fileID: 226896321}
   networkAddress: localhost
   maxConnections: 10
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 5789010011634620522, guid: 99fbdc7f712ba924c9659995bdd04494, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs: []
-  PlayerList: PlayerList
-  AttackerSpawn: 
-  DefenderSpawn: 
+  showRoomGUI: 1
+  minPlayers: 1
+  roomPlayerPrefab: {fileID: 2018583103078967544, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+  RoomScene: Assets/Scenes/Lobby.unity
+  GameplayScene: Assets/Scenes/Game.unity
+  _allPlayersReady: 0
+  roomSlots: []
+  clientIndex: 0
 --- !u!1 &284484413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,3 +2802,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121547255}
   m_CullTransparentMesh: 1
+--- !u!1001 &350981798635479910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.8439882
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6200577
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.8021525
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682163009397974677, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728794338588979397, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: sceneId
+      value: 3677076706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390863302089298678, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
+      propertyPath: m_Name
+      value: NetworkRoomPlayer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}

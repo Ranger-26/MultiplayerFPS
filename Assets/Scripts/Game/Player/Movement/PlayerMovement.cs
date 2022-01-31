@@ -43,15 +43,6 @@ namespace Game.Player.Movement
 		public bool JumpQueue = false;
 		public bool wishJump = false;
 
-		//UI
-		private Vector3 lastPos;
-		private Vector3 moved;
-		public Vector3 PlayerVel;
-		public float ModulasSpeed;
-		public float ZVelocity;
-		public float XVelocity;
-		//End UI
-
 		public Vector3 moveDirection;
 		public Vector3 moveDirectionNorm;
 		private Vector3 playerVelocity;
@@ -71,29 +62,16 @@ namespace Game.Player.Movement
 
 		private void Start()
 		{
-			if (!hasAuthority) this.enabled = false;
-			//This is for UI, feel free to remove the Start() function.
-			lastPos = player.position;
+			if (!hasAuthority) enabled = false;
+			// I think we should have a differnet gameobject for other players,
+			// we can do this by instantiating the other player object on spawn
+			// and removing this one while assigning the instantiated gameobject to the other client
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
 			//if (!hasAuthority) return;
-			
-			#region // UI, Feel free to remove the region.
-
-			moved = player.position - lastPos;
-			lastPos = player.position;
-			PlayerVel = moved / Time.fixedDeltaTime;
-
-			ZVelocity = Mathf.Abs(PlayerVel.z);
-			XVelocity = Mathf.Abs(PlayerVel.x);
-
-
-			ModulasSpeed = Mathf.Sqrt(PlayerVel.z * PlayerVel.z + PlayerVel.x * PlayerVel.x);
-
-			#endregion
 
 			IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
 

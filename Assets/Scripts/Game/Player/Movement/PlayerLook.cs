@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Player.Movement
 {
-    public class PlayerLook : NetworkBehaviour
+    public class PlayerLook : MonoBehaviour
     {
         public float lookSpeed = 1.0f;
         public float lookXLimit = 90.0f;
@@ -24,7 +24,6 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            if (!hasAuthority) return;
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             rotationY = Input.GetAxis("Mouse X") * lookSpeed + addY;

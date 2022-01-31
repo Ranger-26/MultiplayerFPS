@@ -71,6 +71,7 @@ namespace Game.Player.Movement
 
 		private void Start()
 		{
+			if (!hasAuthority) this.enabled = false;
 			//This is for UI, feel free to remove the Start() function.
 			lastPos = player.position;
 		}
@@ -78,7 +79,7 @@ namespace Game.Player.Movement
 		// Update is called once per frame
 		void Update()
 		{
-			if (!hasAuthority) return;
+			//if (!hasAuthority) return;
 			
 			#region // UI, Feel free to remove the region.
 

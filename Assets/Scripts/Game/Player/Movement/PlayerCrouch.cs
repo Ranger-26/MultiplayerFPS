@@ -1,8 +1,9 @@
 using UnityEngine;
+using Mirror;
 
 namespace Game.Player.Movement
 {
-    public class PlayerCrouch : MonoBehaviour
+    public class PlayerCrouch : NetworkBehaviour
     {
         public float CrouchHeight;
         public float StandingHeight;
@@ -18,6 +19,11 @@ namespace Game.Player.Movement
             playerMovement = GetComponent<PlayerMovement>();
             controller = GetComponent<CharacterController>();
             controller.height = StandingHeight;
+        }
+
+        private void Start()
+        {
+            if (!isLocalPlayer) enabled = false;
         }
 
         private void Update()

@@ -62,7 +62,7 @@ namespace Game.Player.Movement
 
 		private void Start()
 		{
-			if (!hasAuthority) enabled = false;
+			if (!isLocalPlayer) enabled = false;
 			// I think we should have a differnet gameobject for other players,
 			// we can do this by instantiating the other player object on spawn
 			// and removing this one while assigning the instantiated gameobject to the other client
@@ -92,6 +92,7 @@ namespace Game.Player.Movement
 			if (udp.magnitude > playerTopVelocity)
 				playerTopVelocity = udp.magnitude;
 		}
+
 		public void SetMovementDir()
 		{
 			x = Input.GetAxis("Horizontal");

@@ -58,11 +58,15 @@ namespace Game.Player.Movement
 
 		public Transform player;
 		Vector3 udp;
-
-
+		
+		
 		private void Start()
 		{
-			if (!isLocalPlayer) enabled = false;
+			if (!isLocalPlayer)
+			{
+				enabled = false;
+				playerView.gameObject.SetActive(false);
+			}
 			// I think we should have a differnet gameobject for other players,
 			// we can do this by instantiating the other player object on spawn
 			// and removing this one while assigning the instantiated gameobject to the other client

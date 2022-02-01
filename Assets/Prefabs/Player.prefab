@@ -53,7 +53,7 @@ MonoBehaviour:
   CrouchHeight: 1
   StandingHeight: 2
   CrouchSpeed: 4
-  NormalSpeed: 7
+  NormalSpeed: 8
 --- !u!114 &6012355211494385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,17 +74,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   GroundDistance: 0.4
-  moveSpeed: 7
+  moveSpeed: 8
   runAcceleration: 14
   runDeacceleration: 10
-  airAcceleration: 2
+  airAcceleration: 1
   airDeacceleration: 2
   airControl: 0.7
   sideStrafeAcceleration: 100
-  sideStrafeSpeed: 2
-  jumpSpeed: 8
-  friction: 6
-  playerFriction: 0
+  sideStrafeSpeed: 3
+  jumpSpeed: 7
+  friction: 8
+  playerFriction: 1
   JumpQueue: 0
   wishJump: 0
   moveDirection: {x: 0, y: 0, z: 0}
@@ -406,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6153013886324232626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}

@@ -41,6 +41,7 @@ public class Gun : ScriptableObject
     public float ReloadTime = 3f;
 
     public int MaxAmmo = 30;
+    public int ReserveAmmo = 90;
 
     [Header("Other Settings")]
     public LayerMask HitLayers;

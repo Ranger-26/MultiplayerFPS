@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
+  m_Name: Makarov
+  m_EditorClassIdentifier: 
+  Damage: 40
+  Range: 60
+  RPS: 9.5
+  BulletCount: 1
+  GunFiringMode: 0
+  Spread: 0.5
+  MovementSpread: 5
+  SpreadMultiplier: 5
+  MaxSpread: 3
+  MaxMovementSpread: 18
+  StartingSpread: 0.05
+  Recoil: 0.5
+  HorizonalRecoil: 1
+  MaxHorizontal: 4
+  MovementMultiplier: 1
+  ShootingMultiplier: 1
+  RecoilDecay: 1
+  SwayAfterRound: 8
+  SwayStartRight: 0
+  HasScope: 0
+  ScopeFOV: 67.5
+  ScopeImage: {fileID: 0}
+  ReloadTime: 3
+  MaxAmmo: 30
+  ReserveAmmo: 90
+  HitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  DroppedForm: {fileID: 0}
+  ViewModel: {fileID: 0}
+  GunSlot: 0
+  DrawTime: 1
+  HitObject: {fileID: 0}
+  HitDecal: {fileID: 0}
+  Tracer: {fileID: 0}
+  NoTracerRange: 10
+  TracerPercentage: 0.75
+  AimPunch: 1
+  AimPunchDuration: 0.05
+  ShootSounds: []
+  SoundMaxDistance: 100
+  SoundVolume: 1
+  SoundPriority: 128

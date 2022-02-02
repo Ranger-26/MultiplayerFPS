@@ -9,6 +9,7 @@ namespace Game.Player.Movement
         public float StandingHeight;
 
         public float CrouchSpeed;
+        public float WalkingSpeed;
         public float NormalSpeed;
 
         CharacterController controller;
@@ -30,6 +31,11 @@ namespace Game.Player.Movement
         {
             controller.height = Input.GetKey(KeyCode.LeftControl) ? CrouchHeight : StandingHeight;
             playerMovement.moveSpeed = Input.GetKey(KeyCode.LeftControl) ? CrouchSpeed : NormalSpeed;
+
+            if (!Input.GetKey(KeyCode.LeftControl))
+            {
+                playerMovement.moveSpeed = Input.GetKey(KeyCode.LeftShift) ? WalkingSpeed : NormalSpeed;
+            }
         }
     }
 }

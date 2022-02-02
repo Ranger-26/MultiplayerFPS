@@ -55,8 +55,9 @@ MonoBehaviour:
   syncInterval: 0.1
   CrouchHeight: 1
   StandingHeight: 2
-  CrouchSpeed: 4
-  NormalSpeed: 8
+  CrouchSpeed: 3
+  WalkingSpeed: 5
+  NormalSpeed: 7
 --- !u!114 &6012355211494385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,11 +81,11 @@ MonoBehaviour:
   moveSpeed: 8
   runAcceleration: 14
   runDeacceleration: 10
-  airAcceleration: 1
+  airAcceleration: 0.2
   airDeacceleration: 2
-  airControl: 0.7
-  sideStrafeAcceleration: 100
-  sideStrafeSpeed: 3
+  airControl: 1
+  sideStrafeAcceleration: 75
+  sideStrafeSpeed: 1.5
   jumpSpeed: 7
   friction: 8
   playerFriction: 1
@@ -114,7 +115,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5634619221568210415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5789010012695376366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}
@@ -409,7 +410,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6153013886324232626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}
@@ -441,7 +442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7553357126425196042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}

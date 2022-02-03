@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace Game.Player.Movement
 {
-    public class PlayerLook : MonoBehaviour
+    public class PlayerLook : NetworkBehaviour
     {
+        public static PlayerLook Instance;
+
         public float lookSpeed = 1.0f;
         public float lookXLimit = 90.0f;
 
@@ -16,6 +18,8 @@ namespace Game.Player.Movement
 
         private void Awake()
         {
+
+
             Player = transform.parent;
 
             Cursor.lockState = CursorLockMode.Locked;

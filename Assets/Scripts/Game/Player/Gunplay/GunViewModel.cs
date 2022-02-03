@@ -41,5 +41,7 @@ public class GunViewModel : MonoBehaviour
         {
             Debug.Log(_hit.transform.gameObject.name);
         }
+
+
     }
 }

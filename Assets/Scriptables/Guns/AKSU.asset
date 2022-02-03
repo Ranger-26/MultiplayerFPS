@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
-  m_Name: Makarov
+  m_Name: AKSU
   m_EditorClassIdentifier: 
   Damage: 40
   Range: 60
   RPS: 9.5
   BulletCount: 1
-  GunFiringMode: 1
+  GunFiringMode: 0
   Spread: 0.5
   MovementSpread: 5
   MaxSpread: 3

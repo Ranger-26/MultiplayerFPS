@@ -8,7 +8,12 @@ namespace Game.Player.Gunplay
     {
         public Gun gun;
 
+        PlayerMovement PM;
+        PlayerLook PL;
+
         Transform cam;
+        Transform firingPoint;
+        Transform spreadPoint;
 
         int currentAmmo;
         int reserve;
@@ -16,6 +21,7 @@ namespace Game.Player.Gunplay
         float recoilFactor;
         float spread;
         float moveSpread;
+        float horizontalRecoil;
 
         bool delay;
         bool isSpraying;
@@ -24,7 +30,11 @@ namespace Game.Player.Gunplay
 
         private void Awake()
         {
+            PM = PlayerMovement.Instance;
+            PL = PlayerLook.Instance;
             cam = Camera.main.transform;
+            firingPoint = cam.GetChild(0);
+            spreadPoint = firingPoint.GetChild(0);
         }
 
         private void Update()
@@ -42,6 +52,7 @@ namespace Game.Player.Gunplay
             if (!delay)
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - gun.RecoilDecay * Time.fixedDeltaTime, 0f, gun.SwayAfterRound + 1);
+                spread = Mathf.Clamp(spread - gun.RecoilDecay * Time.fixedDeltaTime, gun.StartingSpread, gun.MaxSpread);
             }
         }
 
@@ -59,6 +70,8 @@ namespace Game.Player.Gunplay
 
             Recoil();
 
+            StartCoroutine(AimPunch());
+
             yield return new WaitForSecondsRealtime(1f / gun.RPS);
 
             delay = false;
@@ -69,7 +82,7 @@ namespace Game.Player.Gunplay
             Spread();
 
             RaycastHit _hit;
-            if (Physics.Raycast(cam.position, cam.forward, out _hit, gun.Range))
+            if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
             {
                 Debug.Log(_hit.transform.gameObject.name);
             }
@@ -81,18 +94,55 @@ namespace Game.Player.Gunplay
 
             if (recoilFactor < gun.SwayAfterRound)
             {
-                PlayerLook.Instance.MoveCamera(gun.Recoil);
+                PL.MoveCamera(gun.Recoil);
             }
             else
             {
-                PlayerLook.Instance.MoveCamera(0f, (horizontalDirection ? 1 : -1) * gun.HorizonalRecoil);
+                PL.MoveCamera(0f, (horizontalDirection ? 1 : -1) * gun.HorizontalRecoil);
+
+                horizontalRecoil += gun.HorizontalRecoil;
+
+                if (horizontalRecoil > gun.MaxHorizontal || horizontalRecoil < -gun.MaxHorizontal)
+                {
+                    horizontalDirection = !horizontalDirection;
+                    horizontalRecoil = -gun.MaxHorizontal;
+                }
             }
         }
 
         private void Spread()
         {
             spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
-            moveSpread = Mathf.Clamp(moveSpread + gun.MovementSpread, gun.StartingSpread, gun.MaxMovementSpread);
+            moveSpread = Mathf.Clamp(gun.MovementSpread * PM.controller.velocity.magnitude, gun.StartingSpread, gun.MaxMovementSpread);
+
+            float totalSpread = spread + moveSpread;
+
+            spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
+        }
+
+        public IEnumerator AimPunch()
+        {
+            float timer = 0f;
+
+            while (timer <= gun.AimPunchDuration / 3)
+            {
+                PL.MoveCamera(gun.AimPunch / (gun.AimPunchDuration / 3) * Time.fixedDeltaTime);
+
+                timer += Time.fixedDeltaTime;
+
+                yield return new WaitForFixedUpdate();
+            }
+
+            timer = 0f;
+
+            while (timer <= gun.AimPunchDuration * 2 / 3)
+            {
+                PL.MoveCamera(-gun.AimPunch / (gun.AimPunchDuration * 2 / 3) * Time.fixedDeltaTime);
+
+                timer += Time.fixedDeltaTime;
+
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

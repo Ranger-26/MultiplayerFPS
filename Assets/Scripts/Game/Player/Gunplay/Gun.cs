@@ -15,7 +15,6 @@ public class Gun : ScriptableObject
     [Header("Recoil & Inaccuracy")]
     public float Spread = 0.5f;
     public float MovementSpread = 5f;
-    public float SpreadMultiplier = 5f;
     public float MaxSpread = 3f;
     public float MaxMovementSpread = 18f;
     public float StartingSpread = 0.05f;

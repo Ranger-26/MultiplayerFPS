@@ -38,11 +38,19 @@ namespace Lobby
                 if (player.assignedRole == Role.Mtf)
                 {
                     mtfNameTexts[countMtf].text = player.playerName;
+                    if (mtfNameTexts[countMtf].gameObject.GetComponentInParent<LobbyPlayerUi>().player == null)
+                    {
+                        mtfNameTexts[countMtf].gameObject.GetComponentInParent<LobbyPlayerUi>().player = player;
+                    }
                     countMtf++;
                 }
                 if (player.assignedRole == Role.Chaos)
                 {
                     chaosNameTexts[countChaos].text = player.playerName;
+                    if (chaosNameTexts[countChaos].gameObject.GetComponentInParent<LobbyPlayerUi>().player == null)
+                    {
+                        chaosNameTexts[countChaos].gameObject.GetComponentInParent<LobbyPlayerUi>().player = player;
+                    }
                     countChaos++;
                 }
             }

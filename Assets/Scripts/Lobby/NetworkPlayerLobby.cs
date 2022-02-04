@@ -5,6 +5,7 @@ using Networking;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Lobby
@@ -14,7 +15,9 @@ namespace Lobby
         [SyncVar]
         public Role assignedRole;
 
-        [SyncVar] public string playerName; 
+        [SyncVar] public string playerName = String.Empty;
+
+        [SyncVar] public int id;
         
         private NetworkManagerScp m_room;
         private NetworkManagerScp Room
@@ -36,6 +39,7 @@ namespace Lobby
         private void CmdSetName()
         {
             playerName = PlayerProfileManager.GetPlayerName();
+            id = Room.roomSlots.Count;
         }
     }
 }

@@ -1,6 +1,7 @@
 using Mirror;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using Game.GameLogic;
 using Game.Player;
 using Lobby;
@@ -46,7 +47,7 @@ namespace Networking
         }
         
         
-        public override void OnServerDisconnect(NetworkConnection conn)
+        public override void OnRoomServerDisconnect(NetworkConnection conn)
         {
             if (conn.identity != null)
             {
@@ -62,8 +63,6 @@ namespace Networking
                     mtf.Remove(player);
                 }
             }
-
-            base.OnServerDisconnect(conn);
         }
         
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)

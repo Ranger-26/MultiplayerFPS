@@ -54,6 +54,22 @@ namespace Lobby
                     countChaos++;
                 }
             }
+
+            for (int i = 0; i < mtfNameTexts.Length; i++)
+            {
+                if (mtfNameTexts[i].text != "None" && mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
+                {
+                    mtfNameTexts[i].text = "None";
+                }
+            }
+            
+            for (int i = 0; i < chaosNameTexts.Length; i++)
+            {
+                if (chaosNameTexts[i].text != "None" && chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
+                {
+                    chaosNameTexts[i].text = "None";
+                }
+            }
         }
     }
 }

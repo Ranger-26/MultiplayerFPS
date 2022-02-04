@@ -35,7 +35,7 @@ namespace Lobby
         [Command]
         private void CmdSetName()
         {
-            playerName = "Player" + Room.allPlayers.Count;
+            playerName = PlayerProfileManager.GetPlayerName();
         }
     }
 }

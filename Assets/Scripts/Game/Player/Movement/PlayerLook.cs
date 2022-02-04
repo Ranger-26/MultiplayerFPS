@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Player.Movement
 {
-    public class PlayerLook : NetworkBehaviour
+    public class PlayerLook : MonoBehaviour
     {
         public static PlayerLook Instance;
 

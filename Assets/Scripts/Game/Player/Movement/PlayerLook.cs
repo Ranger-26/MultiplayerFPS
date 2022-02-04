@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Player.Movement
 {
-    public class PlayerLook : NetworkBehaviour
+    public class PlayerLook : MonoBehaviour
     {
         public static PlayerLook Instance;
 
@@ -18,7 +18,14 @@ namespace Game.Player.Movement
 
         private void Awake()
         {
-
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                enabled = false;
+            }
 
             Player = transform.parent;
 

@@ -7,6 +7,8 @@ namespace Game.Player.Movement
 {
 	public class PlayerMovement : NetworkBehaviour
 	{
+		public static PlayerMovement Instance;
+
 		public CharacterController controller;
 		public Transform GroundCheck;
 		public LayerMask GroundMask;
@@ -58,9 +60,20 @@ namespace Game.Player.Movement
 
 		public Transform player;
 		Vector3 udp;
-		
-		
-		private void Start()
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+				Instance = this;
+            }
+            else
+            {
+				enabled = false;
+            }
+        }
+
+        private void Start()
 		{
 			if (!isLocalPlayer)
 			{

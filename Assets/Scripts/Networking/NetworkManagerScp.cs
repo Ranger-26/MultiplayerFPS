@@ -44,5 +44,11 @@ namespace Networking
                 chaos.Add(player);
             }
         }
+        
+        public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
+        {
+            gamePlayer.GetComponent<NetworkGamePlayer>().role = roomPlayer.GetComponent<NetworkPlayerLobby>().assignedRole;
+            return true;
+        }
     }
 }

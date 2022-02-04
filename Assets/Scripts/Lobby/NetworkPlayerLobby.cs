@@ -32,7 +32,6 @@ namespace Lobby
             CmdSetName();
         }
 
-        
         [Command]
         private void CmdSetName()
         {

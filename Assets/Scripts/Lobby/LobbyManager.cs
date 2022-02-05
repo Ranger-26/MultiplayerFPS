@@ -19,7 +19,8 @@ namespace Lobby
 
         public void LeaveGame()
         {
-            
+            if (isServer) NetworkManager.singleton.StopHost();
+            NetworkManager.singleton.StopClient();
         }
     }
 }

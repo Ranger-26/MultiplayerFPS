@@ -23,11 +23,11 @@ MonoBehaviour:
   MaxMovementSpread: 18
   StartingSpread: 0.05
   Recoil: 0.5
-  HorizonalRecoil: 1
+  HorizontalRecoil: 1
   MaxHorizontal: 4
-  MovementMultiplier: 1
-  ShootingMultiplier: 1
   RecoilDecay: 1
+  Displacement: 1
+  MaxDisplacement: 4
   SwayAfterRound: 8
   SwayStartRight: 0
   HasScope: 0
@@ -38,16 +38,11 @@ MonoBehaviour:
   ReserveAmmo: 90
   HitLayers:
     serializedVersion: 2
-    m_Bits: 0
-  DroppedForm: {fileID: 0}
-  ViewModel: {fileID: 0}
+    m_Bits: 65
   GunSlot: 0
   DrawTime: 1
-  HitObject: {fileID: 0}
-  HitDecal: {fileID: 0}
-  Tracer: {fileID: 0}
-  NoTracerRange: 10
-  TracerPercentage: 0.75
+  HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
+  HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   AimPunch: 1
   AimPunchDuration: 0.05
   ShootSounds: []

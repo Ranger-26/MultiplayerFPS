@@ -43,8 +43,8 @@ namespace Game.Player.Gunplay
 
         private void Awake()
         {
-            PM = PlayerMovement.Instance;
-            PL = PlayerLook.Instance;
+            PM = GetComponentInParent<PlayerMovement>();
+            PL = GetComponentInParent<PlayerLook>();
             cam = Camera.main.transform;
             firingPoint = cam.GetChild(0);
             spreadPoint = firingPoint.GetChild(0);
@@ -53,6 +53,9 @@ namespace Game.Player.Gunplay
 
             currentAmmo = gun.MaxAmmo;
             reserve = gun.ReserveAmmo;
+            
+            if (PM == null) {Debug.LogError("Player movement is null!");}
+            if (PL == null) {Debug.LogError("Player look is null!");}
         }
 
         private void OnEnable()

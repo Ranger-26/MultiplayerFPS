@@ -5,8 +5,6 @@ namespace Game.Player.Movement
 {
 	public class PlayerMovement : NetworkBehaviour
 	{
-        public static PlayerMovement Instance;
-
         public CharacterController controller;
 
         public float speed = 12f;
@@ -21,19 +19,7 @@ namespace Game.Player.Movement
         public LayerMask groundMask;
 
         bool isGrounded;
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                enabled = false;
-            }
-        }
-
+        
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;

@@ -5,12 +5,11 @@ namespace Game.Player.Movement
 {
     public class PlayerLook : NetworkBehaviour
     {
-        public static PlayerLook Instance;
-
         public float lookSpeed = 1.0f;
         public float lookXLimit = 90.0f;
 
-        Transform cam;
+        [SerializeField]
+        Camera cam;
 
         float rotationX = 0;
         float rotationY = 0;
@@ -18,16 +17,7 @@ namespace Game.Player.Movement
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                enabled = false;
-            }
-
-            cam = transform.GetChild(0);
+            //cam = transform.GetChild(0);
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -35,7 +25,11 @@ namespace Game.Player.Movement
 
         private void Start()
         {
-            if (!isLocalPlayer) enabled = false;
+            if (!isLocalPlayer)
+            {
+                cam.enabled = false;
+                enabled = false;
+            }
         }
 
         private void Update()
@@ -44,7 +38,7 @@ namespace Game.Player.Movement
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             rotationY = Input.GetAxis("Mouse X") * lookSpeed + addY;
             addY = 0f;
-            cam.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
         }
 
@@ -53,7 +47,7 @@ namespace Game.Player.Movement
             rotationX += -x;
             addY = y;
 
-            cam.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
         }
 
@@ -61,7 +55,7 @@ namespace Game.Player.Movement
         {
             rotationX += -x;
 
-            cam.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
         }
 
@@ -70,7 +64,7 @@ namespace Game.Player.Movement
             rotationX += -move.x;
             addY = move.y;
 
-            cam.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
         }
 

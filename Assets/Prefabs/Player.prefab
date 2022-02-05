@@ -257,6 +257,7 @@ MonoBehaviour:
   syncInterval: 0.1
   lookSpeed: 1
   lookXLimit: 90
+  cam: {fileID: 5789010012695376352}
 --- !u!143 &4797266027872760663
 CharacterController:
   m_ObjectHideFlags: 0

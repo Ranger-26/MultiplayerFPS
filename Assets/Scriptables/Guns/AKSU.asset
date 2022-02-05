@@ -33,7 +33,7 @@ MonoBehaviour:
   HasScope: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
-  ReloadTime: 3
+  ReloadTime: 2
   MaxAmmo: 30
   ReserveAmmo: 90
   HitLayers:

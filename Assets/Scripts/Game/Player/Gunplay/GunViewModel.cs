@@ -259,7 +259,7 @@ namespace Game.Player.Gunplay
 
         private IEnumerator Reload()
         {
-            if (!delay && !isSpraying && currentAmmo < gun.MaxAmmo)
+            if (!delay && !isSpraying && currentAmmo < gun.MaxAmmo && reserve > 0)
             {
                 delay = true;
 

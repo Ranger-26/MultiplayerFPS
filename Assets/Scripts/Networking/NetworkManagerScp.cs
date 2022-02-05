@@ -45,26 +45,7 @@ namespace Networking
                 chaos.Add(player);
             }
         }
-        
-        
-        public override void OnRoomServerDisconnect(NetworkConnection conn)
-        {
-            if (conn.identity != null)
-            {
-                var player = conn.identity.GetComponent<NetworkPlayerLobby>();
 
-                allPlayers.Remove(player);
-                if (player.assignedRole == Role.Chaos)
-                {
-                    chaos.Remove(player);
-                }
-                else
-                {
-                    mtf.Remove(player);
-                }
-            }
-        }
-        
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
             gamePlayer.GetComponent<NetworkGamePlayer>().role = roomPlayer.GetComponent<NetworkPlayerLobby>().assignedRole;

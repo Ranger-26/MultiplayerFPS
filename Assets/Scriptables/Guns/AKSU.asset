@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 40
   Range: 60
-  RPS: 15
+  RPS: 12
   BulletCount: 1
   GunFiringMode: 0
   Spread: 0.1

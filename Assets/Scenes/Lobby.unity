@@ -2317,31 +2317,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2111579605}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1113296049}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2507,6 +2511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 2111579607}
 --- !u!1 &1134557381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,31 +3005,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 263134731}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1498259812}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3250,6 +3259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 263134733}
 --- !u!1 &1498849641
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,31 +3431,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1630011651}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1561761471}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3671,6 +3685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1630011653}
 --- !u!1 &1582746150
 GameObject:
   m_ObjectHideFlags: 0
@@ -4042,31 +4057,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1913255035}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1672992750}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4228,6 +4247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1913255037}
 --- !u!1 &1731648698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,31 +4340,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1333392477}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1753606599}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4570,6 +4594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1333392479}
 --- !u!1 &1820660529
 GameObject:
   m_ObjectHideFlags: 0
@@ -4659,31 +4684,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1989484017}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1886481718}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4909,6 +4938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1989484019}
 --- !u!1 &1903508959
 GameObject:
   m_ObjectHideFlags: 0
@@ -5134,31 +5164,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 633111557}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1920145646}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5324,6 +5358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 633111559}
 --- !u!1 &1989484017
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,31 +5584,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 619430971}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1992743328}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5739,6 +5778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 619430973}
 --- !u!1 &2111579605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5885,31 +5925,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1134557381}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2141100521}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6075,6 +6119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1134557383}
 --- !u!1001 &7320562824540341548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6088,31 +6133,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1280815702}
+      objectReference: {fileID: 1498849648}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: ToggleKickPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Lobby.LobbyManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 7320562824540341551}
+    - target: {fileID: 2145356921819124305, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: Lobby.LobbyPlayerUi, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4671223109290540385, guid: f98d1fd58b64b7a44890f8bf4ac1a515, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6285,3 +6334,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  kickPlayerButton: {fileID: 1280815704}

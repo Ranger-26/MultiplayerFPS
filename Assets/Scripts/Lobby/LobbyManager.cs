@@ -11,5 +11,15 @@ namespace Lobby
             Debug.Log($"Trying to kick player {ply.player.playerName}");
             ply.player.GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
         }
+        
+        public void ToggleKickPlayer(LobbyPlayerUi ply)
+        {
+            if (isServer) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
+        }
+
+        public void LeaveGame()
+        {
+            
+        }
     }
 }

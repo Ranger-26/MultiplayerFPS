@@ -17,7 +17,7 @@ MonoBehaviour:
   RPS: 15
   BulletCount: 1
   GunFiringMode: 0
-  Spread: 0.25
+  Spread: 0.1
   MovementSpread: 5
   MaxSpread: 1
   MaxMovementSpread: 18
@@ -27,7 +27,7 @@ MonoBehaviour:
   MaxHorizontal: 2
   RecoilDecay: 1
   Displacement: 1
-  MaxDisplacement: 4
+  MaxDisplacement: 6
   SwayAfterRound: 8
   SwayStartRight: 0
   HasScope: 0

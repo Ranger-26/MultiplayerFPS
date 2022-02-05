@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2f62838b9cc5c4a9e2689d40e41dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
+  gun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
   muzzleFlash: {fileID: 0}
 --- !u!1 &5227915557650034822
 GameObject:
@@ -213,9 +213,9 @@ MonoBehaviour:
   syncInterval: 0.1
   CrouchHeight: 1
   StandingHeight: 2
-  CrouchSpeed: 3
-  WalkingSpeed: 5
-  NormalSpeed: 7
+  CrouchSpeed: 4
+  WalkingSpeed: 6
+  NormalSpeed: 10
 --- !u!114 &6012355211494385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,31 +231,14 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
-  GroundCheck: {fileID: 1769910894114916383}
-  GroundMask:
+  speed: 12
+  gravity: -9.81
+  jumpHeight: 3
+  groundCheck: {fileID: 1769910894114916383}
+  groundDistance: 0.4
+  groundMask:
     serializedVersion: 2
-    m_Bits: 2147483647
-  GroundDistance: 0.4
-  moveSpeed: 8
-  runAcceleration: 14
-  runDeacceleration: 10
-  airAcceleration: 0.2
-  airDeacceleration: 2
-  airControl: 1
-  sideStrafeAcceleration: 75
-  sideStrafeSpeed: 1.5
-  jumpSpeed: 7
-  friction: 8
-  playerFriction: 1
-  JumpQueue: 0
-  wishJump: 0
-  moveDirection: {x: 0, y: 0, z: 0}
-  moveDirectionNorm: {x: 0, y: 0, z: 0}
-  playerView: {fileID: 5789010012695376353}
-  x: 0
-  z: 0
-  IsGrounded: 0
-  player: {fileID: 5789010011634620526}
+    m_Bits: 73
 --- !u!143 &4797266027872760663
 CharacterController:
   m_ObjectHideFlags: 0

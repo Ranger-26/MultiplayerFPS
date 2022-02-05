@@ -21,6 +21,9 @@ namespace Game.Player.Gunplay
         Transform firingPoint;
         Transform spreadPoint;
 
+        Vector3 _prevPosition;
+        Vector3 vel;
+
         Animator anim;
 
         int currentAmmo;
@@ -52,6 +55,11 @@ namespace Game.Player.Gunplay
             reserve = gun.ReserveAmmo;
         }
 
+        private void OnEnable()
+        {
+            StartCoroutine(Draw());
+        }
+
         private void Update()
         {
             isSpraying = Input.GetMouseButton(0);
@@ -79,6 +87,9 @@ namespace Game.Player.Gunplay
         {
             isSwaying = recoilFactor > gun.SwayAfterRound;
 
+            vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
+            _prevPosition = PM.transform.position;
+
             if ((!delay && !isSpraying) || (currentAmmo == 0))
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
@@ -103,9 +114,11 @@ namespace Game.Player.Gunplay
 
         public IEnumerator Shoot()
         {
-            if (!delay)
+            if (!delay && currentAmmo > 0)
             {
                 delay = true;
+
+                currentAmmo--;
 
                 for (int i = 0; i < gun.BulletCount; i++)
                 {
@@ -119,6 +132,11 @@ namespace Game.Player.Gunplay
                 yield return new WaitForSecondsRealtime(1f / gun.RPS);
 
                 delay = false;
+            }
+
+            if (currentAmmo <= 0)
+            {
+                StartCoroutine(Reload());
             }
         }
 
@@ -193,7 +211,7 @@ namespace Game.Player.Gunplay
         private void Spread()
         {
             spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
-            moveSpread = Mathf.Clamp(gun.MovementSpread * PM.controller.velocity.magnitude, gun.StartingSpread, gun.MaxMovementSpread);
+            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, gun.StartingSpread, gun.MaxMovementSpread);
 
             float totalSpread = spread + moveSpread;
 
@@ -252,7 +270,18 @@ namespace Game.Player.Gunplay
 
                 yield return new WaitForSeconds(gun.ReloadTime);
 
-                currentAmmo = gun.MaxAmmo;
+                int exchange = gun.MaxAmmo - currentAmmo;
+
+                if (reserve <= exchange)
+                {
+                    currentAmmo += reserve;
+                    reserve = 0;
+                }
+                else
+                {
+                    currentAmmo += exchange;
+                    reserve -= exchange;
+                }
 
                 delay = false;
             }

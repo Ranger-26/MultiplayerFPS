@@ -27,6 +27,7 @@ namespace Game.Player.Gunplay
         int reserve;
 
         float recoilFactor;
+        float displacementFactor;
         float dropFactor;
         float spread;
         float moveSpread;
@@ -76,17 +77,28 @@ namespace Game.Player.Gunplay
 
         private void FixedUpdate()
         {
-            if (!delay)
+            isSwaying = recoilFactor > gun.SwayAfterRound;
+
+            if ((!delay && !isSpraying) || (currentAmmo == 0))
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
+                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 dropFactor = Mathf.Clamp(dropFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
+
+                if (!isSwaying)
+                {
+                    horizontalRecoil = 0f;
+                    horizontalDirection = gun.SwayStartRight;
+                }
 
                 if (dropFactor > 0f)
                 {
                     PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.RecoilDecay * gun.Recoil, 0f);
                 }
             }
+
+            firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
         }
 
         public IEnumerator Shoot()
@@ -141,13 +153,7 @@ namespace Game.Player.Gunplay
                     target.AddForceAtPosition(cam.transform.forward * gun.Damage * 0.5f, _hit.point, ForceMode.Impulse);
                 }
 
-                Tracer(_hit);
-
                 Hit(_hit);
-            }
-            else
-            {
-                Tracer();
             }
         }
 
@@ -172,6 +178,16 @@ namespace Game.Player.Gunplay
                     horizontalRecoil = -gun.MaxHorizontal;
                 }
             }
+
+            Displacement();
+        }
+
+        private void Displacement()
+        {
+            if (recoilFactor >= gun.SwayAfterRound / 2)
+            {
+                displacementFactor = Mathf.Clamp(displacementFactor + gun.Displacement, 0f, gun.MaxDisplacement);
+            }
         }
 
         private void Spread()
@@ -182,36 +198,6 @@ namespace Game.Player.Gunplay
             float totalSpread = spread + moveSpread;
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
-        }
-
-        private void Tracer(RaycastHit _hit)
-        {
-            float tracerRate = Random.Range(0f, 1f);
-
-            if (gun.Tracer != null && _hit.distance >= gun.NoTracerRange && tracerRate <= gun.TracerPercentage)
-            {
-                Vector3[] poses = new Vector3[2];
-                poses[0] = _hit.point;
-                poses[1] = spreadPoint.position;
-
-                LineRenderer tracer = Instantiate(gun.Tracer, poses[0], cam.transform.rotation).GetComponent<LineRenderer>();
-                tracer.SetPositions(poses);
-            }
-        }
-
-        private void Tracer()
-        {
-            float tracerRate = Random.Range(0f, 1f);
-
-            if (gun.Tracer != null && tracerRate <= gun.TracerPercentage)
-            {
-                Vector3[] poses = new Vector3[2];
-                poses[0] = spreadPoint.position + spreadPoint.forward * gun.Range;
-                poses[1] = spreadPoint.position;
-
-                LineRenderer tracer = Instantiate(gun.Tracer, poses[0], cam.transform.rotation).GetComponent<LineRenderer>();
-                tracer.SetPositions(poses);
-            }
         }
 
         private void Hit(RaycastHit _hit)

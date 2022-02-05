@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613853358741675787}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8563676651254380325}
   - component: {fileID: 9217805040559399973}
   - component: {fileID: 8883505385454214042}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2f62838b9cc5c4a9e2689d40e41dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
+  gun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
   muzzleFlash: {fileID: 0}
 --- !u!1 &5227915557650034822
 GameObject:
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6374122900803664586}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 5634619221568210415}
   - component: {fileID: -3721155344957921899}
   - component: {fileID: 5266444688985546485}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 5789010012695376352}
   - component: {fileID: 5789010012695376354}
   - component: {fileID: 590037374}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1769910894114916383}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1838809099793417575}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 6405161206622119263}
   - component: {fileID: 1057723099655910199}
   - component: {fileID: 6679039370956003391}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

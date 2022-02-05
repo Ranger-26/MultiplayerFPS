@@ -58,7 +58,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs: []
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 2018583103078967544, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
   RoomScene: Assets/Scenes/Lobby.unity
@@ -66,6 +66,9 @@ MonoBehaviour:
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
+  allPlayers: []
+  mtf: []
+  chaos: []
 --- !u!114 &6003513485748147776
 MonoBehaviour:
   m_ObjectHideFlags: 0

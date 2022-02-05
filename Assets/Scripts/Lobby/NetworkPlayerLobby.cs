@@ -41,5 +41,34 @@ namespace Lobby
             playerName = PlayerProfileManager.GetPlayerName();
             id = Room.roomSlots.Count;
         }
+
+        public override bool Equals(object other)
+        {
+            if (other is NetworkPlayerLobby)
+            {
+                NetworkPlayerLobby plr = (NetworkPlayerLobby) other;
+                return plr.id == id;
+            }
+
+            return false;
+        }
+
+        [Command]
+        public void CmdReadyUp(bool readyState)
+        {
+            readyToBegin = readyState;
+            NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
+            if (room != null)
+            {
+                room.ReadyStatusChanged();
+            }
+            //RpcReadyUp(readyState, id);
+        }
+
+        [ClientRpc]
+        public void RpcReadyUp(bool readyState, int id)
+        {
+            LobbyManager.Instance.UpdateReadyStatus(id, readyState);
+        }
     }
 }

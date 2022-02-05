@@ -8,5 +8,7 @@ namespace Lobby
         public NetworkPlayerLobby player;
 
         public Button kickPlayerButton;
+
+        public Image readyImage;
     }
 }

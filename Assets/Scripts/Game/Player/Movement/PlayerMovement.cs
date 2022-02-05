@@ -1,8 +1,6 @@
 using Mirror;
 using UnityEngine;
 
-// CS: GO Movement by Alpharoah: https://www.youtube.com/watch?v=AVjbCn5i_rk (Slightly modified by SwiftKraft)
-
 namespace Game.Player.Movement
 {
 	public class PlayerMovement : NetworkBehaviour
@@ -14,6 +12,7 @@ namespace Game.Player.Movement
         public float speed = 12f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
+
         Vector3 velocity;
 
         //ground stuff
@@ -35,9 +34,16 @@ namespace Game.Player.Movement
             }
         }
 
+        private void Start()
+        {
+            if (!isLocalPlayer) enabled = false;
+        }
+
         private void Update()
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+            Debug.Log(isGrounded);
 
             if (isGrounded && velocity.y < 0)
             {
@@ -48,6 +54,7 @@ namespace Game.Player.Movement
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
+
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 

@@ -15,16 +15,15 @@ public class Gun : ScriptableObject
     [Header("Recoil & Inaccuracy")]
     public float Spread = 0.5f;
     public float MovementSpread = 5f;
-    public float SpreadMultiplier = 5f;
     public float MaxSpread = 3f;
     public float MaxMovementSpread = 18f;
     public float StartingSpread = 0.05f;
     public float Recoil = 0.5f;
-    public float HorizonalRecoil = 1f;
+    public float HorizontalRecoil = 1f;
     public float MaxHorizontal = 4f;
-    public float MovementMultiplier = 1f;
-    public float ShootingMultiplier = 1f;
     public float RecoilDecay = 1f;
+    public float Displacement = 1f;
+    public float MaxDisplacement = 4f;
 
     public int SwayAfterRound = 8;
 
@@ -46,9 +45,6 @@ public class Gun : ScriptableObject
     [Header("Other Settings")]
     public LayerMask HitLayers;
 
-    public GameObject DroppedForm;
-    public GameObject ViewModel;
-
     public WeaponSlot GunSlot;
 
     public float DrawTime = 1f;
@@ -56,10 +52,7 @@ public class Gun : ScriptableObject
     [Header("Visuals & Audio")]
     public GameObject HitObject;
     public GameObject HitDecal;
-    public GameObject Tracer;
 
-    public float NoTracerRange = 10f;
-    public float TracerPercentage = 0.75f;
     public float AimPunch = 1f;
     public float AimPunchDuration = 0.05f;
 

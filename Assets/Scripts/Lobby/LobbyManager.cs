@@ -25,6 +25,8 @@ namespace Lobby
         
         public void ToggleKickPlayer(LobbyPlayerUi ply)
         {
+            if (!isServer) return;
+            Debug.Log("Toggle player is being invoked.");
             if (isServer && ply.player != null && ply.player.id != 1) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
         }
 

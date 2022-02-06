@@ -25,7 +25,7 @@ namespace Lobby
         
         public void ToggleKickPlayer(LobbyPlayerUi ply)
         {
-            if (isServer && ply.player != null) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
+            if (isServer && ply.player != null && ply.player.id != 1) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
         }
 
         public void LeaveGame()

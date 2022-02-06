@@ -7,6 +7,8 @@ public class Gun : ScriptableObject
     public float Damage = 40f;
     public float Range = 60f;
     public float RPS = 9.5f;
+    [Range(0, 1)]
+    public float Tagging = 0.9f;
 
     public int BulletCount = 1;
     

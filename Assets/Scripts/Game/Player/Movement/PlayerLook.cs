@@ -17,7 +17,7 @@ namespace Game.Player.Movement
 
         private void Awake()
         {
-            //cam = transform.GetChild(0);
+            // cam = transform.GetChild(0);
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

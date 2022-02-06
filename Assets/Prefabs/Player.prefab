@@ -215,9 +215,9 @@ MonoBehaviour:
   syncInterval: 0.1
   CrouchHeight: 1
   StandingHeight: 2
-  CrouchSpeed: 4
-  WalkingSpeed: 6
-  NormalSpeed: 10
+  CrouchSpeed: 2.5
+  WalkingSpeed: 4.5
+  NormalSpeed: 7
 --- !u!114 &6012355211494385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
-  speed: 12
+  speed: 10
   gravity: -25
   jumpHeight: 1.25
   groundCheck: {fileID: 1769910894114916383}

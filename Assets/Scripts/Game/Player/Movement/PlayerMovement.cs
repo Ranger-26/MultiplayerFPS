@@ -57,7 +57,7 @@ namespace Game.Player.Movement
             // Debug
             if (Input.GetMouseButtonDown(1))
             {
-                Tag(0.5f);
+                Tag(1f);
             }
         }
 

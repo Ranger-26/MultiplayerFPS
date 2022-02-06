@@ -2,6 +2,7 @@ using Game.Player.Movement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
+using Mirror;
 
 namespace Game.Player.Gunplay
 {
@@ -25,6 +26,8 @@ namespace Game.Player.Gunplay
         Vector3 vel;
 
         Animator anim;
+
+        NetworkIdentity ni;
 
         int currentAmmo;
         int reserve;
@@ -53,9 +56,11 @@ namespace Game.Player.Gunplay
 
             currentAmmo = gun.MaxAmmo;
             reserve = gun.ReserveAmmo;
-            
-            if (PM == null) {Debug.LogError("Player movement is null!");}
-            if (PL == null) {Debug.LogError("Player look is null!");}
+
+            ni = GetComponentInParent<NetworkIdentity>();
+
+            if (PM == null) { Debug.LogError("Player movement is null!"); }
+            if (PL == null) { Debug.LogError("Player look is null!"); }
         }
 
         private void OnEnable()
@@ -65,6 +70,9 @@ namespace Game.Player.Gunplay
 
         private void Update()
         {
+            if (!ni.isLocalPlayer)
+                return;
+
             isSpraying = Input.GetMouseButton(0);
 
             if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
@@ -143,10 +151,8 @@ namespace Game.Player.Gunplay
             }
         }
 
-        private void Raycast()
+        public void Visual()
         {
-            Spread();
-
             if (muzzleFlash != null)
             {
                 muzzleFlash.Play();
@@ -161,6 +167,13 @@ namespace Game.Player.Gunplay
             {
                 AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], spreadPoint.position, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
+        }
+
+        private void Raycast()
+        {
+            Spread();
+
+            Visual();
 
             RaycastHit _hit;
             if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))

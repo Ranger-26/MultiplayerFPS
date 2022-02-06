@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9338ee2-1de1-4fc3-9b25-33505f8cec3f" name="Changes" comment="" />
+    <list default="true" id="d9338ee2-1de1-4fc3-9b25-33505f8cec3f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/HealthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/HealthController.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,6 +94,7 @@
       <workItem from="1643913134032" duration="236000" />
       <workItem from="1643920591291" duration="1093000" />
       <workItem from="1644107775452" duration="938000" />
+      <workItem from="1644122246182" duration="720000" />
     </task>
     <servers />
   </component>

@@ -6,5 +6,17 @@ namespace Game.Player
     {
         [SyncVar]
         public int currentHealth;
+
+        [Server]
+        public void ServerDamagePlayer(int amount)
+        {
+            if (currentHealth - amount > 0)
+            {
+                currentHealth -= amount;
+                return;
+            }
+
+            currentHealth = 0;
+        }
     }
 }

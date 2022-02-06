@@ -39,7 +39,7 @@ namespace Lobby
         private void CmdSetName()
         {
             playerName = PlayerProfileManager.GetPlayerName();
-            id = Room.roomSlots.Count;
+            id = Room.roomSlots.Count + 1;
         }
 
         public override bool Equals(object other)

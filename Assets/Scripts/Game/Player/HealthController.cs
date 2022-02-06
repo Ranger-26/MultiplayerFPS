@@ -18,5 +18,17 @@ namespace Game.Player
 
             currentHealth = 0;
         }
+
+        [ClientRpc]
+        public void RpcDamagePlayer()
+        {
+            
+        }
+
+        [TargetRpc]
+        public void TargetDamagePlayer()
+        {
+            
+        }
     }
 }

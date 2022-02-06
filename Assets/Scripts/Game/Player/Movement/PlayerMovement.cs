@@ -18,6 +18,8 @@ namespace Game.Player.Movement
         public float groundDistance = 0.4f;
         public LayerMask groundMask;
 
+        float tagging;
+
         bool isGrounded;
         
         private void Start()
@@ -44,11 +46,24 @@ namespace Game.Player.Movement
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * (speed - speed * tagging) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
+
+            tagging = Mathf.Clamp01(tagging - Time.deltaTime);
+
+            // Debug
+            if (Input.GetMouseButtonDown(1))
+            {
+                Tag(0.5f);
+            }
+        }
+
+        public void Tag(float amount)
+        {
+            tagging = Mathf.Clamp01(tagging + amount);
         }
     }
 }

@@ -205,7 +205,7 @@ namespace Game.Player.Gunplay
 
         private void Displacement()
         {
-            if (recoilFactor >= gun.SwayAfterRound / 2)
+            if (recoilFactor >= gun.SwayAfterRound / 4)
             {
                 displacementFactor = Mathf.Clamp(displacementFactor + gun.Displacement, 0f, gun.MaxDisplacement);
             }

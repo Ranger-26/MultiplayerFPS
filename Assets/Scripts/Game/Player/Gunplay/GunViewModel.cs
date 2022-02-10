@@ -38,6 +38,7 @@ namespace Game.Player.Gunplay
         float spread;
         float moveSpread;
         float horizontalRecoil;
+        float shootTimer;
 
         bool delay;
         bool isSpraying;
@@ -77,7 +78,7 @@ namespace Game.Player.Gunplay
 
             if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
             {
-                StartCoroutine(Shoot());
+                Shoot();
             }
 
             if (Input.GetKeyDown(KeyCode.F))
@@ -92,6 +93,8 @@ namespace Game.Player.Gunplay
             {
                 StartCoroutine(Reload());
             }
+
+            shootTimer -= Time.deltaTime;
         }
 
         private void FixedUpdate()
@@ -123,11 +126,11 @@ namespace Game.Player.Gunplay
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
         }
 
-        public IEnumerator Shoot()
+        public void Shoot()
         {
-            if (!delay && currentAmmo > 0)
+            if (!delay && currentAmmo > 0 && shootTimer <= 0f)
             {
-                delay = true;
+                shootTimer = 60f / gun.RPM;
 
                 currentAmmo--;
 
@@ -139,10 +142,6 @@ namespace Game.Player.Gunplay
                 Recoil();
 
                 StartCoroutine(AimPunch());
-
-                yield return new WaitForSecondsRealtime(1f / gun.RPS);
-
-                delay = false;
             }
 
             if (currentAmmo <= 0)

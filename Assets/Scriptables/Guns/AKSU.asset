@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
   m_Name: AKSU
   m_EditorClassIdentifier: 
-  Damage: 40
-  Range: 60
-  RPS: 12
+  Damage: 32
+  Range: 500
+  RPM: 735
+  Tagging: 0.9
   BulletCount: 1
   GunFiringMode: 0
   Spread: 0.1
-  MovementSpread: 5
-  MaxSpread: 1
-  MaxMovementSpread: 18
+  MovementSpread: 1
+  MaxSpread: 1.5
+  MaxMovementSpread: 15
   StartingSpread: 0.05
-  Recoil: 1
+  Recoil: 1.25
   HorizontalRecoil: 0.5
   MaxHorizontal: 2
   RecoilDecay: 1

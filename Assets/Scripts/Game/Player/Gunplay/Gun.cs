@@ -105,7 +105,7 @@ namespace Game.Player.Gunplay
         [Tooltip("Priority of the sound (sounds with low priority will get lowered when higher priority sounds are playing)")]
         public int SoundPriority = 128;
     }
-}
+
 
     public enum FiringMode
     {

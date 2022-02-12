@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AKSU
   m_EditorClassIdentifier: 
   Damage: 32
+  HeadshotMultiplier: 4
   Range: 500
   RPM: 735
   Tagging: 0.9
@@ -25,11 +26,11 @@ MonoBehaviour:
   StartingSpread: 0.05
   Recoil: 1.25
   HorizontalRecoil: 0.5
-  MaxHorizontal: 2
+  MaxHorizontal: 2.5
   RecoilDecay: 1
   Displacement: 1
-  MaxDisplacement: 6
-  SwayAfterRound: 8
+  MaxDisplacement: 5
+  SwayAfterRound: 7
   SwayStartRight: 0
   HasScope: 0
   ScopeFOV: 67.5

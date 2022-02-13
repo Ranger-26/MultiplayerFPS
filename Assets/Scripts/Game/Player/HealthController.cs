@@ -1,4 +1,5 @@
 using Mirror;
+using UnityEngine;
 
 namespace Game.Player
 {
@@ -17,6 +18,7 @@ namespace Game.Player
             }
 
             currentHealth = 0;
+            TargetDamagePlayer();
         }
 
         [ClientRpc]
@@ -26,9 +28,9 @@ namespace Game.Player
         }
 
         [TargetRpc]
-        public void TargetDamagePlayer()
+        private void TargetDamagePlayer()
         {
-            
+            Debug.Log("You were damaged!");
         }
     }
 }

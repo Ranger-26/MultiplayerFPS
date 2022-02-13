@@ -11,9 +11,11 @@ namespace Game.Player
         [Server]
         public void ServerDamagePlayer(int amount)
         {
+            Debug.Log("Damaging player on the server...");
             if (currentHealth - amount > 0)
             {
                 currentHealth -= amount;
+                TargetDamagePlayer();
                 return;
             }
 
@@ -30,7 +32,7 @@ namespace Game.Player
         [TargetRpc]
         private void TargetDamagePlayer()
         {
-            Debug.Log("You were damaged!");
+            Debug.Log($"You were damaged! New health is now {currentHealth}");
         }
     }
 }

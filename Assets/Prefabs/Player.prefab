@@ -357,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  currentHealth: 0
+  currentHealth: 100
 --- !u!1 &5789010012695376366
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 6405161206622119263}
   - component: {fileID: 1057723099655910199}
   - component: {fileID: 6679039370956003391}
-  - component: {fileID: 448679472664431677}
+  - component: {fileID: 2927144922437087655}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
@@ -693,7 +693,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &448679472664431677
+--- !u!114 &2927144922437087655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41cf56f88644aab92f26a0c066e7c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageMultiplier: 5
+  damageMultiplier: 1
 --- !u!1001 &7335002963365778306
 PrefabInstance:
   m_ObjectHideFlags: 0

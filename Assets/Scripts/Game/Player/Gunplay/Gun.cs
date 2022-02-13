@@ -7,9 +7,12 @@ namespace Game.Player.Gunplay
     {
         [Header("Stats")]
         [Tooltip("Amount of damage the gun applies")]
-        public float Damage = 40f;
+        public int Damage = 40;
+
         [Tooltip("Multiplier of damage for headshots")]
-        public float HeadshotMultiplier = 4f;
+        public float HeadMultiplier = 4f;
+        [Tooltip("Multiplier of damage for limbshots")]
+        public float LimbMultiplier = 0.5f;
         [Tooltip("Max range in meters for this gun")]
         public float Range = 60f;
         [Tooltip("Fire rate, the amount of rounds it can shoot in a minute (still applies to semi-auto weapons)")]

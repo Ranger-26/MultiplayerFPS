@@ -14,11 +14,12 @@ namespace Game.Player
             if (currentHealth - amount > 0)
             {
                 currentHealth -= amount;
+                TargetDamagePlayer();
                 return;
             }
 
             currentHealth = 0;
-            TargetDamagePlayer();
+            TargetDeathPlayer();
         }
 
         [ClientRpc]
@@ -31,6 +32,12 @@ namespace Game.Player
         private void TargetDamagePlayer()
         {
             Debug.Log("You were damaged!");
+        }
+
+        [TargetRpc]
+        private void TargetDeathPlayer()
+        {
+            Debug.Log("You died!");
         }
     }
 }

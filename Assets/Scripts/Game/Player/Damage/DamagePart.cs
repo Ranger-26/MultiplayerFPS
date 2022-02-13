@@ -15,11 +15,11 @@ namespace Game.Player.Damage
         {
             hc = GetComponentInParent<HealthController>();
         }
-
+        
         [Server]
-        public void Damage(int amount, float damageMultiplier)
+        public void ServerDamage(int amount, int multiplier)
         {
-            hc.ServerDamagePlayer((int)(amount * damageMultiplier));
+            hc.ServerDamagePlayer(amount * multiplier);
         }
     }
 

@@ -99,7 +99,7 @@ namespace Game.Player.Gunplay
 
                     if (gun.ChargeupSounds.Length != 0)
                     {
-                        AudioSystem.PlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], spreadPoint.position, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                        AudioSystem.PlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], spreadPoint.position + spreadPoint.forward * 0.5f, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
                     }
                 }
             }
@@ -198,7 +198,7 @@ namespace Game.Player.Gunplay
 
             if (gun.ShootSounds.Length != 0)
             {
-                AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], spreadPoint.position, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], spreadPoint.position + spreadPoint.forward * 0.5f, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
         }
 
@@ -211,7 +211,8 @@ namespace Game.Player.Gunplay
             RaycastHit _hit;
             if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
             {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green);
+                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 0.2f);
+
                 if (_hit.transform.GetComponent<Rigidbody>() != null)
                 {
                     Rigidbody target = _hit.transform.GetComponent<Rigidbody>();
@@ -277,6 +278,11 @@ namespace Game.Player.Gunplay
             {
                 GameObject decal = Instantiate(gun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
                 decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+            }
+
+            if (gun.HitSounds.Length != 0)
+            {
+                AudioSystem.PlaySound(gun.HitSounds[Random.Range(0, gun.HitSounds.Length - 1)], _hit.point, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
         }
 

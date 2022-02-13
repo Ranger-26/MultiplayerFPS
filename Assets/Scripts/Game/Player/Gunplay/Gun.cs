@@ -7,13 +7,16 @@ namespace Game.Player.Gunplay
     {
         [Header("Stats")]
         [Tooltip("Amount of damage the gun applies")]
-        public float Damage = 40f;
+        public int Damage = 40;
+
         [Tooltip("Multiplier of damage for headshots")]
         public float HeadshotMultiplier = 4f;
         [Tooltip("Max range in meters for this gun")]
         public float Range = 60f;
         [Tooltip("Fire rate, the amount of rounds it can shoot in a minute (still applies to semi-auto weapons)")]
         public float RPM = 735f;
+        [Tooltip("Weapon chargeup delay, basically a delay before shooting (in seconds), like revolvers")]
+        public float ChargeupTime = 0f;
         [Range(0, 1)]
         [Tooltip("Amount of slow when getting hit by this gun, percentage based")]
         public float Tagging = 0.9f;
@@ -94,6 +97,8 @@ namespace Game.Player.Gunplay
         [Tooltip("The duration for the camera jump")]
         public float AimPunchDuration = 0.05f;
 
+        [Tooltip("Chargeup sounds, a sound in this list will be randomly selected to play when shooting")]
+        public AudioClip[] ChargeupSounds;
         [Tooltip("Shooting sounds, a sound in this list will be randomly selected to play when shooting")]
         public AudioClip[] ShootSounds;
 

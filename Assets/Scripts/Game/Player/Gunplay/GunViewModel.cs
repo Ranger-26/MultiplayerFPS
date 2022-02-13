@@ -39,11 +39,13 @@ namespace Game.Player.Gunplay
         float moveSpread;
         float horizontalRecoil;
         float shootTimer;
+        float chargeupTimer;
 
         bool delay;
         bool isSpraying;
         bool isSwaying;
         bool horizontalDirection;
+        bool chargedUp;
 
         private void Awake()
         {
@@ -80,6 +82,8 @@ namespace Game.Player.Gunplay
             {
                 Shoot();
             }
+
+
 
             if (Input.GetKeyDown(KeyCode.F))
             {

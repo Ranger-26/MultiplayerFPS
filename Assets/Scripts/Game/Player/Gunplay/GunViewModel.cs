@@ -181,8 +181,7 @@ namespace Game.Player.Gunplay
             RaycastHit _hit;
             if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
             {
-                // Hit
-
+                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green);
                 if (_hit.transform.GetComponent<Rigidbody>() != null)
                 {
                     Rigidbody target = _hit.transform.GetComponent<Rigidbody>();

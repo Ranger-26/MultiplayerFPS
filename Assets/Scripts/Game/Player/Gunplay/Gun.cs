@@ -10,7 +10,9 @@ namespace Game.Player.Gunplay
         public int Damage = 40;
 
         [Tooltip("Multiplier of damage for headshots")]
-        public float HeadshotMultiplier = 4f;
+        public float HeadMultiplier = 4f;
+        [Tooltip("Multiplier of damage for limbshots")]
+        public float LimbMultiplier = 0.5f;
         [Tooltip("Max range in meters for this gun")]
         public float Range = 60f;
         [Tooltip("Fire rate, the amount of rounds it can shoot in a minute (still applies to semi-auto weapons)")]
@@ -110,6 +112,7 @@ namespace Game.Player.Gunplay
         [Tooltip("Priority of the sound (sounds with low priority will get lowered when higher priority sounds are playing)")]
         public int SoundPriority = 128;
     }
+
 
     public enum FiringMode
     {

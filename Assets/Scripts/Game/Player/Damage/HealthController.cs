@@ -1,4 +1,5 @@
 using Mirror;
+using UnityEngine;
 
 namespace Game.Player
 {
@@ -10,13 +11,16 @@ namespace Game.Player
         [Server]
         public void ServerDamagePlayer(int amount)
         {
+            Debug.Log("Damaging player on the server...");
             if (currentHealth - amount > 0)
             {
                 currentHealth -= amount;
+                TargetDamagePlayer();
                 return;
             }
 
             currentHealth = 0;
+            TargetDeathPlayer();
         }
 
         [ClientRpc]
@@ -26,9 +30,15 @@ namespace Game.Player
         }
 
         [TargetRpc]
-        public void TargetDamagePlayer()
+        private void TargetDamagePlayer()
         {
-            
+            Debug.Log($"You were damaged! New health is now {currentHealth}");
+        }
+
+        [TargetRpc]
+        private void TargetDeathPlayer()
+        {
+            Debug.Log("You died!");
         }
     }
 }

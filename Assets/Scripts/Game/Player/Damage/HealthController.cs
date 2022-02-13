@@ -20,7 +20,7 @@ namespace Game.Player
             }
 
             currentHealth = 0;
-            TargetDamagePlayer();
+            TargetDeathPlayer();
         }
 
         [ClientRpc]
@@ -33,6 +33,12 @@ namespace Game.Player
         private void TargetDamagePlayer()
         {
             Debug.Log($"You were damaged! New health is now {currentHealth}");
+        }
+
+        [TargetRpc]
+        private void TargetDeathPlayer()
+        {
+            Debug.Log("You died!");
         }
     }
 }

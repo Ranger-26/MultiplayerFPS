@@ -6,7 +6,7 @@ namespace Game.Player.Damage
 {
     public class DamagePart : MonoBehaviour, IDamageable
     {
-        public int damageMultiplier;
+        public BodyPart bodyPart;
 
         private HealthController hc;
         
@@ -17,10 +17,16 @@ namespace Game.Player.Damage
         }
 
         [Server]
-        public void ServerDamage(int amount)
+        public void Damage(int amount, float damageMultiplier)
         {
-            Debug.Log("Callling damage on player part...");
-            hc.ServerDamagePlayer(amount * damageMultiplier);
+            hc.ServerDamagePlayer((int)(amount * damageMultiplier));
         }
+    }
+
+    public enum BodyPart
+    {
+        Head,
+        Torso,
+        Limb
     }
 }

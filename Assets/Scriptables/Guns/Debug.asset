@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
-  m_Name: AKSU
+  m_Name: Debug
   m_EditorClassIdentifier: 
   Damage: 32
-  HeadshotMultiplier: 4
+  HeadMultiplier: 4
+  LimbMultiplier: 0.5
   Range: 500
   RPM: 735
+  ChargeupTime: 0.6
   Tagging: 0.9
   BulletCount: 1
   GunFiringMode: 0
@@ -47,6 +49,8 @@ MonoBehaviour:
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   AimPunch: 1
   AimPunchDuration: 0.05
+  ChargeupSounds:
+  - {fileID: 8300000, guid: 1d0f6238ddca17a42a8af609f604419d, type: 3}
   ShootSounds: []
   SoundMaxDistance: 100
   SoundVolume: 1

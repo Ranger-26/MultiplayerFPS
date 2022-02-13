@@ -46,6 +46,7 @@ namespace Game.Player.Gunplay
         bool isSwaying;
         bool horizontalDirection;
         bool chargedUp;
+        bool chargeupSound;
 
         private void Awake()
         {
@@ -61,6 +62,11 @@ namespace Game.Player.Gunplay
             reserve = gun.ReserveAmmo;
 
             ni = GetComponentInParent<NetworkIdentity>();
+
+            if (gun.ChargeupTime <= 0f)
+            {
+                chargedUp = true;
+            }
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
@@ -83,7 +89,31 @@ namespace Game.Player.Gunplay
                 Shoot();
             }
 
+            if (gun.ChargeupTime > 0f && isSpraying && currentAmmo > 0)
+            {
+                chargeupTimer = Mathf.Clamp(chargeupTimer + Time.deltaTime, 0f, gun.ChargeupTime);
 
+                if (!chargeupSound)
+                {
+                    chargeupSound = true;
+
+                    if (gun.ChargeupSounds.Length != 0)
+                    {
+                        AudioSystem.PlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], spreadPoint.position, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                    }
+                }
+            }
+            else if (gun.ChargeupTime > 0f && !isSpraying && currentAmmo > 0)
+            {
+                chargeupTimer = Mathf.Clamp(chargeupTimer - Time.deltaTime, 0f, gun.ChargeupTime);
+
+                chargeupSound = false;
+            }
+
+            if (gun.ChargeupTime > 0f)
+            {
+                chargedUp = chargeupTimer >= gun.ChargeupTime;
+            }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -132,7 +162,7 @@ namespace Game.Player.Gunplay
 
         public void Shoot()
         {
-            if (!delay && currentAmmo > 0 && shootTimer <= 0f)
+            if (!delay && currentAmmo > 0 && shootTimer <= 0f && chargedUp)
             {
                 shootTimer = 60f / gun.RPM;
 
@@ -300,6 +330,9 @@ namespace Game.Player.Gunplay
                     currentAmmo += exchange;
                     reserve -= exchange;
                 }
+
+                chargeupTimer = 0f;
+                chargedUp = false;
 
                 delay = false;
             }

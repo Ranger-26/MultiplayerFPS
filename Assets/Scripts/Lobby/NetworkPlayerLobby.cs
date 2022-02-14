@@ -66,9 +66,9 @@ namespace Lobby
         }
 
         [ClientRpc]
-        public void RpcReadyUp(bool readyState, int id)
+        public void RpcReadyUp(bool readyState, int playerid)
         {
-            LobbyManager.Instance.UpdateReadyStatus(id, readyState);
+            LobbyManager.Instance.UpdateReadyStatus(playerid, readyState);
         }
     }
 }

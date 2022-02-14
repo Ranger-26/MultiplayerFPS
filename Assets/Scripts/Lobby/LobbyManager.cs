@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -27,6 +29,7 @@ namespace Lobby
         {
             if (!isServer) return;
             Debug.Log("Toggle player is being invoked.");
+            if (ply.kickPlayerButton.gameObject.activeSelf) ply.kickPlayerButton.gameObject.SetActive(false);
             if (isServer && ply.player != null && ply.player.id != 1) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
         }
 
@@ -46,12 +49,15 @@ namespace Lobby
 
         public void UpdateReadyStatus(int playerId, bool status)
         {
-            foreach (var player in FindObjectsOfType<LobbyPlayerUi>())
+            List<LobbyPlayerUi> players =
+                FindObjectsOfType<LobbyPlayerUi>().Where(x => x.player != null && x.player.id == playerId).ToList();
+            if (players[0] == null)
             {
-                if (player.player != null && player.player.id == playerId)
-                {
-                    player.readyImage.gameObject.SetActive(status);
-                }
+                Debug.Log("Uh oh");
+            }
+            else
+            {
+                players[0].readyImage.gameObject.SetActive(status);
             }
         }
     }

@@ -57,18 +57,22 @@ namespace Lobby
 
             for (int i = 0; i < mtfNameTexts.Length; i++)
             {
-                if (mtfNameTexts[i].text != "None" && mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
+                if (mtfNameTexts[i].text != "Empty" && mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
                 {
-                    mtfNameTexts[i].text = "None";
+                    mtfNameTexts[i].text = "Empty";
+                    mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
                 }
+                //mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
             }
             
             for (int i = 0; i < chaosNameTexts.Length; i++)
             {
-                if (chaosNameTexts[i].text != "None" && chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
+                if (chaosNameTexts[i].text != "Empty" && chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player == null)
                 {
-                    chaosNameTexts[i].text = "None";
+                    chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
+                    chaosNameTexts[i].text = "Empty";
                 }
+                //chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
             }
         }
     }

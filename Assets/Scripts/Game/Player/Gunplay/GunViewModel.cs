@@ -47,6 +47,7 @@ namespace Game.Player.Gunplay
         bool horizontalDirection;
         bool chargedUp;
         bool chargeupSound;
+        bool canCharge;
 
         private void Awake()
         {
@@ -67,6 +68,8 @@ namespace Game.Player.Gunplay
             {
                 chargedUp = true;
             }
+
+            canCharge = true;
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
@@ -89,7 +92,7 @@ namespace Game.Player.Gunplay
                 Shoot();
             }
 
-            if (gun.ChargeupTime > 0f && isSpraying && currentAmmo > 0)
+            if (gun.ChargeupTime > 0f && isSpraying && currentAmmo > 0 && canCharge)
             {
                 chargeupTimer = Mathf.Clamp(chargeupTimer + Time.deltaTime, 0f, gun.ChargeupTime);
 
@@ -316,6 +319,7 @@ namespace Game.Player.Gunplay
             if (!delay && !isSpraying && currentAmmo < gun.MaxAmmo && reserve > 0)
             {
                 delay = true;
+                canCharge = false;
 
                 if (anim != null)
                 {
@@ -339,6 +343,7 @@ namespace Game.Player.Gunplay
 
                 chargeupTimer = 0f;
                 chargedUp = false;
+                canCharge = true;
 
                 delay = false;
             }
@@ -347,6 +352,7 @@ namespace Game.Player.Gunplay
         private IEnumerator Draw()
         {
             delay = true;
+            canCharge = false;
 
             if (anim != null)
             {
@@ -360,6 +366,7 @@ namespace Game.Player.Gunplay
                 anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
             }
 
+            canCharge = true;
             delay = false;
         }
     }

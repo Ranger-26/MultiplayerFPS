@@ -321,6 +321,8 @@ namespace Game.Player.Gunplay
                 delay = true;
                 canCharge = false;
 
+                Debug.Log("Reload");
+
                 if (anim != null)
                 {
                     anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
@@ -342,8 +344,15 @@ namespace Game.Player.Gunplay
                 }
 
                 chargeupTimer = 0f;
-                chargedUp = false;
+                
+                if (gun.ChargeupTime > 0f)
+                {
+                    chargedUp = false;
+                }
+
                 canCharge = true;
+
+                Debug.Log("Reload Complete");
 
                 delay = false;
             }

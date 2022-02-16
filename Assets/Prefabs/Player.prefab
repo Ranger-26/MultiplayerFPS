@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2f62838b9cc5c4a9e2689d40e41dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
+  gun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
   muzzleFlash: {fileID: 347711586478215485}
 --- !u!1 &5227915557650034822
 GameObject:

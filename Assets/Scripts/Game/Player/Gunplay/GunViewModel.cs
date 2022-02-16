@@ -48,6 +48,7 @@ namespace Game.Player.Gunplay
         bool chargedUp;
         bool chargeupSound;
         bool canCharge;
+        bool shootQueue;
 
         private void Awake()
         {
@@ -90,6 +91,17 @@ namespace Game.Player.Gunplay
             if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
             {
                 Shoot();
+
+                if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.1f && shootTimer > 0f)
+                {
+                    shootQueue = true;
+                }
+            }
+
+            if (shootQueue)
+            {
+                Shoot();
+                shootQueue = false;
             }
 
             if (gun.ChargeupTime > 0f && isSpraying && currentAmmo > 0 && canCharge)
@@ -141,7 +153,7 @@ namespace Game.Player.Gunplay
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((!delay && !isSpraying) || (currentAmmo == 0))
+            if ((!delay && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (currentAmmo == 0))
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
@@ -165,7 +177,7 @@ namespace Game.Player.Gunplay
 
         public void Shoot()
         {
-            if (!delay && currentAmmo > 0 && shootTimer <= 0f && chargedUp)
+            if (!delay && currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
                 shootTimer = 60f / gun.RPM;
 

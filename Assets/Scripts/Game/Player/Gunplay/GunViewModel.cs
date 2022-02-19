@@ -22,6 +22,8 @@ namespace Game.Player.Gunplay
         Transform firingPoint;
         Transform spreadPoint;
 
+        NetworkShootingManager nsm;
+
         Vector3 _prevPosition;
         Vector3 vel;
 
@@ -54,6 +56,7 @@ namespace Game.Player.Gunplay
         {
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
+            nsm = GetComponentInParent<NetworkShootingManager>();
             cam = Camera.main.transform;
             firingPoint = cam.GetChild(0);
             spreadPoint = firingPoint.GetChild(0);
@@ -232,7 +235,7 @@ namespace Game.Player.Gunplay
                 {
                     Rigidbody target = _hit.transform.GetComponent<Rigidbody>();
 
-                    target.AddForceAtPosition(cam.transform.forward * gun.Damage * 0.5f, _hit.point, ForceMode.Impulse);
+                    target.AddForceAtPosition(spreadPoint.forward * gun.Damage * 0.5f, _hit.point, ForceMode.Impulse);
                 }
 
                 Hit(_hit);

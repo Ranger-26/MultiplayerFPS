@@ -9,5 +9,12 @@ namespace Game.Player
     public class NetworkGamePlayer : NetworkBehaviour
     {
         [SyncVar] public Role role;
+
+        public HealthController healthController;
+
+        private void Start()
+        {
+            healthController = GetComponent<HealthController>();
+        }
     }
 }

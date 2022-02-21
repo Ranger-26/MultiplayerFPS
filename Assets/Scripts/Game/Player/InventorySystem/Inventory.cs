@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Game.GameLogic;
 using Game.ItemSystem.Core;
 using Mirror;
@@ -8,12 +9,17 @@ namespace Game.Player.InventorySystem
 {
     public class Inventory : NetworkBehaviour
     {
-        private readonly SyncList<ItemType> _curItems;
+        private readonly SyncList<ItemType> _curItems = new SyncList<ItemType>();
 
         private NetworkGamePlayer player;
         private void Start()
         {
             player = GetComponent<NetworkGamePlayer>();
+
+            if (hasAuthority)
+            {
+                CmdAddItem(ItemType.Medkit);
+            }
         }
 
         [SyncVar]
@@ -26,10 +32,18 @@ namespace Game.Player.InventorySystem
             {
                 _curItems.Add(item);
             }
+            TargetPrintOutItems();
         }
-
+        
+        
+        [Command]
+        public void CmdAddItem(ItemType item) => ServerAddItem(item);
+        
+        [Command]
         public void CmdEquiptItem(int index) => ServerEquiptItem(index);
 
+        
+        
         [Server]
         private void ServerEquiptItem(int index)
         {
@@ -43,9 +57,34 @@ namespace Game.Player.InventorySystem
         {
             if (ItemDatabase.Instance.TryGetItem(item, out ItemViewModel model))
             {
-                NetworkGamePlayer owner = GameManager.Instance.GetPlayerById(playerId);
-                Instantiate(model, owner.transform.position, Quaternion.identity);
+                NetworkGamePlayer owner = GetPlayerById(playerId);
+                Debug.Log($"Null Check Player: {owner == null}");
+                Debug.Log($"Null Check Item: {model == null}");
+                Instantiate(model.gameObject, owner.transform.position, Quaternion.identity);
             }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftControl) && hasAuthority)
+            {
+                CmdEquiptItem(0);
+            }
+        }
+
+        [TargetRpc]
+        private void TargetPrintOutItems()
+        {
+            for (int i = 0; i < _curItems.Count; i++)
+            {
+               Debug.Log($"Item: {_curItems[i]}"); 
+            }
+        }
+
+        public NetworkGamePlayer GetPlayerById(int id)
+        {
+            NetworkGamePlayer[] players = FindObjectsOfType<NetworkGamePlayer>();
+            return players.Where(x => x.playerId == id).ToList()[0];
         }
     }
 }

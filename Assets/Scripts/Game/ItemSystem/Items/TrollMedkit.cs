@@ -10,11 +10,10 @@ namespace Game.ItemSystem.Items
 
         private int _healAmount = 20;
         
-                                             
         [Server]
-        public override void OnUse(NetworkGamePlayer ply)
+        public override void OnUse()
         {
-            ply.healthController.ServerDamagePlayer(_healAmount);
+            Owner.healthController.ServerDamagePlayer(_healAmount);
         }
     }
 }

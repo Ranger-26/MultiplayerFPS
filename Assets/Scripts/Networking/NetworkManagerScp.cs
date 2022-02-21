@@ -48,7 +48,9 @@ namespace Networking
 
         public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
         {
-            gamePlayer.GetComponent<NetworkGamePlayer>().role = roomPlayer.GetComponent<NetworkPlayerLobby>().assignedRole;
+            NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
+            gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
+            gamePlayer.GetComponent<NetworkGamePlayer>().id = ply.id;
             return true;
         }
 

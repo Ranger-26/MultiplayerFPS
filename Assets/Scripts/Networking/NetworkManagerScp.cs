@@ -50,7 +50,9 @@ namespace Networking
         {
             NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
             gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
-            gamePlayer.GetComponent<NetworkGamePlayer>().id = ply.id;
+            gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
+            gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
+            GameManager.Instance.ServerAddPlayer(gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }
 

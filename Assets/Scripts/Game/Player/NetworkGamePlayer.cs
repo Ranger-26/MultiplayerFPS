@@ -9,7 +9,11 @@ namespace Game.Player
     public class NetworkGamePlayer : NetworkBehaviour
     {
         [SyncVar] public Role role;
-        [SyncVar] public int id;
+        
+        [Header("Player Info")]
+        [SyncVar] public int playerId;
+        [SyncVar] public string playerName;
+        
         public HealthController healthController;
         
         private void Start()

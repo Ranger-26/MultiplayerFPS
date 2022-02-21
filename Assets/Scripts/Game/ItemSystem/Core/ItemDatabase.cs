@@ -35,17 +35,16 @@ namespace Game.ItemSystem.Core
             }
         }
 
-        public ItemBase TryGetItem(ItemType item)
+        public bool TryGetItem(ItemType item, out ItemViewModel model)
         {
-            try
+            if (_idsToViewModels[item] != null)
             {
-                return _idsToItems[item];
+                model = _idsToViewModels[item];
+                return true;
             }
-            catch (Exception e)
-            {
-                Debug.LogError($"An error occured when trying to get the item prefab for item id {item}: {e}");
-                return null;
-            }
+
+            model = null;
+            return false;
         }
     }
 }

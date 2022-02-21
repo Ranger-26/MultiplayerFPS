@@ -22,6 +22,9 @@ namespace Game.Player.Gunplay
         [Range(0, 1)]
         [Tooltip("Amount of slow when getting hit by this gun, percentage based")]
         public float Tagging = 0.9f;
+        [Range(0, 1)]
+        [Tooltip("Amount of speed reduction when equipped, percentage based")]
+        public float Weight = 0.1f;
 
         [Tooltip("Amount of bullets it shoots per trigger")]
         public int BulletCount = 1;

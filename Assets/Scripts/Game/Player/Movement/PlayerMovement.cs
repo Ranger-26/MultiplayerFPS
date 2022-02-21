@@ -16,6 +16,8 @@ namespace Game.Player.Movement
         //ground stuff
         public Transform groundCheck;
         public float groundDistance = 0.4f;
+        [HideInInspector]
+        public float weight;
         public LayerMask groundMask;
 
         float tagging;
@@ -46,7 +48,7 @@ namespace Game.Player.Movement
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * (speed - speed * tagging) * Time.deltaTime);
+            controller.Move(move * (speed - speed * tagging - speed * weight) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

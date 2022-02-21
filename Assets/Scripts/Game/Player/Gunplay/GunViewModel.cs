@@ -81,6 +81,7 @@ namespace Game.Player.Gunplay
 
         private void OnEnable()
         {
+            PM.weight = gun.Weight;
             StartCoroutine(Draw());
         }
 

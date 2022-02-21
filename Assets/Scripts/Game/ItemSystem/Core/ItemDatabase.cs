@@ -46,5 +46,17 @@ namespace Game.ItemSystem.Core
             model = null;
             return false;
         }
+
+        public bool TryGetItem(ItemType item, out ItemBase model)
+        {
+            if (_idsToItems[item] != null)
+            {
+                model = _idsToItems[item];
+                return true;
+            }
+
+            model = null;
+            return false;
+        }
     }
 }

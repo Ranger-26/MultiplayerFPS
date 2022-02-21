@@ -18,31 +18,31 @@ namespace Game.ItemSystem.Core
         }
         
         [Server]
-        public virtual void OnItemEquipt()
+        public virtual void OnItemEquipt(NetworkGamePlayer ply)
         {
-            
+            Debug.Log("Initalizing item....");
         }
         
         [Server]
-        public virtual void OnItemDequipt()
+        public virtual void OnItemDequipt(NetworkGamePlayer ply)
         {
             
         }
 
         [Server]
-        public virtual void OnHolsterItem()
+        public virtual void OnHolsterItem(NetworkGamePlayer ply)
+        {
+            
+        }
+        
+        [ServerCallback]
+        public virtual void OnUpdate(NetworkGamePlayer ply)
         {
             
         }
         
         [Server]
-        public virtual void OnUpdate()
-        {
-            
-        }
-        
-        [Server]
-        public virtual void OnUse()
+        public virtual void OnUse(NetworkGamePlayer ply)
         {
             
         }

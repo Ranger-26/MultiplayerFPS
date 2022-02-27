@@ -52,7 +52,7 @@ namespace Game.Player.Gunplay
         bool canCharge;
         bool shootQueue;
 
-        private void Awake()
+        private void Start()
         {
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
@@ -227,17 +227,12 @@ namespace Game.Player.Gunplay
 
             Visual();
 
+            nsm.Shoot();
+
             RaycastHit _hit;
             if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
             {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 0.2f);
-
-                if (_hit.transform.GetComponent<Rigidbody>() != null)
-                {
-                    Rigidbody target = _hit.transform.GetComponent<Rigidbody>();
-
-                    target.AddForceAtPosition(spreadPoint.forward * gun.Damage * 0.5f, _hit.point, ForceMode.Impulse);
-                }
+                // Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.blue, 0.2f);
 
                 Hit(_hit);
             }
@@ -288,7 +283,7 @@ namespace Game.Player.Gunplay
 
         private void Hit(RaycastHit _hit)
         {
-            if (gun.HitObject != null)
+/*            if (gun.HitObject != null)
             {
                 Instantiate(gun.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
             }
@@ -297,7 +292,7 @@ namespace Game.Player.Gunplay
             {
                 GameObject decal = Instantiate(gun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
                 decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
-            }
+            }*/
 
             if (gun.HitSounds.Length != 0)
             {

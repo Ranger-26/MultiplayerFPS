@@ -40,6 +40,20 @@ namespace Game.Player.Movement
             addY = 0f;
             cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Cursor.lockState == CursorLockMode.Locked)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                if (Cursor.lockState == CursorLockMode.None)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
         }
 
         public void MoveCamera(float x, float y)

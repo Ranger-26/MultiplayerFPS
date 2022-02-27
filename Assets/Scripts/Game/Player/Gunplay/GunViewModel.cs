@@ -227,8 +227,6 @@ namespace Game.Player.Gunplay
 
             Visual();
 
-            nsm.Shoot();
-
             RaycastHit _hit;
             if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
             {

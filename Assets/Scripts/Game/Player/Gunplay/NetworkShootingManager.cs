@@ -14,21 +14,22 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
+        Camera maincam;
+
+        private void Start()
+        {
+            maincam = Camera.main;
+        }
+
         /*private void Update()
         {
             if(!hasAuthority) return;
             if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
         }*/
 
-        // Calling this from GunViewModel
-        public void Shoot()
-        {
-            CmdShoot();
-        }
-
         private void Shoot()
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
+            Ray ray = maincam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
             CmdShoot(ray);
         }
         

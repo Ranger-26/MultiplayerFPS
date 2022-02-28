@@ -14,10 +14,16 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
-        private void Update()
+        /*private void Update()
         {
             if(!hasAuthority) return;
-            if (Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
+            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
+        }*/
+
+        // Calling this from GunViewModel
+        public void Shoot()
+        {
+            CmdShoot();
         }
 
         private void Shoot()
@@ -32,17 +38,41 @@ namespace Game.Player.Gunplay
             RaycastHit _hit;
             if (Physics.Raycast(ray, out _hit, curGun.Range, curGun.HitLayers))
             {
-                Debug.Log($"Hit something! {_hit.transform.name}");
+                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * curGun.Range, Color.green, 0.2f);
+
+                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}");
+
+                Hit(_hit);
 
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {
                     Debug.Log($"Found body part {part.bodyPart} when raycasting! ");
-                    //Damage player
+                    // Damage player
                 }
             }
         }
-        
-        
+
+        [Server]
+        private void Hit(RaycastHit _hit)
+        {
+            if (curGun.HitObject != null)
+            {
+                GameObject hit = Instantiate(curGun.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
+                NetworkServer.Spawn(hit);
+            }
+
+            if (curGun.HitDecal != null)
+            {
+                GameObject decal = Instantiate(curGun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
+                decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+                NetworkServer.Spawn(decal);
+            }
+/*
+            if (curGun.HitSounds.Length != 0)
+            {
+                AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
+            }*/
+        }
     }
 }

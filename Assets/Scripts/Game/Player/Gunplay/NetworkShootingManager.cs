@@ -17,20 +17,21 @@ namespace Game.Player.Gunplay
         private void Update()
         {
             if(!hasAuthority) return;
-            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
+            if (Input.GetKeyDown(KeyCode.Mouse0)) Shoot();
         }
 
-        [Command]
-        private void CmdShoot() => ServerProcessShot();
+        private void Shoot()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
+            CmdShoot(ray);
+        }
         
-        [Server]
-        private void ServerProcessShot()
+        [Command]
+        private void CmdShoot(Ray ray)
         {
             RaycastHit _hit;
-            if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, curGun.Range, curGun.HitLayers))
+            if (Physics.Raycast(ray, out _hit, curGun.Range, curGun.HitLayers))
             {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * curGun.Range, Color.green, 0.2f);
-
                 Debug.Log($"Hit something! {_hit.transform.name}");
 
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
@@ -41,7 +42,7 @@ namespace Game.Player.Gunplay
                 }
             }
         }
-
+        
         
     }
 }

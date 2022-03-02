@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using Game.Player.Damage;
 using Game.Player.Movement;
 using Mirror;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 namespace Game.Player.Gunplay
 {
@@ -14,26 +16,23 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
-        /*private void Update()
+        [Header("Ammo")] [SyncVar] public int curReserverAmmo;
+        
+        private void Update()
         {
             if(!hasAuthority) return;
-            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
-        }*/
-
-        // Calling this from GunViewModel
-        public void Shoot()
-        {
-            CmdShoot();
+            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
-        private void Shoot()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
-            CmdShoot(ray);
-        }
-        
         [Command]
         private void CmdShoot(Ray ray)
+        { 
+            ServerShoot(ray);
+        }
+
+        #region ServerShootingLogic
+        [Server]
+        private void ServerShoot(Ray ray)
         {
             RaycastHit _hit;
             if (Physics.Raycast(ray, out _hit, curGun.Range, curGun.HitLayers))
@@ -74,5 +73,7 @@ namespace Game.Player.Gunplay
                 AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
             }*/
         }
+        
+        #endregion
     }
 }

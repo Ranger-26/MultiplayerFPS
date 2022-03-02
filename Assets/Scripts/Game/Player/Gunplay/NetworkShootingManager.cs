@@ -24,6 +24,25 @@ namespace Game.Player.Gunplay
             if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
+        Camera maincam;
+
+        private void Start()
+        {
+            maincam = Camera.main;
+        }
+
+        /*private void Update()
+        {
+            if(!hasAuthority) return;
+            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
+        }*/
+
+        private void Shoot()
+        {
+            Ray ray = maincam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
+            CmdShoot(ray);
+        }
+        
         [Command]
         private void CmdShoot(Ray ray)
         { 

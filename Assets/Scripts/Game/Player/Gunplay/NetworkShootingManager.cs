@@ -16,36 +16,20 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
-        [Header("Ammo")] [SyncVar] public int curReserverAmmo;
+        [Header("Ammo")] 
+        [SyncVar] 
+        public int curReserveAmmo;
         
         private void Update()
         {
             if(!hasAuthority) return;
-            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
+            if (Input.GetKey(KeyCode.Mouse0)) CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
-        Camera maincam;
-
-        private void Start()
-        {
-            maincam = Camera.main;
-        }
-
-        /*private void Update()
-        {
-            if(!hasAuthority) return;
-            if (Input.GetKeyDown(KeyCode.Mouse0)) CmdShoot();
-        }*/
-
-        private void Shoot()
-        {
-            Ray ray = maincam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f));
-            CmdShoot(ray);
-        }
-        
         [Command]
         private void CmdShoot(Ray ray)
         { 
+            if (curReserveAmmo < 0) return;
             ServerShoot(ray);
         }
 
@@ -94,5 +78,13 @@ namespace Game.Player.Gunplay
         }
         
         #endregion
+
+        [Server]
+        private IEnumerator Reload()
+        {
+            yield break;
+        }
+        
+        
     }
 }

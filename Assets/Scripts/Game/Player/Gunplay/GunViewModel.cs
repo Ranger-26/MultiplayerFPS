@@ -87,7 +87,7 @@ namespace Game.Player.Gunplay
 
         private void Update()
         {
-            if (!ni.isLocalPlayer)
+            if (!nsm.hasAuthority)
                 return;
 
             isSpraying = Input.GetMouseButton(0);
@@ -227,15 +227,7 @@ namespace Game.Player.Gunplay
 
             Visual();
 
-            //nsm.Shoot();
-
-            RaycastHit _hit;
-            if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
-            {
-                // Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.blue, 0.2f);
-
-                Hit(_hit);
-            }
+            nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
         private void Recoil()
@@ -280,26 +272,7 @@ namespace Game.Player.Gunplay
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }
-
-        private void Hit(RaycastHit _hit)
-        {
-/*            if (gun.HitObject != null)
-            {
-                Instantiate(gun.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
-            }
-
-            if (gun.HitDecal != null)
-            {
-                GameObject decal = Instantiate(gun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
-                decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
-            }*/
-
-            if (gun.HitSounds.Length != 0)
-            {
-                AudioSystem.PlaySound(gun.HitSounds[Random.Range(0, gun.HitSounds.Length - 1)], _hit.point, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
-            }
-        }
-
+        
         private IEnumerator AimPunch()
         {
             float timer = 0f;

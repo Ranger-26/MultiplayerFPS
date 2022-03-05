@@ -8,5 +8,6 @@ namespace Game.Player.InventorySystem
 {
     public class Inventory : NetworkBehaviour
     {
+        
     }
 }

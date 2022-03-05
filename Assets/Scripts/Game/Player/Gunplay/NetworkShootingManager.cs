@@ -1,35 +1,30 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using Game.Player.Damage;
 using Game.Player.Movement;
+using Lobby;
 using Mirror;
 using UnityEngine;
 using UnityEngine.VFX;
-using Random = UnityEngine.Random;
 
 namespace Game.Player.Gunplay
 {
     public class NetworkShootingManager : NetworkBehaviour
     {
         public Gun curGun;
-        
+
         [SerializeField]
         Transform spreadPoint;
 
-        [Header("Ammo")] 
-        [SyncVar] 
-        public int curReserveAmmo;
-        
         private void Update()
         {
             if(!hasAuthority) return;
-            if (Input.GetKey(KeyCode.Mouse0)) CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
-
+        
         [Command]
-        private void CmdShoot(Ray ray)
-        { 
-            if (curReserveAmmo < 0) return;
+        public void CmdShoot(Ray ray)
+        {
             ServerShoot(ray);
         }
 
@@ -79,12 +74,13 @@ namespace Game.Player.Gunplay
         
         #endregion
 
+        [Command]
+        public void CmdReload() => StartCoroutine(Reload());
+        
         [Server]
         private IEnumerator Reload()
         {
             yield break;
         }
-        
-        
     }
 }

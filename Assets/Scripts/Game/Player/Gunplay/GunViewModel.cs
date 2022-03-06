@@ -157,12 +157,14 @@ namespace Game.Player.Gunplay
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((!delay && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (currentAmmo == 0))
+            if ((!delay && !isSpraying) || currentAmmo == 0)
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 dropFactor = Mathf.Clamp(dropFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
+
+                UpdateSpread();
 
                 if (!isSwaying)
                 {
@@ -194,6 +196,8 @@ namespace Game.Player.Gunplay
 
                 Recoil();
 
+                Spread();
+
                 StartCoroutine(AimPunch());
             }
 
@@ -223,8 +227,6 @@ namespace Game.Player.Gunplay
 
         private void Raycast()
         {
-            Spread();
-
             Visual();
 
             RaycastHit _hit;
@@ -281,7 +283,14 @@ namespace Game.Player.Gunplay
             spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
             moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, gun.StartingSpread, gun.MaxMovementSpread);
 
+            UpdateSpread();
+        }
+
+        private void UpdateSpread()
+        {
             float totalSpread = spread + moveSpread;
+
+            Debug.Log(moveSpread + " " + spread + " " + totalSpread);
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }

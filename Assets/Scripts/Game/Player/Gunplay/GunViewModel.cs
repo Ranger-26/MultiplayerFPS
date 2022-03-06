@@ -157,7 +157,7 @@ namespace Game.Player.Gunplay
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((!delay && !isSpraying) || currentAmmo == 0)
+            if ((!delay && !(isSpraying && gun.GunFiringMode == FiringMode.Auto)) || currentAmmo == 0)
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
@@ -221,7 +221,7 @@ namespace Game.Player.Gunplay
 
             if (gun.ShootSounds.Length != 0)
             {
-                AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], spreadPoint.position + spreadPoint.forward * 0.5f, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.position, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
         }
 
@@ -341,7 +341,7 @@ namespace Game.Player.Gunplay
 
         private IEnumerator Reload()
         {
-            if (!delay && !isSpraying && currentAmmo < gun.MaxAmmo && reserve > 0)
+            if (!delay && !(isSpraying && gun.GunFiringMode == FiringMode.Auto) && currentAmmo < gun.MaxAmmo && reserve > 0)
             {
                 delay = true;
                 canCharge = false;

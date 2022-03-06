@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DrawMakarov
+  m_Name: Draw
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -175,7 +175,7 @@ AnimatorStateMachine:
     m_Position: {x: 750, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6210637041577475996}
-    m_Position: {x: 785, y: 95, z: 0}
+    m_Position: {x: 1050, y: 50, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

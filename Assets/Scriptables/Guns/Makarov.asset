@@ -22,7 +22,7 @@ MonoBehaviour:
   Weight: 0.1
   BulletCount: 1
   GunFiringMode: 1
-  Spread: 1
+  Spread: 2
   MovementSpread: 1
   MaxSpread: 4
   MaxMovementSpread: 13
@@ -55,6 +55,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
-  SoundMaxDistance: 100
-  SoundVolume: 1
+  SoundMaxDistance: 200
+  SoundVolume: 3
   SoundPriority: 128

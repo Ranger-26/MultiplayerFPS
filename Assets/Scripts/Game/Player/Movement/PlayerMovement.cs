@@ -1,4 +1,5 @@
 using Mirror;
+using System;
 using UnityEngine;
 
 namespace Game.Player.Movement
@@ -23,10 +24,13 @@ namespace Game.Player.Movement
         float tagging;
 
         bool isGrounded;
+        bool LandTagged;
         
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;
+
+            LandTagged = true;
         }
 
         private void Update()
@@ -43,12 +47,23 @@ namespace Game.Player.Movement
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
+            if (!isGrounded)
+            {
+                LandTagged = false;
+            }
+
+            if (!LandTagged && isGrounded)
+            {
+                Tag(0.6f);
+                LandTagged = true;
+            }
+
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * (speed - speed * tagging - speed * weight) * Time.deltaTime);
+            controller.Move(move * (speed - speed * (tagging - tagging * 0.75f * Convert.ToInt32(isGrounded)) - speed * weight) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

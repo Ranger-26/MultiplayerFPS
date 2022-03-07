@@ -203,7 +203,7 @@ namespace Game.Player.Gunplay
                 StartCoroutine(AimPunch());
             }
 
-            if (nsm.currentAmmo <= 0 && !delay)
+            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
             {
                 StartCoroutine(Reload());
             }
@@ -313,6 +313,7 @@ namespace Game.Player.Gunplay
         private IEnumerator Reload()
         {
             Debug.Log("Trying to reload...");
+
             delay = true;
             canCharge = false;
 
@@ -323,12 +324,10 @@ namespace Game.Player.Gunplay
                 anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
             }
 
-
             nsm.CmdReload();
 
             //yield return new WaitUntil(()=>!nsm.isReloading);
             yield return new WaitForSeconds(nsm.curGun.ReloadTime);
-                
                 
             chargeupTimer = 0f;
                 

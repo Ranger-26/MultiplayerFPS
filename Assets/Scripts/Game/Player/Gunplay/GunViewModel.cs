@@ -203,7 +203,7 @@ namespace Game.Player.Gunplay
                 StartCoroutine(AimPunch());
             }
 
-            if (nsm.currentAmmo <= 0)
+            if (nsm.currentAmmo <= 0 && !delay)
             {
                 StartCoroutine(Reload());
             }

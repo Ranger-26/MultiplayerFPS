@@ -17,6 +17,8 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
+        private int id => GetComponent<NetworkGamePlayer>().playerId;
+        
         private void Update()
         {
             if(!hasAuthority) return;
@@ -37,7 +39,7 @@ namespace Game.Player.Gunplay
             {
                 Debug.DrawRay(spreadPoint.position, spreadPoint.forward * curGun.Range, Color.green, 0.2f);
 
-                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}");
+                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
 
                 Hit(_hit);
 

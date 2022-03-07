@@ -181,6 +181,7 @@ namespace Game.Player.Gunplay
 
         public void Shoot()
         {
+            if (!ni.hasAuthority) return;
             if (!delay && currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
                 shootTimer = 60f / gun.RPM;

@@ -88,7 +88,7 @@ namespace Game.Player.Gunplay
         [Tooltip("The slot this gun occupies")]
         public WeaponSlot GunSlot;
 
-        [Tooltip("The time it takes in seconds to pull the gun out")]
+        [Tooltip("The time it takes in seconds to pull the gun out, as well as the time it takes to chamber the gun after reload")]
         public float DrawTime = 1f;
 
         [Header("Visuals & Audio")]

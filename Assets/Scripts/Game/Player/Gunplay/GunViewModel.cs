@@ -346,7 +346,7 @@ namespace Game.Player.Gunplay
                 delay = true;
                 canCharge = false;
 
-                Debug.Log("Reload");
+                Debug.Log("Reloading... ");
 
                 if (anim != null)
                 {
@@ -377,7 +377,11 @@ namespace Game.Player.Gunplay
 
                 canCharge = true;
 
-                Debug.Log("Reload Complete");
+                Debug.Log("Filled Magazine, Chambering... ");
+
+                yield return new WaitForSeconds(gun.DrawTime);
+
+                Debug.Log("Gun Chambered. ");
 
                 delay = false;
             }

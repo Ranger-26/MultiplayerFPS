@@ -10,7 +10,6 @@ namespace Game.Player.Damage
 
         private HealthController hc;
         
-        [ServerCallback]
         private void Start()
         {
             hc = GetComponentInParent<HealthController>();

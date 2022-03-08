@@ -31,9 +31,6 @@ namespace Game.Player.Gunplay
 
         NetworkIdentity ni;
 
-        int currentAmmo;
-        int reserve;
-
         float recoilFactor;
         float displacementFactor;
         float dropFactor;
@@ -52,7 +49,7 @@ namespace Game.Player.Gunplay
         bool canCharge;
         bool shootQueue;
 
-        private void Awake()
+        private void Start()
         {
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
@@ -62,9 +59,6 @@ namespace Game.Player.Gunplay
             spreadPoint = firingPoint.GetChild(0);
 
             anim = GetComponent<Animator>();
-
-            currentAmmo = gun.MaxAmmo;
-            reserve = gun.ReserveAmmo;
 
             ni = GetComponentInParent<NetworkIdentity>();
 
@@ -87,7 +81,7 @@ namespace Game.Player.Gunplay
 
         private void Update()
         {
-            if (!ni.isLocalPlayer)
+            if (!nsm.hasAuthority)
                 return;
 
             isSpraying = Input.GetMouseButton(0);
@@ -108,7 +102,7 @@ namespace Game.Player.Gunplay
                 shootQueue = false;
             }
 
-            if (gun.ChargeupTime > 0f && isSpraying && currentAmmo > 0 && canCharge)
+            if (gun.ChargeupTime > 0f && isSpraying && nsm.currentAmmo > 0 && canCharge)
             {
                 chargeupTimer = Mathf.Clamp(chargeupTimer + Time.deltaTime, 0f, gun.ChargeupTime);
 
@@ -122,7 +116,7 @@ namespace Game.Player.Gunplay
                     }
                 }
             }
-            else if (gun.ChargeupTime > 0f && !isSpraying && currentAmmo > 0)
+            else if (gun.ChargeupTime > 0f && !isSpraying && nsm.currentAmmo > 0)
             {
                 chargeupTimer = Mathf.Clamp(chargeupTimer - Time.deltaTime, 0f, gun.ChargeupTime);
 
@@ -157,7 +151,7 @@ namespace Game.Player.Gunplay
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((!delay && !(isSpraying && gun.GunFiringMode == FiringMode.Auto)) || currentAmmo == 0)
+            if ((!delay && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (nsm.currentAmmo == 0))
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
@@ -183,17 +177,23 @@ namespace Game.Player.Gunplay
 
         public void Shoot()
         {
-            if (!delay && currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
+            if (!ni.hasAuthority) return;
+            if (!delay && nsm.currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
                 shootTimer = 60f / gun.RPM;
 
-                currentAmmo--;
-
-                for (int i = 0; i < gun.BulletCount; i++)
+                for (int i = 0; i < nsm.curGun.BulletCount; i++)
                 {
-                    Raycast();
+                    Spread();
+
+                    Visual();
                 }
 
+                if (nsm.hasAuthority)
+                {
+                    nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
+                }
+                
                 Recoil();
 
                 Spread();
@@ -201,7 +201,7 @@ namespace Game.Player.Gunplay
                 StartCoroutine(AimPunch());
             }
 
-            if (currentAmmo <= 0)
+            if (nsm.currentAmmo <= 0)
             {
                 StartCoroutine(Reload());
             }
@@ -229,20 +229,7 @@ namespace Game.Player.Gunplay
         {
             Visual();
 
-            RaycastHit _hit;
-            if (Physics.Raycast(spreadPoint.position, spreadPoint.forward, out _hit, gun.Range, gun.HitLayers))
-            {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 0.2f);
-
-                if (_hit.transform.GetComponent<Rigidbody>() != null)
-                {
-                    Rigidbody target = _hit.transform.GetComponent<Rigidbody>();
-
-                    target.AddForceAtPosition(spreadPoint.forward * gun.Damage * 0.5f, _hit.point, ForceMode.Impulse);
-                }
-
-                Hit(_hit);
-            }
+            nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
         private void Recoil()
@@ -294,26 +281,7 @@ namespace Game.Player.Gunplay
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }
-
-        private void Hit(RaycastHit _hit)
-        {
-            if (gun.HitObject != null)
-            {
-                Instantiate(gun.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
-            }
-
-            if (gun.HitDecal != null)
-            {
-                GameObject decal = Instantiate(gun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
-                decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
-            }
-
-            if (gun.HitSounds.Length != 0)
-            {
-                AudioSystem.PlaySound(gun.HitSounds[Random.Range(0, gun.HitSounds.Length - 1)], _hit.point, gun.SoundMaxDistance, Random.Range(0.9f, 1.1f), Random.Range(0.95f, 1.05f), 1.1f, gun.SoundPriority);
-            }
-        }
-
+        
         private IEnumerator AimPunch()
         {
             float timer = 0f;
@@ -338,10 +306,11 @@ namespace Game.Player.Gunplay
                 yield return new WaitForFixedUpdate();
             }
         }
+        
 
         private IEnumerator Reload()
         {
-            if (!delay && !(isSpraying && gun.GunFiringMode == FiringMode.Auto) && currentAmmo < gun.MaxAmmo && reserve > 0)
+            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
             {
                 delay = true;
                 canCharge = false;
@@ -353,21 +322,13 @@ namespace Game.Player.Gunplay
                     anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
                 }
 
-                yield return new WaitForSeconds(gun.ReloadTime);
 
-                int exchange = gun.MaxAmmo - currentAmmo;
+                nsm.CmdReload();
 
-                if (reserve <= exchange)
-                {
-                    currentAmmo += reserve;
-                    reserve = 0;
-                }
-                else
-                {
-                    currentAmmo += exchange;
-                    reserve -= exchange;
-                }
-
+                //yield return new WaitUntil(()=>!nsm.isReloading);
+                yield return new WaitForSeconds(nsm.curGun.ReloadTime);
+                
+                
                 chargeupTimer = 0f;
                 
                 if (gun.ChargeupTime > 0f)

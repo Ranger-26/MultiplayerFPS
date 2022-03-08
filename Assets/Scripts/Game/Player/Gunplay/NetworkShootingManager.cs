@@ -31,11 +31,7 @@ namespace Game.Player.Gunplay
 
         private int id => GetComponent<NetworkGamePlayer>().playerId;
         
-        private void Update()
-        {
-            
-        }
-        
+        #region ServerShootingLogic
         [Command]
         public void CmdShoot(Ray ray)
         {
@@ -46,8 +42,7 @@ namespace Game.Player.Gunplay
             }
             
         }
-
-        #region ServerShootingLogic
+        
         [Server]
         private void ServerShoot(Ray ray)
         {
@@ -93,6 +88,7 @@ namespace Game.Player.Gunplay
         
         #endregion
 
+        #region ReloadingLogic
         [Command]
         public void CmdReload()
         {
@@ -119,5 +115,9 @@ namespace Game.Player.Gunplay
 
             isReloading = false;
         }
+        
+
+        #endregion
+        
     }
 }

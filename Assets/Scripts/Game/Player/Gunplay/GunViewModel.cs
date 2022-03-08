@@ -138,9 +138,11 @@ namespace Game.Player.Gunplay
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                StartCoroutine(Reload());
+                if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
+                {
+                    StartCoroutine(Reload());
+                }
             }
-
             shootTimer -= Time.deltaTime;
         }
 
@@ -277,7 +279,7 @@ namespace Game.Player.Gunplay
         {
             float totalSpread = spread + moveSpread;
 
-            Debug.Log(moveSpread + " " + spread + " " + totalSpread);
+            //Debug.Log(moveSpread + " " + spread + " " + totalSpread);
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }
@@ -310,42 +312,40 @@ namespace Game.Player.Gunplay
 
         private IEnumerator Reload()
         {
-            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
+            Debug.Log("Trying to reload...");
+            delay = true;
+            canCharge = false;
+
+            Debug.Log("Reloading... ");
+
+            if (anim != null)
             {
-                delay = true;
-                canCharge = false;
-
-                Debug.Log("Reloading... ");
-
-                if (anim != null)
-                {
-                    anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
-                }
-
-
-                nsm.CmdReload();
-
-                //yield return new WaitUntil(()=>!nsm.isReloading);
-                yield return new WaitForSeconds(nsm.curGun.ReloadTime);
-                
-                
-                chargeupTimer = 0f;
-                
-                if (gun.ChargeupTime > 0f)
-                {
-                    chargedUp = false;
-                }
-
-                canCharge = true;
-
-                Debug.Log("Filled Magazine, Chambering... ");
-
-                yield return new WaitForSeconds(gun.DrawTime);
-
-                Debug.Log("Gun Chambered. ");
-
-                delay = false;
+                anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
             }
+
+
+            nsm.CmdReload();
+
+            //yield return new WaitUntil(()=>!nsm.isReloading);
+            yield return new WaitForSeconds(nsm.curGun.ReloadTime);
+                
+                
+            chargeupTimer = 0f;
+                
+            if (gun.ChargeupTime > 0f)
+            {
+                chargedUp = false;
+            }
+
+            canCharge = true;
+
+            Debug.Log("Filled Magazine, Chambering... ");
+
+            yield return new WaitForSeconds(gun.DrawTime);
+
+            Debug.Log("Gun Chambered. ");
+
+            delay = false;
         }
 
         private IEnumerator Draw()

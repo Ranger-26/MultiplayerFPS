@@ -25,9 +25,10 @@ namespace Game.Player.Movement
 
         private void Start()
         {
-            if (!isLocalPlayer)
+            if (!hasAuthority)
             {
                 cam.enabled = false;
+                cam.transform.parent.GetComponentInChildren<AudioListener>().enabled = false;
                 enabled = false;
             }
         }

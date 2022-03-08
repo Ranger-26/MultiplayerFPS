@@ -409,9 +409,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  curGun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
+  curGun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
   spreadPoint: {fileID: 6374122900803664586}
-  curReserveAmmo: 0
+  currentAmmo: 0
+  reserveAmmo: 0
+  isReloading: 0
 --- !u!114 &2900848325028794953
 MonoBehaviour:
   m_ObjectHideFlags: 0

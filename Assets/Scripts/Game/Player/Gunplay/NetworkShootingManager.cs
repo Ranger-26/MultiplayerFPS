@@ -17,17 +17,34 @@ namespace Game.Player.Gunplay
         [SerializeField]
         Transform spreadPoint;
 
+        [SyncVar]
+        public int currentAmmo;
+        [SyncVar]
+        public int reserveAmmo;
+
+        [SyncVar] public bool isReloading = false;
+        public void Start()
+        {
+            currentAmmo = curGun.MaxAmmo;
+            reserveAmmo = curGun.ReserveAmmo;
+        }
+
         private int id => GetComponent<NetworkGamePlayer>().playerId;
         
         private void Update()
         {
-            if(!hasAuthority) return;
+            
         }
         
         [Command]
         public void CmdShoot(Ray ray)
         {
-            ServerShoot(ray);
+            currentAmmo--;
+            for (int i = 0; i < curGun.BulletCount; i++)
+            {
+                ServerShoot(ray);
+            }
+            
         }
 
         #region ServerShootingLogic
@@ -77,12 +94,30 @@ namespace Game.Player.Gunplay
         #endregion
 
         [Command]
-        public void CmdReload() => StartCoroutine(Reload());
+        public void CmdReload()
+        {
+            if (currentAmmo > 0 || reserveAmmo <= 0) return; 
+            isReloading = true;
+            StartCoroutine(Reload());
+        } 
         
         [Server]
         private IEnumerator Reload()
         {
-            yield break;
+            yield return new WaitForSeconds(curGun.ReloadTime);
+            int exchange = curGun.MaxAmmo - currentAmmo;
+            if (reserveAmmo <= exchange)
+            {
+                currentAmmo += reserveAmmo;
+                reserveAmmo = 0;
+            }
+            else
+            {
+                currentAmmo += exchange;
+                reserveAmmo -= exchange;
+            }
+
+            isReloading = false;
         }
     }
 }

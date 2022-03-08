@@ -64,7 +64,7 @@ namespace Game.Player.Gunplay
             if (curGun.HitDecal != null)
             {
                 GameObject decal = Instantiate(curGun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
-                decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+                //decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
                 NetworkServer.Spawn(decal);
             }
 /*

@@ -33,23 +33,22 @@ namespace Game.Player.Gunplay
         
         #region ServerShootingLogic
         [Command]
-        public void CmdShoot(Ray ray)
+        public void CmdShoot(Vector3 start, Vector3 forward)
         {
             currentAmmo--;
             for (int i = 0; i < curGun.BulletCount; i++)
             {
-                ServerShoot(ray);
+                ServerShoot(start, forward);
             }
-            
         }
         
         [Server]
-        private void ServerShoot(Ray ray)
+        private void ServerShoot(Vector3 start, Vector3 forward)
         {
             RaycastHit _hit;
-            if (Physics.Raycast(ray, out _hit, curGun.Range, curGun.HitLayers))
+            if (Physics.Raycast(start,forward, out _hit, curGun.Range, curGun.HitLayers))
             {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * curGun.Range, Color.green, 0.2f);
+                Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
 
                 Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
 
@@ -118,6 +117,5 @@ namespace Game.Player.Gunplay
         
 
         #endregion
-        
     }
 }

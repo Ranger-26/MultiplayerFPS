@@ -193,7 +193,7 @@ namespace Game.Player.Gunplay
 
                 if (nsm.hasAuthority)
                 {
-                    nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
+                    nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                 }
                 
                 Recoil();
@@ -225,13 +225,6 @@ namespace Game.Player.Gunplay
             {
                 AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
             }
-        }
-
-        private void Raycast()
-        {
-            Visual();
-
-            nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
         private void Recoil()

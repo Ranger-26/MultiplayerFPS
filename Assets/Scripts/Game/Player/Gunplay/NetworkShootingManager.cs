@@ -14,9 +14,6 @@ namespace Game.Player.Gunplay
     {
         public Gun curGun;
 
-        [SerializeField]
-        Transform spreadPoint;
-
         [SyncVar]
         public int currentAmmo;
         [SyncVar]
@@ -49,8 +46,8 @@ namespace Game.Player.Gunplay
             if (Physics.Raycast(start,forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-
-                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
+                RpcDebuger(start, forward);
+                //Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
 
                 Hit(_hit);
 
@@ -63,6 +60,12 @@ namespace Game.Player.Gunplay
             }
         }
 
+        [ClientRpc]
+        public void RpcDebuger(Vector3 start, Vector3 forward)
+        {
+            Debug.Log($"Server: {start},{forward}");
+        }
+        
         [Server]
         private void Hit(RaycastHit _hit)
         {

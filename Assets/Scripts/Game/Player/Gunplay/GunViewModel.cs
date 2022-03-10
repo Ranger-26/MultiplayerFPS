@@ -51,6 +51,12 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
+            if (!GetComponentInParent<NetworkIdentity>().hasAuthority)
+            {
+                enabled = false;
+                return;
+            } 
+
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             nsm = GetComponentInParent<NetworkShootingManager>();
@@ -71,6 +77,7 @@ namespace Game.Player.Gunplay
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
+
         }
 
         private void OnEnable()
@@ -193,6 +200,7 @@ namespace Game.Player.Gunplay
 
                 if (nsm.hasAuthority)
                 {
+                    Debug.Log($"Client: {spreadPoint.position},{spreadPoint.forward}");
                     nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                 }
                 

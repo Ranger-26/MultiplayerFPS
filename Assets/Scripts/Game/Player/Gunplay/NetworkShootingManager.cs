@@ -46,11 +46,11 @@ namespace Game.Player.Gunplay
             if (Physics.Raycast(start,forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-                RpcDebuger(start, forward);
+                Debug.Log($"Server: {start},{forward}, player {id}");
                 //Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
-
+                                        
                 Hit(_hit);
-
+                
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {

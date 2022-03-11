@@ -77,11 +77,6 @@ namespace Game.Player.Gunplay
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
-
-        }
-
-        private void OnEnable()
-        {
             PM.weight = gun.Weight;
             StartCoroutine(Draw());
         }

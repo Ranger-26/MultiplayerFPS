@@ -188,20 +188,18 @@ namespace Game.Player.Gunplay
 
                 for (int i = 0; i < nsm.curGun.BulletCount; i++)
                 {
+                    if (nsm.hasAuthority)
+                    {
+                        Debug.Log($"Client: {spreadPoint.position},{spreadPoint.forward}");
+                        nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
+                    }
+
                     Spread();
 
                     Visual();
                 }
-
-                if (nsm.hasAuthority)
-                {
-                    Debug.Log($"Client: {spreadPoint.position},{spreadPoint.forward}");
-                    nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
-                }
                 
                 Recoil();
-
-                Spread();
 
                 StartCoroutine(AimPunch());
             }
@@ -275,7 +273,7 @@ namespace Game.Player.Gunplay
         {
             float totalSpread = spread + moveSpread;
 
-            //Debug.Log(moveSpread + " " + spread + " " + totalSpread);
+            Debug.Log(moveSpread + " " + spread + " " + totalSpread);
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }

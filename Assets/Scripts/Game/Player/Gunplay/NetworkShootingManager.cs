@@ -33,10 +33,8 @@ namespace Game.Player.Gunplay
         public void CmdShoot(Vector3 start, Vector3 forward)
         {
             currentAmmo--;
-            for (int i = 0; i < curGun.BulletCount; i++)
-            {
-                ServerShoot(start, forward);
-            }
+
+            ServerShoot(start, forward);
         }
         
         [Server]

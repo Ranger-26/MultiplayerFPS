@@ -32,6 +32,7 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdShoot(Vector3 start, Vector3 forward)
         {
+            if (currentAmmo <= 0) return;
             currentAmmo--;
 
             ServerShoot(start, forward);

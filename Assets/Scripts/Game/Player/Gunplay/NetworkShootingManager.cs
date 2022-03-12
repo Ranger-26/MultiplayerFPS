@@ -74,11 +74,11 @@ namespace Game.Player.Gunplay
                 //decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
                 NetworkServer.Spawn(decal);
             }
-/*
+
             if (curGun.HitSounds.Length != 0)
             {
                 AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
-            }*/
+            }
         }
         
         #endregion

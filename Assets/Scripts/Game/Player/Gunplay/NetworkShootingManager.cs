@@ -22,7 +22,7 @@ namespace Game.Player.Gunplay
 
         [SyncVar] public bool isReloading = false;
 
-        private void Awake()
+        public void Start()
         {
             if (!hasAuthority)
             {
@@ -32,10 +32,7 @@ namespace Game.Player.Gunplay
                 Destroy(tempcam.GetComponent<AudioListener>());
                 Destroy(tempcam.GetComponent<HDAdditionalCameraData>());
             }
-        }
 
-        public void Start()
-        {
             currentAmmo = curGun.MaxAmmo;
             reserveAmmo = curGun.ReserveAmmo;
         }

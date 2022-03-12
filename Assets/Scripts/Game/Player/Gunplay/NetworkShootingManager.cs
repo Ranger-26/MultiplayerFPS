@@ -20,19 +20,11 @@ namespace Game.Player.Gunplay
         [SyncVar]
         public int reserveAmmo;
 
-        [SyncVar] public bool isReloading = false;
+        [SyncVar] 
+        public bool isReloading = false;
 
         public void Start()
         {
-            if (!hasAuthority)
-            {
-                Transform tempcam = transform.GetChild(0).GetChild(0);
-                Destroy(tempcam.GetChild(0).gameObject);
-                tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
-                tempcam.GetComponent<Camera>().enabled = false;
-                tempcam.GetComponent<AudioListener>().enabled = false;
-            }
-
             currentAmmo = curGun.MaxAmmo;
             reserveAmmo = curGun.ReserveAmmo;
         }

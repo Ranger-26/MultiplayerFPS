@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace Game.Player.Gunplay
 {
@@ -53,6 +54,11 @@ namespace Game.Player.Gunplay
         {
             if (!GetComponentInParent<NetworkIdentity>().hasAuthority)
             {
+                Transform tempcam = transform.parent.parent;
+                Destroy(tempcam.GetChild(0).gameObject);
+                tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
+                tempcam.GetComponent<Camera>().enabled = false;
+                tempcam.GetComponent<AudioListener>().enabled = false;
                 enabled = false;
                 return;
             } 

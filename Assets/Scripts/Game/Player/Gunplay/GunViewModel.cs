@@ -176,6 +176,8 @@ namespace Game.Player.Gunplay
         {
             isSwaying = recoilFactor > gun.SwayAfterRound;
 
+            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
+
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
@@ -291,7 +293,6 @@ namespace Game.Player.Gunplay
         private void Spread()
         {
             spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
-            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
 
             UpdateSpread();
         }

@@ -45,7 +45,7 @@ namespace Game.Player.Gunplay
             if (Physics.Raycast(start,forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-                Debug.Log($"Server: {start},{forward}, player {id}");
+                //Debug.Log($"Server: {start},{forward}, player {id}");
                 //Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
                                         
                 Hit(_hit);
@@ -57,12 +57,6 @@ namespace Game.Player.Gunplay
                     // Damage player
                 }
             }
-        }
-
-        [ClientRpc]
-        public void RpcDebuger(Vector3 start, Vector3 forward)
-        {
-            Debug.Log($"Server: {start},{forward}");
         }
         
         [Server]
@@ -116,8 +110,12 @@ namespace Game.Player.Gunplay
 
             isReloading = false;
         }
-        
-
         #endregion
+
+        [Command]
+        public void CmdSendDebug(string message, int playerId)
+        {
+            Debug.Log($"Message: {message}, Player id: {playerId}");
+        }
     }
 }

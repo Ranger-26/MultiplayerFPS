@@ -79,6 +79,7 @@ namespace Game.Player.Gunplay
             if (PL == null) { Debug.LogError("Player look is null!"); }
             PM.weight = gun.Weight;
             StartCoroutine(Draw());
+            //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
         }
 
         private void Update()
@@ -190,7 +191,7 @@ namespace Game.Player.Gunplay
                 {
                     if (nsm.hasAuthority)
                     {
-                        Debug.Log($"Client: {spreadPoint.position},{spreadPoint.forward}");
+                        //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
                         nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                     }
 
@@ -273,7 +274,7 @@ namespace Game.Player.Gunplay
         {
             float totalSpread = spread + moveSpread;
 
-            Debug.Log(moveSpread + " " + spread + " " + totalSpread);
+            //Debug.Log(moveSpread + " " + spread + " " + totalSpread);
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }

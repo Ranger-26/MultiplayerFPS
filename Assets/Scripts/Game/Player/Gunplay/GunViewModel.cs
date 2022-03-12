@@ -11,6 +11,15 @@ namespace Game.Player.Gunplay
         [Header("Settings")]
         public Gun gun;
 
+        [HideInInspector]
+        public float Sprd
+        {
+            get
+            {
+                return spread;
+            }
+        }
+
         [Header("Visuals")]
         [SerializeField]
         VisualEffect muzzleFlash;
@@ -186,19 +195,17 @@ namespace Game.Player.Gunplay
 
                 for (int i = 0; i < nsm.curGun.BulletCount; i++)
                 {
+                    if (nsm.hasAuthority)
+                    {
+                        nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
+                    }
+
                     Spread();
 
                     Visual();
                 }
-
-                if (nsm.hasAuthority)
-                {
-                    nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
-                }
                 
                 Recoil();
-
-                Spread();
 
                 StartCoroutine(AimPunch());
             }

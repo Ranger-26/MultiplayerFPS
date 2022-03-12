@@ -36,11 +36,8 @@ namespace Game.Player.Gunplay
         public void CmdShoot(Ray ray)
         {
             currentAmmo--;
-            for (int i = 0; i < curGun.BulletCount; i++)
-            {
-                ServerShoot(ray);
-            }
-            
+
+            ServerShoot(ray);
         }
         
         [Server]

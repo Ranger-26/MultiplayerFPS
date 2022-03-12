@@ -27,10 +27,10 @@ namespace Game.Player.Gunplay
             if (!hasAuthority)
             {
                 Transform tempcam = transform.GetChild(0).GetChild(0);
-                Destroy(tempcam.GetChild(0));
-                Destroy(tempcam.GetComponent<Camera>());
-                Destroy(tempcam.GetComponent<AudioListener>());
-                Destroy(tempcam.GetComponent<HDAdditionalCameraData>());
+                Destroy(tempcam.GetChild(0).gameObject);
+                tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
+                tempcam.GetComponent<Camera>().enabled = false;
+                tempcam.GetComponent<AudioListener>().enabled = false;
             }
 
             currentAmmo = curGun.MaxAmmo;

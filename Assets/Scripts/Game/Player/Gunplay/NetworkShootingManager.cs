@@ -6,6 +6,7 @@ using Game.Player.Movement;
 using Lobby;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.VFX;
 
 namespace Game.Player.Gunplay
@@ -20,6 +21,19 @@ namespace Game.Player.Gunplay
         public int reserveAmmo;
 
         [SyncVar] public bool isReloading = false;
+
+        private void Awake()
+        {
+            if (!hasAuthority)
+            {
+                Transform tempcam = transform.GetChild(0).GetChild(0);
+                Destroy(tempcam.GetChild(0));
+                Destroy(tempcam.GetComponent<Camera>());
+                Destroy(tempcam.GetComponent<AudioListener>());
+                Destroy(tempcam.GetComponent<HDAdditionalCameraData>());
+            }
+        }
+
         public void Start()
         {
             currentAmmo = curGun.MaxAmmo;

@@ -191,7 +191,7 @@ namespace Game.Player.Gunplay
                 {
                     if (nsm.hasAuthority)
                     {
-                        //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
+                        // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
                         nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                     }
 

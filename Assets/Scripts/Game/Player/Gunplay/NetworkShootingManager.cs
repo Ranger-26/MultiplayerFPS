@@ -53,11 +53,11 @@ namespace Game.Player.Gunplay
         private void ServerShoot(Vector3 start, Vector3 forward)
         {
             RaycastHit _hit;
-            if (Physics.Raycast(start,forward, out _hit, curGun.Range, curGun.HitLayers))
+            if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-                //Debug.Log($"Server: {start},{forward}, player {id}");
-                //Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
+                // Debug.Log($"Server: {start},{forward}, player {id}");
+                // Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
                                         
                 Hit(_hit);
                 

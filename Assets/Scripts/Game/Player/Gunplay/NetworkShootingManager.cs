@@ -38,19 +38,19 @@ namespace Game.Player.Gunplay
             if (currentAmmo <= 0) return;
             currentAmmo--;
 
-            ServerShoot(start, forward);
+            ServerShoot(start, forward, id);
         }
         
         [Server]
-        private void ServerShoot(Vector3 start, Vector3 forward)
+        private void ServerShoot(Vector3 start, Vector3 forward, int id)
         {
             RaycastHit _hit;
             if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
                 // Debug.Log($"Server: {start},{forward}, player {id}");
-                // Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
-                                        
+                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
+                                           
                 Hit(_hit);
                 
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();

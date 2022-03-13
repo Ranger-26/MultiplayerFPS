@@ -52,7 +52,7 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
-            if (!GetComponentInParent<NetworkIdentity>().hasAuthority)
+            if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
             {
                 Transform tempcam = transform.parent.parent;
                 Destroy(tempcam.GetChild(0).gameObject);
@@ -60,7 +60,6 @@ namespace Game.Player.Gunplay
                 tempcam.GetComponent<Camera>().enabled = false;
                 tempcam.GetComponent<AudioListener>().enabled = false;
                 enabled = false;
-                return;
             } 
 
             PM = GetComponentInParent<PlayerMovement>();
@@ -85,11 +84,20 @@ namespace Game.Player.Gunplay
             if (PL == null) { Debug.LogError("Player look is null!"); }
             PM.weight = gun.Weight;
             StartCoroutine(Draw());
+
+            if (nsm == null)
+            {
+                Debug.LogError("Network Shooting Manager is null in the start!");
+            }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
         }
 
         private void Update()
         {
+            if (nsm == null)
+            {
+                Debug.LogError("Network Shooting Manager is null in the update!");
+            }
             if (!nsm.hasAuthority)
                 return;
 
@@ -197,6 +205,7 @@ namespace Game.Player.Gunplay
                 {
                     if (nsm.hasAuthority)
                     {
+                        Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 1f);
                         // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
                         nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                     }

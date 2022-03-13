@@ -118,7 +118,6 @@ namespace Game.Player.Gunplay
         public int SoundPriority = 128;
     }
 
-
     public enum FiringMode
     {
         Auto,
@@ -129,5 +128,84 @@ namespace Game.Player.Gunplay
     {
         Primary,
         Secondary
+    }
+
+    public enum GunIDs : byte
+    {
+        [Tooltip("Debug Gun")]
+        Debug,
+
+        // T Pistols
+
+        [Tooltip("Basic Free Pistol")]
+        Makarov, 
+        [Tooltip("Better Pistol (One tap headshot with no armor)")]
+        TT33, 
+
+        // T SMGs
+
+        [Tooltip("Eco SMG")]
+        Bizon, 
+        [Tooltip("Half Buy SMG")]
+        Vityaz, 
+
+        // T Rifles
+
+        [Tooltip("Half Buy Rifle")]
+        VSS, 
+        [Tooltip("Full Buy Rifle (One tap headshot)")]
+        AN94, 
+
+        // T Shotguns
+
+        [Tooltip("Auto Shotty")]
+        Saiga12, 
+
+
+
+        // CT Pistols
+
+        [Tooltip("Basic Free Pistol")]
+        HK45CT, 
+        [Tooltip("Better Pistol (One tap headshot with no armor)")]
+        M1911, 
+
+        // CT SMGs
+
+        [Tooltip("Eco SMG")]
+        MP7, 
+        [Tooltip("Half Buy SMG")]
+        MP5K, 
+
+        // CT Rifles
+
+        [Tooltip("Half Buy Rifle")]
+        G36C, 
+        [Tooltip("Full Buy Rifle")]
+        HK416, 
+
+        // CT Shotguns
+
+        [Tooltip("Auto Shotty")]
+        AA12, 
+
+        // Other
+
+        [Tooltip("Eco Shotgun")]
+        Mossberg,
+        [Tooltip("Eco Sniper")]
+        M2010,
+        [Tooltip("AWP (One hit kill body and head)")]
+        Intervention,
+        [Tooltip("ONE TRICK DEAG (One tap headshot)")]
+        Deagle,
+        [Tooltip("Auto Sniper")]
+        FNFAL,
+        [Tooltip("Chargeup Sniper, One Shot Anywhere")]
+        Gauss,
+        [Tooltip("Light Machine Gun")]
+        Ultimax, 
+        [Tooltip("Heavy Machine Gun")]
+        M60 
     }
 }

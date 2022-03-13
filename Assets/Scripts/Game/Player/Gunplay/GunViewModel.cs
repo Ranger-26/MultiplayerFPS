@@ -214,7 +214,9 @@ namespace Game.Player.Gunplay
 
                     Visual();
                 }
-                
+
+                nsm.CmdAmmo();
+
                 Recoil();
 
                 StartCoroutine(AimPunch());

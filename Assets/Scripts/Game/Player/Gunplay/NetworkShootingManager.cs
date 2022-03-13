@@ -35,10 +35,14 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdShoot(Vector3 start, Vector3 forward)
         {
+            ServerShoot(start, forward, id);
+        }
+
+        [Command]
+        public void CmdAmmo()
+        {
             if (currentAmmo <= 0) return;
             currentAmmo--;
-
-            ServerShoot(start, forward, id);
         }
         
         [Server]
@@ -48,7 +52,7 @@ namespace Game.Player.Gunplay
             if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
             {
                 Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-                // Debug.Log($"Server: {start},{forward}, player {id}");
+                // Debug.Log($"Server: {start}, {forward}, player {id}");
                 Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
                                            
                 Hit(_hit);

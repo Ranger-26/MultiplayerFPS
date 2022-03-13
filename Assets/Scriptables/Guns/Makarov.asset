@@ -30,7 +30,7 @@ MonoBehaviour:
   Recoil: 1
   HorizontalRecoil: 1
   MaxHorizontal: 4
-  RecoilDecay: 1
+  RecoilDecay: 2
   Displacement: 1
   MaxDisplacement: 4
   SwayAfterRound: 5

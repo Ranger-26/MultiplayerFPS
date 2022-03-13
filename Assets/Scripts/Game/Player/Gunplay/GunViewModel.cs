@@ -291,7 +291,7 @@ namespace Game.Player.Gunplay
         private void Spread()
         {
             spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
-            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, gun.StartingSpread, gun.MaxMovementSpread);
+            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
 
             UpdateSpread();
         }
@@ -299,8 +299,6 @@ namespace Game.Player.Gunplay
         private void UpdateSpread()
         {
             float totalSpread = spread + moveSpread;
-
-            //Debug.Log(moveSpread + " " + spread + " " + totalSpread);
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }

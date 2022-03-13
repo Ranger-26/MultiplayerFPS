@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace Game.Player.Gunplay
 {
@@ -60,6 +61,16 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
+            if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
+            {
+                Transform tempcam = transform.parent.parent;
+                Destroy(tempcam.GetChild(0).gameObject);
+                tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
+                tempcam.GetComponent<Camera>().enabled = false;
+                tempcam.GetComponent<AudioListener>().enabled = false;
+                enabled = false;
+            } 
+
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             nsm = GetComponentInParent<NetworkShootingManager>();
@@ -80,16 +91,22 @@ namespace Game.Player.Gunplay
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
-        }
-
-        private void OnEnable()
-        {
             PM.weight = gun.Weight;
             StartCoroutine(Draw());
+
+            if (nsm == null)
+            {
+                Debug.LogError("Network Shooting Manager is null in the start!");
+            }
+            //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
         }
 
         private void Update()
         {
+            if (nsm == null)
+            {
+                Debug.LogError("Network Shooting Manager is null in the update!");
+            }
             if (!nsm.hasAuthority)
                 return;
 
@@ -197,14 +214,18 @@ namespace Game.Player.Gunplay
                 {
                     if (nsm.hasAuthority)
                     {
-                        nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
+                        Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 1f);
+                        // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
+                        nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
                     }
 
                     Spread();
 
                     Visual();
                 }
-                
+
+                nsm.CmdAmmo();
+
                 Recoil();
 
                 StartCoroutine(AimPunch());
@@ -232,13 +253,6 @@ namespace Game.Player.Gunplay
             {
                 AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
             }
-        }
-
-        private void Raycast()
-        {
-            Visual();
-
-            nsm.CmdShoot(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0f)));
         }
 
         private void Recoil()

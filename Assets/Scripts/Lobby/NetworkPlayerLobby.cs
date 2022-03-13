@@ -32,13 +32,13 @@ namespace Lobby
         public override void OnStartAuthority()
         {
             base.OnStartAuthority();
-            CmdSetName();
+            CmdSetName(PlayerProfileManager.GetPlayerName());
         }
 
         [Command]
-        private void CmdSetName()
+        private void CmdSetName(string name)
         {
-            playerName = PlayerProfileManager.GetPlayerName();
+            playerName = name;
             id = Room.roomSlots.Count + 1;
         }
 

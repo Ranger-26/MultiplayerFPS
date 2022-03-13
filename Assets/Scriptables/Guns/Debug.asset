@@ -19,6 +19,7 @@ MonoBehaviour:
   RPM: 735
   ChargeupTime: 0.45
   Tagging: 0.9
+  Weight: 0.1
   BulletCount: 2
   GunFiringMode: 0
   Spread: 0.1
@@ -42,7 +43,7 @@ MonoBehaviour:
   ReserveAmmo: 90
   HitLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 73
   GunSlot: 0
   DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}

@@ -6,6 +6,7 @@ using Game.Player.Movement;
 using Lobby;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.VFX;
 
 namespace Game.Player.Gunplay
@@ -14,15 +15,14 @@ namespace Game.Player.Gunplay
     {
         public Gun curGun;
 
-        [SerializeField]
-        Transform spreadPoint;
-
         [SyncVar]
         public int currentAmmo;
         [SyncVar]
         public int reserveAmmo;
 
-        [SyncVar] public bool isReloading = false;
+        [SyncVar] 
+        public bool isReloading = false;
+
         public void Start()
         {
             currentAmmo = curGun.MaxAmmo;
@@ -33,25 +33,30 @@ namespace Game.Player.Gunplay
         
         #region ServerShootingLogic
         [Command]
-        public void CmdShoot(Ray ray)
+        public void CmdShoot(Vector3 start, Vector3 forward)
         {
-            currentAmmo--;
+            ServerShoot(start, forward, id);
+        }
 
-            ServerShoot(ray);
+        [Command]
+        public void CmdAmmo()
+        {
+            if (currentAmmo <= 0) return;
+            currentAmmo--;
         }
         
         [Server]
-        private void ServerShoot(Ray ray)
+        private void ServerShoot(Vector3 start, Vector3 forward, int id)
         {
             RaycastHit _hit;
-            if (Physics.Raycast(ray, out _hit, curGun.Range, curGun.HitLayers))
+            if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
             {
-                Debug.DrawRay(spreadPoint.position, spreadPoint.forward * curGun.Range, Color.green, 0.2f);
-
+                Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
+                // Debug.Log($"Server: {start}, {forward}, player {id}");
                 Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
-
+                                           
                 Hit(_hit);
-
+                
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {
@@ -60,7 +65,7 @@ namespace Game.Player.Gunplay
                 }
             }
         }
-
+        
         [Server]
         private void Hit(RaycastHit _hit)
         {
@@ -76,11 +81,11 @@ namespace Game.Player.Gunplay
                 //decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
                 NetworkServer.Spawn(decal);
             }
-/*
+
             if (curGun.HitSounds.Length != 0)
             {
                 AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
-            }*/
+            }
         }
         
         #endregion
@@ -112,9 +117,12 @@ namespace Game.Player.Gunplay
 
             isReloading = false;
         }
-        
-
         #endregion
-        
+
+        [Command]
+        public void CmdSendDebug(string message, int playerId)
+        {
+            Debug.Log($"Message: {message}, Player id: {playerId}");
+        }
     }
 }

@@ -177,7 +177,7 @@ MonoBehaviour:
   weight: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 73
 --- !u!114 &807805569061322819
 MonoBehaviour:
   m_ObjectHideFlags: 0

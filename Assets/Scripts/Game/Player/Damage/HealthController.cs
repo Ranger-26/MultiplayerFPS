@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-namespace Game.Player
+namespace Game.Player.Damage
 {
     public class HealthController : NetworkBehaviour
     {
@@ -15,7 +15,7 @@ namespace Game.Player
             if (currentHealth - amount > 0)
             {
                 currentHealth -= amount;
-                TargetDamagePlayer();
+                TargetDamagePlayer(currentHealth);
                 return;
             }
 
@@ -26,18 +26,19 @@ namespace Game.Player
         [ClientRpc]
         public void RpcDamagePlayer()
         {
-            
+            //play sound maybe?
         }
 
         [TargetRpc]
-        private void TargetDamagePlayer()
+        private void TargetDamagePlayer(int newHealth)
         {
-            Debug.Log($"You were damaged! New health is now {currentHealth}");
+            GameUiManager.Instance.UpdateHealthUI(newHealth);
         }
 
         [TargetRpc]
         private void TargetDeathPlayer()
         {
+            TargetDamagePlayer(0);
             Debug.Log("You died!");
         }
     }

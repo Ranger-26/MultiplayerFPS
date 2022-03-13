@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  curGun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
+  curGun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
   currentAmmo: 0
   reserveAmmo: 0
   isReloading: 0
@@ -720,7 +720,7 @@ PrefabInstance:
     - target: {fileID: 7288043380750043804, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: gun
       value: 
-      objectReference: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
+      objectReference: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
     - target: {fileID: 8535455495096780019, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: m_Layer
       value: 3

@@ -61,7 +61,7 @@ namespace Game.Player.Gunplay
                 if (part != null)
                 {
                     Debug.Log($"Found body part {part.bodyPart} when raycasting! ");
-                    // Damage player
+                    part.ServerDamage(curGun.Damage, 1);
                 }
             }
         }

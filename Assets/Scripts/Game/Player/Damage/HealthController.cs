@@ -1,4 +1,5 @@
 using Mirror;
+using Networking;
 using UnityEngine;
 
 namespace Game.Player.Damage
@@ -18,9 +19,10 @@ namespace Game.Player.Damage
                 TargetDamagePlayer(currentHealth);
                 return;
             }
-
+            
             currentHealth = 0;
-            TargetDeathPlayer();
+            TargetDamagePlayer(currentHealth);
+            ServerKillPlayer();
         }
 
         [ClientRpc]
@@ -38,8 +40,21 @@ namespace Game.Player.Damage
         [TargetRpc]
         private void TargetDeathPlayer()
         {
-            TargetDamagePlayer(0);
             Debug.Log("You died!");
+        }
+
+        [Server]
+        private void ServerKillPlayer()
+        {
+            NetworkManagerScp nm = (NetworkManagerScp) NetworkManager.singleton;
+            GameObject deadPlayer = Instantiate(nm.deadPlayerPrefab,
+                gameObject.transform.position, Quaternion.identity);
+            NetworkServer.Spawn(deadPlayer);
+            NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
+            GameObject rag = Instantiate(nm.ragDoll, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            NetworkServer.Spawn(rag);
+            TargetDeathPlayer();
         }
     }
 }

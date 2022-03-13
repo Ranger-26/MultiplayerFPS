@@ -18,6 +18,9 @@ namespace Networking
 
         public List<NetworkPlayerLobby> chaos = new List<NetworkPlayerLobby>();
 
+        public GameObject deadPlayerPrefab;
+
+        public GameObject ragDoll;
         public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnection conn)
         {
             GameObject roomPlayer = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);

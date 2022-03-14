@@ -4,6 +4,5 @@ namespace Game.GameLogic.Spawning
     {
         Mtf,
         Chaos,
-        Scp
     }
 }

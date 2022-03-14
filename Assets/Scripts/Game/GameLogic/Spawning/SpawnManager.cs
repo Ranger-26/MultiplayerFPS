@@ -42,6 +42,21 @@ namespace Game.GameLogic.Spawning
             }
         }
 
+        public void RemoveSpawnPoint(Transform point, SpawnType type)
+        {
+            switch (type)
+            {
+                case SpawnType.Mtf:
+                    _mtfSpawn.Remove(point);
+                    break;
+                case SpawnType.Chaos:
+                    _chaosSpawn.Remove(point);
+                    break;
+                default:
+                    return;
+            }
+        }
+        
         public Transform GetRandomSpawn(SpawnType type)
         {
             if (type == SpawnType.Mtf)
@@ -50,8 +65,10 @@ namespace Game.GameLogic.Spawning
                 _usedPositions.Add(_mtfSpawn[index]);
                 return _mtfSpawn[index];
             }
-
-            return null;
+            
+            int indexChaos = UnityEngine.Random.Range(0, _chaosSpawn.Count - 1);
+            _usedPositions.Add(_chaosSpawn[indexChaos]);
+            return _chaosSpawn[indexChaos];
         }
     }
 }

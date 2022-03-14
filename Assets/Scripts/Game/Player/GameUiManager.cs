@@ -24,6 +24,6 @@ namespace Game.Player
             }
         }
 
-        public void UpdateHealthUI(int newHealth) => _healthText.text = "Health: " + newHealth;
+        public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();
     }
 }

@@ -61,11 +61,11 @@ namespace Game.Player.Gunplay
                 if (part != null)
                 {
                     Debug.Log($"Found body part {part.bodyPart} on {_hit.transform.name} when raycasting! ");
-                    int multiplier;
+                    float multiplier;
                     switch (part.bodyPart)
                     {
                         case BodyPart.Head:
-                            multiplier = 2;
+                            multiplier = curGun.HeadMultiplier;
                             break;
                         default:
                             multiplier = 1;

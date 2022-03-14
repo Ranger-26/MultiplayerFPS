@@ -4,6 +4,6 @@ namespace Game
 {
     public interface IDamageable
     {
-        void ServerDamage(int amount, int multiplier);
+        void ServerDamage(float amount, float multiplier);
     }
 }

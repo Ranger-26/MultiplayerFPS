@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 
@@ -5,8 +6,14 @@ namespace Game.Player.Spectating
 {
     public class SpectatorController : NetworkBehaviour
     {
-        public override void OnStartClient()
+        private void Start()
         {
+            if (!hasAuthority) enabled = false;
+        }
+
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
             if (Camera.main == null) Debug.LogError("The camera is null.");
             for (int i = 0; i < Camera.main.transform.childCount; i++)
             { 

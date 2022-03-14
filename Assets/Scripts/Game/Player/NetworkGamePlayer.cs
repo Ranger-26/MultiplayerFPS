@@ -21,5 +21,13 @@ namespace Game.Player
         {
             healthController = GetComponent<HealthController>();
         }
+
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+            Camera camera = GetComponentInChildren<Camera>();
+            camera.transform.tag = "MainCamera";
+        }
+        
     }
 }

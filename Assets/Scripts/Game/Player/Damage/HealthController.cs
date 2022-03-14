@@ -10,12 +10,12 @@ namespace Game.Player.Damage
         public int currentHealth;
 
         [Server]
-        public void ServerDamagePlayer(int amount)
+        public void ServerDamagePlayer(float amount)
         {
             Debug.Log("Damaging player on the server...");
             if (currentHealth - amount > 0)
             {
-                currentHealth -= amount;
+                currentHealth -= (int)amount;
                 TargetDamagePlayer(currentHealth);
                 return;
             }
@@ -39,22 +39,32 @@ namespace Game.Player.Damage
 
         [TargetRpc]
         private void TargetDeathPlayer()
-        {
+        { 
+            Camera.main.transform.parent = null;
             Debug.Log("You died!");
         }
 
         [Server]
         private void ServerKillPlayer()
         {
+            TargetDeathPlayer();
+            for (int i = 0; i < transform.GetChild(0).GetChild(0).childCount; i++)
+            { 
+                Destroy(transform.GetChild(0).GetChild(0).transform.GetChild(i).gameObject);
+            }
+            transform.GetChild(0).GetChild(0).rotation = Quaternion.Euler(0,0,0);
+            transform.GetChild(0).GetChild(0).parent = null;
+            
+
             NetworkManagerScp nm = (NetworkManagerScp) NetworkManager.singleton;
             GameObject deadPlayer = Instantiate(nm.deadPlayerPrefab,
-                gameObject.transform.position, Quaternion.identity);
+                transform.position, Quaternion.identity);
+            Debug.Log($"Player {GetComponent<NetworkGamePlayer>().playerId} died!");
             NetworkServer.Spawn(deadPlayer);
-            NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
             GameObject rag = Instantiate(nm.ragDoll, transform.position, Quaternion.identity);
-            Destroy(gameObject);
             NetworkServer.Spawn(rag);
-            TargetDeathPlayer();
+            NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
+            Destroy(gameObject);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Game.Player.Throwables;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]

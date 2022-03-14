@@ -60,8 +60,18 @@ namespace Game.Player.Gunplay
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {
-                    Debug.Log($"Found body part {part.bodyPart} when raycasting! ");
-                    // Damage player
+                    Debug.Log($"Found body part {part.bodyPart} on {_hit.transform.name} when raycasting! ");
+                    float multiplier;
+                    switch (part.bodyPart)
+                    {
+                        case BodyPart.Head:
+                            multiplier = curGun.HeadMultiplier;
+                            break;
+                        default:
+                            multiplier = 1;
+                            break;
+                    }
+                    part.ServerDamage(curGun.Damage, multiplier);
                 }
             }
         }

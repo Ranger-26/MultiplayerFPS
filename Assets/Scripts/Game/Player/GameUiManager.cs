@@ -6,7 +6,8 @@ namespace Game.Player
 {
     public class GameUiManager : MonoBehaviour
     {
-        public Text healthText;
+        [SerializeField]
+        private Text _healthText;
 
         public static GameUiManager Instance;
 
@@ -22,5 +23,7 @@ namespace Game.Player
                 Instance = this;
             }
         }
+
+        public void UpdateHealthUI(int newHealth) => _healthText.text = "Health: " + newHealth;
     }
 }

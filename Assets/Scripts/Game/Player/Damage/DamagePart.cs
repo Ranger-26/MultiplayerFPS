@@ -16,7 +16,7 @@ namespace Game.Player.Damage
         }
         
         [Server]
-        public void ServerDamage(int amount, int multiplier)
+        public void ServerDamage(float amount, float multiplier)
         {
             hc.ServerDamagePlayer(amount * multiplier);
         }

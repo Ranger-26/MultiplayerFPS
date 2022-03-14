@@ -613,6 +613,8 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   - {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  - {fileID: 2681812053718918600, guid: fbdebcee09dac4d4691e08a8c3a32f8e, type: 3}
+  - {fileID: 2760846970382974809, guid: 7a2919b0af7182f48a272dbc2fc21ac7, type: 3}
   showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 2018583103078967544, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
@@ -624,6 +626,8 @@ MonoBehaviour:
   allPlayers: []
   mtf: []
   chaos: []
+  deadPlayerPrefab: {fileID: 2760846970382974809, guid: 7a2919b0af7182f48a272dbc2fc21ac7, type: 3}
+  ragDoll: {fileID: 2681812053718918600, guid: fbdebcee09dac4d4691e08a8c3a32f8e, type: 3}
 --- !u!1 &284484413
 GameObject:
   m_ObjectHideFlags: 0

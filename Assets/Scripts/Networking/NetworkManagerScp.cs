@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Game.GameLogic;
+using Game.GameLogic.Spawning;
 using Game.Player;
 using Lobby;
 using UnityEngine.Serialization;
@@ -55,6 +56,14 @@ namespace Networking
             gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
+
+            SpawnType spawn = ply.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos;
+
+
+            Vector3 position = SpawnManager.Instance.GetRandomSpawn(spawn).position;
+
+            gamePlayer.transform.position = position;
+            
             GameManager.Instance.ServerAddPlayer(gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }

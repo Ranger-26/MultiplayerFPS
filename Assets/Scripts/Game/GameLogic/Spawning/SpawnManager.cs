@@ -9,8 +9,10 @@ namespace Game.GameLogic.Spawning
     {
         public static SpawnManager Instance;
         
+        [SerializeField]
         private List<Transform> _mtfSpawn = new List<Transform>();
         
+        [SerializeField]
         private List<Transform> _chaosSpawn = new List<Transform>();
 
         private List<Transform> _usedPositions = new List<Transform>();

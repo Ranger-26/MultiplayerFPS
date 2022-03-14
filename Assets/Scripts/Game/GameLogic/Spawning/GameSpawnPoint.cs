@@ -5,6 +5,7 @@ namespace Game.GameLogic.Spawning
 {
     public class GameSpawnPoint : MonoBehaviour
     {
+        [SerializeField]
         private SpawnType type;
 
         public void Awake()

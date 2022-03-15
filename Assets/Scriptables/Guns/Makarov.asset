@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Makarov
   m_EditorClassIdentifier: 
   Damage: 29
-  HeadMultiplier: 2.5
+  HeadMultiplier: 2
   LimbMultiplier: 0.4
   Range: 60
   RPM: 650

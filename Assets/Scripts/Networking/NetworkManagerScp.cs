@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Game.GameLogic;
+using Game.GameLogic.Spawning;
 using Game.Player;
 using Lobby;
 using UnityEngine.Serialization;
@@ -55,6 +56,9 @@ namespace Networking
             gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
+
+            SpawnType spawn = ply.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos;
+
             GameManager.Instance.ServerAddPlayer(gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }
@@ -75,5 +79,16 @@ namespace Networking
         }
 
         public static NetworkManagerScp Instance => (NetworkManagerScp) singleton;
+        
+        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
+        {
+            NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
+            Transform startPos =
+                SpawnManager.Instance.GetRandomSpawn(room.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
+            //change this to instantiate a different prefab based on the role
+            GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
+            return gamePlayer;
+        }
+        
     }
 }

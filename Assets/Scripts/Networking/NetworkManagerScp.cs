@@ -73,5 +73,7 @@ namespace Networking
                 }
             }
         }
+
+        public static NetworkManagerScp Instance => (NetworkManagerScp) singleton;
     }
 }

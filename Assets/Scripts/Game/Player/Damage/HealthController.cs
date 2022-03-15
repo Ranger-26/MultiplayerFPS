@@ -56,12 +56,11 @@ namespace Game.Player.Damage
             transform.GetChild(0).GetChild(0).parent = null;
             
 
-            NetworkManagerScp nm = (NetworkManagerScp) NetworkManager.singleton;
-            GameObject deadPlayer = Instantiate(nm.deadPlayerPrefab,
+            GameObject deadPlayer = Instantiate(NetworkManagerScp.Instance.deadPlayerPrefab,
                 transform.position, Quaternion.identity);
             Debug.Log($"Player {GetComponent<NetworkGamePlayer>().playerId} died!");
             NetworkServer.Spawn(deadPlayer);
-            GameObject rag = Instantiate(nm.ragDoll, transform.position, Quaternion.identity);
+            GameObject rag = Instantiate(NetworkManagerScp.Instance.ragDoll, transform.position, Quaternion.identity);
             NetworkServer.Spawn(rag);
             NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
             Destroy(gameObject);

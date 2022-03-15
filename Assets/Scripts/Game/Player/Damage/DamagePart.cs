@@ -1,4 +1,5 @@
 using System;
+using Game.Player.Movement;
 using Mirror;
 using UnityEngine;
 
@@ -8,18 +9,26 @@ namespace Game.Player.Damage
     {
         public BodyPart bodyPart;
 
-        private HealthController hc;
-        
+        private HealthController _hc;
+
+        private PlayerMovement _playerMovement;
         private void Start()
         {
-            hc = GetComponentInParent<HealthController>();
+            _hc = GetComponentInParent<HealthController>();
+            _playerMovement = GetComponentInParent<PlayerMovement>();
         }
         
         [Server]
         public void ServerDamage(float amount, float multiplier)
         {
-            hc.ServerDamagePlayer(amount * multiplier);
+            _hc.ServerDamagePlayer(amount * multiplier);
         }
+        
+        [Server]
+        public void ServerTag(float tagging)
+        {
+            _playerMovement.TargetTag(tagging);
+        } 
     }
 
     public enum BodyPart

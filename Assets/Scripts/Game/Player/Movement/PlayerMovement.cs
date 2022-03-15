@@ -78,9 +78,13 @@ namespace Game.Player.Movement
             }
         }
 
+        
         public void Tag(float amount)
         {
             tagging = Mathf.Clamp01(tagging + amount);
         }
+
+        [TargetRpc]
+        public void TargetTag(float amount) => Tag(amount);
     }
 }

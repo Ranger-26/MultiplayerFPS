@@ -71,6 +71,7 @@ namespace Game.Player.Gunplay
                             multiplier = 1;
                             break;
                     }
+                    part.ServerTag(curGun.Tagging);
                     part.ServerDamage(curGun.Damage, multiplier);
                 }
             }

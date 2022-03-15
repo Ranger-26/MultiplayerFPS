@@ -61,8 +61,13 @@ namespace Lobby
                 {
                     mtfNameTexts[i].text = "Empty";
                     mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
+                    mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
                 }
-                //mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
+
+                if (mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player != null)
+                {
+                    mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
+                }
             }
             
             for (int i = 0; i < chaosNameTexts.Length; i++)
@@ -71,8 +76,12 @@ namespace Lobby
                 {
                     chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
                     chaosNameTexts[i].text = "Empty";
+                    chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(false);
                 }
-                //chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(mtfNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
+                if (chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player != null)
+                {
+                    chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().readyImage.gameObject.SetActive(chaosNameTexts[i].GetComponentInParent<LobbyPlayerUi>().player.readyToBegin);
+                } 
             }
         }
     }

@@ -16,6 +16,7 @@ namespace Lobby
         {
             GetComponent<Button>().onClick.AddListener(()=>LobbyManager.Instance.ToggleKickPlayer(this));
             kickPlayerButton.onClick.AddListener(()=>LobbyManager.Instance.KickPlayer(this));
+            
         }
     }
 }

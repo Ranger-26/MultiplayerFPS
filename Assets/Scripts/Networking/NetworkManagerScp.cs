@@ -59,11 +59,6 @@ namespace Networking
 
             SpawnType spawn = ply.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos;
 
-
-            Vector3 position = SpawnManager.Instance.GetRandomSpawn(spawn).position;
-
-            gamePlayer.transform.position = position;
-            
             GameManager.Instance.ServerAddPlayer(gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }
@@ -82,5 +77,16 @@ namespace Networking
                 }
             }
         }
+        
+        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
+        {
+            NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
+            Transform startPos =
+                SpawnManager.Instance.GetRandomSpawn(room.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
+            //change this to instantiate a different prefab based on the role
+            GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
+            return gamePlayer;
+        }
+        
     }
 }

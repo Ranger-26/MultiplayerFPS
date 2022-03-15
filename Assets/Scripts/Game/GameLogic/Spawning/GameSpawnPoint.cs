@@ -8,7 +8,7 @@ namespace Game.GameLogic.Spawning
         [SerializeField]
         private SpawnType type;
 
-        public void Awake()
+        public void Start()
         {
             SpawnManager.Instance.RegisterSpawnPoint(transform, type);
         }

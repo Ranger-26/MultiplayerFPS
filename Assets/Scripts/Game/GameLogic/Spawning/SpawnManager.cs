@@ -65,10 +65,12 @@ namespace Game.GameLogic.Spawning
             {
                 int index = UnityEngine.Random.Range(0, _mtfSpawn.Count - 1);
                 _usedPositions.Add(_mtfSpawn[index]);
+                Debug.Log($"Getting random spawn point of {_mtfSpawn[index].position}");
                 return _mtfSpawn[index];
             }
             
             int indexChaos = UnityEngine.Random.Range(0, _chaosSpawn.Count - 1);
+            Debug.Log($"Getting random spawn point of {_chaosSpawn[indexChaos].position}");
             _usedPositions.Add(_chaosSpawn[indexChaos]);
             return _chaosSpawn[indexChaos];
         }

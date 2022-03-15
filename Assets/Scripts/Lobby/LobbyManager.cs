@@ -43,7 +43,7 @@ namespace Lobby
         {
             foreach (var player in FindObjectsOfType<NetworkPlayerLobby>())
             {
-                player.CmdReadyUp(!player.readyToBegin);
+                player.CmdChangeReadyState(!player.readyToBegin);
             }
         }
 

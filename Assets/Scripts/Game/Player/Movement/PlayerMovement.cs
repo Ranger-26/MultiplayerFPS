@@ -69,7 +69,7 @@ namespace Game.Player.Movement
 
             controller.Move(velocity * Time.deltaTime);
 
-            tagging = Mathf.Clamp01(tagging - Time.deltaTime);
+            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.5f);
 
             // Debug
             if (Input.GetMouseButtonDown(1))

@@ -71,8 +71,6 @@ namespace Game.Player.Movement
 
             tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.7f);
 
-            Debug.Log(tagging);
-
             // Debug
             if (Input.GetMouseButtonDown(1))
             {

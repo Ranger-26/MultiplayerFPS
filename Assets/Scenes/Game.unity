@@ -6097,6 +6097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthText: {fileID: 1403232146}
   Menu: {fileID: 1329751041}
+  _disconnectButton: {fileID: 87554884}
 --- !u!1001 &2049687178
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,23 @@ namespace Game.Player
         [SerializeField]
         private GameObject Menu;
 
+        [SerializeField]
+        private Button _disconnectButton;
+        
         public static GameUiManager Instance;
+
+        private void Start()
+        {
+            _disconnectButton.onClick.AddListener(()=>
+            {
+                if (NetworkGamePlayer.localPlayer.isServer)
+                {
+                    NetworkManager.singleton.StopHost();
+                }
+                NetworkManager.singleton.StopClient();
+            });
+        }
+
 
         private void Awake()
         {

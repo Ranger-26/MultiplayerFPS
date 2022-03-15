@@ -28,6 +28,19 @@ namespace Game.GameLogic
             players.Add(ply);
         }
 
+        [Server]
+        public void TryRemovePlayer(NetworkGamePlayer ply)
+        {
+            if (players.Contains(ply))
+            {
+                players.Remove(ply);
+            }
+            else
+            {
+                Debug.LogError($"Tried to remove a player that doesnt exist! {ply}");
+            }
+        }
+        
         public NetworkGamePlayer GetPlayerById(int id) => players.Where(x => x.playerId == id).ToList()[0];
     }
 }

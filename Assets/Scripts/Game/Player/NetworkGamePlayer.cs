@@ -16,7 +16,8 @@ namespace Game.Player
         [SyncVar] public string playerName;
         
         public HealthController healthController;
-        
+
+        public static NetworkGamePlayer localPlayer;
         private void Start()
         {
             healthController = GetComponent<HealthController>();
@@ -27,7 +28,18 @@ namespace Game.Player
             base.OnStartAuthority();
             Camera camera = GetComponentInChildren<Camera>();
             camera.transform.tag = "MainCamera";
+            localPlayer = this;
         }
-        
+
+        public override void OnStopClient()
+        {
+            if (!isServer) return;
+            GameManager.Instance.TryRemovePlayer(this);
+        }
+
+        public override string ToString()
+        {
+            return $"Name {playerName}, Id: {playerId}";
+        }
     }
 }

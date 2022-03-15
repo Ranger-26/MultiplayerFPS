@@ -8,6 +8,8 @@ namespace Game.Player
     {
         [SerializeField]
         private Text _healthText;
+        [SerializeField]
+        private GameObject Menu;
 
         public static GameUiManager Instance;
 
@@ -21,6 +23,14 @@ namespace Game.Player
             else
             {
                 Instance = this;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Menu.SetActive(true);
             }
         }
 

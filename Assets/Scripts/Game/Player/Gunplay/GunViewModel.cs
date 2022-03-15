@@ -114,6 +114,9 @@ namespace Game.Player.Gunplay
 
             if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
             {
+                if (MenuOpen.IsOpen)
+                    return;
+
                 Shoot();
 
                 if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.1f && shootTimer > 0f)
@@ -124,6 +127,9 @@ namespace Game.Player.Gunplay
 
             if (shootQueue)
             {
+                if (MenuOpen.IsOpen)
+                    return;
+
                 Shoot();
                 shootQueue = false;
             }
@@ -156,6 +162,9 @@ namespace Game.Player.Gunplay
 
             if (Input.GetKeyDown(KeyCode.F))
             {
+                if (MenuOpen.IsOpen)
+                    return;
+
                 if (anim != null)
                 {
                     anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
@@ -164,11 +173,15 @@ namespace Game.Player.Gunplay
 
             if (Input.GetKeyDown(KeyCode.R))
             {
+                if (MenuOpen.IsOpen)
+                    return;
+
                 if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
                 {
                     StartCoroutine(Reload());
                 }
             }
+
             shootTimer -= Time.deltaTime;
         }
 

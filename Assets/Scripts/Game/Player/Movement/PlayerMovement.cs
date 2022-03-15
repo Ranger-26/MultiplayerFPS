@@ -63,13 +63,15 @@ namespace Game.Player.Movement
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * (speed - speed * (tagging - tagging * 0.75f * Convert.ToInt32(isGrounded)) - speed * weight) * Time.deltaTime);
+            controller.Move(move * (speed - speed * (tagging - tagging * 0.75f * Convert.ToInt32(!isGrounded)) - speed * weight) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
 
-            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.5f);
+            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.7f);
+
+            Debug.Log(tagging);
 
             // Debug
             if (Input.GetMouseButtonDown(1))

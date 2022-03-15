@@ -48,12 +48,16 @@ namespace Game.Player.Damage
         private void ServerKillPlayer()
         {
             TargetDeathPlayer();
-            for (int i = 0; i < transform.GetChild(0).GetChild(0).childCount; i++)
+
+            Camera camera = GetComponentInChildren<Camera>();
+            
+            for (int i = 0; i < camera.transform.childCount; i++)
             { 
-                Destroy(transform.GetChild(0).GetChild(0).transform.GetChild(i).gameObject);
+                Destroy(camera.transform.GetChild(i).gameObject);
             }
-            transform.GetChild(0).GetChild(0).rotation = Quaternion.Euler(0,0,0);
-            transform.GetChild(0).GetChild(0).parent = null;
+            camera.transform.rotation = Quaternion.Euler(0,0,0);
+            
+            camera.transform.parent = null;
             
 
             GameObject deadPlayer = Instantiate(NetworkManagerScp.Instance.deadPlayerPrefab,

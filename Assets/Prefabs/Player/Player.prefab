@@ -172,7 +172,7 @@ MonoBehaviour:
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
   speed: 14
-  gravity: -25
+  gravity: -24
   jumpHeight: 1
   groundCheck: {fileID: 1769910894114916383}
   groundDistance: 0.4

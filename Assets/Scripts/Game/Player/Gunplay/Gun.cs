@@ -118,22 +118,25 @@ namespace Game.Player.Gunplay
         public int SoundPriority = 128;
     }
 
-    public enum FiringMode
+    public enum FiringMode : byte
     {
         Auto,
         SemiAuto
     }
 
-    public enum WeaponSlot
+    public enum WeaponSlot : byte
     {
         Primary,
-        Secondary
+        Secondary,
+        Melee
     }
 
     public enum GunIDs : byte
     {
         [Tooltip("Debug Gun")]
         Debug,
+        [Tooltip("Melee")]
+        Knife, 
 
         // T Pistols
 
@@ -168,14 +171,14 @@ namespace Game.Player.Gunplay
         [Tooltip("Basic Free Pistol")]
         HK45CT, 
         [Tooltip("Better Pistol (One tap headshot with no armor)")]
-        M1911, 
+        M1911,
 
         // CT SMGs
 
         [Tooltip("Eco SMG")]
-        MP7, 
+        MP5K,
         [Tooltip("Half Buy SMG")]
-        MP5K, 
+        MP7, 
 
         // CT Rifles
 

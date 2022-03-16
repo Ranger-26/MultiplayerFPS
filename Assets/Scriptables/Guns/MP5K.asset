@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
   m_Name: MP5K
   m_EditorClassIdentifier: 
-  Damage: 20
-  HeadMultiplier: 3
+  Damage: 21
+  HeadMultiplier: 2.5
   LimbMultiplier: 0.5
   Range: 85
   RPM: 900

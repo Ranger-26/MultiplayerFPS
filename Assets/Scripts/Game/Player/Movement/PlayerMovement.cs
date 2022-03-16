@@ -8,11 +8,13 @@ namespace Game.Player.Movement
 	{
         public CharacterController controller;
 
-        public float speed = 12f;
+        public float acceleration = 5f;
+        public float maxSpeed = 12f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
 
         Vector3 velocity;
+        Vector3 velocityMove;
 
         //ground stuff
         public Transform groundCheck;
@@ -37,7 +39,7 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 4, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 6, groundMask);
             canJump = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
@@ -48,7 +50,7 @@ namespace Game.Player.Movement
             if (Input.GetButtonDown("Jump") && canJump)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                airAccel = Mathf.Clamp(airAccel + 1f, 0f, 3f);
+                airAccel = Mathf.Clamp(airAccel + 1f, 0f, 2f);
             }
 
             if (!isGrounded)
@@ -74,7 +76,7 @@ namespace Game.Player.Movement
 
             controller.Move(velocity * Time.deltaTime);
 
-            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.7f);
+            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.9f);
         }
 
         

@@ -43,7 +43,7 @@ MonoBehaviour:
   ReserveAmmo: 90
   HitLayers:
     serializedVersion: 2
-    m_Bits: 73
+    m_Bits: 65
   GunSlot: 0
   DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}

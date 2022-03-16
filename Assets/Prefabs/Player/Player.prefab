@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  CrouchHeight: 1
+  CrouchHeight: 0.7
   StandingHeight: 2
   CrouchSpeed: 2.5
   WalkingSpeed: 4.5
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 6679039370956003391}
   - component: {fileID: 2927144922437087655}
   - component: {fileID: 5561824790150084922}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +733,7 @@ GameObject:
   - component: {fileID: 6871998180869341445}
   - component: {fileID: 3469084329130819723}
   - component: {fileID: 2586884475956537812}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

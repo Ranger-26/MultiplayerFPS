@@ -24,6 +24,7 @@ namespace Game.Player.Movement
         float tagging;
 
         bool isGrounded;
+        bool canJump;
         bool LandTagged;
         
         private void Start()
@@ -35,14 +36,15 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 2, groundMask);
+            canJump = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
             }
 
-            if (Input.GetButtonDown("Jump") && isGrounded)
+            if (Input.GetButtonDown("Jump") && canJump)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
@@ -54,7 +56,7 @@ namespace Game.Player.Movement
 
             if (!LandTagged && isGrounded)
             {
-                Tag(0.6f);
+                Tag(0.5f);
                 LandTagged = true;
             }
 
@@ -70,12 +72,6 @@ namespace Game.Player.Movement
             controller.Move(velocity * Time.deltaTime);
 
             tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.7f);
-
-            // Debug
-            if (Input.GetMouseButtonDown(1))
-            {
-                Tag(1f);
-            }
         }
 
         

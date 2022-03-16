@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
+  m_Name: MP5K
+  m_EditorClassIdentifier: 
+  Damage: 20
+  HeadMultiplier: 3
+  LimbMultiplier: 0.5
+  Range: 85
+  RPM: 900
+  ChargeupTime: 0
+  Tagging: 0.9
+  Weight: 0.25
+  BulletCount: 1
+  GunFiringMode: 0
+  Spread: 0.4
+  MovementSpread: 2
+  MaxSpread: 1.5
+  MaxMovementSpread: 15
+  StartingSpread: 0.07
+  Recoil: 0.35
+  HorizontalRecoil: 0.7
+  MaxHorizontal: 3
+  RecoilDecay: 1
+  Displacement: 1
+  MaxDisplacement: 5
+  SwayAfterRound: 12
+  SwayStartRight: 1
+  HasScope: 0
+  ScopeFOV: 67.5
+  ScopeImage: {fileID: 0}
+  ReloadTime: 1.75
+  MaxAmmo: 30
+  ReserveAmmo: 90
+  HitLayers:
+    serializedVersion: 2
+    m_Bits: 65
+  GunSlot: 0
+  DrawTime: 1
+  HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
+  HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  AimPunch: 0.5
+  AimPunchDuration: 0.05
+  ChargeupSounds: []
+  HitSounds:
+  - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
+  ShootSounds:
+  - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
+  SoundMaxDistance: 100
+  SoundVolume: 1
+  SoundPriority: 128

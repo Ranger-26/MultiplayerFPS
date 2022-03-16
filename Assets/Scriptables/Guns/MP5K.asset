@@ -16,31 +16,31 @@ MonoBehaviour:
   HeadMultiplier: 2.5
   LimbMultiplier: 0.5
   Range: 85
-  RPM: 900
+  RPM: 1200
   ChargeupTime: 0
   Tagging: 0.9
   Weight: 0.25
   BulletCount: 1
   GunFiringMode: 0
-  Spread: 0.4
+  Spread: 0.5
   MovementSpread: 2
-  MaxSpread: 1.5
+  MaxSpread: 2.1
   MaxMovementSpread: 15
   StartingSpread: 0.07
-  Recoil: 0.35
+  Recoil: 1
   HorizontalRecoil: 0.7
   MaxHorizontal: 3
   RecoilDecay: 1
-  Displacement: 1
-  MaxDisplacement: 5
-  SwayAfterRound: 12
+  Displacement: 1.5
+  MaxDisplacement: 6
+  SwayAfterRound: 10
   SwayStartRight: 1
   HasScope: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
   ReloadTime: 1.75
-  MaxAmmo: 30
-  ReserveAmmo: 90
+  MaxAmmo: 25
+  ReserveAmmo: 75
   HitLayers:
     serializedVersion: 2
     m_Bits: 65

@@ -105,7 +105,7 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdReload()
         {
-            if (currentAmmo > 0 || reserveAmmo <= 0) return; 
+            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0) return; 
             isReloading = true;
             StartCoroutine(Reload());
         } 

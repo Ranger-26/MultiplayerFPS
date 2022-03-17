@@ -68,7 +68,9 @@ namespace Game.Player.Movement
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * (speed - speed * tagging - speed * weight + airAccel) * Time.deltaTime);
+            float moddedSpeed = speed - speed * weight + airAccel;
+
+            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

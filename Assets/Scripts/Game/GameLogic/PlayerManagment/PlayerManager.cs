@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Player;
@@ -24,19 +25,17 @@ namespace Game.GameLogic.PlayerManagment
         
         [SerializeField]
         private List<NetworkGamePlayer> spectators = new List<NetworkGamePlayer>();
-
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private void Init()
-        {
-            Instance = null;
-        }
+        
 
         private void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
+            }
+            else
+            {
+                Destroy(this);
             }
         }
 
@@ -101,7 +100,7 @@ namespace Game.GameLogic.PlayerManagment
 
             if (player == null)
             {
-                Debug.LogError($"Could not find player {playerOrigin} in dicionary!");
+                Debug.LogError($"Could not find player {playerOrigin} in dictionary!");
                 return;
             }
             
@@ -110,8 +109,20 @@ namespace Game.GameLogic.PlayerManagment
             spectators.Add(newPlayer);
             players.Add(player, newPlayer);
             Debug.Log($"Game Player Count: {players.Count}");
+
+            if (GameEnded)
+            {
+                StartCoroutine(RestartRound());
+            }
+        }
+
+        private IEnumerator RestartRound()
+        {
+            Debug.Log("Restarting round....");
+            yield return new WaitForSeconds(3);
+            
         }
         
-        
+        public bool GameEnded => alivePlayers.Count <= 1;
     }
 }

@@ -57,9 +57,6 @@ namespace Networking
             gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
             gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
-
-            SpawnType spawn = ply.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos;
-
             PlayerManager.Instance.TryAddPlayer(roomPlayer.GetComponent<NetworkPlayerLobby>(), gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }
@@ -85,7 +82,7 @@ namespace Networking
         {
             NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
             Transform startPos =
-                SpawnManager.Instance.GetRandomSpawn(room.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
+                SpawnManager.Instance.GetRandomSpawn(room.assignedRole);
             //change this to instantiate a different prefab based on the role
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
             return gamePlayer;

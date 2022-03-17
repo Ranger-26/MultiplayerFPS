@@ -22,8 +22,15 @@ namespace Game.Player
         public override void OnStartAuthority()
         {
             base.OnStartAuthority();
-            Camera camera = GetComponentInChildren<Camera>();
-            camera.transform.tag = "MainCamera";
+            Camera cam;
+            cam = GetComponentInChildren<Camera>();
+            if (cam == null && isSpectating)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                cam = GetComponentInChildren<Camera>();
+            }
+            
+            cam.transform.tag = "MainCamera";
             localPlayer = this;
         }
 

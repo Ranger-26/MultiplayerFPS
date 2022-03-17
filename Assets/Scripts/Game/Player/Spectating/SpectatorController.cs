@@ -6,14 +6,6 @@ namespace Game.Player.Spectating
 {
     public class SpectatorController : NetworkBehaviour
     {
-        private void Start()
-        {
-            if (hasAuthority)
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-            }
-        }
-        
         public float movementForwardMultiplier = 4f;
         public float movementSideMultiplier = 4f;
 

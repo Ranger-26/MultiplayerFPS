@@ -59,7 +59,7 @@ namespace Game.GameLogic.Spawning
             }
         }
         
-        public Transform GetRandomSpawn(SpawnType type)
+        private Transform GetRandomSpawn(SpawnType type)
         {
             if (type == SpawnType.Mtf)
             {
@@ -74,5 +74,8 @@ namespace Game.GameLogic.Spawning
             _usedPositions.Add(_chaosSpawn[indexChaos]);
             return _chaosSpawn[indexChaos];
         }
+
+        public Transform GetRandomSpawn(Role role) =>
+            GetRandomSpawn(role == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
     }
 }

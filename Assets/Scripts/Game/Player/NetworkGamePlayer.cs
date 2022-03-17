@@ -1,5 +1,6 @@
 using System;
 using Game.GameLogic;
+using Game.GameLogic.PlayerManagment;
 using Game.Player.Damage;
 using Mirror;
 using UnityEngine;
@@ -14,27 +15,23 @@ namespace Game.Player
         [Header("Player Info")]
         [SyncVar] public int playerId;
         [SyncVar] public string playerName;
+        [SyncVar] public bool isSpectating;
         
-        public HealthController healthController;
-
         public static NetworkGamePlayer localPlayer;
-        private void Start()
-        {
-            healthController = GetComponent<HealthController>();
-        }
 
         public override void OnStartAuthority()
         {
             base.OnStartAuthority();
-            Camera camera = GetComponentInChildren<Camera>();
-            camera.transform.tag = "MainCamera";
+            Camera cam;
+            cam = GetComponentInChildren<Camera>();
+            if (cam == null && isSpectating)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                cam = GetComponentInChildren<Camera>();
+            }
+            
+            cam.transform.tag = "MainCamera";
             localPlayer = this;
-        }
-
-        public override void OnStopClient()
-        {
-            if (!isServer) return;
-            GameManager.Instance.TryRemovePlayer(this);
         }
 
         public override string ToString()

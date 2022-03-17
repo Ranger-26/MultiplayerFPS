@@ -1,3 +1,4 @@
+using Game.GameLogic.PlayerManagment;
 using Mirror;
 using Networking;
 using UnityEngine;
@@ -37,36 +38,21 @@ namespace Game.Player.Damage
             GameUiManager.Instance.UpdateHealthUI(newHealth);
         }
 
-        [TargetRpc]
-        private void TargetDeathPlayer()
-        { 
-            Camera.main.transform.parent = null;
-            Debug.Log("You died!");
-        }
-
         [Server]
         private void ServerKillPlayer()
         {
-            TargetDeathPlayer();
-
-            Camera camera = GetComponentInChildren<Camera>();
             
-            for (int i = 0; i < camera.transform.childCount; i++)
-            { 
-                Destroy(camera.transform.GetChild(i).gameObject);
-            }
-            camera.transform.rotation = Quaternion.Euler(0,0,0);
-            
-            camera.transform.parent = null;
-            
-
             GameObject deadPlayer = Instantiate(NetworkManagerScp.Instance.deadPlayerPrefab,
                 transform.position, Quaternion.identity);
             Debug.Log($"Player {GetComponent<NetworkGamePlayer>().playerId} died!");
+            deadPlayer.GetComponent<NetworkGamePlayer>().playerName = GetComponent<NetworkGamePlayer>().playerName;
+            deadPlayer.GetComponent<NetworkGamePlayer>().playerId = GetComponent<NetworkGamePlayer>().playerId;
+            deadPlayer.GetComponent<NetworkGamePlayer>().isSpectating = true;
             NetworkServer.Spawn(deadPlayer);
             GameObject rag = Instantiate(NetworkManagerScp.Instance.ragDoll, transform.position, Quaternion.identity);
             NetworkServer.Spawn(rag);
             NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
+            PlayerManager.Instance.TryHandleDeadPlayer(GetComponent<NetworkGamePlayer>(), deadPlayer.GetComponent<NetworkGamePlayer>());
             Destroy(gameObject);
         }
     }

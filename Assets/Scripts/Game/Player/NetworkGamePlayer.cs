@@ -15,6 +15,7 @@ namespace Game.Player
         [Header("Player Info")]
         [SyncVar] public int playerId;
         [SyncVar] public string playerName;
+        [SyncVar] public bool isSpectating;
         
         public static NetworkGamePlayer localPlayer;
 

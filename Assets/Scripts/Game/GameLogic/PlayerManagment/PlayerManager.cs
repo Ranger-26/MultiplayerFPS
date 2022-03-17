@@ -18,7 +18,14 @@ namespace Game.GameLogic.PlayerManagment
             new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
 
         public static PlayerManager Instance;
+
+        [SerializeField]
+        private List<NetworkGamePlayer> alivePlayers = new List<NetworkGamePlayer>();
         
+        [SerializeField]
+        private List<NetworkGamePlayer> spectators = new List<NetworkGamePlayer>();
+
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private void Init()
         {
@@ -47,6 +54,7 @@ namespace Game.GameLogic.PlayerManagment
                 return;
             }
             players.Add(playerOrigin, currentPlayer);
+            alivePlayers.Add(currentPlayer);
             Debug.Log($"Game Player Count: {players.Count}");
         }
 
@@ -59,8 +67,15 @@ namespace Game.GameLogic.PlayerManagment
                 return;
             }
 
+            if (players[playerOrigin].isSpectating)
+            {
+                spectators.Remove(players[playerOrigin]);
+            }
+            else
+            {
+                alivePlayers.Remove(players[playerOrigin]);
+            }
             players.Remove(playerOrigin);
-            
             lobbyPlayers.Remove(playerOrigin);
             Debug.Log($"Game Player Count: {players.Count}");
         }
@@ -91,6 +106,8 @@ namespace Game.GameLogic.PlayerManagment
             }
             
             players.Remove(player);
+            alivePlayers.Remove(playerOrigin);
+            spectators.Add(newPlayer);
             players.Add(player, newPlayer);
             Debug.Log($"Game Player Count: {players.Count}");
         }

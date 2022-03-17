@@ -29,7 +29,10 @@ namespace Game.Player
                 transform.GetChild(0).gameObject.SetActive(true);
                 cam = GetComponentInChildren<Camera>();
             }
-            
+            else
+            {
+                GameUiManager.Instance.UpdateHealthUI(100);
+            }
             cam.transform.tag = "MainCamera";
             localPlayer = this;
         }

@@ -236,7 +236,7 @@ MonoBehaviour:
   weight: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 1
 --- !u!114 &807805569061322819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   role: 0
   playerId: 0
   playerName: 
-  healthController: {fileID: 3381366458952543702}
+  isSpectating: 0
 --- !u!114 &5266444688985546485
 MonoBehaviour:
   m_ObjectHideFlags: 0

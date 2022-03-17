@@ -8,13 +8,11 @@ namespace Game.Player.Movement
 	{
         public CharacterController controller;
 
-        public float acceleration = 5f;
-        public float maxSpeed = 12f;
+        public float speed = 5f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
 
         Vector3 velocity;
-        Vector3 velocityMove;
 
         //ground stuff
         public Transform groundCheck;
@@ -39,7 +37,7 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 6, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 8, groundMask);
             canJump = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)

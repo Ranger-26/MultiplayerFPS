@@ -30,11 +30,11 @@ namespace Game.Player.Movement
         private void Update()
         {
             controller.height = Input.GetKey(KeyCode.LeftControl) ? CrouchHeight : StandingHeight;
-            playerMovement.acceleration = Input.GetKey(KeyCode.LeftControl) ? CrouchSpeed : NormalSpeed;
+            playerMovement.speed = Input.GetKey(KeyCode.LeftControl) ? CrouchSpeed : NormalSpeed;
 
             if (!Input.GetKey(KeyCode.LeftControl))
             {
-                playerMovement.acceleration = Input.GetKey(KeyCode.LeftShift) ? WalkingSpeed : NormalSpeed;
+                playerMovement.speed = Input.GetKey(KeyCode.LeftShift) ? WalkingSpeed : NormalSpeed;
             }
         }
     }

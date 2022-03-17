@@ -16,8 +16,7 @@ namespace Game.GameLogic.PlayerManagment
         [SerializeField]
         private List<NetworkPlayerLobby> lobbyPlayers = new List<NetworkPlayerLobby>();
         
-        private Dictionary<NetworkPlayerLobby, NetworkGamePlayer> players =
-            new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
+        public Dictionary<NetworkPlayerLobby, NetworkGamePlayer> players { get; } = new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
 
         public static PlayerManager Instance;
 
@@ -113,26 +112,17 @@ namespace Game.GameLogic.PlayerManagment
 
             if (GameEnded)
             {
-                StartCoroutine(RestartRound());
+                StartCoroutine(GameManager.Instance.RestartRound());
             }
         }
 
+        
+        
+        public bool GameEnded => alivePlayers.Count <= 1;
+        
         [Server]
-        private IEnumerator RestartRound()
+        public void ResetPlayers(Dictionary<NetworkPlayerLobby, NetworkGamePlayer> newPlayers)
         {
-            Debug.Log("Restarting round....");
-
-            //respawn time for now can just be 5 seconds
-            int respawnTime = 5;
-            for (int i = 0; i < respawnTime; i++)
-            {
-                RpcSendTimer(5-i, false);
-                yield return new WaitForSeconds(1);
-            }
-
-            RpcSendTimer(0, true);
-            
-            var newPlayers = GameManager.Instance.RespawnAllPlayers(players);
             lobbyPlayers.Clear();
             players.Clear();
             alivePlayers.Clear();
@@ -140,15 +130,6 @@ namespace Game.GameLogic.PlayerManagment
             players.AddRange(newPlayers);
             lobbyPlayers.AddRange(players.Keys);
             alivePlayers.AddRange(players.Values);
-            Debug.Log("New round has started!");
         }
-
-        [ClientRpc]
-        private void RpcSendTimer(int newTime, bool disable)
-        {
-            GameUiManager.Instance.UpdateUiTimer(newTime, disable);
-        }
-        
-        public bool GameEnded => alivePlayers.Count <= 1;
     }
 }

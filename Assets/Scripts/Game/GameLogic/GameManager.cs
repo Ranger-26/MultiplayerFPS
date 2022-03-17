@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Game.GameLogic.PlayerManagment;
 using Game.GameLogic.Spawning;
 using Game.Player;
 using Lobby;
@@ -47,6 +49,32 @@ namespace Game.GameLogic
             }
 
             return newDict;
+        }
+        
+        [Server]
+        public IEnumerator RestartRound()
+        {
+            Debug.Log("Restarting round....");
+
+            //respawn time for now can just be 5 seconds
+            int respawnTime = 5;
+            for (int i = 0; i < respawnTime; i++)
+            {
+                RpcSendTimer(5-i, false);
+                yield return new WaitForSeconds(1);
+            }
+
+            RpcSendTimer(0, true);
+            PlayerManager.Instance.ResetPlayers(RespawnAllPlayers(PlayerManager.Instance.players));
+            
+
+            Debug.Log("New round has started!");
+        }
+
+        [ClientRpc]
+        private void RpcSendTimer(int newTime, bool disable)
+        {
+            GameUiManager.Instance.UpdateUiTimer(newTime, disable);
         }
     }
 }

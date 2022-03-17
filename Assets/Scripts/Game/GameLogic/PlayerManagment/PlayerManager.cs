@@ -117,10 +117,21 @@ namespace Game.GameLogic.PlayerManagment
             }
         }
 
+        [Server]
         private IEnumerator RestartRound()
         {
             Debug.Log("Restarting round....");
-            yield return new WaitForSeconds(3);
+
+            //respawn time for now can just be 5 seconds
+            int respawnTime = 5;
+            for (int i = 0; i < respawnTime; i++)
+            {
+                RpcSendTimer(5-i, false);
+                yield return new WaitForSeconds(1);
+            }
+
+            RpcSendTimer(0, true);
+            
             var newPlayers = GameManager.Instance.RespawnAllPlayers(players);
             lobbyPlayers.Clear();
             players.Clear();
@@ -130,6 +141,12 @@ namespace Game.GameLogic.PlayerManagment
             lobbyPlayers.AddRange(players.Keys);
             alivePlayers.AddRange(players.Values);
             Debug.Log("New round has started!");
+        }
+
+        [ClientRpc]
+        private void RpcSendTimer(int newTime, bool disable)
+        {
+            GameUiManager.Instance.UpdateUiTimer(newTime, disable);
         }
         
         public bool GameEnded => alivePlayers.Count <= 1;

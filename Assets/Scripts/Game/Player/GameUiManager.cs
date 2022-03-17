@@ -14,6 +14,9 @@ namespace Game.Player
 
         [SerializeField]
         private Button _disconnectButton;
+
+        [SerializeField]
+        private Text _gameOverText;
         
         public static GameUiManager Instance;
 
@@ -52,5 +55,12 @@ namespace Game.Player
         }
 
         public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();
+
+        public void UpdateUiTimer(int time, bool shouldDisable = false)
+        {
+            _gameOverText.gameObject.SetActive(true);
+            _gameOverText.text = $"Game over: Restarting in {time}";
+            _gameOverText.gameObject.SetActive(!shouldDisable);
+        }
     }
 }

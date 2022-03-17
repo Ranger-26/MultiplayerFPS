@@ -66,16 +66,33 @@ namespace Game.GameLogic.PlayerManagment
         }
 
         [Server]
-        public void TryHandleDeadPlayer(NetworkPlayerLobby playerOrigin, NetworkGamePlayer newPlayer)
+        public void TryHandleDeadPlayer(NetworkGamePlayer playerOrigin, NetworkGamePlayer newPlayer)
         {
-            if (!players.ContainsKey(playerOrigin))
+            if (!players.ContainsValue(playerOrigin))
             {
-                Debug.LogError($"Something went wrong when adding Player {playerOrigin.id}.");
+                Debug.LogError($"Something went wrong when adding Player {playerOrigin.playerId}.");
                 return;
             }
 
-            players.Remove(playerOrigin);
-            players.Add(playerOrigin, newPlayer);
+            NetworkPlayerLobby player = null;
+
+            foreach (var pair in players)
+            {
+                if (pair.Value == playerOrigin)
+                {
+                    player = pair.Key;
+                }
+            }
+
+            if (player == null)
+            {
+                Debug.LogError($"Could not find player {playerOrigin} in dicionary!");
+                return;
+            }
+            
+            players.Remove(player);
+            players.Add(player, newPlayer);
+            Debug.Log($"Game Player Count: {players.Count}");
         }
         
         

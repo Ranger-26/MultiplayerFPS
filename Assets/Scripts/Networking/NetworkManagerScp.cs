@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Game.GameLogic;
+using Game.GameLogic.PlayerManagment;
 using Game.GameLogic.Spawning;
 using Game.Player;
 using Lobby;
@@ -59,7 +60,7 @@ namespace Networking
 
             SpawnType spawn = ply.assignedRole == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos;
 
-            GameManager.Instance.ServerAddPlayer(gamePlayer.GetComponent<NetworkGamePlayer>());
+            PlayerManager.Instance.TryAddPlayer(roomPlayer.GetComponent<NetworkPlayerLobby>(), gamePlayer.GetComponent<NetworkGamePlayer>());
             return true;
         }
 

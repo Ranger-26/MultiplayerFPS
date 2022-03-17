@@ -1,5 +1,6 @@
 using System;
 using Game.GameLogic;
+using Game.GameLogic.PlayerManagment;
 using Game.Player.Damage;
 using Mirror;
 using UnityEngine;
@@ -29,12 +30,6 @@ namespace Game.Player
             Camera camera = GetComponentInChildren<Camera>();
             camera.transform.tag = "MainCamera";
             localPlayer = this;
-        }
-
-        public override void OnStopClient()
-        {
-            if (!isServer) return;
-            GameManager.Instance.TryRemovePlayer(this);
         }
 
         public override string ToString()

@@ -11,8 +11,9 @@ namespace Game.GameLogic.PlayerManagment
 {
     public class PlayerManager : NetworkBehaviour
     {
+        [SerializeField]
         private List<NetworkPlayerLobby> lobbyPlayers = new List<NetworkPlayerLobby>();
-
+        
         private Dictionary<NetworkPlayerLobby, NetworkGamePlayer> players =
             new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
 
@@ -37,6 +38,7 @@ namespace Game.GameLogic.PlayerManagment
             lobbyPlayers.AddRange(NetworkManagerScp.Instance.allPlayers);
         }
 
+        [Server]
         public void TryAddPlayer(NetworkPlayerLobby playerOrigin, NetworkGamePlayer currentPlayer)
         {
             if (players.ContainsKey(playerOrigin) || players.ContainsValue(currentPlayer))
@@ -45,8 +47,10 @@ namespace Game.GameLogic.PlayerManagment
                 return;
             }
             players.Add(playerOrigin, currentPlayer);
+            Debug.Log($"Game Player Count: {players.Count}");
         }
 
+        [Server]
         public void TryRemovePlayer(NetworkPlayerLobby playerOrigin)
         {
             if (!players.ContainsKey(playerOrigin) || !lobbyPlayers.Contains(playerOrigin))
@@ -56,9 +60,12 @@ namespace Game.GameLogic.PlayerManagment
             }
 
             players.Remove(playerOrigin);
+            
             lobbyPlayers.Remove(playerOrigin);
+            Debug.Log($"Game Player Count: {players.Count}");
         }
 
+        [Server]
         public void TryHandleDeadPlayer(NetworkPlayerLobby playerOrigin, NetworkGamePlayer newPlayer)
         {
             if (!players.ContainsKey(playerOrigin))
@@ -70,5 +77,7 @@ namespace Game.GameLogic.PlayerManagment
             players.Remove(playerOrigin);
             players.Add(playerOrigin, newPlayer);
         }
+        
+        
     }
 }

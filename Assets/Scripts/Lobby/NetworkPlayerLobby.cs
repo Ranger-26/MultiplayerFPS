@@ -1,5 +1,6 @@
 using System;
 using Game.GameLogic;
+using Game.GameLogic.PlayerManagment;
 using Mirror;
 using Networking;
 using TMPro;
@@ -53,6 +54,11 @@ namespace Lobby
             return false;
         }
 
+        public override string ToString()
+        {
+            return $"Name {playerName}, Id: {id}";
+        }
+        
         [Command]
         public void CmdReadyUp(bool readyState)
         {
@@ -69,6 +75,13 @@ namespace Lobby
         public void RpcReadyUp(bool readyState, int playerid)
         {
             LobbyManager.Instance.UpdateReadyStatus(playerid, readyState);
+        }
+
+        public override void OnStopClient()
+        {
+            base.OnStopClient();
+            Debug.Log($"<color=#FF0000>Player {this} disconnecting..</color>");
+            PlayerManager.Instance.TryRemovePlayer(this);
         }
     }
 }

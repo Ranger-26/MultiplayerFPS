@@ -9,9 +9,6 @@ namespace Game.GameLogic
 {
     public class GameManager : NetworkBehaviour
     {
-        [SerializeField]
-        private List<NetworkGamePlayer> players = new List<NetworkGamePlayer>();
-
         public static GameManager Instance;
 
         private void Awake()
@@ -19,25 +16,6 @@ namespace Game.GameLogic
             if (Instance == null)
             {
                 Instance = this;
-            }
-        }
-
-        [Server]
-        public void ServerAddPlayer(NetworkGamePlayer ply)
-        {
-            players.Add(ply);
-        }
-
-        [Server]
-        public void TryRemovePlayer(NetworkGamePlayer ply)
-        {
-            if (players.Contains(ply))
-            {
-                players.Remove(ply);
-            }
-            else
-            {
-                Debug.LogError($"Tried to remove a player that doesnt exist! {ply}");
             }
         }
     }

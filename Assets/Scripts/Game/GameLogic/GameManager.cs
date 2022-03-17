@@ -40,7 +40,5 @@ namespace Game.GameLogic
                 Debug.LogError($"Tried to remove a player that doesnt exist! {ply}");
             }
         }
-        
-        public NetworkGamePlayer GetPlayerById(int id) => players.Where(x => x.playerId == id).ToList()[0];
     }
 }

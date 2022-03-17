@@ -6,6 +6,7 @@ using Game.Player;
 using Lobby;
 using Mirror;
 using Networking;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.GameLogic.PlayerManagment
@@ -120,7 +121,15 @@ namespace Game.GameLogic.PlayerManagment
         {
             Debug.Log("Restarting round....");
             yield return new WaitForSeconds(3);
-            
+            var newPlayers = GameManager.Instance.RespawnAllPlayers(players);
+            lobbyPlayers.Clear();
+            players.Clear();
+            alivePlayers.Clear();
+            spectators.Clear();
+            players.AddRange(newPlayers);
+            lobbyPlayers.AddRange(players.Keys);
+            alivePlayers.AddRange(players.Values);
+            Debug.Log("New round has started!");
         }
         
         public bool GameEnded => alivePlayers.Count <= 1;

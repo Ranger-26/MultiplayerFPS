@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613853358741675787}
+  - component: {fileID: 3494791331755322652}
   m_Layer: 3
   m_Name: FiringPoint
   m_TagString: Untagged
@@ -62,6 +63,18 @@ Transform:
   m_Father: {fileID: 5789010012695376353}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3494791331755322652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592345222791048983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd16f78be804f92a73089ccd5126720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229749646448994957
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6374122900803664586}
+  - component: {fileID: 7866628467667992726}
   m_Layer: 3
   m_Name: Spread
   m_TagString: Untagged
@@ -123,6 +137,18 @@ Transform:
   m_Father: {fileID: 8613853358741675787}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7866628467667992726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227915557650034822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58275f32611640d9a3405775119bd83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5789010011634620522
 GameObject:
   m_ObjectHideFlags: 0

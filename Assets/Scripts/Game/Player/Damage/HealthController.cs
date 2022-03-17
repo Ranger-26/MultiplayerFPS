@@ -21,7 +21,7 @@ namespace Game.Player.Damage
             }
             
             currentHealth = 0;
-            TargetDamagePlayer(currentHealth);
+            TargetDamagePlayer(0);
             ServerKillPlayer();
         }
 

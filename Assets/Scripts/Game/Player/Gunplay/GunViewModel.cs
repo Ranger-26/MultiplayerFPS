@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine.Rendering.HighDefinition;
 
 namespace Game.Player.Gunplay
@@ -63,8 +64,8 @@ namespace Game.Player.Gunplay
         {
             if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
             {
-                Transform tempcam = transform.parent.parent;
-                Destroy(tempcam.GetChild(0).gameObject);
+                Transform tempcam = GetComponentInParent<Camera>().transform;
+                Destroy(tempcam.GetComponentInChildren<FiringPoint>().gameObject);
                 tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
                 tempcam.GetComponent<Camera>().enabled = false;
                 tempcam.GetComponent<AudioListener>().enabled = false;
@@ -74,9 +75,9 @@ namespace Game.Player.Gunplay
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             nsm = GetComponentInParent<NetworkShootingManager>();
-            cam = Camera.main.transform;
-            firingPoint = cam.GetChild(0);
-            spreadPoint = firingPoint.GetChild(0);
+            cam = GetComponentInParent<Camera>().transform;
+            firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
+            spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
 
             anim = GetComponent<Animator>();
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Game.GameLogic.Map;
 using Game.GameLogic.PlayerManagment;
 using Game.GameLogic.Spawning;
 using Game.Player;
@@ -65,6 +66,10 @@ namespace Game.GameLogic
             }
 
             RpcSendTimer(0, true);
+            foreach (var spawnable in FindObjectsOfType<MapSpawnableObject>())
+            {
+                Destroy(spawnable.gameObject);
+            }
             PlayerManager.Instance.ResetPlayers(RespawnAllPlayers(PlayerManager.Instance.players));
             
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 389512984250178929}
   - component: {fileID: -7813248008622669059}
   - component: {fileID: 5801139250987402227}
+  - component: {fileID: 6657234826292873386}
   m_Layer: 0
   m_Name: BulletHit
   m_TagString: Untagged
@@ -144,3 +145,15 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 4089ddf1161a17b4ab79cb0f6f900e31
   hasSpawned: 0
+--- !u!114 &6657234826292873386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389512984250178928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4419219c574ba491ad6737723050cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

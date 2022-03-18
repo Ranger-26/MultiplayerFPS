@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4189760790314654939}
   - component: {fileID: 6818817080472739355}
   - component: {fileID: 398338803767322288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2986887672353967667}
   - component: {fileID: 5647659556044317146}
   - component: {fileID: 1239588399019338183}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 2955582559480694222}
   - component: {fileID: 2693455025288739479}
   - component: {fileID: 7496816713518015923}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 6849217335516239783}
   - component: {fileID: 5397217995607078282}
   - component: {fileID: 873322914088414235}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 5309356340140612006}
   - component: {fileID: 1737399188714255089}
   - component: {fileID: 838726599818351345}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FiremodeChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6930042796250343905}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 6079247785213604484}
   - component: {fileID: 3287770898406425626}
   - component: {fileID: 6387951303191795909}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 2603892024559222757}
   - component: {fileID: 2080545039916373680}
   - component: {fileID: 5533228190800064076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 8977734440536146801}
   - component: {fileID: 7288043380750043804}
   - component: {fileID: 6725289208620413639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MakarovViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 663714746295547370}
   - component: {fileID: 1302021054351845665}
   - component: {fileID: 1401684446353844084}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,6 +835,10 @@ PrefabInstance:
     - target: {fileID: 6996477868075680418, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
       propertyPath: m_Name
       value: MuzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996477868075680418, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}

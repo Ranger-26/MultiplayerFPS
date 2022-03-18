@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4894143964277066331}
   - component: {fileID: 5459665406310251202}
   - component: {fileID: 4724303351601979921}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 8081578255797015875}
   - component: {fileID: 7062909645996715819}
   - component: {fileID: 3654655161687526005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 588251599758679750}
   - component: {fileID: 238712139112680175}
   - component: {fileID: 644858488246211529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: shutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 1202960033355947994}
   - component: {fileID: 9116752383695112383}
   - component: {fileID: 8774247545431412603}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 8977734440536146801}
   - component: {fileID: 7288043380750043804}
   - component: {fileID: 6725289208620413639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MP5KViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8106971214724037098}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,6 +503,10 @@ PrefabInstance:
     - target: {fileID: 6996477868075680418, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
       propertyPath: m_Name
       value: MuzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996477868075680418, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}

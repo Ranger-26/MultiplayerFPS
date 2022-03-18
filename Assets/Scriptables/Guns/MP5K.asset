@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
   m_Name: MP5K
   m_EditorClassIdentifier: 
-  Damage: 21
-  HeadMultiplier: 2.5
+  Damage: 25
+  HeadMultiplier: 2
   LimbMultiplier: 0.5
   Range: 35
-  RPM: 1000
+  RPM: 750
   ChargeupTime: 0
   Tagging: 0.9
   Weight: 0.25
@@ -54,7 +54,7 @@ MonoBehaviour:
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
-  - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
+  - {fileID: 8300000, guid: 1b7a203aeeb54084bbc3d1d2cb93701f, type: 3}
   SoundMaxDistance: 100
-  SoundVolume: 1
+  SoundVolume: 0.7
   SoundPriority: 128

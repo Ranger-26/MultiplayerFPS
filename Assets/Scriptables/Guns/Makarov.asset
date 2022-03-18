@@ -16,7 +16,7 @@ MonoBehaviour:
   HeadMultiplier: 2
   LimbMultiplier: 0.4
   Range: 60
-  RPM: 650
+  RPM: 580
   ChargeupTime: 0
   Tagging: 0.9
   Weight: 0.1
@@ -38,14 +38,14 @@ MonoBehaviour:
   HasScope: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
-  ReloadTime: 1.2
+  ReloadTime: 1.05
   MaxAmmo: 12
   ReserveAmmo: 48
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
   GunSlot: 1
-  DrawTime: 0.45
+  DrawTime: 0.95
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   AimPunch: 0.75
@@ -54,7 +54,7 @@ MonoBehaviour:
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
-  - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
+  - {fileID: 8300000, guid: 58c35ce94e18cee458c5214c775fb9ff, type: 3}
   SoundMaxDistance: 200
-  SoundVolume: 3
+  SoundVolume: 1
   SoundPriority: 128

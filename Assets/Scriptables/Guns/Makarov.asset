@@ -50,6 +50,7 @@ MonoBehaviour:
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   AimPunch: 0.75
   AimPunchDuration: 0.08
+  MaxBacking: 0.2
   ChargeupSounds: []
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}

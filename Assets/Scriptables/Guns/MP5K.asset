@@ -50,11 +50,12 @@ MonoBehaviour:
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   AimPunch: 0.5
   AimPunchDuration: 0.05
+  MaxBacking: 0.2
   ChargeupSounds: []
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 1b7a203aeeb54084bbc3d1d2cb93701f, type: 3}
   SoundMaxDistance: 100
-  SoundVolume: 0.7
+  SoundVolume: 0.5
   SoundPriority: 128

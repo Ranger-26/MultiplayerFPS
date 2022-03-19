@@ -183,9 +183,9 @@ namespace Game.Player.Gunplay
                 }
             }
 
-            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 4f, -gun.MaxBacking), Mathf.InverseLerp(0f, gun.MaxSpread + gun.MaxMovementSpread, spread + moveSpread));
+            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), Mathf.InverseLerp(0f, gun.MaxSpread + gun.MaxMovementSpread, spread + moveSpread));
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 4f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
             shootTimer -= Time.deltaTime;
         }

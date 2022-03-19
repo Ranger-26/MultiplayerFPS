@@ -8,4 +8,6 @@ public static class StringKeys
 
     public static string InputHorizontal = "Horizontal";
     public static string InputVertical = "Vertical";
+
+    public static string PlayerPrefsKeySens = "Sensitivity";
 }

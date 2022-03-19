@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Mirror;
 
 public class TitleScreen : MonoBehaviour
@@ -6,6 +7,9 @@ public class TitleScreen : MonoBehaviour
     // This is a component on the Canvas in the Menu Scene, used to control the menu, doing things such as exiting the application
 
     public static TitleScreen Instance;
+
+    [SerializeField]
+    InputField sens;
 
     private void Awake()
     {
@@ -17,6 +21,10 @@ public class TitleScreen : MonoBehaviour
         {
             Instance = this;
         }
+
+        GameSettingsLoader.LoadFile();
+
+        sens.text = GameSettings.Sensitivity.ToString();
     }
 
     public void QuitGame()
@@ -35,5 +43,12 @@ public class TitleScreen : MonoBehaviour
     public void Host()
     {
         NetworkManager.singleton.StartServer();
+    }
+
+    public void Sensitivity(string sense)
+    {
+        float sen = float.Parse(sense);
+        GameSettings.Sensitivity = sen;
+        GameSettingsLoader.SaveFile();
     }
 }

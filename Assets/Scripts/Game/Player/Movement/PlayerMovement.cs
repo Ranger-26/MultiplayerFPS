@@ -22,7 +22,6 @@ namespace Game.Player.Movement
         public LayerMask groundMask;
 
         float tagging;
-        float airAccel;
 
         bool isGrounded;
         bool canJump;
@@ -37,7 +36,7 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 8, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance / 1.5f, groundMask);
             canJump = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
@@ -48,7 +47,6 @@ namespace Game.Player.Movement
             if (Input.GetButtonDown("Jump") && canJump)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                airAccel = Mathf.Clamp(airAccel + 1f, 0f, 2f);
             }
 
             if (!isGrounded)
@@ -58,8 +56,7 @@ namespace Game.Player.Movement
 
             if (!LandTagged && isGrounded)
             {
-                Tag(0.6f);
-                airAccel = 0f;
+                Tag(0.8f);
                 LandTagged = true;
             }
 
@@ -68,7 +65,7 @@ namespace Game.Player.Movement
 
             Vector3 move = transform.right * x + transform.forward * z;
 
-            float moddedSpeed = speed - speed * weight + airAccel;
+            float moddedSpeed = speed - speed * weight;
 
             controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
 

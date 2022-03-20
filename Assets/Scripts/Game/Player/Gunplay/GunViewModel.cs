@@ -60,6 +60,8 @@ namespace Game.Player.Gunplay
         bool canCharge;
         bool shootQueue;
 
+        public GunIDs gunId;
+        
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)

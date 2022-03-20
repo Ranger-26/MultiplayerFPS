@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Game.Player.Damage;
 using Game.Player.Movement;
@@ -22,7 +23,6 @@ namespace Game.Player.Gunplay
 
         [SyncVar] 
         public bool isReloading = false;
-
         public void Start()
         {
             currentAmmo = curGun.MaxAmmo;
@@ -130,10 +130,15 @@ namespace Game.Player.Gunplay
         }
         #endregion
 
+        #region GunSwitchLogic
+
         [Command]
-        public void CmdSendDebug(string message, int playerId)
+        public void CmdSwitchGun()
         {
-            Debug.Log($"Message: {message}, Player id: {playerId}");
+            
         }
+        
+
+        #endregion
     }
 }

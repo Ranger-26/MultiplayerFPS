@@ -183,9 +183,9 @@ namespace Game.Player.Gunplay
                 }
             }
 
-            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 4f, -gun.MaxBacking), Mathf.InverseLerp(0f, gun.MaxSpread + gun.MaxMovementSpread, spread + moveSpread));
+            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), Mathf.InverseLerp(0f, gun.MaxSpread + gun.MaxMovementSpread, spread + moveSpread));
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 4f * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
             shootTimer -= Time.deltaTime;
         }
@@ -226,6 +226,12 @@ namespace Game.Player.Gunplay
         public void Shoot()
         {
             if (!ni.hasAuthority) return;
+
+            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
+            {
+                StartCoroutine(Reload());
+            }
+
             if (!delay && nsm.currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
                 shootTimer = 60f / gun.RPM;
@@ -249,11 +255,6 @@ namespace Game.Player.Gunplay
                 Recoil();
 
                 StartCoroutine(AimPunch());
-            }
-
-            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
-            {
-                StartCoroutine(Reload());
             }
         }
 

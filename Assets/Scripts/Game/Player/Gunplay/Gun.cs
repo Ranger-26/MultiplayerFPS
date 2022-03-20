@@ -120,6 +120,9 @@ namespace Game.Player.Gunplay
 
         [Tooltip("Priority of the sound (sounds with low priority will get lowered when higher priority sounds are playing)")]
         public int SoundPriority = 128;
+
+        [Tooltip("Unique id of the gun.")]
+        public GunIDs UniqueGunID = GunIDs.Debug;
     }
 
     public enum FiringMode : byte

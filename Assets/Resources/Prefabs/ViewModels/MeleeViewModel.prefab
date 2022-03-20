@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4579177951944741617}
   - component: {fileID: 2756070115496385308}
   - component: {fileID: 4243143689165096876}
-  - component: {fileID: 2269362622059433731}
   m_Layer: 3
   m_Name: MeleeViewModel
   m_TagString: Untagged
@@ -79,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 06150285ed76e1441b9c94d6006bd66f, type: 2}
   muzzleFlash: {fileID: 0}
+  gunId: 1
 --- !u!95 &4243143689165096876
 Animator:
   serializedVersion: 3
@@ -98,18 +98,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2269362622059433731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3803099366710298699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4ac814cc9f96c44ca6004b980dbd99b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5650577073614752548
 GameObject:
   m_ObjectHideFlags: 0

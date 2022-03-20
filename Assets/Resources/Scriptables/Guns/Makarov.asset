@@ -10,50 +10,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
-  m_Name: Knife
+  m_Name: Makarov
   m_EditorClassIdentifier: 
-  Damage: 50
+  Damage: 29
   HeadMultiplier: 2
-  LimbMultiplier: 0.5
-  Range: 2
-  RPM: 130
+  LimbMultiplier: 0.4
+  Range: 60
+  RPM: 580
   ChargeupTime: 0
-  Tagging: 1
-  Weight: 0
+  Tagging: 0.9
+  Weight: 0.1
   BulletCount: 1
   GunFiringMode: 1
-  Spread: 0
-  MovementSpread: 0
-  MaxSpread: 0
-  MaxMovementSpread: 0
-  StartingSpread: 0
-  Recoil: 0.01
-  HorizontalRecoil: 0.01
-  MaxHorizontal: 0.01
-  RecoilDecay: 1000
-  Displacement: 0
-  MaxDisplacement: 0
-  SwayAfterRound: 1
+  Spread: 2
+  MovementSpread: 1
+  MaxSpread: 4
+  MaxMovementSpread: 13
+  StartingSpread: 0.2
+  Recoil: 1
+  HorizontalRecoil: 1
+  MaxHorizontal: 4
+  RecoilDecay: 1
+  Displacement: 1
+  MaxDisplacement: 4
+  SwayAfterRound: 5
   SwayStartRight: 0
   HasScope: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
-  ReloadTime: 0
-  MaxAmmo: 2147483647
-  ReserveAmmo: 2147483647
+  ReloadTime: 1.05
+  MaxAmmo: 12
+  ReserveAmmo: 48
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
-  GunSlot: 2
-  DrawTime: 1
+  GunSlot: 1
+  DrawTime: 0.95
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
-  AimPunch: 0.01
-  AimPunchDuration: 0.01
+  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
+  AimPunch: 0.75
+  AimPunchDuration: 0.08
+  MaxBacking: 0.2
   ChargeupSounds: []
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
-  ShootSounds: []
-  SoundMaxDistance: 100
+  ShootSounds:
+  - {fileID: 8300000, guid: 58c35ce94e18cee458c5214c775fb9ff, type: 3}
+  SoundMaxDistance: 200
   SoundVolume: 1
   SoundPriority: 128
+  UniqueGunID: 2

@@ -1,5 +1,6 @@
 using Game.Player.Movement;
 using System.Collections;
+using Game.Player.Gunplay.IdentifierComponents;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;
@@ -60,6 +61,8 @@ namespace Game.Player.Gunplay
         bool canCharge;
         bool shootQueue;
 
+        public GunIDs gunId;
+        
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)

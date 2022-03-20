@@ -96,6 +96,8 @@ namespace Game.Player.Gunplay
         public GameObject HitObject;
         [Tooltip("The decal it instantiates at the hit point when hitting something")]
         public GameObject HitDecal;
+        [Tooltip("The decal it instantiates at the hit point when hitting something")]
+        public GameObject Tracer;
 
         [Tooltip("The amount that the camera jumps when shooting in degrees")]
         public float AimPunch = 1f;

@@ -48,6 +48,7 @@ MonoBehaviour:
   DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   AimPunch: 0.5
   AimPunchDuration: 0.05
   MaxBacking: 0.2

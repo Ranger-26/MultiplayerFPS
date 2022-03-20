@@ -242,7 +242,7 @@ namespace Game.Player.Gunplay
                     {
                         Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 1f);
                         // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
-                        nsm.CmdShoot(spreadPoint.position, spreadPoint.forward);
+                        nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, muzzleFlash.transform.position);
                     }
 
                     Spread();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3776940742789302731}
   - component: {fileID: 4421991444573838027}
   - component: {fileID: 4177831950599218548}
+  - component: {fileID: 9099546556989715482}
   m_Layer: 3
   m_Name: DebugGun
   m_TagString: Untagged
@@ -98,6 +99,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
   muzzleFlash: {fileID: 5071467466835144659}
+--- !u!114 &9099546556989715482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310304761716977796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910255eecb4ae04dac73c2d70edbe02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Layer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1001 &2844308246479514988
 PrefabInstance:
   m_ObjectHideFlags: 0

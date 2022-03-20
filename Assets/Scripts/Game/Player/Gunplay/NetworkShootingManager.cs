@@ -33,9 +33,9 @@ namespace Game.Player.Gunplay
         
         #region ServerShootingLogic
         [Command]
-        public void CmdShoot(Vector3 start, Vector3 forward)
+        public void CmdShoot(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
         {
-            ServerShoot(start, forward, id);
+            ServerShoot(start, forward, id, visualFiringPoint);
         }
 
         [Command]
@@ -46,7 +46,7 @@ namespace Game.Player.Gunplay
         }
         
         [Server]
-        private void ServerShoot(Vector3 start, Vector3 forward, int id)
+        private void ServerShoot(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
         {
             RaycastHit _hit;
             if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
@@ -55,7 +55,7 @@ namespace Game.Player.Gunplay
                 // Debug.Log($"Server: {start}, {forward}, player {id}");
                 Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
                                            
-                Hit(_hit);
+                ServerHit(_hit, visualFiringPoint);
                 
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
@@ -75,10 +75,14 @@ namespace Game.Player.Gunplay
                     part.ServerDamage(curGun.Damage, multiplier);
                 }
             }
+            else
+            {
+                ServerTracer(visualFiringPoint, start + forward * curGun.Range);
+            }
         }
         
         [Server]
-        private void Hit(RaycastHit _hit)
+        private void ServerHit(RaycastHit _hit, Vector3 visualFiringPoint)
         {
             if (curGun.HitObject != null)
             {
@@ -89,13 +93,27 @@ namespace Game.Player.Gunplay
             if (curGun.HitDecal != null)
             {
                 GameObject decal = Instantiate(curGun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
-                //decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+                // decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
                 NetworkServer.Spawn(decal);
             }
+
+            ServerTracer(visualFiringPoint, _hit.point);
 
             if (curGun.HitSounds.Length != 0)
             {
                 AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
+            }
+        }
+
+        [Server]
+        private void ServerTracer(Vector3 start, Vector3 end)
+        {
+            if (curGun.Tracer != null)
+            {
+                NetworkTracer ln = Instantiate(curGun.Tracer, transform.position, transform.rotation).GetComponent<NetworkTracer>();
+                ln.start = start;
+                ln.end = end;
+                NetworkServer.Spawn(ln.gameObject);
             }
         }
         

@@ -60,3 +60,4 @@ MonoBehaviour:
   SoundMaxDistance: 200
   SoundVolume: 1
   SoundPriority: 128
+  UniqueGunID: 2

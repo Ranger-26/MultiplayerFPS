@@ -48,8 +48,10 @@ MonoBehaviour:
   DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  Tracer: {fileID: 0}
   AimPunch: 0.01
   AimPunchDuration: 0.01
+  MaxBacking: 0.3
   ChargeupSounds: []
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
@@ -57,3 +59,4 @@ MonoBehaviour:
   SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128
+  UniqueGunID: 1

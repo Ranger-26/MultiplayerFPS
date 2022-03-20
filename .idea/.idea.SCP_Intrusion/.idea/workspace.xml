@@ -5,57 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9338ee2-1de1-4fc3-9b25-33505f8cec3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunDatabase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunDatabase.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/IdentifierComponents.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHit.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHit.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHit.vfx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHit.vfx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHole.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHole.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MapObjects.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MapObjects/Box.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MapObjects/Box.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MuzzleFlash.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MuzzleFlash.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MuzzleFlash.vfx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MuzzleFlash.vfx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/NetworkManager.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/NetworkManager.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/NetworkRoomPlayer.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/NetworkRoomPlayer.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/PlayerUI.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/PlayerUI.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Ragdoll.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Ragdoll.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/SpectatorPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/SpectatorPrefab.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/DebugGun.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/DebugGun.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MP5KViewModel.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MP5KViewModel.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MakarovViewModel.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MakarovViewModel.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MeleeViewModel.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ViewModels/MeleeViewModel.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Debug.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Debug.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Knife.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Knife.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/MP5K.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/MP5K.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Makarov.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scriptables/Guns/Makarov.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/Gun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/Gun.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/FiringPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/IdentifierComponents/FiringPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/FiringPoint.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/IdentifierComponents/FiringPoint.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/SpreadPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/IdentifierComponents/SpreadPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/SpreadPoint.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/IdentifierComponents/SpreadPoint.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,5 +1,6 @@
 using Game.Player.Movement;
 using System.Collections;
+using Game.Player.Gunplay.IdentifierComponents;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;

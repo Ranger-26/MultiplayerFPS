@@ -164,7 +164,7 @@ namespace Game.Player.Gunplay
                 chargedUp = chargeupTimer >= gun.ChargeupTime;
             }
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && !delay)
             {
                 if (MenuOpen.IsOpen)
                     return;

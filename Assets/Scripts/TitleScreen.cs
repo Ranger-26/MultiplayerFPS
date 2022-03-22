@@ -8,9 +8,6 @@ public class TitleScreen : MonoBehaviour
 
     public static TitleScreen Instance;
 
-    [SerializeField]
-    InputField sens;
-
     private void Awake()
     {
         if (Instance != null)
@@ -23,8 +20,6 @@ public class TitleScreen : MonoBehaviour
         }
 
         GameSettingsLoader.LoadFile();
-
-        sens.text = GameSettings.Sensitivity.ToString();
     }
 
     public void QuitGame()
@@ -43,12 +38,5 @@ public class TitleScreen : MonoBehaviour
     public void Host()
     {
         NetworkManager.singleton.StartServer();
-    }
-
-    public void Sensitivity(string sense)
-    {
-        float sen = float.Parse(sense);
-        GameSettings.Sensitivity = sen;
-        GameSettingsLoader.SaveFile();
     }
 }

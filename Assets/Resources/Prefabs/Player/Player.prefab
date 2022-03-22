@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6966271938023936789
 Transform:
   m_ObjectHideFlags: 0
@@ -410,8 +410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  CrouchRate: 3
   CrouchHeight: 0.7
-  StandingHeight: 2
+  StandingHeight: 1.8
   CrouchSpeed: 2.5
   WalkingSpeed: 4.5
   NormalSpeed: 7
@@ -467,7 +468,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -572,7 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  curGun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
+  curGun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
   currentAmmo: 0
   reserveAmmo: 0
   isReloading: 0
@@ -832,7 +833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6153013886324232626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}
@@ -853,7 +854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1861831532860040729
 Transform:
   m_ObjectHideFlags: 0
@@ -1178,7 +1179,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836145610334071351, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 836145610334071351, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1314,7 +1315,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Materials.Array.data[0]

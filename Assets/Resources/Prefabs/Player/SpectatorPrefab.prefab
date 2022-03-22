@@ -102,8 +102,8 @@ MonoBehaviour:
   axes: 0
   minimumX: -360
   maximumX: 360
-  minimumY: -60
-  maximumY: 60
+  minimumY: -90
+  maximumY: 90
 --- !u!114 &2399478239635611937
 MonoBehaviour:
   m_ObjectHideFlags: 0

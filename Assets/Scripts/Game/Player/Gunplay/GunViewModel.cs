@@ -111,6 +111,7 @@ namespace Game.Player.Gunplay
             {
                 Debug.LogError("Network Shooting Manager is null in the update!");
             }
+
             if (!nsm.hasAuthority)
                 return;
 
@@ -191,6 +192,8 @@ namespace Game.Player.Gunplay
             transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
             shootTimer -= Time.deltaTime;
+
+            Crosshair.Instance.UpdateError(spread, moveSpread);
         }
 
         private void FixedUpdate()

@@ -16,8 +16,11 @@ namespace Game.Player.Spectating
 
         float rotationY = 0F;
 
-        void Update ()
+        void Update()
         {
+            if (MenuOpen.IsOpen)
+                return;
+
             if (axes == RotationAxes.MouseXAndY)
             {
                 float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * GameSettings.Sensitivity;
@@ -40,7 +43,7 @@ namespace Game.Player.Spectating
             }
         }
 	
-        void Start ()
+        void Start()
         {
             if (!hasAuthority) enabled = false;
             // Make the rigid body not change rotation

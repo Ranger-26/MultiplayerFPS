@@ -15,4 +15,12 @@ public class Menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         MenuOpen.IsOpen = false;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }

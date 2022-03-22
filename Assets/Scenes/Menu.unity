@@ -260,10 +260,10 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1801507974}
-        m_TargetAssemblyTypeName: TitleScreen, Assembly-CSharp
+      - m_Target: {fileID: 1801507976}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Sensitivity
-        m_Mode: 0
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -275,10 +275,10 @@ MonoBehaviour:
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1801507974}
-        m_TargetAssemblyTypeName: TitleScreen, Assembly-CSharp
+      - m_Target: {fileID: 1801507976}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Sensitivity
-        m_Mode: 0
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -289,7 +289,19 @@ MonoBehaviour:
         m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1801507976}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: Sensitivity
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -2722,6 +2734,7 @@ GameObject:
   - component: {fileID: 1801507970}
   - component: {fileID: 1801507974}
   - component: {fileID: 1801507975}
+  - component: {fileID: 1801507976}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2824,7 +2837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a189c8c91bd99e458d9582e5f1c33fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: {fileID: 57415968}
 --- !u!114 &1801507975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,6 +2849,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67d5cabc8912404d8e88bef77c0f56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1801507976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801507969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443624e4861cee3499d0e4c8592a55b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sens: {fileID: 57415968}
 --- !u!1 &1807902846
 GameObject:
   m_ObjectHideFlags: 0

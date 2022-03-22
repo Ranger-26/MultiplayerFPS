@@ -12,28 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
   m_Name: MP5K
   m_EditorClassIdentifier: 
-  Damage: 25
+  Damage: 22
   HeadMultiplier: 2
-  LimbMultiplier: 0.5
+  LimbMultiplier: 0.4
   Range: 35
-  RPM: 750
+  RPM: 900
   ChargeupTime: 0
   Tagging: 0.9
   Weight: 0.25
   BulletCount: 1
   GunFiringMode: 0
-  Spread: 0.5
-  MovementSpread: 2
-  MaxSpread: 2.1
-  MaxMovementSpread: 15
-  StartingSpread: 0.07
-  Recoil: 1
+  Spread: 0.6
+  MovementSpread: 2.5
+  MaxSpread: 3.5
+  MaxMovementSpread: 18
+  StartingSpread: 0.1
+  Recoil: 1.1
   HorizontalRecoil: 0.7
   MaxHorizontal: 3
-  RecoilDecay: 1
+  RecoilDecay: 0.7
   Displacement: 1.5
-  MaxDisplacement: 6
-  SwayAfterRound: 10
+  MaxDisplacement: 5
+  SwayAfterRound: 8
   SwayStartRight: 1
   HasScope: 0
   ScopeFOV: 67.5
@@ -51,7 +51,7 @@ MonoBehaviour:
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   AimPunch: 0.5
   AimPunchDuration: 0.05
-  MaxBacking: 0.2
+  MaxBacking: 0.1
   ChargeupSounds: []
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}

@@ -96,6 +96,7 @@ namespace Game.Player.Gunplay
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
             PM.weight = gun.Weight;
+
             StartCoroutine(Draw());
 
             if (nsm == null)
@@ -194,6 +195,13 @@ namespace Game.Player.Gunplay
             shootTimer -= Time.deltaTime;
 
             Crosshair.Instance.UpdateError(spread, moveSpread);
+
+            // Debug
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                StartCoroutine(Draw());
+            }
         }
 
         private void FixedUpdate()
@@ -247,8 +255,17 @@ namespace Game.Player.Gunplay
                     if (nsm.hasAuthority)
                     {
                         Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 1f);
+
                         // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
-                        nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, muzzleFlash.transform.position);
+
+                        if (muzzleFlash != null)
+                        {
+                            nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, muzzleFlash.transform.position);
+                        }
+                        else
+                        {
+                            nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, transform.position);
+                        }
                     }
 
                     Spread();

@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6966271938023936789
 Transform:
   m_ObjectHideFlags: 0
@@ -523,7 +523,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  lookSpeed: 1
   lookXLimit: 90
   cam: {fileID: 5789010012695376352}
 --- !u!114 &-3721155344957921899
@@ -573,7 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  curGun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
+  curGun: {fileID: 11400000, guid: 06150285ed76e1441b9c94d6006bd66f, type: 2}
   currentAmmo: 0
   reserveAmmo: 0
   isReloading: 0
@@ -1154,7 +1153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7816493561560554035
 Transform:
   m_ObjectHideFlags: 0
@@ -1315,7 +1314,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Materials.Array.data[0]

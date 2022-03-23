@@ -35,6 +35,9 @@ namespace Game.Player.Movement
 
         private void Update()
         {
+            if (MenuOpen.IsOpen)
+                return;
+
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)

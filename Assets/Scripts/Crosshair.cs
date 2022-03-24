@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class Crosshair : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Crosshair : MonoBehaviour
 
     float startingSize = 25f;
 
+    [SerializeField]
     RectTransform[] CrosshairParts;
 
     RectTransform rect;
@@ -55,11 +57,13 @@ public class Crosshair : MonoBehaviour
         rect = GetComponent<RectTransform>();
 
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
-
-        foreach (RectTransform rect in CrosshairParts)
+        CrosshairParts = CrosshairParts.Skip(1).ToArray();
+        Debug.Log($"Found {CrosshairParts.Length} cross parts.");
+        foreach (RectTransform rectTrans in CrosshairParts)
         {
-            rect.sizeDelta = new Vector2(length, thickness);
-            rect.GetComponent<Image>().color = color;
+            if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
+            rectTrans.sizeDelta = new Vector2(length, thickness);
+            rectTrans.gameObject.GetComponent<Image>().color = color;
         }
 
         size = length * 2 + offset;
@@ -75,7 +79,7 @@ public class Crosshair : MonoBehaviour
 
         size = startingSize + errorPixelsFire * firingErrorMultiplier * Convert.ToInt32(firingError) + errorPixelsMovement * movementErrorMultiplier * Convert.ToInt32(movementError);
 
-        Debug.Log(size);
+        //Debug.Log(size);
 
         rect.sizeDelta = new Vector2(size, size);
     }

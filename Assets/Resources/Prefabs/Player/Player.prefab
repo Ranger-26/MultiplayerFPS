@@ -589,6 +589,9 @@ MonoBehaviour:
   currentAmmo: 0
   reserveAmmo: 0
   isReloading: 0
+  primarySlot: {fileID: 6966271938023936789}
+  secondarySlot: {fileID: 1861831532860040729}
+  meleeSlot: {fileID: 7816493561560554035}
 --- !u!114 &2900848325028794953
 MonoBehaviour:
   m_ObjectHideFlags: 0

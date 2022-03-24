@@ -17,7 +17,11 @@ namespace Game.Player.Gunplay
     {
         [Header("Gun storing")]
         public Gun curGun;
-        
+
+        [SyncVar] public GunIDs curGunId;
+        public readonly SyncList<GunIDs> allGuns = new SyncList<GunIDs>();
+
+
         [Header("Ammo info")]
         [SyncVar]
         public int currentAmmo;
@@ -50,8 +54,24 @@ namespace Game.Player.Gunplay
             {
                 meleeSlot = GetComponentInChildren<MeleeSlot>().transform;
             }
+
+            if (isServer)
+            {
+                ServerReloadGuns();
+            }
+            
         }
 
+        [Server]
+        private void ServerReloadGuns()
+        {
+            foreach (var gun in GetComponentsInChildren<GunViewModel>(true))
+            {
+                allGuns.Add(gun.gunId);
+            }
+            Debug.Log($"New gun count: {allGuns.Count}, player {id}");
+        }
+        
         private void Update()
         {
             if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
@@ -214,6 +234,8 @@ namespace Game.Player.Gunplay
             newGunModel.transform.localPosition = Vector3.zero;
             newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
+        
+        
         
         #endregion
     }

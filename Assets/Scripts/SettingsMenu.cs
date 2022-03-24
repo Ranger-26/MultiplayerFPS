@@ -11,9 +11,9 @@ public class SettingsMenu : MonoBehaviour
         sens.text = GameSettings.Sensitivity.ToString();
     }
 
-    public void Sensitivity(string sense)
+    public void Sensitivity()
     {
-        float sen = float.Parse(sense);
+        float sen = float.Parse(sens.text);
         GameSettings.Sensitivity = sen;
         GameSettingsLoader.SaveFile();
     }

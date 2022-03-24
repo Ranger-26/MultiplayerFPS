@@ -1489,6 +1489,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 25
+  offset: 5
+  length: 10
+  thickness: 3
+  color: {r: 255, g: 255, b: 255, a: 100}
+  firingErrorMultiplier: 10
+  movementErrorMultiplier: 10
+  firingError: 1
+  movementError: 1
 --- !u!1001 &320424324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5971,7 +5979,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2012427764}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Sensitivity
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5986,7 +5994,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2012427764}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Sensitivity
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6001,7 +6009,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2012427764}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: Sensitivity
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

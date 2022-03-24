@@ -5,7 +5,8 @@ namespace Game.Player.Movement
 {
     public class PlayerLook : NetworkBehaviour
     {
-        public float lookSpeed = 1.0f;
+        public float lookSpeed => GameSettings.Sensitivity;
+
         public float lookXLimit = 90.0f;
 
         [SerializeField]
@@ -19,7 +20,6 @@ namespace Game.Player.Movement
         {
             cam = transform.GetChild(0).GetChild(0).GetComponent<Camera>();
 
-            lookSpeed = GameSettings.Sensitivity;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

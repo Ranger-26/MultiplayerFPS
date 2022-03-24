@@ -54,9 +54,10 @@ namespace Game.Player.Gunplay
 
         private void Update()
         {
-            if (hasAuthority && Input.GetKeyDown(KeyCode.Question))
+            if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
             {
-                CmdSwitchGunSlot(GunIDs.Debug, WeaponSlot.Melee);
+                Debug.Log("Trying to switch gun...");
+                CmdSwitchGunSlot(GunIDs.Makarov, WeaponSlot.Melee);
             }
         }
 
@@ -184,12 +185,14 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdSwitchGunSlot(GunIDs newGun, WeaponSlot slot)
         {
+            Debug.Log("Calling command...");
             RpcSwitchGunSlot(newGun, slot);
         }
 
         [ClientRpc]
         public void RpcSwitchGunSlot(GunIDs newGun, WeaponSlot slot)
         {
+            Debug.Log("Calling rpc...");
             GameObject newGunModel = Instantiate(GunDatabase.idsToModels[newGun].gameObject, transform.position, Quaternion.identity);
 
             switch (slot)

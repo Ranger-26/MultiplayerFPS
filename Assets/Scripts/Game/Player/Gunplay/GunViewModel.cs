@@ -109,11 +109,14 @@ namespace Game.Player.Gunplay
         {
             if (nsm == null)
             {
-                Debug.LogError("Network Shooting Manager is null in the update!");
+                nsm = GetComponentInParent<NetworkShootingManager>();
+                return;
             }
 
             if (!nsm.hasAuthority)
-                return;
+            {
+                enabled = false;
+            }
 
             isSpraying = Input.GetMouseButton(0);
 

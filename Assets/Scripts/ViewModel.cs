@@ -7,11 +7,12 @@ public class ViewModel : MonoBehaviour
 
     private void Awake()
     {
-        ni = GetComponentInParent<NetworkIdentity>();
     }
 
     private void Start()
     {
+        ni = GetComponentInParent<NetworkIdentity>();
+
         if (ni.hasAuthority)
         {
             foreach (MeshRenderer mesh in GetComponentsInChildren<MeshRenderer>())

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6966271938023936789}
+  - component: {fileID: 6541938359304973817}
   m_Layer: 3
   m_Name: Primary
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 1838809099793417575}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &6541938359304973817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294822571422631101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ddfb1850f14887be1b34f9e79eb6d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &592345222791048983
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  lookSpeed: 1
   lookXLimit: 90
   cam: {fileID: 5789010012695376352}
 --- !u!114 &-3721155344957921899
@@ -848,13 +860,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1861831532860040729}
+  - component: {fileID: 5620832574838076618}
   m_Layer: 3
   m_Name: Secondary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1861831532860040729
 Transform:
   m_ObjectHideFlags: 0
@@ -870,6 +883,18 @@ Transform:
   m_Father: {fileID: 1838809099793417575}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &5620832574838076618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974900837452088352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc0bd6593294d599813c7fc11154d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7349419785513729204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,13 +1173,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7816493561560554035}
+  - component: {fileID: 696096038801311520}
   m_Layer: 3
   m_Name: Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7816493561560554035
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,6 +1196,18 @@ Transform:
   m_Father: {fileID: 1838809099793417575}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &696096038801311520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859613314870190819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76530d8e90494557a9ab0a31e75778c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1101631318021946133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1192,6 +1230,10 @@ PrefabInstance:
     - target: {fileID: 8636920317891238347, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: m_Name
       value: MakarovViewModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636920317891238347, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977734440536146801, guid: 7fbfba6eb957c254e8a160eb9fd404fe, type: 3}
       propertyPath: m_RootOrder
@@ -1254,6 +1296,10 @@ PrefabInstance:
     - target: {fileID: 3803099366710298699, guid: efc156202e9b5a548a2963aadfe59b56, type: 3}
       propertyPath: m_Name
       value: MeleeViewModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803099366710298699, guid: efc156202e9b5a548a2963aadfe59b56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4579177951944741617, guid: efc156202e9b5a548a2963aadfe59b56, type: 3}
       propertyPath: m_RootOrder

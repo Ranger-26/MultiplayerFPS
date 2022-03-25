@@ -12,10 +12,14 @@ namespace Game.Player.Damage
         private HealthController _hc;
 
         private PlayerMovement _playerMovement;
+
+        public NetworkGamePlayer Player;
+        
         private void Start()
         {
             _hc = GetComponentInParent<HealthController>();
             _playerMovement = GetComponentInParent<PlayerMovement>();
+            Player = GetComponentInParent<NetworkGamePlayer>();
         }
         
         [Server]

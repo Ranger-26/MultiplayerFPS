@@ -125,6 +125,12 @@ namespace Game.Player.Gunplay
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {
+                    NetworkGamePlayer playerMain = part.GetComponentInParent<NetworkGamePlayer>();
+                    if (playerMain != null && playerMain.playerId == id)
+                    {
+                        Debug.Log($"Player {id} trying to shoot themselves.");
+                        return;
+                    }
                     Debug.Log($"Found body part {part.bodyPart} on {_hit.transform.name} when raycasting! ");
                     float multiplier;
                     switch (part.bodyPart)

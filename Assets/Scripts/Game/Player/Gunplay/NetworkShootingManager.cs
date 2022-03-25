@@ -61,12 +61,6 @@ namespace Game.Player.Gunplay
             {
                 meleeSlot = GetComponentInChildren<MeleeSlot>().transform;
             }
-
-            if (isServer)
-            {
-                ServerInitGuns();
-            }
-            
         }
 
         [Server]
@@ -93,7 +87,8 @@ namespace Game.Player.Gunplay
             if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
             {
                 Debug.Log("Trying to switch gun...");
-                CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Melee : WeaponSlot.Primary);
+                //CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Melee : WeaponSlot.Primary);
+                CmdSetNewGunSlot(GunIDs.Debug, WeaponSlot.Primary);
             }
         }
 
@@ -228,8 +223,9 @@ namespace Game.Player.Gunplay
         public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
         {
             Debug.Log("Calling command...");
+            allGuns[slot] = newGun;
             RpcAddGunSlot(newGun, slot);
-            //ServerSetActiveGun(newGun);
+            ServerSwitchGunSlot(slot);
         }
 
         [ClientRpc]
@@ -292,46 +288,18 @@ namespace Game.Player.Gunplay
         [Command]
         private void CmdSwitchGunSlot(WeaponSlot newSlot)
         {
+            ServerSwitchGunSlot(newSlot);
+        }
+
+        [Server]
+        private void ServerSwitchGunSlot(WeaponSlot newSlot)
+        {
             if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
             {
                 curGun = newGun;
             }
             heldWeaponSlot = newSlot;
         }
-        
-        /*
-        [Server]
-        public void ServerSetActiveGun(GunIDs newGun)
-        {
-            if (!allGuns.Values.Contains(newGun)) return;
-            curGun = GunDatabase.idsToGuns[newGun];
-            GunIDs old = curGunId;
-            curGunId = newGun;
-            RpcSetActiveGun(newGun, old);
-        }
-
-        [ClientRpc]
-        private void RpcSetActiveGun(GunIDs gun, GunIDs oldActiveGun)
-        {
-            if (GunDatabase.TryGetGun(oldActiveGun, out Gun old))
-            {
-                if (old.GunSlot == WeaponSlot.Primary)
-                {
-                    primarySlot.transform.GetChild(0).gameObject.SetActive(false);
-                }
-                if (old.GunSlot == WeaponSlot.Secondary)
-                {
-                    secondarySlot.transform.GetChild(0).gameObject.SetActive(false);
-                }
-                if (old.GunSlot == WeaponSlot.Melee)
-                {
-                    meleeSlot.transform.GetChild(0).gameObject.SetActive(false);
-                }
-            }
-        }
-        */
         #endregion
-        
-        
     }
 }

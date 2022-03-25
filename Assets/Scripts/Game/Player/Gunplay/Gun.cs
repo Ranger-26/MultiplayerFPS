@@ -140,6 +140,7 @@ namespace Game.Player.Gunplay
 
     public enum GunIDs : byte
     {
+        None,
         [Tooltip("Debug Gun")]
         Debug,
         [Tooltip("Melee")]

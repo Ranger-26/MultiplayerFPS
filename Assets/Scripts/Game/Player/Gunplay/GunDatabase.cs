@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Player.Gunplay
@@ -28,5 +29,35 @@ namespace Game.Player.Gunplay
             
             Debug.Log($"Found {idsToGuns.Count} guns and {idsToModels.Count} models!");
         }
+
+        public static bool TryGetGun(GunIDs gunId, out Gun newGun)
+        {
+            if (!idsToGuns.ContainsKey(gunId))
+            {
+                if (gunId != GunIDs.None)
+                {
+                    Debug.LogError($"Gun id {gunId} was not found in the dictionary of guns.");
+                }
+                newGun = null;
+                return false;
+            }
+
+            newGun = idsToGuns[gunId];
+            return true;
+        }
+
+        public static bool TryGetGunModel(GunIDs id, out GunViewModel newGunModel)
+        { 
+            if (!idsToModels.ContainsKey(id))
+            {
+                Debug.LogError($"Gun id {id} was not found in the dictionary of gun models.");
+                newGunModel = null;
+                return false;
+            }
+
+            newGunModel = idsToModels[id];
+            return true;
+        }
+
     }
 }

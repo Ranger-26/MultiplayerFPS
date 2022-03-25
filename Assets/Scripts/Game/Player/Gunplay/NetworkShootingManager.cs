@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Game.Player.Damage;
 using Game.Player.Gunplay.IdentifierComponents;
 using Game.Player.Movement;
 using Lobby;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.VFX;
@@ -19,8 +21,10 @@ namespace Game.Player.Gunplay
         public Gun curGun;
 
         [SyncVar] public GunIDs curGunId;
-        public readonly SyncList<GunIDs> allGuns = new SyncList<GunIDs>();
+        private readonly SyncDictionary<WeaponSlot, GunIDs> allGuns = new SyncDictionary<WeaponSlot, GunIDs>();
 
+        [SerializeField]
+        private List<Gun> allGunScriptables = new List<Gun>();
 
         [Header("Ammo info")]
         [SyncVar]
@@ -57,19 +61,28 @@ namespace Game.Player.Gunplay
 
             if (isServer)
             {
-                ServerReloadGuns();
+                ServerInitGuns();
             }
             
         }
 
         [Server]
-        private void ServerReloadGuns()
+        private void ServerInitGuns()
         {
+            allGuns.Add(WeaponSlot.Primary, GunIDs.None);
+            allGuns.Add(WeaponSlot.Secondary, GunIDs.None);
+            allGuns.Add(WeaponSlot.Melee, GunIDs.None);
+
             foreach (var gun in GetComponentsInChildren<GunViewModel>(true))
             {
-                allGuns.Add(gun.gunId);
+                if (GunDatabase.TryGetGun(gun.gunId, out Gun newGun))
+                {
+                    allGuns[newGun.GunSlot] = gun.gunId;
+                }
             }
-            Debug.Log($"New gun count: {allGuns.Count}, player {id}");
+            
+            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
+            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
         }
         
         private void Update()
@@ -77,7 +90,7 @@ namespace Game.Player.Gunplay
             if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
             {
                 Debug.Log("Trying to switch gun...");
-                CmdSwitchGunSlot(GunIDs.Makarov, WeaponSlot.Melee);
+                CmdAddGunSlot(GunIDs.Makarov, WeaponSlot.Melee);
             }
         }
 
@@ -203,18 +216,20 @@ namespace Game.Player.Gunplay
         #region GunSwitchLogic
 
         [Command]
-        public void CmdSwitchGunSlot(GunIDs newGun, WeaponSlot slot)
+        public void CmdAddGunSlot(GunIDs newGun, WeaponSlot slot)
         {
             Debug.Log("Calling command...");
-            RpcSwitchGunSlot(newGun, slot);
+            RpcAddGunSlot(newGun, slot);
         }
 
         [ClientRpc]
-        public void RpcSwitchGunSlot(GunIDs newGun, WeaponSlot slot)
+        public void RpcAddGunSlot(GunIDs newGun, WeaponSlot slot)
         {
             Debug.Log("Calling rpc...");
-            GameObject newGunModel = Instantiate(GunDatabase.idsToModels[newGun].gameObject, transform.position, Quaternion.identity);
-
+            if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
+            
+            GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);
+    
             switch (slot)
             {
                 case WeaponSlot.Primary:
@@ -232,11 +247,30 @@ namespace Game.Player.Gunplay
             }
             
             newGunModel.transform.localPosition = Vector3.zero;
-            newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero); 
         }
-        
-        
-        
+
+        [Server]
+        public void ServerSetActiveGun(GunIDs newGun)
+        {
+            if (!allGuns.Values.Contains(newGun)) return;
+            curGun = GunDatabase.idsToGuns[newGun];
+            GunIDs old = curGunId;
+            curGunId = newGun;
+            RpcSetActiveGun(newGun, old);
+        }
+
+        [ClientRpc]
+        private void RpcSetActiveGun(GunIDs gun, GunIDs oldActiveGun)
+        {
+            if (GunDatabase.idsToGuns[oldActiveGun].GunSlot == WeaponSlot.Primary)
+            {
+                primarySlot.transform.GetChild(0).gameObject.SetActive(false);
+            }
+        }
+
         #endregion
+        
+        
     }
 }

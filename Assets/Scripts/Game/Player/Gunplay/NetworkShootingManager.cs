@@ -6,6 +6,7 @@ using Game.Player.Damage;
 using Game.Player.Movement;
 using Lobby;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.VFX;
@@ -60,6 +61,12 @@ namespace Game.Player.Gunplay
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
                 {
+                    NetworkGamePlayer playerMain = part.GetComponentInParent<NetworkGamePlayer>();
+                    if (playerMain != null && playerMain.playerId == id)
+                    {
+                        Debug.Log($"Player {id} trying to shoot themselves.");
+                        return;
+                    }
                     Debug.Log($"Found body part {part.bodyPart} on {_hit.transform.name} when raycasting! ");
                     float multiplier;
                     switch (part.bodyPart)

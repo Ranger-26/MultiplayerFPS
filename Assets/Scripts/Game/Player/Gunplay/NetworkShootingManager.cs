@@ -20,11 +20,14 @@ namespace Game.Player.Gunplay
         [Header("Gun storing")]
         public Gun curGun;
 
-        [SyncVar] public GunIDs curGunId;
+        //[SyncVar] public GunIDs curGunId;
+        [SyncVar(hook = nameof(OnCurWeaponSlotChanged))] public WeaponSlot heldWeaponSlot = WeaponSlot.Primary;
+        
         private readonly SyncDictionary<WeaponSlot, GunIDs> allGuns = new SyncDictionary<WeaponSlot, GunIDs>();
 
         [SerializeField]
         private List<Gun> allGunScriptables = new List<Gun>();
+
 
         [Header("Ammo info")]
         [SyncVar]
@@ -90,7 +93,7 @@ namespace Game.Player.Gunplay
             if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
             {
                 Debug.Log("Trying to switch gun...");
-                CmdAddGunSlot(GunIDs.Makarov, WeaponSlot.Melee);
+                CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Melee : WeaponSlot.Primary);
             }
         }
 
@@ -222,10 +225,11 @@ namespace Game.Player.Gunplay
         #region GunSwitchLogic
 
         [Command]
-        public void CmdAddGunSlot(GunIDs newGun, WeaponSlot slot)
+        public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
         {
             Debug.Log("Calling command...");
             RpcAddGunSlot(newGun, slot);
+            //ServerSetActiveGun(newGun);
         }
 
         [ClientRpc]
@@ -256,6 +260,46 @@ namespace Game.Player.Gunplay
             newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero); 
         }
 
+        public void OnCurWeaponSlotChanged(WeaponSlot old, WeaponSlot newSlot)
+        {
+            switch (old)
+            {
+                case WeaponSlot.Primary:
+                    primarySlot.GetChild(0).gameObject.SetActive(false);
+                    break;
+                case WeaponSlot.Secondary:
+                    secondarySlot.GetChild(0).gameObject.SetActive(false);
+                    break;
+                case WeaponSlot.Melee:
+                    meleeSlot.GetChild(0).gameObject.SetActive(false);
+                    break;
+            }
+            
+            switch (newSlot)
+            {
+                case WeaponSlot.Primary:
+                    primarySlot.GetChild(0).gameObject.SetActive(true);
+                    break;
+                case WeaponSlot.Secondary:
+                    secondarySlot.GetChild(0).gameObject.SetActive(true);
+                    break;
+                case WeaponSlot.Melee:
+                    meleeSlot.GetChild(0).gameObject.SetActive(true);
+                    break;
+            }
+        }
+
+        [Command]
+        private void CmdSwitchGunSlot(WeaponSlot newSlot)
+        {
+            if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
+            {
+                curGun = newGun;
+            }
+            heldWeaponSlot = newSlot;
+        }
+        
+        /*
         [Server]
         public void ServerSetActiveGun(GunIDs newGun)
         {
@@ -269,12 +313,23 @@ namespace Game.Player.Gunplay
         [ClientRpc]
         private void RpcSetActiveGun(GunIDs gun, GunIDs oldActiveGun)
         {
-            if (GunDatabase.idsToGuns[oldActiveGun].GunSlot == WeaponSlot.Primary)
+            if (GunDatabase.TryGetGun(oldActiveGun, out Gun old))
             {
-                primarySlot.transform.GetChild(0).gameObject.SetActive(false);
+                if (old.GunSlot == WeaponSlot.Primary)
+                {
+                    primarySlot.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                if (old.GunSlot == WeaponSlot.Secondary)
+                {
+                    secondarySlot.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                if (old.GunSlot == WeaponSlot.Melee)
+                {
+                    meleeSlot.transform.GetChild(0).gameObject.SetActive(false);
+                }
             }
         }
-
+        */
         #endregion
         
         

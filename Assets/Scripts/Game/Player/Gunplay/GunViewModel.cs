@@ -209,7 +209,7 @@ namespace Game.Player.Gunplay
 
         private void FixedUpdate()
         {
-            if (!ni.hasAuthority) return;
+            if (PM == null) return;
             isSwaying = recoilFactor > gun.SwayAfterRound;
 
             moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);

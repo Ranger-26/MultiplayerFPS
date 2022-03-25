@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6966271938023936789
 Transform:
   m_ObjectHideFlags: 0
@@ -587,6 +587,7 @@ MonoBehaviour:
   syncInterval: 0.1
   curGun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
   curGunId: 11
+  allGunScriptables: []
   currentAmmo: 0
   reserveAmmo: 0
   isReloading: 0
@@ -1044,6 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 1
+  Player: {fileID: 0}
 --- !u!136 &5561824790150084922
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1168,6 +1170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 0
+  Player: {fileID: 0}
 --- !u!1 &8859613314870190819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1368,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 836145610334071351, guid: d445fdd22fdbfdd42ad2ca894d1909e3, type: 3}
       propertyPath: m_Materials.Array.data[0]

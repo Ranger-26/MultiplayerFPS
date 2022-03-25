@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" afterDir="false" />
-    </list>
+    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,6 +163,7 @@
       <workItem from="1647722757714" duration="1111000" />
       <workItem from="1648135516949" duration="1534000" />
       <workItem from="1648168972995" duration="8023000" />
+      <workItem from="1648218134740" duration="313000" />
     </task>
     <servers />
   </component>

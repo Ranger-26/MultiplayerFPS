@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/DebugGun.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/DebugGun.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MP5KViewModel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MP5KViewModel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MakarovViewModel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MakarovViewModel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MeleeViewModel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/ViewModels/MeleeViewModel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/Gun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/Gun.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +164,7 @@
       <workItem from="1647490237144" duration="2168000" />
       <workItem from="1647722757714" duration="1111000" />
       <workItem from="1648135516949" duration="1534000" />
-      <workItem from="1648168972995" duration="7701000" />
+      <workItem from="1648168972995" duration="8023000" />
     </task>
     <servers />
   </component>

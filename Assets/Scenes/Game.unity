@@ -1494,9 +1494,7 @@ MonoBehaviour:
   thickness: 3
   color: {r: 255, g: 255, b: 255, a: 100}
   firingErrorMultiplier: 10
-  movementErrorMultiplier: 10
   firingError: 1
-  movementError: 1
 --- !u!1001 &320424324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2549,7 +2547,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35888
+  m_Name: pb_Mesh57582
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

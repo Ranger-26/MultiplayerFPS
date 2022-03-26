@@ -51,6 +51,7 @@ namespace Game.Player.Gunplay
         float horizontalRecoil;
         float shootTimer;
         float chargeupTimer;
+        float lerpFactor;
 
         bool delay;
         bool isSpraying;
@@ -188,13 +189,25 @@ namespace Game.Player.Gunplay
                 }
             }
 
-            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), Mathf.InverseLerp(0f, gun.MaxSpread + gun.MaxMovementSpread, spread + moveSpread));
+            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * System.Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = Input.GetAxisRaw(StringKeys.InputVertical) * System.Convert.ToInt32(!MenuOpen.IsOpen);
+
+            lerpFactor = Mathf.Clamp01(
+                lerpFactor + Mathf.Abs(x * Time.deltaTime * gun.BackingMultiplier) + Mathf.Abs(z * Time.deltaTime * gun.BackingMultiplier)
+                );
+
+            if ((x == 0) && (z == 0))
+            {
+                lerpFactor = Mathf.Clamp01(lerpFactor - Time.deltaTime * gun.BackingMultiplier);
+            }
+
+            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), lerpFactor);
 
             transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
             shootTimer -= Time.deltaTime;
 
-            Crosshair.Instance.UpdateError(spread, moveSpread);
+            Crosshair.Instance.UpdateError(spread);
 
             // Debug
 

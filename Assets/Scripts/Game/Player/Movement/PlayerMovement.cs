@@ -35,9 +35,6 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            if (MenuOpen.IsOpen)
-                return;
-
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (isGrounded && velocity.y < 0)
@@ -47,6 +44,9 @@ namespace Game.Player.Movement
 
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
+                if (MenuOpen.IsOpen)
+                    return;
+
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
@@ -61,8 +61,8 @@ namespace Game.Player.Movement
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
+            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
 

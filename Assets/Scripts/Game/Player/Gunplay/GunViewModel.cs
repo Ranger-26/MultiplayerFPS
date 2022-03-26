@@ -258,7 +258,7 @@ namespace Game.Player.Gunplay
                 {
                     if (nsm.hasAuthority)
                     {
-                        Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 1f);
+                        Debug.DrawRay(spreadPoint.position, spreadPoint.forward * gun.Range, Color.green, 5f);
 
                         // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
 

@@ -37,6 +37,8 @@ namespace Game.Player.Gunplay
         [SyncVar] 
         public bool isReloading = false;
 
+        private readonly SyncDictionary<GunIDs, GunAmmo> gunsToAmmo = new SyncDictionary<GunIDs, GunAmmo>(); 
+
         [Header("Weapon Holder Transforms")] 
         public Transform primarySlot;
 
@@ -61,6 +63,11 @@ namespace Game.Player.Gunplay
             {
                 meleeSlot = GetComponentInChildren<MeleeSlot>().transform;
             }
+
+            if (isServer)
+            {
+                ServerInitGuns();
+            }
         }
 
         [Server]
@@ -75,11 +82,14 @@ namespace Game.Player.Gunplay
                 if (GunDatabase.TryGetGun(gun.gunId, out Gun newGun))
                 {
                     allGuns[newGun.GunSlot] = gun.gunId;
+                    gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
                 }
             }
             
             allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
             allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
+            
+            
         }
         
         private void Update()
@@ -87,8 +97,7 @@ namespace Game.Player.Gunplay
             if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
             {
                 Debug.Log("Trying to switch gun...");
-                //CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Melee : WeaponSlot.Primary);
-                CmdSetNewGunSlot(GunIDs.Debug, WeaponSlot.Primary);
+                CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Secondary : WeaponSlot.Primary);
             }
         }
 
@@ -107,7 +116,7 @@ namespace Game.Player.Gunplay
             if (currentAmmo <= 0) return;
             currentAmmo--;
         }
-        
+
         [Server]
         private void ServerShoot(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
         {
@@ -292,14 +301,53 @@ namespace Game.Player.Gunplay
         }
 
         [Server]
+        private void ServerCalcAmmo(GunIDs oldGun, GunIDs newGun)
+        {
+            if (!gunsToAmmo.ContainsKey(oldGun))
+            {
+                gunsToAmmo.Add(oldGun, new GunAmmo(currentAmmo, reserveAmmo));
+            }
+            else
+            {
+                gunsToAmmo[oldGun] = new GunAmmo(currentAmmo, reserveAmmo);
+            }
+
+            if (gunsToAmmo.ContainsKey(newGun))
+            {
+                currentAmmo = gunsToAmmo[newGun].currentAmmo;
+                reserveAmmo = gunsToAmmo[newGun].reserveAmmo;
+            }
+            else if (GunDatabase.TryGetGun(newGun, out Gun gun))
+            {
+                currentAmmo = gun.MaxAmmo;
+                reserveAmmo = gun.ReserveAmmo;
+            }
+        }
+        
+        
+        [Server]
         private void ServerSwitchGunSlot(WeaponSlot newSlot)
         {
+            if (isReloading) return;
             if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
             {
+                ServerCalcAmmo(allGuns[heldWeaponSlot], newGun.UniqueGunID);
                 curGun = newGun;
             }
             heldWeaponSlot = newSlot;
         }
         #endregion
+    }
+    
+    public struct GunAmmo
+    {
+        public int currentAmmo;
+        public int reserveAmmo;
+
+        public GunAmmo(int curAmmo, int resAmmo)
+        {
+            currentAmmo = curAmmo;
+            reserveAmmo = resAmmo;
+        }
     }
 }

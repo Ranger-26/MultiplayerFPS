@@ -77,7 +77,10 @@ namespace Lobby
         {
             base.OnStopClient();
             Debug.Log($"<color=#FF0000>Player {this} disconnecting..</color>");
-            PlayerManager.Instance.TryRemovePlayer(this);
+            if (PlayerManager.Instance != null)
+            {
+                PlayerManager.Instance.TryRemovePlayer(this);
+            }
         }
     }
 }

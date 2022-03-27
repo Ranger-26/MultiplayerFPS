@@ -1,3 +1,4 @@
+using System;
 using Game.Player.Movement;
 using System.Collections;
 using Game.Player.Gunplay.IdentifierComponents;
@@ -6,6 +7,7 @@ using UnityEngine.VFX;
 using Mirror;
 using Unity.VisualScripting;
 using UnityEngine.Rendering.HighDefinition;
+using Random = UnityEngine.Random;
 
 namespace Game.Player.Gunplay
 {
@@ -39,7 +41,7 @@ namespace Game.Player.Gunplay
         Vector3 _prevPosition;
         Vector3 vel;
 
-        Animator anim;
+        public Animator anim;
 
         NetworkIdentity ni;
 
@@ -83,6 +85,8 @@ namespace Game.Player.Gunplay
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
 
             anim = GetComponent<Animator>();
+            anim.keepAnimatorControllerStateOnDisable = true;
+
 
             ni = GetComponentInParent<NetworkIdentity>();
 
@@ -104,6 +108,22 @@ namespace Game.Player.Gunplay
                 Debug.LogError("Network Shooting Manager is null in the start!");
             }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
+        }
+
+
+        public void OnEnable()
+        {
+            if (PM != null)
+            {
+                PM.weight = gun.Weight;
+            }
+
+            StartCoroutine(Draw());
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine(Reload());
         }
 
         private void Update()
@@ -429,9 +449,12 @@ namespace Game.Player.Gunplay
             {
                 anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
             }
-
             canCharge = true;
             delay = false;
+            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
+            {
+                StartCoroutine(Reload());
+            }
         }
     }
 }

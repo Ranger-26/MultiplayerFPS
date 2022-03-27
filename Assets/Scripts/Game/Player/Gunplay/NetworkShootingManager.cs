@@ -45,8 +45,12 @@ namespace Game.Player.Gunplay
         public Transform secondarySlot;
 
         public Transform meleeSlot;
+
+        
+        private int id => GetComponent<NetworkGamePlayer>().playerId;
         
         
+        #region UnityCallbacks
         public void Start()
         {
             currentAmmo = curGun.MaxAmmo;
@@ -69,28 +73,6 @@ namespace Game.Player.Gunplay
                 ServerInitGuns();
             }
         }
-
-        [Server]
-        private void ServerInitGuns()
-        {
-            allGuns.Add(WeaponSlot.Primary, GunIDs.None);
-            allGuns.Add(WeaponSlot.Secondary, GunIDs.None);
-            allGuns.Add(WeaponSlot.Melee, GunIDs.None);
-
-            foreach (var gun in GetComponentsInChildren<GunViewModel>(true))
-            {
-                if (GunDatabase.TryGetGun(gun.gunId, out Gun newGun))
-                {
-                    allGuns[newGun.GunSlot] = gun.gunId;
-                    gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
-                }
-            }
-            
-            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
-            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
-            
-            
-        }
         
         private void Update()
         {
@@ -100,8 +82,7 @@ namespace Game.Player.Gunplay
                 CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Secondary : WeaponSlot.Primary);
             }
         }
-
-        private int id => GetComponent<NetworkGamePlayer>().playerId;
+        #endregion
         
         #region ServerShootingLogic
         [Command]
@@ -227,7 +208,28 @@ namespace Game.Player.Gunplay
         #endregion
 
         #region GunSwitchLogic
+        [Server]
+        private void ServerInitGuns()
+        {
+            allGuns.Add(WeaponSlot.Primary, GunIDs.None);
+            allGuns.Add(WeaponSlot.Secondary, GunIDs.None);
+            allGuns.Add(WeaponSlot.Melee, GunIDs.None);
 
+            foreach (var gun in GetComponentsInChildren<GunViewModel>(true))
+            {
+                if (GunDatabase.TryGetGun(gun.gunId, out Gun newGun))
+                {
+                    allGuns[newGun.GunSlot] = gun.gunId;
+                    gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
+                }
+            }
+            
+            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
+            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
+        }
+        
+        
+        
         [Command]
         public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
         {
@@ -328,7 +330,11 @@ namespace Game.Player.Gunplay
         [Server]
         private void ServerSwitchGunSlot(WeaponSlot newSlot)
         {
-            if (isReloading) return;
+            if (isReloading)
+            {
+                StopCoroutine(Reload());
+                isReloading = false;
+            }
             if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
             {
                 ServerCalcAmmo(allGuns[heldWeaponSlot], newGun.UniqueGunID);

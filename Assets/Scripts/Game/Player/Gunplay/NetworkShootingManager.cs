@@ -48,7 +48,8 @@ namespace Game.Player.Gunplay
 
         
         private int id => GetComponent<NetworkGamePlayer>().playerId;
-        
+
+        float reloadTimer;
         
         #region UnityCallbacks
         public void Start()
@@ -80,6 +81,16 @@ namespace Game.Player.Gunplay
             {
                 Debug.Log("Trying to switch gun...");
                 CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Secondary : WeaponSlot.Primary);
+            }
+
+            if (hasAuthority)
+            {
+                reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
+
+                if (reloadTimer == 0f)
+                {
+                    FillMagazine();
+                }
             }
         }
         #endregion
@@ -184,14 +195,23 @@ namespace Game.Player.Gunplay
         {
             if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0) return; 
             isReloading = true;
-            StartCoroutine(Reload());
-        } 
+            Reload();
+        }
         
         [Server]
-        private IEnumerator Reload()
+        private void Reload()
         {
-            yield return new WaitForSeconds(curGun.ReloadTime);
+            reloadTimer = curGun.ReloadTime;
+        }
+
+        [Server]
+        private void FillMagazine()
+        {
+            if (!isReloading)
+                return;
+
             int exchange = curGun.MaxAmmo - currentAmmo;
+
             if (reserveAmmo <= exchange)
             {
                 currentAmmo += reserveAmmo;
@@ -203,6 +223,13 @@ namespace Game.Player.Gunplay
                 reserveAmmo -= exchange;
             }
 
+            isReloading = false;
+        }
+
+        [Server]
+        private void StopReload()
+        {
+            reloadTimer = 0f;
             isReloading = false;
         }
         #endregion
@@ -234,6 +261,7 @@ namespace Game.Player.Gunplay
         public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
         {
             Debug.Log("Calling command...");
+            StopReload();
             allGuns[slot] = newGun;
             RpcAddGunSlot(newGun, slot);
             ServerSwitchGunSlot(slot);
@@ -299,6 +327,7 @@ namespace Game.Player.Gunplay
         [Command]
         private void CmdSwitchGunSlot(WeaponSlot newSlot)
         {
+            StopReload();
             ServerSwitchGunSlot(newSlot);
         }
 

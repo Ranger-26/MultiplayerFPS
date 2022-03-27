@@ -48,12 +48,16 @@ namespace Game.Player.Gunplay
         float recoilFactor;
         float displacementFactor;
         float dropFactor;
+        float lerpFactor;
+
         float spread;
         float moveSpread;
         float horizontalRecoil;
+
         float shootTimer;
+        float reloadTimer;
+        float chamberTimer;
         float chargeupTimer;
-        float lerpFactor;
 
         bool delay;
         bool isSpraying;
@@ -112,7 +116,7 @@ namespace Game.Player.Gunplay
         }
 
 
-        public void OnEnable()
+        private void OnEnable()
         {
             if (PM != null)
             {
@@ -120,11 +124,6 @@ namespace Game.Player.Gunplay
             }
 
             StartCoroutine(Draw());
-        }
-
-        private void OnDisable()
-        {
-            StopCoroutine(Reload());
         }
 
         private void Update()
@@ -208,7 +207,7 @@ namespace Game.Player.Gunplay
 
                 if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
                 {
-                    StartCoroutine(Reload());
+                    Reload();
                 }
             }
 
@@ -228,7 +227,19 @@ namespace Game.Player.Gunplay
 
             transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
-            shootTimer -= Time.deltaTime;
+            shootTimer = Mathf.Clamp(shootTimer - Time.deltaTime, 0f, 60f / gun.RPM);
+            reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, gun.ReloadTime);
+            chamberTimer = Mathf.Clamp(chamberTimer - Time.deltaTime, 0f, gun.DrawTime);
+
+            if (reloadTimer == 0f)
+            {
+                Chamber();
+            }
+
+            if (chamberTimer == 0f)
+            {
+                FinishReload();
+            }
 
             Crosshair.Instance.UpdateError(spread);
 
@@ -280,7 +291,7 @@ namespace Game.Player.Gunplay
 
             if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
             {
-                StartCoroutine(Reload());
+                Reload();
             }
 
             if (!delay && nsm.currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
@@ -408,12 +419,14 @@ namespace Game.Player.Gunplay
             }
         }
 
-        private IEnumerator Reload()
+        private void Reload()
         {
             Debug.Log("Trying to reload...");
 
             delay = true;
             canCharge = false;
+
+            reloadTimer = nsm.curGun.ReloadTime;
 
             Debug.Log("Reloading... ");
 
@@ -423,25 +436,23 @@ namespace Game.Player.Gunplay
             }
 
             nsm.CmdReload();
+        }
 
-            //yield return new WaitUntil(()=>!nsm.isReloading);
-            yield return new WaitForSeconds(nsm.curGun.ReloadTime);
-                
+        private void Chamber()
+        {
+            chamberTimer = gun.DrawTime;
+        }
+
+        private void FinishReload()
+        {
             chargeupTimer = 0f;
-                
+
             if (gun.ChargeupTime > 0f)
             {
                 chargedUp = false;
             }
 
             canCharge = true;
-
-            Debug.Log("Filled Magazine, Chambering... ");
-
-            yield return new WaitForSeconds(gun.DrawTime);
-
-            Debug.Log("Gun Chambered. ");
-
             delay = false;
         }
 
@@ -461,12 +472,9 @@ namespace Game.Player.Gunplay
             {
                 anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
             }
+
             canCharge = true;
             delay = false;
-            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
-            {
-                StartCoroutine(Reload());
-            }
         }
     }
 }

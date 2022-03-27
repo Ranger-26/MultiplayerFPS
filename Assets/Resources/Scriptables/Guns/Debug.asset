@@ -51,7 +51,8 @@ MonoBehaviour:
   Tracer: {fileID: 0}
   AimPunch: 1
   AimPunchDuration: 0.05
-  MaxBacking: 0.2
+  MaxBacking: 0.05
+  BackingMultiplier: 3
   ChargeupSounds:
   - {fileID: 8300000, guid: 1d0f6238ddca17a42a8af609f604419d, type: 3}
   HitSounds:

@@ -10,7 +10,7 @@ namespace Game.Player.Spectating
         public float movementSideMultiplier = 4f;
 
         private string forwardAxis = "Vertical";
-        private string horizontalAxis = "Horizontal";
+        private string horizontalAxis = StringKeys.InputHorizontal;
 
         void Update () 
         {

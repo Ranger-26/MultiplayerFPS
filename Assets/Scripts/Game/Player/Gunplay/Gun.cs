@@ -104,7 +104,9 @@ namespace Game.Player.Gunplay
         [Tooltip("The duration for the camera jump")]
         public float AimPunchDuration = 0.05f;
         [Tooltip("The amount that the view model moves back when spread is increasing")]
-        public float MaxBacking = 0.3f;
+        public float MaxBacking = 0.1f;
+        [Tooltip("The multiplier for the backing speed")]
+        public float BackingMultiplier = 3f;
 
         [Tooltip("Chargeup sounds, a sound in this list will be randomly selected to play when shooting")]
         public AudioClip[] ChargeupSounds;
@@ -156,9 +158,9 @@ namespace Game.Player.Gunplay
         // T SMGs
 
         [Tooltip("Eco SMG")]
-        Bizon, 
+        Bizon,
         [Tooltip("Half Buy SMG")]
-        Vityaz, 
+        Vityaz,
 
         // T Rifles
 

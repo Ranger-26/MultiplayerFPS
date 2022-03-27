@@ -18,10 +18,8 @@ public class Crosshair : MonoBehaviour
     public Color color = new Color(255f, 255f, 255f, 100f);
 
     public float firingErrorMultiplier = 10f;
-    public float movementErrorMultiplier = 10f;
 
     public bool firingError = true;
-    public bool movementError = true;
 
     float startingSize = 25f;
 
@@ -72,12 +70,12 @@ public class Crosshair : MonoBehaviour
         rect.sizeDelta = new Vector2(size, size);
     }
 
-    public void UpdateError(float errorPixelsFire, float errorPixelsMovement)
+    public void UpdateError(float errorPixelsFire)
     {
-        if (!firingError && !movementError)
+        if (!firingError)
             return;
 
-        size = startingSize + errorPixelsFire * firingErrorMultiplier * Convert.ToInt32(firingError) + errorPixelsMovement * movementErrorMultiplier * Convert.ToInt32(movementError);
+        size = startingSize + errorPixelsFire * firingErrorMultiplier * Convert.ToInt32(firingError);
 
         //Debug.Log(size);
 

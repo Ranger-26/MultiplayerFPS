@@ -383,7 +383,6 @@ namespace Game.Player.Gunplay
                 yield return new WaitForFixedUpdate();
             }
         }
-        
 
         private IEnumerator Reload()
         {

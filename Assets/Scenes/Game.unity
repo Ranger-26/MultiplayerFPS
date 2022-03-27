@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 15.574045, g: 19.293215, b: 25.53779, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1712,6 +1712,7 @@ MonoBehaviour:
   color: {r: 255, g: 255, b: 255, a: 100}
   firingErrorMultiplier: 10
   firingError: 1
+  CrosshairParts: []
 --- !u!1001 &320424324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4169,6 +4170,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2784721822809676093, guid: 70b723dcb5ead2b458e73d5d188056da, type: 3}
   m_PrefabInstance: {fileID: 677790990}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &681294456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 681294457}
+  m_Layer: 0
+  m_Name: BulletHoles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &681294457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681294456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6507323, y: 32.832806, z: -85.69504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &691640638
 PrefabInstance:
   m_ObjectHideFlags: 0

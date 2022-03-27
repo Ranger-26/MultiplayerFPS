@@ -46,7 +46,6 @@ namespace Game.Player.Gunplay
 
         public Transform meleeSlot;
 
-        
         private int id => GetComponent<NetworkGamePlayer>().playerId;
 
         float reloadTimer;
@@ -361,7 +360,6 @@ namespace Game.Player.Gunplay
         {
             if (isReloading)
             {
-                StopCoroutine(Reload());
                 isReloading = false;
             }
             if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))

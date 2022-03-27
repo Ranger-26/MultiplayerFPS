@@ -292,6 +292,7 @@ namespace Game.Player.Gunplay
             if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
             {
                 Reload();
+                return;
             }
 
             if (!delay && nsm.currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))

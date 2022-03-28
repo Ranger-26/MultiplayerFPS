@@ -13,7 +13,13 @@ namespace Game.Player.Movement
         public float WalkingSpeed;
         public float NormalSpeed;
 
-        float crouchFactor;
+        [HideInInspector]
+        public float crouchFactor;
+
+        [HideInInspector]
+        public bool isCrouching;
+        [HideInInspector]
+        public bool isWalking;
 
         CharacterController controller;
         PlayerMovement playerMovement;
@@ -41,7 +47,12 @@ namespace Game.Player.Movement
             }
 
             float h = Mathf.Lerp(StandingHeight, CrouchHeight, crouchFactor);
-            controller.height = Mathf.Lerp(controller.height, h, 0.7f);
+            controller.height = h;
+
+            isCrouching = crouchFactor >= 0.8f;
+            isWalking = Input.GetKey(KeyCode.LeftShift);
+
+            playerMovement.canMakeSound = !isCrouching && !isWalking;
         }
     }
 }

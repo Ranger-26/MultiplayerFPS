@@ -11,8 +11,12 @@ namespace Game.Player.Movement
         public float speed = 5f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
+        public float StepDistance = 1.2f;
+
+        public AudioClip[] stepClips;
 
         Vector3 velocity;
+        Vector3 previousStepLocation;
 
         //ground stuff
         public Transform groundCheck;
@@ -20,6 +24,9 @@ namespace Game.Player.Movement
         [HideInInspector]
         public float weight;
         public LayerMask groundMask;
+
+        [HideInInspector]
+        public bool canMakeSound;
 
         float tagging;
 
@@ -30,7 +37,11 @@ namespace Game.Player.Movement
         {
             if (!isLocalPlayer) enabled = false;
 
+            previousStepLocation = transform.position;
+
             LandTagged = true;
+
+            canMakeSound = true;
         }
 
         private void Update()
@@ -40,6 +51,18 @@ namespace Game.Player.Movement
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
+            }
+
+            if (isGrounded)
+            {
+                if (canMakeSound)
+                {
+                    if (Vector3.Distance(previousStepLocation, transform.position) >= StepDistance)
+                    {
+                        previousStepLocation = transform.position;
+                        AudioSystem.PlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
+                    }
+                }
             }
 
             if (Input.GetButtonDown("Jump") && isGrounded)
@@ -58,6 +81,8 @@ namespace Game.Player.Movement
             if (!LandTagged && isGrounded)
             {
                 Tag(0.8f);
+                previousStepLocation = transform.position;
+                AudioSystem.PlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
                 LandTagged = true;
             }
 

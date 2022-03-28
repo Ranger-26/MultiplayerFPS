@@ -563,6 +563,9 @@ MonoBehaviour:
   CrouchSpeed: 2.5
   WalkingSpeed: 4.5
   NormalSpeed: 7
+  crouchFactor: 0
+  isCrouching: 0
+  isWalking: 0
 --- !u!114 &6012355211494385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,12 +584,23 @@ MonoBehaviour:
   speed: 14
   gravity: -17
   jumpHeight: 1
+  StepDistance: 2.7
+  stepClips:
+  - {fileID: 8300000, guid: a9fc33e3623474f41bdae10e1f010fab, type: 3}
+  - {fileID: 8300000, guid: 8fe5c7c7258b9e44fadd541119ebe784, type: 3}
+  - {fileID: 8300000, guid: fc5c5ce24a2026c458533b1c5c709933, type: 3}
+  - {fileID: 8300000, guid: 69c07441b9c77fd41b7b6701d450bea5, type: 3}
+  - {fileID: 8300000, guid: 3176efc718e86c74e98447daba194636, type: 3}
+  - {fileID: 8300000, guid: 33af7dd10fe86b64da64ac6883530676, type: 3}
+  - {fileID: 8300000, guid: cc12b07747e24b64caff3aca0bef00ef, type: 3}
+  - {fileID: 8300000, guid: bb002fada44585b49a8f2a6d18fad3e0, type: 3}
   groundCheck: {fileID: 1769910894114916383}
   groundDistance: 0.4
   weight: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+  canMakeSound: 0
 --- !u!114 &807805569061322819
 MonoBehaviour:
   m_ObjectHideFlags: 0

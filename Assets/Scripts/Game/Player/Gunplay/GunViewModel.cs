@@ -92,7 +92,6 @@ namespace Game.Player.Gunplay
             anim = GetComponent<Animator>();
             anim.keepAnimatorControllerStateOnDisable = true;
 
-
             ni = GetComponentInParent<NetworkIdentity>();
 
             if (gun.ChargeupTime <= 0f)
@@ -242,13 +241,6 @@ namespace Game.Player.Gunplay
             }
 
             Crosshair.Instance.UpdateError(spread);
-
-            // Debug
-
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                StartCoroutine(Draw());
-            }
         }
 
         private void FixedUpdate()
@@ -467,6 +459,11 @@ namespace Game.Player.Gunplay
             {
                 anim.Play(StringKeys.GunDrawAnimation, -1, 0f);
             }
+
+            spread = gun.StartingSpread;
+
+            displacementFactor = 0f;
+            recoilFactor = 0f;
 
             yield return new WaitForSeconds(gun.DrawTime);
 

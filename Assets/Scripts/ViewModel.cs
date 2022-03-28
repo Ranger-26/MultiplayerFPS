@@ -7,6 +7,7 @@ public class ViewModel : MonoBehaviour
 
     private void Awake()
     {
+
     }
 
     private void Start()

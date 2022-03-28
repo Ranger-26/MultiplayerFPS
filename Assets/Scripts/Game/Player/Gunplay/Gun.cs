@@ -55,6 +55,9 @@ namespace Game.Player.Gunplay
         public float Displacement = 1f;
         [Tooltip("Displacement cap for shooting")]
         public float MaxDisplacement = 4f;
+        [Tooltip("Multiplier applied to spread when crouching")]
+        [Range(0f, 1f)]
+        public float CrouchingMultiplier = 0.5f;
 
         [Tooltip("How many rounds must be shot before starting to sway left and right, displacement is applied at 25% of this value")]
         public int SwayAfterRound = 8;

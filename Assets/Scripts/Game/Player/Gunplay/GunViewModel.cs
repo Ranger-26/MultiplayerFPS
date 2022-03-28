@@ -31,6 +31,7 @@ namespace Game.Player.Gunplay
 
         PlayerMovement PM;
         PlayerLook PL;
+        PlayerCrouch PC;
 
         Transform cam;
         Transform firingPoint;
@@ -86,6 +87,7 @@ namespace Game.Player.Gunplay
 
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
+            PC = GetComponentInParent<PlayerCrouch>();
             nsm = GetComponentInParent<NetworkShootingManager>();
             cam = GetComponentInParent<Camera>().transform;
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
@@ -288,10 +290,7 @@ namespace Game.Player.Gunplay
             if (!ni.hasAuthority) return;
 
             if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0 && !isSpraying)
-            {
-                Reload();
                 return;
-            }
 
             if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {

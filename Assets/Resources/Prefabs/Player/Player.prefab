@@ -366,12 +366,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratio: {x: 16, y: 9}
-  forceRatioOnAwake: 1
+  forceRatioOnAwake: 0
   listenForWindowChanges: 1
   createCameraForLetterBoxRendering: 1
-  findCamerasAutomatically: 1
+  findCamerasAutomatically: 0
   letterBoxCameraColor: {r: 0, g: 0, b: 0, a: 1}
-  cameras: []
+  cameras:
+  - camera: {fileID: 5789010012695376352}
+    anchor: 0
+    vectorAnchor: {x: 0, y: 0}
   letterBoxCamera: {fileID: 0}
 --- !u!114 &6336910330133595916
 MonoBehaviour:

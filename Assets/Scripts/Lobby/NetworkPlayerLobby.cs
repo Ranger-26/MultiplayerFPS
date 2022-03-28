@@ -39,17 +39,6 @@ namespace Lobby
             id = Room.roomSlots.Count + 1;
         }
 
-        public override bool Equals(object other)
-        {
-            if (other is NetworkPlayerLobby)
-            {
-                NetworkPlayerLobby plr = (NetworkPlayerLobby) other;
-                return plr.id == id;
-            }
-
-            return false;
-        }
-
         public override string ToString()
         {
             return $"Name {playerName}, Id: {id}";

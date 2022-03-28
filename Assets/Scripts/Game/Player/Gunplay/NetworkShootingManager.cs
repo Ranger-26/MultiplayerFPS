@@ -43,7 +43,8 @@ namespace Game.Player.Gunplay
 
         private int id => GetComponent<NetworkGamePlayer>().playerId;
 
-        float reloadTimer;
+        [SyncVar]
+        private float reloadTimer;
         
         #region UnityCallbacks
         public void Start()
@@ -87,23 +88,17 @@ namespace Game.Player.Gunplay
                 CmdSwitchGunSlot(WeaponSlot.Melee);
             }
 
-            if (hasAuthority)
+
+            if (isServer)
             {
                 reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
-
-                if (reloadTimer == 0f)
-                {
-                    CmdFillMagazine();
-                }
+            }
+            
+            if (reloadTimer == 0f && isServer)
+            {
+                FillMagazine();
             }
         }
-
-        [Command]
-        private void CmdFillMagazine()
-        {
-            FillMagazine();
-        }
-
         #endregion
         
         #region ServerShootingLogic

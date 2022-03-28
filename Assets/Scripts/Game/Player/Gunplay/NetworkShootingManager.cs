@@ -98,6 +98,7 @@ namespace Game.Player.Gunplay
             }
         }
 
+        [Command]
         private void CmdFillMagazine()
         {
             FillMagazine();
@@ -384,6 +385,7 @@ namespace Game.Player.Gunplay
 
         private void UpdateAmmoUI(int oldValue, int newValue)
         {
+            if (!hasAuthority) return;
             GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
         }
 

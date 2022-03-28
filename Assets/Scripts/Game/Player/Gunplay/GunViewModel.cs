@@ -67,6 +67,8 @@ namespace Game.Player.Gunplay
         bool chargeupSound;
         bool canCharge;
         bool shootQueue;
+        bool chambered;
+        bool finishedReload;
 
         public GunIDs gunId;
         
@@ -100,6 +102,8 @@ namespace Game.Player.Gunplay
             }
 
             canCharge = true;
+            chambered = true;
+            finishedReload = true;
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
@@ -233,11 +237,11 @@ namespace Game.Player.Gunplay
             if (reloadTimer == 0f)
             {
                 Chamber();
-            }
 
-            if (reloadTimer == 0f && chamberTimer == 0f)
-            {
-                FinishReload();
+                if (chamberTimer == 0f)
+                {
+                    FinishReload();
+                }
             }
 
             Crosshair.Instance.UpdateError(spread);
@@ -419,6 +423,8 @@ namespace Game.Player.Gunplay
 
             delay = true;
             canCharge = false;
+            chambered = false;
+            finishedReload = false;
 
             reloadTimer = nsm.curGun.ReloadTime;
 
@@ -434,26 +440,35 @@ namespace Game.Player.Gunplay
 
         private void Chamber()
         {
-            chamberTimer = gun.DrawTime;
+            if (!chambered)
+            {
+                chamberTimer = gun.DrawTime;
+                chambered = true;
+            }
         }
 
         private void FinishReload()
         {
-            chargeupTimer = 0f;
-
-            if (gun.ChargeupTime > 0f)
+            if (!finishedReload)
             {
-                chargedUp = false;
-            }
+                chargeupTimer = 0f;
 
-            canCharge = true;
-            delay = false;
+                if (gun.ChargeupTime > 0f)
+                {
+                    chargedUp = false;
+                }
+
+                canCharge = true;
+                finishedReload = true;
+                delay = false;
+            }
         }
 
         private IEnumerator Draw()
         {
             delay = true;
             canCharge = false;
+            chambered = true;
 
             if (anim != null)
             {

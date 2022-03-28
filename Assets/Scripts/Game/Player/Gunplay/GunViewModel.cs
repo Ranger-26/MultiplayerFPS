@@ -422,6 +422,7 @@ namespace Game.Player.Gunplay
 
         private void Reload()
         {
+            if (nsm.isReloading) return;
             Debug.Log("Trying to reload...");
 
             delay = true;

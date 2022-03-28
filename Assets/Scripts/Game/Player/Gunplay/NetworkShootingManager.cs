@@ -88,10 +88,16 @@ namespace Game.Player.Gunplay
 
                 if (reloadTimer == 0f)
                 {
-                    FillMagazine();
+                    CmdFillMagazine();
                 }
             }
         }
+
+        private void CmdFillMagazine()
+        {
+            FillMagazine();
+        }
+
         #endregion
         
         #region ServerShootingLogic
@@ -192,7 +198,7 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdReload()
         {
-            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0) return; 
+            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0 || isReloading) return; 
             isReloading = true;
             Reload();
         }
@@ -358,10 +364,8 @@ namespace Game.Player.Gunplay
         [Server]
         private void ServerSwitchGunSlot(WeaponSlot newSlot)
         {
-            if (isReloading)
-            {
-                isReloading = false;
-            }
+            isReloading = false;
+
             if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
             {
                 ServerCalcAmmo(allGuns[heldWeaponSlot], newGun.UniqueGunID);

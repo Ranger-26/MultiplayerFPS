@@ -480,6 +480,7 @@ namespace Game.Player.Gunplay
 
             displacementFactor = 0f;
             recoilFactor = 0f;
+            dropFactor = 0f;
 
             yield return new WaitForSeconds(gun.DrawTime);
 

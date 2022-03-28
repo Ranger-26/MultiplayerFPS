@@ -147,7 +147,7 @@ namespace Game.Player.Gunplay
 
                 Shoot();
 
-                if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.1f && shootTimer > 0f)
+                if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.2f && shootTimer > 0f)
                 {
                     shootQueue = true;
                 }

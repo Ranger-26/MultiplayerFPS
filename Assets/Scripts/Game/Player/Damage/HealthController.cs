@@ -29,7 +29,7 @@ namespace Game.Player.Damage
         [ClientRpc]
         public void RpcDamagePlayer()
         {
-            //play sound maybe?
+            // play sound maybe?
         }
 
         [TargetRpc]

@@ -20,7 +20,6 @@ namespace Game.Player.Movement
         {
             cam = transform.GetChild(0).GetChild(0).GetComponent<Camera>();
 
-
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

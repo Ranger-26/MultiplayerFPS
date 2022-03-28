@@ -10,6 +10,8 @@ namespace Game.Player
         [SerializeField]
         private Text _healthText;
         [SerializeField]
+        private Text _ammoText;
+        [SerializeField]
         private GameObject Menu;
 
         [SerializeField]
@@ -55,6 +57,8 @@ namespace Game.Player
         }
 
         public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();
+
+        public void UpdateAmmoUI(int currentAmmo, int reserveAmmo) => _ammoText.text = ((currentAmmo >= 200000) ? "¡Þ" : currentAmmo.ToString()) + " / " + ((reserveAmmo >= 200000) ? "¡Þ" : reserveAmmo.ToString());
 
         public void UpdateUiTimer(int time, bool shouldDisable = false)
         {

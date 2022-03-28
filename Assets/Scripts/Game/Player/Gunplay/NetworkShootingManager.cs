@@ -5,13 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Game.Player.Damage;
 using Game.Player.Gunplay.IdentifierComponents;
-using Game.Player.Movement;
-using Lobby;
 using Mirror;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.VFX;
 
 namespace Game.Player.Gunplay
 {
@@ -30,9 +25,9 @@ namespace Game.Player.Gunplay
 
 
         [Header("Ammo info")]
-        [SyncVar]
+        [SyncVar(hook = nameof(UpdateAmmoUI))]
         public int currentAmmo;
-        [SyncVar]
+        [SyncVar(hook = nameof(UpdateAmmoUI))]
         public int reserveAmmo;
         [SyncVar] 
         public bool isReloading = false;
@@ -384,8 +379,17 @@ namespace Game.Player.Gunplay
             heldWeaponSlot = newSlot;
         }
         #endregion
+
+        #region AmmoText
+
+        private void UpdateAmmoUI(int oldValue, int newValue)
+        {
+            GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
+        }
+
+        #endregion
     }
-    
+
     public struct GunAmmo
     {
         public int currentAmmo;

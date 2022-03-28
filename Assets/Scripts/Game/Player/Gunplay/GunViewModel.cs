@@ -235,7 +235,7 @@ namespace Game.Player.Gunplay
                 Chamber();
             }
 
-            if (chamberTimer == 0f)
+            if (reloadTimer == 0f && chamberTimer == 0f)
             {
                 FinishReload();
             }
@@ -281,13 +281,13 @@ namespace Game.Player.Gunplay
         {
             if (!ni.hasAuthority) return;
 
-            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0)
+            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0 && !isSpraying)
             {
                 Reload();
                 return;
             }
 
-            if (!delay && nsm.currentAmmo > 0 && shootTimer <= 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
+            if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
                 shootTimer = 60f / gun.RPM;
 

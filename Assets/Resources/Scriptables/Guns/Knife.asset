@@ -38,9 +38,9 @@ MonoBehaviour:
   HasScope: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
-  ReloadTime: 0
+  ReloadTime: 0.01
   MaxAmmo: 2147483647
-  ReserveAmmo: 2147483647
+  ReserveAmmo: 0
   HitLayers:
     serializedVersion: 2
     m_Bits: 65

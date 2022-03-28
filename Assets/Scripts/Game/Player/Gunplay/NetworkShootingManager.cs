@@ -76,10 +76,20 @@ namespace Game.Player.Gunplay
         
         private void Update()
         {
-            if (hasAuthority && Input.GetKeyDown(KeyCode.Mouse2))
+            if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Debug.Log("Trying to switch gun...");
-                CmdSwitchGunSlot(heldWeaponSlot == WeaponSlot.Primary ? WeaponSlot.Secondary : WeaponSlot.Primary);
+                Debug.Log("Trying to switch to Primary");
+                CmdSwitchGunSlot(WeaponSlot.Primary);
+            }
+            else if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("Trying to switch to Secondary");
+                CmdSwitchGunSlot(WeaponSlot.Secondary);
+            }
+            else if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Debug.Log("Trying to switch to Melee");
+                CmdSwitchGunSlot(WeaponSlot.Melee);
             }
 
             if (hasAuthority)

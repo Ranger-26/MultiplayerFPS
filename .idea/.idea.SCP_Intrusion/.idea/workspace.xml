@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="" />
+    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/BidirectionalDictionary.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/BidirectionalDictionary.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/FizzySteamworks.asmdef" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/FizzySteamworks.asmdef.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/FizzySteamworks.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/FizzySteamworks.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/IClient.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/IClient.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/IServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/IServer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LICENSE.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyClient.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyClient.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyCommon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyCommon.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/LegacyServer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextClient.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextClient.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextCommon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextCommon.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/NextServer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/README.md.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Mirror/Runtime/Transport/FizzySteamworks/package.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerProfileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerProfileManager.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -175,7 +209,7 @@
       <workItem from="1648419736660" duration="3641000" />
       <workItem from="1648505488575" duration="2096000" />
       <workItem from="1648518529522" duration="260000" />
-      <workItem from="1648518911084" duration="281000" />
+      <workItem from="1648518911084" duration="654000" />
     </task>
     <servers />
   </component>

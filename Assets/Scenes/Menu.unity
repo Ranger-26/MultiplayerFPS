@@ -2673,6 +2673,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 3
   m_AspectRatio: 1.777779
+--- !u!1 &1634428700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3043139860209545113, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+  m_PrefabInstance: {fileID: 3043139860385302055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1634428703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634428700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
 --- !u!1 &1745870017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3633,6 +3654,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 1634428703}
     - target: {fileID: 6003513485748147774, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3644,7 +3669,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
   m_PrefabInstance: {fileID: 3043139860385302055}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1634428700}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b811e3fbabd4f6445a278572c9b5a0c7, type: 3}

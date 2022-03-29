@@ -1,5 +1,4 @@
 using Steamworks;
-using Steamworks;
 using UnityEngine;
 
 public static class PlayerProfileManager

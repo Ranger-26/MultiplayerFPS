@@ -218,8 +218,8 @@ namespace Game.Player.Gunplay
                 }
             }
 
-            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * System.Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxisRaw(StringKeys.InputVertical) * System.Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = Input.GetAxisRaw(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
 
             lerpFactor = Mathf.Clamp01(
                 lerpFactor + Mathf.Abs(x * Time.deltaTime * gun.BackingMultiplier) + Mathf.Abs(z * Time.deltaTime * gun.BackingMultiplier)
@@ -261,7 +261,7 @@ namespace Game.Player.Gunplay
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((!delay && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (nsm.currentAmmo == 0))
+            if ((shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (nsm.currentAmmo == 0))
             {
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);

@@ -16,7 +16,7 @@ MonoBehaviour:
   HeadMultiplier: 2
   LimbMultiplier: 0.5
   Range: 2
-  RPM: 130
+  RPM: 120
   ChargeupTime: 0
   Tagging: 1
   Weight: 0
@@ -33,6 +33,7 @@ MonoBehaviour:
   RecoilDecay: 1000
   Displacement: 0
   MaxDisplacement: 0
+  CrouchingMultiplier: 0.5
   SwayAfterRound: 1
   SwayStartRight: 0
   HasScope: 0

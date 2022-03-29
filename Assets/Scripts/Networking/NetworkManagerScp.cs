@@ -87,6 +87,5 @@ namespace Networking
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
             return gamePlayer;
         }
-        
     }
 }

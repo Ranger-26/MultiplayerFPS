@@ -33,6 +33,7 @@ namespace Game.GameLogic
             NetworkGamePlayer playerNew = player.GetComponent<NetworkGamePlayer>();
             playerNew.playerName = ply.playerName;
             playerNew.playerId = ply.playerId;
+            playerNew.role = role;
             return player;
         }
         #endregion
@@ -41,6 +42,7 @@ namespace Game.GameLogic
         {
             Dictionary<NetworkPlayerLobby, NetworkGamePlayer> newDict =
                 new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
+            SpawnManager.Instance.ResetSpawnPoints();
             foreach (var player in players)
             {
                 GameObject newPlayer = CreateNewPlayer(player.Value.role, player.Value);

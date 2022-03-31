@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KillBanner : MonoBehaviour
 {
@@ -11,9 +13,16 @@ public class KillBanner : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void Trigger()
+    public void Trigger(bool head)
     {
-        anim.Play(StringKeys.KillBannerAnimation, -1, 0f);
+        if (head)
+        {
+            anim.Play(StringKeys.KillBannerHeadAnimation, -1, 0f);
+        }
+        else
+        {
+            anim.Play(StringKeys.KillBannerAnimation, -1, 0f);
+        }
     }
 
     private void Update()
@@ -22,7 +31,12 @@ public class KillBanner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Trigger();
+            Trigger(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Trigger(true);
         }
     }
 }

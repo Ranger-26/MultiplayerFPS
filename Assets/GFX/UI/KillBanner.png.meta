@@ -1,7 +1,16 @@
 fileFormatVersion: 2
 guid: fad80a865ce799848bf46b88e61dff2d
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2885765962435716573
+    second: KillBanner_0
+  - first:
+      213: -6134523780156462019
+    second: KillBanner_1
+  - first:
+      213: -2848980292439250
+    second: KillBanner_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +50,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -89,7 +98,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: KillBanner_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4450
+        width: 2225
+        height: 2225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32a1b188523b3f7d0800000000000000
+      internalID: -2885765962435716573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KillBanner_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2225
+        width: 2225
+        height: 2225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c6691cf1bcddaa0800000000000000
+      internalID: -6134523780156462019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KillBanner_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2225
+        height: 2225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2372b51ed0e5fff0800000000000000
+      internalID: -2848980292439250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

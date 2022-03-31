@@ -6,6 +6,8 @@ public static class StringKeys
     public static string GunIdleAnimation = "Idle";
     public static string GunDrawAnimation = "Draw";
 
+    public static string KillBannerAnimation = "Trigger";
+
     public static string InputHorizontal = "Horizontal";
     public static string InputVertical = "Vertical";
 

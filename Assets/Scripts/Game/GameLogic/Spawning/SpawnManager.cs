@@ -15,7 +15,12 @@ namespace Game.GameLogic.Spawning
         [SerializeField]
         private List<Transform> _chaosSpawn = new List<Transform>();
 
-        private List<Transform> _usedPositions = new List<Transform>();
+        [SerializeField]
+        private List<Transform> _curChaosSpawn = new List<Transform>();
+        
+        [SerializeField]
+        private List<Transform> _curMtfSpawn = new List<Transform>();
+        
         private void Awake()
         {
             if (Instance != null)
@@ -35,9 +40,11 @@ namespace Game.GameLogic.Spawning
             {
                 case SpawnType.Mtf:
                     _mtfSpawn.Add(point);
+                    _curMtfSpawn.Add(point);
                     break;
                 case SpawnType.Chaos:
                     _chaosSpawn.Add(point);
+                    _curChaosSpawn.Add(point);
                     break;
                 default:
                     return;
@@ -50,9 +57,11 @@ namespace Game.GameLogic.Spawning
             {
                 case SpawnType.Mtf:
                     _mtfSpawn.Remove(point);
+                    _curMtfSpawn.Remove(point);
                     break;
                 case SpawnType.Chaos:
                     _chaosSpawn.Remove(point);
+                    _curChaosSpawn.Remove(point);
                     break;
                 default:
                     return;
@@ -61,21 +70,35 @@ namespace Game.GameLogic.Spawning
         
         private Transform GetRandomSpawn(SpawnType type)
         {
+            Transform transform;
             if (type == SpawnType.Mtf)
             {
-                int index = UnityEngine.Random.Range(0, _mtfSpawn.Count - 1);
-                _usedPositions.Add(_mtfSpawn[index]);
-                Debug.Log($"Getting random spawn point of {_mtfSpawn[index].position}");
-                return _mtfSpawn[index];
+                int index = UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1);
+                Debug.Log($"Getting random spawn point of {_curMtfSpawn[index].position}");
+                transform = _curMtfSpawn[index]; 
+                _curMtfSpawn.Remove(_curMtfSpawn[index]);
             }
-            
-            int indexChaos = UnityEngine.Random.Range(0, _chaosSpawn.Count - 1);
-            Debug.Log($"Getting random spawn point of {_chaosSpawn[indexChaos].position}");
-            _usedPositions.Add(_chaosSpawn[indexChaos]);
-            return _chaosSpawn[indexChaos];
+            else
+            {
+                int indexChaos = UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1);
+                Debug.Log($"Getting random spawn point of {_curChaosSpawn[indexChaos].position}");
+                transform = _curChaosSpawn[indexChaos];
+                _curChaosSpawn.Remove(_curChaosSpawn[indexChaos]);
+            }
+
+            return transform;
         }
 
         public Transform GetRandomSpawn(Role role) =>
             GetRandomSpawn(role == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
+
+        public void ResetSpawnPoints()
+        {
+            Debug.Log("Reseting spawn points..");
+            _curChaosSpawn.Clear();
+            _curMtfSpawn.Clear();
+            _curMtfSpawn.AddRange(_mtfSpawn);
+            _curChaosSpawn.AddRange(_chaosSpawn);
+        }
     }
 }

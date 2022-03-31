@@ -133,8 +133,6 @@ namespace Game.Player.Gunplay
 
         private void Update()
         {
-            Debug.Log(chamberTimer);
-
             if (nsm == null)
             {
                 nsm = GetComponentInParent<NetworkShootingManager>();

@@ -47,6 +47,7 @@ namespace Game.Player.Damage
             Debug.Log($"Player {GetComponent<NetworkGamePlayer>().playerId} died!");
             deadPlayer.GetComponent<NetworkGamePlayer>().playerName = GetComponent<NetworkGamePlayer>().playerName;
             deadPlayer.GetComponent<NetworkGamePlayer>().playerId = GetComponent<NetworkGamePlayer>().playerId;
+            deadPlayer.GetComponent<NetworkGamePlayer>().role = GetComponent<NetworkGamePlayer>().role;
             deadPlayer.GetComponent<NetworkGamePlayer>().isSpectating = true;
             NetworkServer.Spawn(deadPlayer);
             GameObject rag = Instantiate(NetworkManagerScp.Instance.ragDoll, transform.position, Quaternion.identity);

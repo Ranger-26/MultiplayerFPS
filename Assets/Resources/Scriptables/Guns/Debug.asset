@@ -33,6 +33,7 @@ MonoBehaviour:
   RecoilDecay: 1
   Displacement: 1
   MaxDisplacement: 5
+  CrouchingMultiplier: 0.5
   SwayAfterRound: 7
   SwayStartRight: 0
   HasScope: 0
@@ -60,6 +61,6 @@ MonoBehaviour:
   ShootSounds:
   - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
   SoundMaxDistance: 100
-  SoundVolume: 2
+  SoundVolume: 1
   SoundPriority: 128
   UniqueGunID: 1

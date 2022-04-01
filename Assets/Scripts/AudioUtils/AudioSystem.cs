@@ -20,6 +20,7 @@ namespace AudioUtils
             au.spatialBlend = _spatialBlend;
             au.priority = _priority;
             des.Timer = _sound.length + 1f;
+            au.rolloffMode = AudioRolloffMode.Linear;
             au.Play();
         }
 
@@ -38,6 +39,7 @@ namespace AudioUtils
             au.spatialBlend = _spatialBlend;
             au.priority = _priority;
             des.Timer = _sound.length + 1f;
+            au.rolloffMode = AudioRolloffMode.Linear;
             au.Play();
         }
         

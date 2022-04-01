@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/AudioClips.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes/CustomMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes/CustomMessageHandler.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioMessage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioMessage.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkHandlerRegistration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkHandlerRegistration.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/AudioClips/AudioClip_Makarov.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/AudioClips/AudioClip_Makarov.asset.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioId.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/NetworkManagerScp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/NetworkManagerScp.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +189,8 @@
       <workItem from="1648770533116" duration="1290000" />
       <workItem from="1648784580319" duration="1271000" />
       <workItem from="1648785954733" duration="226000" />
-      <workItem from="1648792803044" duration="1138000" />
+      <workItem from="1648792803044" duration="2285000" />
+      <workItem from="1648837108317" duration="1584000" />
     </task>
     <servers />
   </component>

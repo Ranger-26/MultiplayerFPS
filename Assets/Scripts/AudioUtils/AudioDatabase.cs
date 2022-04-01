@@ -47,16 +47,5 @@ namespace AudioUtils
             }
             return idsToAudio[id];
         }
-        
-        public void OnClientReceiveAudioMessage(AudioMessage message)
-        {
-            AudioDatabase.Instance.TryGetClip(message.id).AudioClip.PlaySound(message.position, message.maxDistance, message.volume,
-                message.pitch, message.spatialBlend, message.priority);
-        }
-        
-        public void OnServerRecieveAudioMessage(AudioMessage message)
-        {
-            NetworkServer.SendToAll(message);
-        }
     }
 }

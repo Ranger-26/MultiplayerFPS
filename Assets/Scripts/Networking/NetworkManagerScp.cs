@@ -1,7 +1,9 @@
+using System;
 using Mirror;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using AudioUtils;
 using Game.GameLogic;
 using Game.GameLogic.PlayerManagment;
 using Game.GameLogic.Spawning;
@@ -23,6 +25,15 @@ namespace Networking
         public GameObject deadPlayerPrefab;
 
         public GameObject ragDoll;
+
+        public static event Action OnClientJoin;
+        
+        public override void OnClientConnect()
+        {
+            base.OnClientConnect();
+            OnClientJoin?.Invoke();
+        }
+        
         public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnection conn)
         {
             GameObject roomPlayer = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);

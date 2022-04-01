@@ -1,3 +1,5 @@
+using Mirror;
+using Networking;
 using UnityEngine;
 
 namespace AudioUtils
@@ -38,6 +40,31 @@ namespace AudioUtils
             des.Timer = _sound.length + 1f;
             au.Play();
         }
+        
+        public static void OnClientReceiveAudioMessage(AudioMessage message)
+        { 
+            AudioDatabase.Instance.TryGetClip(message.id).AudioClip.PlaySound(message.position, message.maxDistance, message.volume,
+                message.pitch, message.spatialBlend, message.priority);
+        }
+        
+        public static void OnServerRecieveAudioMessage(NetworkConnection conn, AudioMessage message)
+        {
+            NetworkServer.SendToAll(message, Channels.Unreliable);
+        }
+        
+        public static void RegisterHandlers()
+        {
+            Debug.Log("Registered Audio Network Handlers!");
+            NetworkClient.RegisterHandler<AudioMessage>(OnClientReceiveAudioMessage);
+            NetworkServer.RegisterHandler<AudioMessage>(OnServerRecieveAudioMessage);
+        }
+
+        [RuntimeInitializeOnLoadMethod]
+        public static void Init()
+        {
+            NetworkManagerScp.OnClientJoin += RegisterHandlers;
+        }
+        
     }
 }
 

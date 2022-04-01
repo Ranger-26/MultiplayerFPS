@@ -340,7 +340,18 @@ namespace Game.Player.Gunplay
 
             if (gun.ShootSounds.Length != 0)
             {
-                AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
+                AudioMessage message = new AudioMessage()
+                {
+                    id = AudioDatabase.Instance.clipsToIds[gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)]],
+                    position = cam.position,
+                    maxDistance = gun.SoundMaxDistance,
+                    volume = gun.SoundVolume,
+                    pitch = 1f,
+                    spatialBlend = 1.1f,
+                    priority = gun.SoundPriority
+                };
+                NetworkClient.Send(message);
+                //AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
             }
         }
 

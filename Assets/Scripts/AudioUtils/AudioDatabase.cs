@@ -9,6 +9,9 @@ namespace AudioUtils
     {
         private Dictionary<AudioId, NetworkAudioClip> idsToAudio = new Dictionary<AudioId, NetworkAudioClip>();
 
+        public Dictionary<AudioClip, AudioId> clipsToIds = new Dictionary<AudioClip, AudioId>();
+
+
         public static AudioDatabase Instance;
         private void Awake()
         {
@@ -30,10 +33,11 @@ namespace AudioUtils
 
         public void LoadClips()
         {
-            NetworkAudioClip[] clips = Resources.LoadAll<NetworkAudioClip>("AudioClips");
+            NetworkAudioClip[] clips = Resources.LoadAll<NetworkAudioClip>("Scriptables/AudioClips");
             foreach (var clip in clips)
             {
                 idsToAudio.Add(clip.AudioId, clip);
+                clipsToIds.Add(clip.AudioClip, clip.AudioId);
             }
             Debug.Log($"Loaded {clips.Length} clips!");
         }

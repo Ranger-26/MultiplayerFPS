@@ -22,10 +22,10 @@ MonoBehaviour:
   Weight: 0.1
   BulletCount: 1
   GunFiringMode: 1
-  Spread: 2
+  Spread: 2.5
   MovementSpread: 1
-  MaxSpread: 4
-  MaxMovementSpread: 13
+  MaxSpread: 5
+  MaxMovementSpread: 15
   StartingSpread: 0.2
   Recoil: 1
   HorizontalRecoil: 1

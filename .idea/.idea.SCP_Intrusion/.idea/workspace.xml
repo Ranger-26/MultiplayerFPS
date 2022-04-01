@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/NetworkAudioClip.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/NetworkAudioClip.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/com.rlabrecque.steamworks.net/Editor/RedistCopy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/com.rlabrecque.steamworks.net/Editor/RedistCopy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioSystem.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioSystem.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/GunViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Movement/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Movement/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

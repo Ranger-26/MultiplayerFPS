@@ -1,6 +1,7 @@
 using System;
 using Game.Player.Movement;
 using System.Collections;
+using AudioUtils;
 using Game.Player.Gunplay.IdentifierComponents;
 using UnityEngine;
 using UnityEngine.VFX;

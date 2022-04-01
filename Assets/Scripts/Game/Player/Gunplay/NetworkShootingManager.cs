@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using AudioUtils;
 using Game.Player.Damage;
 using Game.Player.Gunplay.IdentifierComponents;
 using Mirror;

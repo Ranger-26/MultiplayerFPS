@@ -2673,6 +2673,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 3
   m_AspectRatio: 1.777779
+--- !u!114 &1558183042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3043139860209545190, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+  m_PrefabInstance: {fileID: 3043139860385302055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1745870017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3633,6 +3644,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 1558183042}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
 --- !u!114 &3043139860385302056 stripped

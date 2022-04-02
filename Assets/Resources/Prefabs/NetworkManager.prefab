@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3043139860209545112}
   - component: {fileID: 3043139860209545189}
   - component: {fileID: 3043139860209545190}
+  - component: {fileID: 1506649697}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   serverTickRate: 64
   offlineScene: Assets/Scenes/Menu.unity
   onlineScene: Assets/Scenes/Lobby.unity
-  transport: {fileID: 3043139860209545190}
+  transport: {fileID: 1506649697}
   networkAddress: localhost
   maxConnections: 10
   authenticator: {fileID: 0}
@@ -59,11 +60,11 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
+  - {fileID: 2286638164126399630, guid: fd35ef4923df4334185dae2f55d5fa9b, type: 3}
   - {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   - {fileID: 2681812053718918600, guid: fbdebcee09dac4d4691e08a8c3a32f8e, type: 3}
   - {fileID: 2760846970382974809, guid: 7a2919b0af7182f48a272dbc2fc21ac7, type: 3}
   - {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
-  - {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
   showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 2018583103078967544, guid: 6ac08be6da469454f99ea179110b73b9, type: 3}
@@ -106,3 +107,19 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
+--- !u!114 &1506649697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043139860209545113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1

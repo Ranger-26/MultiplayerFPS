@@ -48,7 +48,7 @@ MonoBehaviour:
   GunSlot: 2
   DrawTime: 0.58
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
-  HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  HitDecal: {fileID: 2286638164126399630, guid: fd35ef4923df4334185dae2f55d5fa9b, type: 3}
   Tracer: {fileID: 0}
   AimPunch: 0.01
   AimPunchDuration: 0.01

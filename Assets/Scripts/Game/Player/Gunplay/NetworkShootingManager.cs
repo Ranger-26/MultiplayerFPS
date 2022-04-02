@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 using AudioUtils;
 using Game.Player.Damage;
 using Game.Player.Gunplay.IdentifierComponents;
 using Mirror;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Player.Gunplay
@@ -18,7 +16,7 @@ namespace Game.Player.Gunplay
 
         //[SyncVar] public GunIDs curGunId;
         [SyncVar(hook = nameof(OnCurWeaponSlotChanged))] public WeaponSlot heldWeaponSlot = WeaponSlot.Primary;
-        
+
         private readonly SyncDictionary<WeaponSlot, GunIDs> allGuns = new SyncDictionary<WeaponSlot, GunIDs>();
 
         [SerializeField]
@@ -30,12 +28,12 @@ namespace Game.Player.Gunplay
         public int currentAmmo;
         [SyncVar(hook = nameof(UpdateAmmoUI))]
         public int reserveAmmo;
-        [SyncVar] 
+        [SyncVar]
         public bool isReloading = false;
 
-        private readonly SyncDictionary<GunIDs, GunAmmo> gunsToAmmo = new SyncDictionary<GunIDs, GunAmmo>(); 
+        private readonly SyncDictionary<GunIDs, GunAmmo> gunsToAmmo = new SyncDictionary<GunIDs, GunAmmo>();
 
-        [Header("Weapon Holder Transforms")] 
+        [Header("Weapon Holder Transforms")]
         public Transform primarySlot;
 
         public Transform secondarySlot;
@@ -46,7 +44,7 @@ namespace Game.Player.Gunplay
 
         [SyncVar]
         private float reloadTimer;
-        
+
         #region UnityCallbacks
         public void Start()
         {
@@ -71,7 +69,7 @@ namespace Game.Player.Gunplay
             }
             GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
         }
-        
+
         private void Update()
         {
             if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha1))
@@ -95,14 +93,14 @@ namespace Game.Player.Gunplay
             {
                 reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
             }
-            
+
             if (reloadTimer == 0f && isServer)
             {
                 FillMagazine();
             }
         }
         #endregion
-        
+
         #region ServerShootingLogic
         [Command]
         public void CmdShoot(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
@@ -120,45 +118,52 @@ namespace Game.Player.Gunplay
         [Server]
         private void ServerShoot(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
         {
-            RaycastHit _hit;
-            if (Physics.Raycast(start, forward, out _hit, curGun.Range, curGun.HitLayers))
+            RaycastHit[] _hit = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers);
+
+            if (_hit.Length != 0)
             {
-                Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
-                // Debug.Log($"Server: {start}, {forward}, player {id}");
-                Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
-                                           
-                
-                DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
-                if (part != null)
+                Array.Sort(_hit, (x, y) => x.distance.CompareTo(y.distance));
+
+                foreach (RaycastHit __hit in _hit)
                 {
-                    NetworkGamePlayer playerMain = part.GetComponentInParent<NetworkGamePlayer>();
-                    if (playerMain != null && playerMain.playerId == id)
+                    DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
+
+                    if (part != null)
                     {
-                        Debug.Log($"Player {id} trying to shoot themselves.");
-                        return;
+                        if (part.Player.playerId == id)
+                            continue;
+
+                        Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
+                        Debug.Log($"Hit something! {__hit.transform.name}, position {__hit.point}, shot by from player {id}");
+
+                        NetworkGamePlayer playerMain = part.GetComponentInParent<NetworkGamePlayer>();
+
+                        if (playerMain != null && playerMain.playerId == id)
+                        {
+                            Debug.Log($"Player {id} trying to shoot themselves.");
+                            return;
+                        }
+
+                        Debug.Log($"Found body part {part.bodyPart} on {__hit.transform.name} when raycasting! ");
+                        float multiplier;
+                        switch (part.bodyPart)
+                        {
+                            case BodyPart.Head:
+                                multiplier = curGun.HeadMultiplier;
+                                break;
+                            default:
+                                multiplier = 1;
+                                break;
+                        }
+                        part.ServerTag(curGun.Tagging);
+                        part.ServerDamage(curGun.Damage, multiplier);
+
+                        ServerHit(__hit, visualFiringPoint);
                     }
-                    Debug.Log($"Found body part {part.bodyPart} on {_hit.transform.name} when raycasting! ");
-                    float multiplier;
-                    switch (part.bodyPart)
-                    {
-                        case BodyPart.Head:
-                            multiplier = curGun.HeadMultiplier;
-                            break;
-                        default:
-                            multiplier = 1;
-                            break;
-                    }
-                    part.ServerTag(curGun.Tagging);
-                    part.ServerDamage(curGun.Damage, multiplier);
                 }
-                ServerHit(_hit, visualFiringPoint);
-            }
-            else
-            {
-                ServerTracer(visualFiringPoint, start + forward * curGun.Range);
             }
         }
-        
+
         [Server]
         private void ServerHit(RaycastHit _hit, Vector3 visualFiringPoint)
         {
@@ -205,18 +210,18 @@ namespace Game.Player.Gunplay
                 NetworkServer.Spawn(ln.gameObject);
             }
         }
-        
+
         #endregion
 
         #region ReloadingLogic
         [Command]
         public void CmdReload()
         {
-            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0 || isReloading) return; 
+            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0 || isReloading) return;
             isReloading = true;
             Reload();
         }
-        
+
         [Server]
         private void Reload()
         {
@@ -269,13 +274,13 @@ namespace Game.Player.Gunplay
                     gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
                 }
             }
-            
+
             allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
             allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
         }
-        
-        
-        
+
+
+
         [Command]
         public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
         {
@@ -291,9 +296,9 @@ namespace Game.Player.Gunplay
         {
             Debug.Log("Calling rpc...");
             if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
-            
+
             GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);
-    
+
             switch (slot)
             {
                 case WeaponSlot.Primary:
@@ -309,9 +314,9 @@ namespace Game.Player.Gunplay
                     newGunModel.transform.parent = meleeSlot;
                     break;
             }
-            
+
             newGunModel.transform.localPosition = Vector3.zero;
-            newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero); 
+            newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
         public void OnCurWeaponSlotChanged(WeaponSlot old, WeaponSlot newSlot)
@@ -328,7 +333,7 @@ namespace Game.Player.Gunplay
                     meleeSlot.GetChild(0).gameObject.SetActive(false);
                     break;
             }
-            
+
             switch (newSlot)
             {
                 case WeaponSlot.Primary:
@@ -373,8 +378,8 @@ namespace Game.Player.Gunplay
                 reserveAmmo = gun.ReserveAmmo;
             }
         }
-        
-        
+
+
         [Server]
         private void ServerSwitchGunSlot(WeaponSlot newSlot)
         {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1537484683276683196}
   - component: {fileID: 8446398989381624196}
   - component: {fileID: 1511835026322189016}
+  - component: {fileID: 3512395922906383062}
   m_Layer: 0
   m_Name: Tracer
   m_TagString: Untagged
@@ -54,7 +55,7 @@ LineRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fdd8f73de1b7aa42858462902e7f14d, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +78,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 5}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -85,7 +86,7 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.24999377
+        time: 0
         value: 0
         inSlope: 0.41766283
         outSlope: 0.41766283
@@ -96,19 +97,19 @@ LineRenderer:
       - serializedVersion: 3
         time: 1
         value: 0.37288666
-        inSlope: 0.37426284
-        outSlope: 0.37426284
+        inSlope: 0.324496
+        outSlope: 0.324496
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.241544
+        inWeight: 0.2101695
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.49574798, b: 0, a: 0}
+      key1: {r: 1, g: 0.5464047, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -123,7 +124,7 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 25250
+      atime0: 35852
       atime1: 65535
       atime2: 65535
       atime3: 0
@@ -135,7 +136,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 1
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  Timer: 0.05
+  Timer: 0.04
 --- !u!114 &1511835026322189016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +191,22 @@ MonoBehaviour:
   syncInterval: 0.1
   start: {x: 0, y: 0, z: 0}
   end: {x: 0, y: 0, z: 0}
+--- !u!95 &3512395922906383062
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789423977170713373}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47b58de48229c674a83661e9f3c001aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -60,6 +60,19 @@ namespace Game.Player
 
         public void UpdateAmmoUI(int currentAmmo, int reserveAmmo) => _ammoText.text = ((currentAmmo >= 200000) ? "¡Þ" : currentAmmo.ToString()) + " / " + ((reserveAmmo >= 200000) ? "¡Þ" : reserveAmmo.ToString());
 
+        public void OnDie()
+        {
+            _ammoText.gameObject.SetActive(false);
+            _healthText.gameObject.SetActive(false);
+        }
+
+        public void OnRespawn()
+        {
+            _ammoText.gameObject.SetActive(true);
+            UpdateHealthUI(100);
+            _healthText.gameObject.SetActive(true);
+        }
+        
         public void UpdateUiTimer(int time, bool shouldDisable = false)
         {
             _gameOverText.gameObject.SetActive(true);

@@ -2350,6 +2350,17 @@ MonoBehaviour:
   Timeout: 25
   AllowSteamRelay: 1
   UseNextGenSteamNetworking: 1
+--- !u!114 &1506649698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3043139860209545190, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+  m_PrefabInstance: {fileID: 3043139860385302055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506649696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509289333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3668,7 @@ PrefabInstance:
     - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 1506649697}
+      objectReference: {fileID: 1506649698}
     - target: {fileID: 6003513485748147774, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: m_RootOrder
       value: 1

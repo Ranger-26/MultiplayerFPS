@@ -69,6 +69,7 @@ namespace Game.Player.Gunplay
             {
                 ServerInitGuns();
             }
+            GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
         }
         
         private void Update()

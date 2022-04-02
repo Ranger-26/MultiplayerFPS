@@ -5,7 +5,6 @@ namespace AudioUtils
         //Guns
         Guns_Markov,
         Guns_MP5K,
-        Guns_Knife,
         //Footsteps
         Step_1,
         Step_2,

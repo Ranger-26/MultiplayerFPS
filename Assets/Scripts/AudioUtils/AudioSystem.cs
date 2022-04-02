@@ -45,7 +45,7 @@ namespace AudioUtils
         
         public static void OnClientReceiveAudioMessage(AudioMessage message)
         { 
-            AudioDatabase.Instance.TryGetClip(message.id).AudioClip.PlaySound(message.position, message.maxDistance, message.volume,
+            AudioDatabase.Instance.TryGetClip(message.id)?.AudioClip.PlaySound(message.position, message.maxDistance, message.volume,
                 message.pitch, message.spatialBlend, message.priority);
         }
         

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AudioClip_Knife
   m_EditorClassIdentifier: 
   AudioId: 1
-  AudioClip: {fileID: 8300000, guid: 1b7a203aeeb54084bbc3d1d2cb93701f, type: 3}
+  AudioClip: {fileID: 8300000, guid: 45263a5fe0ea94c44b941a6c2fc250dc, type: 3}

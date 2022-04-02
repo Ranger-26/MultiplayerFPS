@@ -127,7 +127,6 @@ namespace Game.Player.Gunplay
                 // Debug.Log($"Server: {start}, {forward}, player {id}");
                 Debug.Log($"Hit something! {_hit.transform.name}, position {_hit.point}, shot by from player {id}");
                                            
-                ServerHit(_hit, visualFiringPoint);
                 
                 DamagePart part = _hit.transform.gameObject.GetComponentInChildren<DamagePart>();
                 if (part != null)
@@ -152,6 +151,7 @@ namespace Game.Player.Gunplay
                     part.ServerTag(curGun.Tagging);
                     part.ServerDamage(curGun.Damage, multiplier);
                 }
+                ServerHit(_hit, visualFiringPoint);
             }
             else
             {

@@ -96,7 +96,7 @@ LineRenderer:
         outWeight: 0.2705374
       - serializedVersion: 3
         time: 1
-        value: 0.37288666
+        value: 0.51351166
         inSlope: 0.324496
         outSlope: 0.324496
         tangentMode: 0
@@ -124,7 +124,7 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 35852
+      atime0: 8867
       atime1: 65535
       atime2: 65535
       atime3: 0

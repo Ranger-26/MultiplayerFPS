@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
   muzzleFlash: {fileID: 836145610334071336}
+  anim: {fileID: 0}
   gunId: 12
 --- !u!95 &6725289208620413639
 Animator:

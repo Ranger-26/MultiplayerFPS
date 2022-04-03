@@ -2082,9 +2082,8 @@ MonoBehaviour:
   length: 10
   thickness: 3
   color: {r: 255, g: 255, b: 255, a: 100}
-  firingErrorMultiplier: 10
+  firingErrorMultiplier: 5
   firingError: 1
-  CrosshairParts: []
 --- !u!1001 &320424324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7376,7 +7375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.72434616, y: -0.000011444092}
   m_SizeDelta: {x: 10, y: 3}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &995152181
@@ -9038,7 +9037,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36850
+  m_Name: pb_Mesh42592
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -148,7 +148,7 @@ PlayerSettings:
   applicationIdentifier:
     Standalone: com.EternityStudios.SCPIntrusion
   buildNumber:
-    Standalone: 0
+    Standalone: 1
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1

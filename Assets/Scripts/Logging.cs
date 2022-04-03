@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 public class Logging : MonoBehaviour
@@ -8,6 +9,18 @@ public class Logging : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        string d = System.Environment.GetFolderPath(
+            System.Environment.SpecialFolder.ApplicationData) + "/SCP_INTRUSION_LOGS";
+        System.IO.Directory.CreateDirectory(d);
+        filename = d + "/scp_intrusion_log.txt";
+        if (System.IO.File.Exists(filename))
+        {
+            File.WriteAllText(filename, String.Empty);
+        }
     }
 
     void OnEnable() { Application.logMessageReceived += Log;  }

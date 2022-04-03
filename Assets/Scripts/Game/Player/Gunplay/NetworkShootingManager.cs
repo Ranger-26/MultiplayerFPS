@@ -118,13 +118,13 @@ namespace Game.Player.Gunplay
         [Server]
         private void ServerShoot(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
         {
-            RaycastHit[] _hit = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers);
+            RaycastHit[] _hits = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers);
 
-            if (_hit.Length != 0)
+            if (_hits.Length != 0)
             {
-                Array.Sort(_hit, (x, y) => x.distance.CompareTo(y.distance));
+                Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
 
-                foreach (RaycastHit __hit in _hit)
+                foreach (RaycastHit __hit in _hits)
                 {
                     DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
 
@@ -135,15 +135,7 @@ namespace Game.Player.Gunplay
 
                         Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
                         Debug.Log($"Hit something! {__hit.transform.name}, position {__hit.point}, shot by from player {id}");
-
-                        NetworkGamePlayer playerMain = part.GetComponentInParent<NetworkGamePlayer>();
-
-                        if (playerMain != null && playerMain.playerId == id)
-                        {
-                            Debug.Log($"Player {id} trying to shoot themselves.");
-                            return;
-                        }
-
+                        
                         Debug.Log($"Found body part {part.bodyPart} on {__hit.transform.name} when raycasting! ");
                         float multiplier;
                         switch (part.bodyPart)
@@ -159,6 +151,11 @@ namespace Game.Player.Gunplay
                         part.ServerDamage(curGun.Damage, multiplier);
 
                         ServerHit(__hit, visualFiringPoint);
+                    }
+                    else
+                    {
+                        ServerHit(__hit, visualFiringPoint);
+                        return;
                     }
                 }
             }

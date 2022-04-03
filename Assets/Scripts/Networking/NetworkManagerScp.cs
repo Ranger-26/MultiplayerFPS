@@ -30,7 +30,6 @@ namespace Networking
         
         public override void OnClientConnect()
         {
-            Debug.Log("NetworkManagerScp::OnClientConnected being invoked.");
             base.OnClientConnect();
             OnClientJoin?.Invoke();
         }
@@ -98,57 +97,6 @@ namespace Networking
             //change this to instantiate a different prefab based on the role
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
             return gamePlayer;
-        }
-        
-        public override void OnServerConnect(NetworkConnection conn)
-        {
-            if (numPlayers >= maxConnections)
-            {
-                conn.Disconnect();
-                return;
-            }
-            
-            OnRoomServerConnect(conn);
-        }
-
-        public override void OnServerAddPlayer(NetworkConnection conn)
-        {
-            Debug.Log("NetworkManagerScp::OnServerAddPlayer is being called!");
-            if (IsSceneActive(RoomScene))
-            {
-                if (roomSlots.Count == maxConnections)
-                    return;
-
-                allPlayersReady = false;
-
-                //Debug.Log("NetworkRoomManager.OnServerAddPlayer playerPrefab: {roomPlayerPrefab.name}");
-
-                GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
-                if (newRoomGameObject == null)
-                    newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
-
-                NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
-            }
-            else
-            {
-                GameObject newRoomGameObject = OnRoomServerCreateRoomPlayer(conn);
-                NetworkServer.AddPlayerForConnection(conn, newRoomGameObject);
-                GameObject spectator = CreateSpectator(newRoomGameObject.GetComponent<NetworkPlayerLobby>());
-                NetworkServer.ReplacePlayerForConnection(conn, spectator);
-                PlayerManager.Instance.TryAddPlayer(newRoomGameObject.GetComponent<NetworkPlayerLobby>(), spectator.GetComponent<NetworkGamePlayer>());
-            }
-        }
-
-        public GameObject CreateSpectator(NetworkPlayerLobby roomPlayer)
-        {
-            GameObject spectator = Instantiate(deadPlayerPrefab, Vector3.zero, Quaternion.identity);
-            NetworkGamePlayer player = spectator.GetComponent<NetworkGamePlayer>();
-            spectator.transform.position = SpawnManager.Instance.GetRandomSpawn(player.role).position;
-            player.playerName = roomPlayer.playerName;
-            player.playerId = roomPlayer.id;
-            player.role = roomPlayer.assignedRole;
-            player.isSpectating = true;
-            return spectator;
         }
     }
 }

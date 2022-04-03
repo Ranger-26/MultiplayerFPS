@@ -53,14 +53,7 @@ namespace Game.GameLogic.PlayerManagment
                 return;
             }
             players.Add(playerOrigin, currentPlayer);
-            if (currentPlayer.isSpectating)
-            {
-                spectators.Add(currentPlayer);
-            }
-            else
-            {
-                alivePlayers.Add(currentPlayer);
-            }
+            alivePlayers.Add(currentPlayer);
             Debug.Log($"Game Player Count: {players.Count}");
         }
 

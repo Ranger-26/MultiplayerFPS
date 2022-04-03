@@ -116,7 +116,7 @@ namespace Game.Player.Movement
 
             float moddedSpeed = speed - speed * weight;
 
-            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
+            controller.Move(move.normalized * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

@@ -11,16 +11,15 @@ namespace Game.Player
  
     void Update ()
     {
-        if (isLocalPlayer && Input.GetKeyUp(KeyCode.V))
+        if (isLocalPlayer && Input.GetKeyDown(KeyCode.V))
             SteamUser.StartVoiceRecording();
-        else if (isLocalPlayer && Input.GetKeyDown(KeyCode.V))
+        else if (isLocalPlayer && Input.GetKeyUp(KeyCode.V))
             SteamUser.StopVoiceRecording();
  
  
         if(isLocalPlayer)
         {
             uint Compressed;
-            uint Uncompressed;
             EVoiceResult ret = SteamUser.GetAvailableVoice(out Compressed);
             if(ret == EVoiceResult.k_EVoiceResultOK && Compressed > 1024)
             {
@@ -36,21 +35,21 @@ namespace Game.Player
         }
     }
  
-    [Command (channel = 2)]
+    [Command (channel = Channels.Unreliable)]
     void Cmd_SendData(byte[] data, uint size)
     {
         Debug.Log("Command");
         Collider[] cols = Physics.OverlapSphere(transform.position, 50, PlayerMask);
         for (int i = 0; i < cols.Length; i++)
         {
-            if(cols[i].GetComponent<NetworkIdentity>())
+            if(cols[i].GetComponent<NetworkIdentity>() && cols[i].GetComponent<NetworkIdentity>() != GetComponent<NetworkIdentity>())
             {
                 Target_PlaySound(cols[i].GetComponent<NetworkIdentity>().connectionToClient, data, size);
             }
         }
     }
  
-    [TargetRpc (channel = 2)]
+    [TargetRpc (channel = Channels.Unreliable)]
     void Target_PlaySound(NetworkConnection connection, byte[] DestBuffer, uint BytesWritten)
     {
         Debug.Log("TARGET");

@@ -16,7 +16,6 @@ namespace Game.Player
             else if (isLocalPlayer && Input.GetKeyUp(KeyCode.V))
                 SteamUser.StopVoiceRecording();
 
-
             if (isLocalPlayer)
             {
                 uint Compressed;

@@ -109,8 +109,8 @@ namespace Game.Player.Movement
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = Input.GetAxisRaw(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
 

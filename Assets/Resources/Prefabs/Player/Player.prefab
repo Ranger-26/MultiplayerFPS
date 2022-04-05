@@ -518,7 +518,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
-  speed: 14
+  speed: 7
   gravity: -17
   jumpHeight: 1
   StepDistance: 2.7
@@ -532,7 +532,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cc12b07747e24b64caff3aca0bef00ef, type: 3}
   - {fileID: 8300000, guid: bb002fada44585b49a8f2a6d18fad3e0, type: 3}
   groundCheck: {fileID: 1769910894114916383}
-  groundDistance: 0.4
+  groundDistance: 0.2
   weight: 0
   groundMask:
     serializedVersion: 2
@@ -980,7 +980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6153013886324232626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}
@@ -1039,7 +1039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1838809099793417575}
-  - component: {fileID: 7464560581774067314}
+  - component: {fileID: 915693192055238994}
   m_Layer: 3
   m_Name: ViewModel
   m_TagString: Untagged
@@ -1064,7 +1064,7 @@ Transform:
   m_Father: {fileID: 5789010012695376353}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7464560581774067314
+--- !u!114 &915693192055238994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

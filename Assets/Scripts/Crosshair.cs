@@ -23,7 +23,6 @@ public class Crosshair : MonoBehaviour
 
     float startingSize = 25f;
 
-    [SerializeField]
     RectTransform[] CrosshairParts;
 
     RectTransform rect;

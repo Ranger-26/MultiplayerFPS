@@ -113,6 +113,7 @@ namespace Game.Player.Movement
             float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
+            move = Vector3.ClampMagnitude(move, 1f);
 
             float moddedSpeed = speed - speed * weight;
 

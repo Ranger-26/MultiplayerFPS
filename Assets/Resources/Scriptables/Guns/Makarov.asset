@@ -15,7 +15,7 @@ MonoBehaviour:
   Damage: 29
   HeadMultiplier: 2
   LimbMultiplier: 0.4
-  Range: 60
+  Range: 70
   RPM: 580
   ChargeupTime: 0
   Tagging: 0.9

@@ -21,6 +21,7 @@ namespace AudioUtils
             au.priority = _priority;
             des.Timer = _sound.length + 1f;
             au.rolloffMode = AudioRolloffMode.Linear;
+            au.minDistance = 1.5f;
             au.Play();
         }
 
@@ -40,7 +41,23 @@ namespace AudioUtils
             au.priority = _priority;
             des.Timer = _sound.length + 1f;
             au.rolloffMode = AudioRolloffMode.Linear;
+            au.minDistance = 1.5f;
             au.Play();
+        }
+
+        public static void NetworkPlaySound(this AudioClip _sound, Vector3 _position, float _maxDistance, float _volume, float _pitch, float _spatialBlend, int _priority)
+        {
+            AudioMessage message = new AudioMessage()
+            {
+                id = AudioDatabase.Instance.clipsToIds[_sound],
+                position = _position,
+                maxDistance = _maxDistance,
+                volume = _volume,
+                pitch = _pitch,
+                spatialBlend = _spatialBlend,
+                priority = _priority
+            };
+            NetworkClient.Send(message);
         }
         
         public static void OnClientReceiveAudioMessage(AudioMessage message)

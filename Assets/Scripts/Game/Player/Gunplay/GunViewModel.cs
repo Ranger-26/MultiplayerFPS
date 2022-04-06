@@ -179,7 +179,7 @@ namespace Game.Player.Gunplay
 
                     if (gun.ChargeupSounds.Length != 0)
                     {
-                        AudioSystem.PlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], spreadPoint.position + spreadPoint.forward * 0.5f, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                        AudioSystem.NetworkPlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], cam.position + cam.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
                     }
                 }
             }
@@ -340,18 +340,7 @@ namespace Game.Player.Gunplay
 
             if (gun.ShootSounds.Length != 0)
             {
-                AudioMessage message = new AudioMessage()
-                {
-                    id = AudioDatabase.Instance.clipsToIds[gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)]],
-                    position = cam.position,
-                    maxDistance = gun.SoundMaxDistance,
-                    volume = gun.SoundVolume,
-                    pitch = 1f,
-                    spatialBlend = 1.1f,
-                    priority = gun.SoundPriority
-                };
-                NetworkClient.Send(message);
-                //AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
+                AudioSystem.NetworkPlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.position + cam.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
         }
 

@@ -59,7 +59,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 58c35ce94e18cee458c5214c775fb9ff, type: 3}
-  SoundMaxDistance: 75
+  SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128
   UniqueGunID: 3

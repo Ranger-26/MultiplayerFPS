@@ -2,11 +2,17 @@ using UnityEngine;
 
 namespace AudioUtils
 {
-    [CreateAssetMenu(fileName = "AudioClip", menuName = "Database Audio Clip")]
-    public class NetworkAudioClip : ScriptableObject
+    [System.Serializable]
+    public class NetworkAudioClip
     {
-        public AudioId AudioId;
+        public string AudioId;
 
-        public AudioClip AudioClip;
+        public AudioClip audioClip;
+
+        public NetworkAudioClip(string id, AudioClip au)
+        {
+            AudioId = id;
+            audioClip = au;
+        }
     }
 }

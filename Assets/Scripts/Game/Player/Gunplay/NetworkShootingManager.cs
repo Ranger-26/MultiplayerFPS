@@ -181,18 +181,7 @@ namespace Game.Player.Gunplay
 
             if (curGun.HitSounds.Length != 0)
             {
-                AudioMessage message = new AudioMessage()
-                {
-                    id = AudioDatabase.Instance.clipsToIds[curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)]],
-                    position = _hit.point,
-                    maxDistance = curGun.SoundMaxDistance,
-                    volume = curGun.SoundVolume,
-                    pitch = 1f,
-                    spatialBlend = 1f,
-                    priority = curGun.SoundPriority
-                };
-                NetworkServer.SendToAll(message);
-                //AudioSystem.PlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
+                AudioSystem.NetworkPlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
             }
         }
 

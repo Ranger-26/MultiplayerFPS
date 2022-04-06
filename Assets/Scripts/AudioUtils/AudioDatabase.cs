@@ -7,12 +7,12 @@ namespace AudioUtils
 {
     public class AudioDatabase : MonoBehaviour
     {
-        private Dictionary<AudioId, NetworkAudioClip> idsToAudio = new Dictionary<AudioId, NetworkAudioClip>();
+        private Dictionary<string, NetworkAudioClip> idsToAudio = new Dictionary<string, NetworkAudioClip>();
 
-        public Dictionary<AudioClip, AudioId> clipsToIds = new Dictionary<AudioClip, AudioId>();
-
+        public Dictionary<AudioClip, string> clipsToIds = new Dictionary<AudioClip, string>();
 
         public static AudioDatabase Instance;
+
         private void Awake()
         {
             if (Instance == null)
@@ -33,16 +33,26 @@ namespace AudioUtils
 
         public void LoadClips()
         {
-            NetworkAudioClip[] clips = Resources.LoadAll<NetworkAudioClip>("Scriptables/AudioClips");
-            foreach (var clip in clips)
+            AudioClip[] clips = Resources.LoadAll<AudioClip>("");
+
+            List<NetworkAudioClip> _clips = new List<NetworkAudioClip>();
+
+            foreach (AudioClip au in clips)
+            {
+                _clips.Add(new NetworkAudioClip(au.name, au));
+                Debug.Log("Added " + au.name + " to clips");
+            }
+
+            foreach (var clip in _clips)
             {
                 idsToAudio.Add(clip.AudioId, clip);
-                clipsToIds.Add(clip.AudioClip, clip.AudioId);
+                clipsToIds.Add(clip.audioClip, clip.AudioId);
             }
+
             Debug.Log($"Loaded {clips.Length} clips!");
         }
 
-        public NetworkAudioClip TryGetClip(AudioId id)
+        public NetworkAudioClip TryGetClip(string id)
         {
             if (idsToAudio[id] == null)
             {

@@ -33,13 +33,14 @@ namespace AudioUtils
 
         public void LoadClips()
         {
-            AudioClip[] clips = Resources.LoadAll<AudioClip>("Scriptables/SFX");
+            AudioClip[] clips = Resources.LoadAll<AudioClip>("");
 
             List<NetworkAudioClip> _clips = new List<NetworkAudioClip>();
 
             foreach (AudioClip au in clips)
             {
                 _clips.Add(new NetworkAudioClip(au.name, au));
+                Debug.Log("Added " + au.name + " to clips");
             }
 
             foreach (var clip in _clips)

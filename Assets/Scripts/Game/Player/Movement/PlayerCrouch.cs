@@ -39,17 +39,21 @@ namespace Game.Player.Movement
         private void Update()
         {
             crouchFactor = Mathf.Clamp01(crouchFactor + Time.deltaTime * CrouchRate * (Input.GetKey(KeyCode.LeftControl) ? 1 : -1));
-            playerMovement.speed = Input.GetKey(KeyCode.LeftControl) ? CrouchSpeed : NormalSpeed;
 
-            if (!Input.GetKey(KeyCode.LeftControl))
+            playerMovement.speed = Mathf.Lerp(NormalSpeed, CrouchSpeed, crouchFactor);
+
+            float previousHeight = controller.height;
+
+            if (!isCrouching)
             {
                 playerMovement.speed = Input.GetKey(KeyCode.LeftShift) ? WalkingSpeed : NormalSpeed;
             }
 
             float h = Mathf.Lerp(StandingHeight, CrouchHeight, crouchFactor);
             controller.height = h;
+            controller.Move(new Vector3(0f, h - previousHeight, 0f));
 
-            isCrouching = crouchFactor >= 0.8f;
+            isCrouching = crouchFactor >= 0.5f;
             isWalking = Input.GetKey(KeyCode.LeftShift);
 
             playerMovement.canMakeSound = !isCrouching && !isWalking;

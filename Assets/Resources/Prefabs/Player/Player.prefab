@@ -425,7 +425,7 @@ CharacterController:
   m_Height: 1.8
   m_Radius: 0.4
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -532,7 +532,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cc12b07747e24b64caff3aca0bef00ef, type: 3}
   - {fileID: 8300000, guid: bb002fada44585b49a8f2a6d18fad3e0, type: 3}
   groundCheck: {fileID: 1769910894114916383}
-  groundDistance: 0.2
+  groundDistance: 0.4
   weight: 0
   groundMask:
     serializedVersion: 2
@@ -980,7 +980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6153013886324232626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.9, z: 0}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5789010011634620526}

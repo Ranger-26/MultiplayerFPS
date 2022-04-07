@@ -63,8 +63,8 @@ MonoBehaviour:
     supportShadowMask: 0
     supportSSR: 0
     supportSSRTransparent: 0
-    supportSSAO: 1
-    supportSSGI: 1
+    supportSSAO: 0
+    supportSSGI: 0
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -296,7 +296,7 @@ MonoBehaviour:
   enableSRPBatcher: 1
   shaderVariantLogLevel: 0
   availableMaterialQualityLevels: -1
-  m_DefaultMaterialQualityLevel: 4
+  m_DefaultMaterialQualityLevel: 2
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList:
   - {fileID: 0}

@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/VoiceChatTransmitter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/VoiceChatTransmitter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +189,7 @@
       <workItem from="1648837108317" duration="6813000" />
       <workItem from="1648952779804" duration="359000" />
       <workItem from="1648967361227" duration="1019000" />
+      <workItem from="1649024737417" duration="856000" />
     </task>
     <servers />
   </component>

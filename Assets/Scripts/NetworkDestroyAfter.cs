@@ -6,6 +6,20 @@ public class NetworkDestroyAfter : NetworkBehaviour
 {
     public float Timer = 1f;
 
+    AudioSource au;
+
+    bool hasAudio;
+
+    private void Awake()
+    {
+        au = GetComponent<AudioSource>();
+
+        if (au != null)
+        {
+            hasAudio = true;
+        }
+    }
+
     private void Start()
     {
         StartCoroutine(Des());
@@ -15,6 +29,15 @@ public class NetworkDestroyAfter : NetworkBehaviour
     IEnumerator Des()
     {
         yield return new WaitForSeconds(Timer);
-        Destroy(gameObject);
+        if (hasAudio)
+        {
+            StartCoroutine(AudioFadeOut.FadeOut(au, 0.1f));
+            yield return new WaitForSeconds(0.2f);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

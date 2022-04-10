@@ -19,7 +19,7 @@ namespace AudioUtils
             au.pitch = _pitch;
             au.spatialBlend = _spatialBlend;
             au.priority = _priority;
-            des.Timer = _sound.length + 1f;
+            des.Timer = _sound.length - 0.1f;
             au.rolloffMode = AudioRolloffMode.Linear;
             au.minDistance = 1.5f;
             au.Play();
@@ -39,7 +39,7 @@ namespace AudioUtils
             au.pitch = _pitch;
             au.spatialBlend = _spatialBlend;
             au.priority = _priority;
-            des.Timer = _sound.length + 1f;
+            des.Timer = _sound.length - 0.1f;
             au.rolloffMode = AudioRolloffMode.Linear;
             au.minDistance = 1.5f;
             au.Play();

@@ -58,10 +58,10 @@ MonoBehaviour:
   HitSounds:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
-  - {fileID: 8300000, guid: 4961ad83d31b7544288b60df6ef36dea, type: 3}
-  - {fileID: 8300000, guid: 403018d155923b64cb40e4a6f9ea987e, type: 3}
-  - {fileID: 8300000, guid: 4cba53eced27c9341966039abaa74692, type: 3}
-  - {fileID: 8300000, guid: 7c9414bc6d25ce646a6461665419c6cb, type: 3}
+  - {fileID: 8300000, guid: 87982b73589ab51419a5db3c6662e086, type: 3}
+  - {fileID: 8300000, guid: 06aa4e039ce96944387e03d0a8168f2c, type: 3}
+  - {fileID: 8300000, guid: 31f5f7998136265478c5fae69d0eaacb, type: 3}
+  - {fileID: 8300000, guid: 287a9ae56e3201840b4112ce6c7de9de, type: 3}
   SoundMaxDistance: 125
   SoundVolume: 1
   SoundPriority: 128

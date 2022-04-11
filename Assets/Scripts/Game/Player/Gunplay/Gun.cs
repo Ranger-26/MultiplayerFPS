@@ -68,6 +68,8 @@ namespace Game.Player.Gunplay
         [Header("Scopes")]
         [Tooltip("Determines whether or not you can scope in with this gun")]
         public bool HasScope;
+        [Tooltip("Determines whether or not you exit the scope when you shoot")]
+        public bool ExitScopeOnShoot;
 
         [Tooltip("Zoomed in FOV of player")]
         public float ScopeFOV = 67.5f;

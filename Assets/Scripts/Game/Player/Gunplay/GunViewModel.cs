@@ -4,6 +4,7 @@ using System.Collections;
 using AudioUtils;
 using Game.Player.Gunplay.IdentifierComponents;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
 using Unity.VisualScripting;
@@ -34,9 +35,15 @@ namespace Game.Player.Gunplay
         PlayerLook PL;
         PlayerCrouch PC;
 
-        Transform cam;
+        Camera cam;
+
         Transform firingPoint;
         Transform spreadPoint;
+
+        GameObject scopeUI;
+        GameObject model;
+
+        Image scopeUIImage;
 
         NetworkShootingManager nsm;
 
@@ -64,6 +71,7 @@ namespace Game.Player.Gunplay
         bool delay;
         bool isSpraying;
         bool isSwaying;
+        bool isScoped;
         bool horizontalDirection;
         bool chargedUp;
         bool chargeupSound;
@@ -73,7 +81,13 @@ namespace Game.Player.Gunplay
         bool finishedReload;
 
         public GunIDs gunId;
-        
+
+        private void Awake()
+        {
+            scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
+            scopeUIImage = scopeUI.GetComponent<Image>();
+        }
+
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
@@ -90,11 +104,12 @@ namespace Game.Player.Gunplay
             PL = GetComponentInParent<PlayerLook>();
             PC = GetComponentInParent<PlayerCrouch>();
             nsm = GetComponentInParent<NetworkShootingManager>();
-            cam = GetComponentInParent<Camera>().transform;
+            cam = GetComponentInParent<Camera>();
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
-
             anim = GetComponent<Animator>();
+            model = transform.GetChild(0).gameObject;
+
             anim.keepAnimatorControllerStateOnDisable = true;
 
             ni = GetComponentInParent<NetworkIdentity>();
@@ -130,6 +145,8 @@ namespace Game.Player.Gunplay
             }
 
             StartCoroutine(Draw());
+
+            scopeUIImage.sprite = gun.ScopeImage;
         }
 
         private void Update()
@@ -179,7 +196,7 @@ namespace Game.Player.Gunplay
 
                     if (gun.ChargeupSounds.Length != 0)
                     {
-                        AudioSystem.NetworkPlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], cam.position + cam.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                        AudioSystem.NetworkPlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
                     }
                 }
             }
@@ -215,6 +232,11 @@ namespace Game.Player.Gunplay
                 {
                     Reload();
                 }
+            }
+
+            if (Input.GetMouseButtonDown(1) && gun.HasScope && !delay)
+            {
+                Scope(!isScoped);
             }
 
             float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
@@ -253,6 +275,7 @@ namespace Game.Player.Gunplay
         private void FixedUpdate()
         {
             if (PM == null) return;
+
             isSwaying = recoilFactor > gun.SwayAfterRound;
 
             moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
@@ -284,6 +307,14 @@ namespace Game.Player.Gunplay
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
         }
 
+        public void Scope(bool status)
+        {
+            isScoped = status;
+            cam.fieldOfView = status ? gun.ScopeFOV : 87.5f;
+            scopeUI.SetActive(status);
+            model.SetActive(!status);
+        }
+
         public void Shoot()
         {
             if (!ni.hasAuthority) return;
@@ -313,6 +344,11 @@ namespace Game.Player.Gunplay
                         }
                     }
 
+                    if (gun.ExitScopeOnShoot)
+                    {
+                        Scope(false);
+                    }
+
                     Spread();
 
                     Visual();
@@ -328,19 +364,22 @@ namespace Game.Player.Gunplay
 
         public void Visual()
         {
-            if (muzzleFlash != null)
+            if (!isScoped)
             {
-                muzzleFlash.Play();
-            }
+                if (muzzleFlash != null)
+                {
+                    muzzleFlash.Play();
+                }
 
-            if (anim != null)
-            {
-                anim.Play(StringKeys.GunShootAnimation, -1, 0f);
+                if (anim != null)
+                {
+                    anim.Play(StringKeys.GunShootAnimation, -1, 0f);
+                }
             }
 
             if (gun.ShootSounds.Length != 0)
             {
-                AudioSystem.NetworkPlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.position + cam.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                AudioSystem.NetworkPlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
             }
         }
 
@@ -426,6 +465,8 @@ namespace Game.Player.Gunplay
             chambered = false;
             finishedReload = false;
 
+            Scope(false);
+
             reloadTimer = nsm.curGun.ReloadTime;
 
             Debug.Log("Reloading... ");
@@ -469,6 +510,8 @@ namespace Game.Player.Gunplay
             delay = true;
             canCharge = false;
             chambered = true;
+
+            Scope(false);
 
             if (anim != null)
             {

@@ -37,6 +37,7 @@ MonoBehaviour:
   SwayAfterRound: 10
   SwayStartRight: 1
   HasScope: 0
+  ExitScopeOnShoot: 0
   ScopeFOV: 67.5
   ScopeImage: {fileID: 0}
   ReloadTime: 1.75

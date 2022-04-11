@@ -125,9 +125,15 @@ namespace Game.Player.Gunplay
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
-            PM.weight = gun.Weight;
+
+            if (PM != null)
+            {
+                PM.weight = gun.Weight;
+            }
 
             StartCoroutine(Draw());
+
+            scopeUIImage.sprite = gun.ScopeImage;
 
             if (nsm == null)
             {
@@ -309,10 +315,25 @@ namespace Game.Player.Gunplay
 
         public void Scope(bool status)
         {
+            if (!gun.HasScope)
+            {
+                isScoped = false;
+                cam.fieldOfView = 87.5f;
+                scopeUI.SetActive(false);
+                model.SetActive(true);
+                PM.weight = gun.Weight;
+                return;
+            }
+
             isScoped = status;
             cam.fieldOfView = status ? gun.ScopeFOV : 87.5f;
             scopeUI.SetActive(status);
             model.SetActive(!status);
+
+            if (PM != null)
+            {
+                PM.weight = status ? gun.ScopeSpeedReduction : gun.Weight;
+            }
         }
 
         public void Shoot()

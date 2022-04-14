@@ -11,6 +11,8 @@ namespace Game.Player.Movement
 
         public Camera cam;
         public Transform cameraHolder;
+        public Transform visualCamera;
+        public Transform aimPunchCamera;
 
         float rotationX = 0;
         float rotationY = 0;
@@ -44,6 +46,8 @@ namespace Game.Player.Movement
             UpdateCamera();
         }
 
+        #region Main Camera Movement Overloads
+
         public void MoveCamera(float x, float y)
         {
             rotationX += -x;
@@ -67,40 +71,87 @@ namespace Game.Player.Movement
             UpdateCamera();
         }
 
+        #endregion
+
+        #region Visual Camera Movement Overloads
+
         public void MoveCameraVisual(float x, float y)
         {
-            cam.transform.Rotate(Vector3.right * -x + Vector3.up * y, Space.Self);
+            visualCamera.Rotate(Vector3.right * -x + Vector3.up * y, Space.Self);
         }
 
         public void MoveCameraVisual(float x)
         {
-            cam.transform.Rotate(Vector3.right * -x, Space.Self);
+            visualCamera.Rotate(Vector3.right * -x, Space.Self);
         }
 
         public void MoveCameraVisual(Vector2 move)
         {
-            cam.transform.Rotate(Vector3.right * -move.x + Vector3.up * move.y, Space.Self);
+            visualCamera.Rotate(Vector3.right * -move.x + Vector3.up * move.y, Space.Self);
         }
 
         public void SetCameraVisual(float x, float y)
         {
-            cam.transform.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * y);
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * y);
         }
 
         public void SetCameraVisual(float x)
         {
-            cam.transform.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * cam.transform.localRotation.y);
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * visualCamera.localRotation.y);
         }
 
         public void SetCameraVisual(Vector2 move)
         {
-            cam.transform.localRotation = Quaternion.Euler(Vector3.right * -move.x + Vector3.up * move.y);
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -move.x + Vector3.up * move.y);
         }
 
         public void SetCameraVisual(Quaternion move)
         {
-            cam.transform.localRotation = move;
+            visualCamera.localRotation = move;
         }
+
+        #endregion
+
+        #region Aim Punch Camera Movement Overloads
+
+        public void MoveCameraAimPunch(float x, float y)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -x + Vector3.up * y, Space.Self);
+        }
+
+        public void MoveCameraAimPunch(float x)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -x, Space.Self);
+        }
+
+        public void MoveCameraAimPunch(Vector2 move)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -move.x + Vector3.up * move.y, Space.Self);
+        }
+
+        public void SetCameraAimPunch(float x, float y)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * y);
+        }
+
+        public void SetCameraAimPunch(float x)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * visualCamera.localRotation.y);
+        }
+
+        public void SetCameraAimPunch(Vector2 move)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -move.x + Vector3.up * move.y);
+        }
+
+        public void SetCameraAimPunch(Quaternion move)
+        {
+            aimPunchCamera.localRotation = move;
+        }
+
+        #endregion
+
+        #region Misc Camera Functions
 
         public void UpdateCamera()
         {
@@ -115,7 +166,14 @@ namespace Game.Player.Movement
 
         public Quaternion GetCameraVisualRotation()
         {
-            return cam.transform.localRotation;
+            return visualCamera.localRotation;
         }
+
+        public Quaternion GetCameraAimPunchRotation()
+        {
+            return aimPunchCamera.localRotation;
+        }
+
+        #endregion
     }
 }

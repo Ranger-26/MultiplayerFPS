@@ -83,9 +83,12 @@ namespace Game.Player.Gunplay
 
         private void Awake()
         {
+            PM = GetComponentInParent<PlayerMovement>();
+            PL = GetComponentInParent<PlayerLook>();
+            PC = GetComponentInParent<PlayerCrouch>();
             scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
             scopeUIImage = scopeUI.GetComponent<Image>();
-            cam = GetComponentInParent<Camera>();
+            cam = PL.cam;
             model = transform.GetChild(0).gameObject;
         }
 
@@ -101,9 +104,6 @@ namespace Game.Player.Gunplay
                 enabled = false;
             } 
 
-            PM = GetComponentInParent<PlayerMovement>();
-            PL = GetComponentInParent<PlayerLook>();
-            PC = GetComponentInParent<PlayerCrouch>();
             nsm = GetComponentInParent<NetworkShootingManager>();
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
@@ -419,18 +419,14 @@ namespace Game.Player.Gunplay
             {
                 timer -= Time.deltaTime;
 
-                PL.MoveCameraVisual(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
+                PL.MoveCameraAimPunch(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
 
                 yield return new WaitForEndOfFrame();
             }
 
-            timer = gun.AimPunchDropDuration;
-
-            while (timer > 0f)
+            while (PL.GetCameraAimPunchRotation() != Quaternion.Euler(Vector3.zero))
             {
-                timer -= Time.deltaTime;
-
-                PL.MoveCameraVisual(-gun.AimPunch / gun.AimPunchDropDuration * Time.deltaTime);
+                PL.SetCameraAimPunch(Quaternion.RotateTowards(PL.GetCameraAimPunchRotation(), Quaternion.Euler(Vector3.zero), gun.AimPunch / gun.AimPunchDropDuration));
 
                 yield return new WaitForEndOfFrame();
             }

@@ -60,7 +60,7 @@ namespace Game.Player.Gunplay
         public float CrouchingMultiplier = 0.5f;
 
         [Tooltip("How many rounds must be shot before starting to sway left and right, displacement is applied at 25% of this value")]
-        public int SwayAfterRound = 8;
+        public int SwayAfterRecoil = 8;
 
         [Tooltip("Determines if the swaying starts going right first")]
         public bool SwayStartRight = false;
@@ -110,7 +110,9 @@ namespace Game.Player.Gunplay
         [Tooltip("The amount that the camera jumps when shooting in degrees")]
         public float AimPunch = 1f;
         [Tooltip("The duration for the camera jump")]
-        public float AimPunchDuration = 0.05f;
+        public float AimPunchDuration = 0.025f;
+        [Tooltip("The duration for the camera drop")]
+        public float AimPunchDropDuration = 0.05f;
         [Tooltip("The amount that the view model moves back when spread is increasing")]
         public float MaxBacking = 0.1f;
         [Tooltip("The multiplier for the backing speed")]

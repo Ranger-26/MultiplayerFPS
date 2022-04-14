@@ -34,7 +34,7 @@ MonoBehaviour:
   Displacement: 1
   MaxDisplacement: 3
   CrouchingMultiplier: 0.4
-  SwayAfterRound: 10
+  SwayAfterRecoil: 6
   SwayStartRight: 1
   HasScope: 0
   ExitScopeOnShoot: 0

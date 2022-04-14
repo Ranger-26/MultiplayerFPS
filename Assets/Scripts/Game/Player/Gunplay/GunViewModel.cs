@@ -56,8 +56,8 @@ namespace Game.Player.Gunplay
 
         float recoilFactor;
         float displacementFactor;
-        float dropFactor;
         float lerpFactor;
+        float aimPunchFactor;
 
         float spread;
         float moveSpread;
@@ -86,6 +86,8 @@ namespace Game.Player.Gunplay
         {
             scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
             scopeUIImage = scopeUI.GetComponent<Image>();
+            cam = GetComponentInParent<Camera>();
+            model = transform.GetChild(0).gameObject;
         }
 
         private void Start()
@@ -104,11 +106,9 @@ namespace Game.Player.Gunplay
             PL = GetComponentInParent<PlayerLook>();
             PC = GetComponentInParent<PlayerCrouch>();
             nsm = GetComponentInParent<NetworkShootingManager>();
-            cam = GetComponentInParent<Camera>();
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
             anim = GetComponent<Animator>();
-            model = transform.GetChild(0).gameObject;
 
             anim.keepAnimatorControllerStateOnDisable = true;
 
@@ -131,6 +131,8 @@ namespace Game.Player.Gunplay
                 PM.weight = gun.Weight;
             }
 
+            Scope(false);
+
             StartCoroutine(Draw());
 
             scopeUIImage.sprite = gun.ScopeImage;
@@ -149,6 +151,8 @@ namespace Game.Player.Gunplay
             {
                 PM.weight = gun.Weight;
             }
+
+            Scope(false);
 
             StartCoroutine(Draw());
 
@@ -282,20 +286,15 @@ namespace Game.Player.Gunplay
         {
             if (PM == null) return;
 
-            isSwaying = recoilFactor > gun.SwayAfterRound;
+            isSwaying = recoilFactor > gun.SwayAfterRecoil;
 
             moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
 
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (nsm.currentAmmo == 0))
+            if (shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto || gun.GunFiringMode == FiringMode.SemiAuto) || nsm.currentAmmo == 0)
             {
-                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                dropFactor = Mathf.Clamp(dropFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
-
                 UpdateSpread();
 
                 if (!isSwaying)
@@ -304,10 +303,14 @@ namespace Game.Player.Gunplay
                     horizontalDirection = gun.SwayStartRight;
                 }
 
-                if (dropFactor > 0f)
+                if (recoilFactor > 0f)
                 {
-                    PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.RecoilDecay * gun.Recoil, 0f);
+                    PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay, 0f);
                 }
+
+                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
@@ -321,7 +324,6 @@ namespace Game.Player.Gunplay
                 cam.fieldOfView = 87.5f;
                 scopeUI.SetActive(false);
                 model.SetActive(true);
-                PM.weight = gun.Weight;
                 return;
             }
 
@@ -406,10 +408,9 @@ namespace Game.Player.Gunplay
 
         private void Recoil()
         {
-            recoilFactor = Mathf.Clamp(recoilFactor + 1, 0f, gun.SwayAfterRound + 1);
-            dropFactor += gun.Recoil;
+            recoilFactor = Mathf.Clamp(recoilFactor + gun.Recoil, 0f, gun.SwayAfterRecoil + 1);
 
-            if (recoilFactor < gun.SwayAfterRound)
+            if (recoilFactor < gun.SwayAfterRecoil)
             {
                 PL.MoveCamera(gun.Recoil);
             }
@@ -431,7 +432,7 @@ namespace Game.Player.Gunplay
 
         private void Displacement()
         {
-            if (recoilFactor >= gun.SwayAfterRound / 4)
+            if (recoilFactor >= gun.SwayAfterRecoil / 4)
             {
                 displacementFactor = Mathf.Clamp(displacementFactor + gun.Displacement, 0f, gun.MaxDisplacement);
             }
@@ -453,26 +454,26 @@ namespace Game.Player.Gunplay
         
         private IEnumerator AimPunch()
         {
-            float timer = 0f;
+            float timer = gun.AimPunchDuration;
 
-            while (timer <= gun.AimPunchDuration / 3)
+            while (timer > 0f)
             {
-                PL.MoveCamera(gun.AimPunch / (gun.AimPunchDuration / 3) * Time.fixedDeltaTime);
+                timer -= Time.deltaTime;
 
-                timer += Time.fixedDeltaTime;
+                PL.MoveCamera(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
 
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
 
-            timer = 0f;
+            timer = gun.AimPunchDropDuration;
 
-            while (timer <= gun.AimPunchDuration * 2 / 3)
+            while (timer > 0f)
             {
-                PL.MoveCamera(-gun.AimPunch / (gun.AimPunchDuration * 2 / 3) * Time.fixedDeltaTime);
+                timer -= Time.deltaTime;
 
-                timer += Time.fixedDeltaTime;
+                PL.MoveCamera(-gun.AimPunch / gun.AimPunchDropDuration * Time.deltaTime);
 
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
         }
 
@@ -532,8 +533,6 @@ namespace Game.Player.Gunplay
             canCharge = false;
             chambered = true;
 
-            Scope(false);
-
             if (anim != null)
             {
                 anim.Play(StringKeys.GunDrawAnimation, -1, 0f);
@@ -543,7 +542,6 @@ namespace Game.Player.Gunplay
 
             displacementFactor = 0f;
             recoilFactor = 0f;
-            dropFactor = 0f;
 
             yield return new WaitForSeconds(gun.DrawTime);
 

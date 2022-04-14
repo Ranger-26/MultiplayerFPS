@@ -305,10 +305,10 @@ namespace Game.Player.Gunplay
 
                 if (recoilFactor > 0f)
                 {
-                    PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay, 0f);
+                    PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay);
+                    recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 }
 
-                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.Recoil * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
             }
@@ -408,7 +408,7 @@ namespace Game.Player.Gunplay
 
         private void Recoil()
         {
-            recoilFactor = Mathf.Clamp(recoilFactor + gun.Recoil, 0f, gun.SwayAfterRecoil + 1);
+            recoilFactor = Mathf.Clamp(recoilFactor + gun.Recoil, 0f, gun.SwayAfterRecoil + gun.Recoil);
 
             if (recoilFactor < gun.SwayAfterRecoil)
             {

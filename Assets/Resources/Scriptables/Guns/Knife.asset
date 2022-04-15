@@ -31,13 +31,16 @@ MonoBehaviour:
   HorizontalRecoil: 0.01
   MaxHorizontal: 0.01
   RecoilDecay: 1000
+  SpreadDecay: 2
   Displacement: 0
   MaxDisplacement: 0
   CrouchingMultiplier: 0.5
-  SwayAfterRound: 1
+  SwayAfterRecoil: 8
   SwayStartRight: 0
   HasScope: 0
+  ExitScopeOnShoot: 0
   ScopeFOV: 67.5
+  ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
   ReloadTime: 0.01
   MaxAmmo: 2147483647
@@ -52,11 +55,10 @@ MonoBehaviour:
   Tracer: {fileID: 0}
   AimPunch: 0.01
   AimPunchDuration: 0.01
+  AimPunchDropDuration: 0.01
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []
-  HitSounds:
-  - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds: []
   SoundMaxDistance: 10
   SoundVolume: 1

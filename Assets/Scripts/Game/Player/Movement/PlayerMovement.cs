@@ -30,6 +30,7 @@ namespace Game.Player.Movement
         public bool canMakeSound;
 
         float tagging;
+        float airTime;
 
         bool isGrounded;
         bool LandTagged;
@@ -76,7 +77,14 @@ namespace Game.Player.Movement
 
             if (!isGrounded)
             {
-                LandTagged = false;
+                airTime += Time.deltaTime;
+
+                if (airTime >= 0.5f)
+                    LandTagged = false;
+            }
+            else
+            {
+                airTime = 0f;
             }
 
             if (!LandTagged && isGrounded)

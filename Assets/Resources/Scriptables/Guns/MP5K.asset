@@ -31,6 +31,7 @@ MonoBehaviour:
   HorizontalRecoil: 0.5
   MaxHorizontal: 2.5
   RecoilDecay: 0.3
+  SpreadDecay: 2
   Displacement: 1
   MaxDisplacement: 3
   CrouchingMultiplier: 0.4
@@ -43,7 +44,7 @@ MonoBehaviour:
   ScopeImage: {fileID: 0}
   ReloadTime: 1.75
   MaxAmmo: 15
-  ReserveAmmo: 45
+  ReserveAmmo: 60
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
@@ -58,8 +59,6 @@ MonoBehaviour:
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []
-  HitSounds:
-  - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 87982b73589ab51419a5db3c6662e086, type: 3}
   - {fileID: 8300000, guid: 06aa4e039ce96944387e03d0a8168f2c, type: 3}

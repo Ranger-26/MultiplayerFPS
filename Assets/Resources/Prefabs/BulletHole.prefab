@@ -47,13 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d66cd8fc457227540bc1643f0cc41525, type: 2}
-  m_DrawDistance: 1000
+  m_DrawDistance: 50
   m_FadeScale: 1
   m_StartAngleFade: 180
   m_EndAngleFade: 180
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
-  m_AffectsTransparency: 0
+  m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_Offset: {x: 0, y: 0, z: 0.0065231444}
   m_Size: {x: 0.35, y: 0.35, z: 0.033936925}

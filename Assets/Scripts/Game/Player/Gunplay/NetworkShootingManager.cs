@@ -109,6 +109,12 @@ namespace Game.Player.Gunplay
         }
 
         [Command]
+        public void CmdMelee(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
+        {
+            ServerMelee(start, forward, id, visualFiringPoint);
+        }
+
+        [Command]
         public void CmdAmmo()
         {
             if (currentAmmo <= 0) return;
@@ -136,6 +142,52 @@ namespace Game.Player.Gunplay
                         Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
                         Debug.Log($"Hit something! {__hit.transform.name}, position {__hit.point}, shot by from player {id}");
                         
+                        Debug.Log($"Found body part {part.bodyPart} on {__hit.transform.name} when raycasting! ");
+                        float multiplier;
+                        switch (part.bodyPart)
+                        {
+                            case BodyPart.Head:
+                                multiplier = curGun.HeadMultiplier;
+                                break;
+                            default:
+                                multiplier = 1;
+                                break;
+                        }
+                        part.ServerTag(curGun.Tagging);
+                        part.ServerDamage(curGun.Damage, multiplier);
+
+                        ServerHit(__hit, visualFiringPoint);
+                    }
+                    else
+                    {
+                        ServerHit(__hit, visualFiringPoint);
+                        return;
+                    }
+                }
+            }
+        }
+
+        [Server]
+        private void ServerMelee(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
+        {
+            RaycastHit[] _hits = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers);
+
+            if (_hits.Length != 0)
+            {
+                Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
+
+                foreach (RaycastHit __hit in _hits)
+                {
+                    DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
+
+                    if (part != null)
+                    {
+                        if (part.Player.playerId == id)
+                            continue;
+
+                        Debug.DrawRay(start, forward * curGun.Range, Color.green, 1f);
+                        Debug.Log($"Hit something! {__hit.transform.name}, position {__hit.point}, shot by from player {id}");
+
                         Debug.Log($"Found body part {part.bodyPart} on {__hit.transform.name} when raycasting! ");
                         float multiplier;
                         switch (part.bodyPart)

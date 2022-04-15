@@ -5,11 +5,6 @@ public class ViewModel : MonoBehaviour
 {
     NetworkIdentity ni;
 
-    private void Awake()
-    {
-
-    }
-
     private void Start()
     {
         ni = GetComponentInParent<NetworkIdentity>();

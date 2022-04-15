@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5388824469547082503}
   - component: {fileID: 7070611908040809037}
   - component: {fileID: 5997218212386209497}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2756070115496385308}
   - component: {fileID: 4243143689165096876}
   - component: {fileID: 2983801376723489499}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: MeleeViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4807811952619573855}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

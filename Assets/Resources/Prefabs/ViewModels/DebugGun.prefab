@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4421991444573838027}
   - component: {fileID: 4177831950599218548}
   - component: {fileID: -9027195104956469736}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: DebugGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6996477868075680418, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}

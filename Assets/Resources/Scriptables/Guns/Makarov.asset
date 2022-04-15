@@ -30,14 +30,16 @@ MonoBehaviour:
   Recoil: 1
   HorizontalRecoil: 1
   MaxHorizontal: 4
-  RecoilDecay: 1
+  RecoilDecay: 0.4
   Displacement: 1
   MaxDisplacement: 4
   CrouchingMultiplier: 0.5
-  SwayAfterRound: 5
+  SwayAfterRecoil: 8
   SwayStartRight: 0
   HasScope: 0
+  ExitScopeOnShoot: 0
   ScopeFOV: 67.5
+  ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
   ReloadTime: 1.05
   MaxAmmo: 12
@@ -52,6 +54,7 @@ MonoBehaviour:
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   AimPunch: 0.75
   AimPunchDuration: 0.08
+  AimPunchDropDuration: 0.05
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []

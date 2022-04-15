@@ -554,6 +554,7 @@ MonoBehaviour:
   syncInterval: 0.1
   lookXLimit: 90
   cam: {fileID: 5789010012695376352}
+  cameraHolder: {fileID: 4331839624090802582}
 --- !u!114 &-3721155344957921899
 MonoBehaviour:
   m_ObjectHideFlags: 0

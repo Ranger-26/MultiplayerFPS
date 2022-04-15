@@ -61,18 +61,7 @@ namespace Game.Player.Movement
                     if (Vector3.Distance(previousStepLocation, transform.position) >= StepDistance)
                     {
                         previousStepLocation = transform.position;
-                        AudioMessage message = new AudioMessage()
-                        {
-                            id = AudioDatabase.Instance.clipsToIds[stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)]],
-                            position = transform.position,
-                            maxDistance = 20f,
-                            volume = 1f,
-                            pitch = 1f,
-                            spatialBlend = 1f,
-                            priority = 128
-                        };
-                        NetworkClient.Send(message);
-                        //AudioSystem.PlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
+                        AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
                     }
                 }
             }
@@ -94,18 +83,7 @@ namespace Game.Player.Movement
             {
                 Tag(0.8f);
                 previousStepLocation = transform.position;
-                AudioMessage message = new AudioMessage()
-                {
-                    id = AudioDatabase.Instance.clipsToIds[stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)]],
-                    position = transform.position,
-                    maxDistance = 20f,
-                    volume = 1f,
-                    pitch = 1f,
-                    spatialBlend = 1f,
-                    priority = 128
-                };
-                NetworkClient.Send(message);
-                //AudioSystem.PlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
+                AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
                 LandTagged = true;
             }
 

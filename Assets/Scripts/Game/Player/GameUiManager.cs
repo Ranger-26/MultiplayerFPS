@@ -58,7 +58,7 @@ namespace Game.Player
 
         public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();
 
-        public void UpdateAmmoUI(int currentAmmo, int reserveAmmo) => _ammoText.text = ((currentAmmo >= 200000) ? "¡Þ" : currentAmmo.ToString()) + " / " + ((reserveAmmo >= 200000) ? "¡Þ" : reserveAmmo.ToString());
+        public void UpdateAmmoUI(int currentAmmo, int reserveAmmo) => _ammoText.text = ((currentAmmo >= 200000) ? "inf" : currentAmmo.ToString()) + " / " + ((reserveAmmo >= 200000) ? "inf" : reserveAmmo.ToString());
 
         public void OnDie()
         {

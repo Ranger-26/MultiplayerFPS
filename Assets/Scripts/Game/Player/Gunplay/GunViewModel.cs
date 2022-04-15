@@ -4,6 +4,7 @@ using System.Collections;
 using AudioUtils;
 using Game.Player.Gunplay.IdentifierComponents;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
 using Unity.VisualScripting;
@@ -34,9 +35,15 @@ namespace Game.Player.Gunplay
         PlayerLook PL;
         PlayerCrouch PC;
 
-        Transform cam;
+        Camera cam;
+
         Transform firingPoint;
         Transform spreadPoint;
+
+        GameObject scopeUI;
+        GameObject model;
+
+        Image scopeUIImage;
 
         NetworkShootingManager nsm;
 
@@ -49,7 +56,6 @@ namespace Game.Player.Gunplay
 
         float recoilFactor;
         float displacementFactor;
-        float dropFactor;
         float lerpFactor;
 
         float spread;
@@ -64,6 +70,7 @@ namespace Game.Player.Gunplay
         bool delay;
         bool isSpraying;
         bool isSwaying;
+        bool isScoped;
         bool horizontalDirection;
         bool chargedUp;
         bool chargeupSound;
@@ -73,7 +80,18 @@ namespace Game.Player.Gunplay
         bool finishedReload;
 
         public GunIDs gunId;
-        
+
+        private void Awake()
+        {
+            PM = GetComponentInParent<PlayerMovement>();
+            PL = GetComponentInParent<PlayerLook>();
+            PC = GetComponentInParent<PlayerCrouch>();
+            scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
+            scopeUIImage = scopeUI.GetComponent<Image>();
+            cam = PL.cam;
+            model = transform.GetChild(0).gameObject;
+        }
+
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
@@ -86,23 +104,17 @@ namespace Game.Player.Gunplay
                 enabled = false;
             } 
 
-            PM = GetComponentInParent<PlayerMovement>();
-            PL = GetComponentInParent<PlayerLook>();
-            PC = GetComponentInParent<PlayerCrouch>();
             nsm = GetComponentInParent<NetworkShootingManager>();
-            cam = GetComponentInParent<Camera>().transform;
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
-
             anim = GetComponent<Animator>();
+
             anim.keepAnimatorControllerStateOnDisable = true;
 
             ni = GetComponentInParent<NetworkIdentity>();
 
             if (gun.ChargeupTime <= 0f)
-            {
                 chargedUp = true;
-            }
 
             canCharge = true;
             chambered = true;
@@ -110,9 +122,15 @@ namespace Game.Player.Gunplay
 
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
-            PM.weight = gun.Weight;
+
+            if (PM != null)
+                PM.weight = gun.Weight;
+
+            Scope(false);
 
             StartCoroutine(Draw());
+
+            scopeUIImage.sprite = gun.ScopeImage;
 
             if (nsm == null)
             {
@@ -125,11 +143,13 @@ namespace Game.Player.Gunplay
         private void OnEnable()
         {
             if (PM != null)
-            {
                 PM.weight = gun.Weight;
-            }
+
+            Scope(false);
 
             StartCoroutine(Draw());
+
+            scopeUIImage.sprite = gun.ScopeImage;
         }
 
         private void Update()
@@ -141,9 +161,7 @@ namespace Game.Player.Gunplay
             }
 
             if (!nsm.hasAuthority)
-            {
                 enabled = false;
-            }
 
             isSpraying = Input.GetMouseButton(0);
 
@@ -155,9 +173,7 @@ namespace Game.Player.Gunplay
                 Shoot();
 
                 if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.2f && shootTimer > 0f)
-                {
                     shootQueue = true;
-                }
             }
 
             if (shootQueue)
@@ -178,9 +194,7 @@ namespace Game.Player.Gunplay
                     chargeupSound = true;
 
                     if (gun.ChargeupSounds.Length != 0)
-                    {
-                        AudioSystem.PlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], spreadPoint.position + spreadPoint.forward * 0.5f, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
-                    }
+                        AudioSystem.NetworkPlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
                 }
             }
             else if (gun.ChargeupTime > 0f && !isSpraying && nsm.currentAmmo > 0)
@@ -201,9 +215,7 @@ namespace Game.Player.Gunplay
                     return;
 
                 if (anim != null)
-                {
                     anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
-                }
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -212,10 +224,11 @@ namespace Game.Player.Gunplay
                     return;
 
                 if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
-                {
                     Reload();
-                }
             }
+
+            if (Input.GetMouseButtonDown(1) && gun.HasScope && !delay)
+                Scope(!isScoped);
 
             float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
             float z = Input.GetAxisRaw(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
@@ -225,9 +238,7 @@ namespace Game.Player.Gunplay
                 );
 
             if ((x == 0) && (z == 0))
-            {
                 lerpFactor = Mathf.Clamp01(lerpFactor - Time.deltaTime * gun.BackingMultiplier);
-            }
 
             Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), lerpFactor);
 
@@ -242,9 +253,7 @@ namespace Game.Player.Gunplay
                 Chamber();
 
                 if (chamberTimer == 0f)
-                {
                     FinishReload();
-                }
             }
 
             Crosshair.Instance.UpdateError(spread);
@@ -253,20 +262,16 @@ namespace Game.Player.Gunplay
         private void FixedUpdate()
         {
             if (PM == null) return;
-            isSwaying = recoilFactor > gun.SwayAfterRound;
+
+            isSwaying = recoilFactor > gun.SwayAfterRecoil;
 
             moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
 
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
 
-            if ((shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || (gun.GunFiringMode == FiringMode.SemiAuto)) || (nsm.currentAmmo == 0))
+            if (shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto || gun.GunFiringMode == FiringMode.SemiAuto) || nsm.currentAmmo == 0)
             {
-                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                dropFactor = Mathf.Clamp(dropFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRound + 1);
-                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.RecoilDecay, gun.StartingSpread, gun.MaxSpread);
-
                 UpdateSpread();
 
                 if (!isSwaying)
@@ -275,21 +280,43 @@ namespace Game.Player.Gunplay
                     horizontalDirection = gun.SwayStartRight;
                 }
 
-                if (dropFactor > 0f)
+                if (PL.GetCameraVisualRotation() != Quaternion.Euler(Vector3.zero))
                 {
-                    PL.MoveCamera(-Time.fixedDeltaTime * 10f * gun.RecoilDecay * gun.Recoil, 0f);
+                    PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay));
                 }
+
+                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 15f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 20f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.SpreadDecay, gun.StartingSpread, gun.MaxSpread);
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
+        }
+
+        public void Scope(bool status)
+        {
+            if (!gun.HasScope)
+            {
+                isScoped = false;
+                cam.fieldOfView = 87.5f;
+                scopeUI.SetActive(false);
+                model.SetActive(true);
+                return;
+            }
+
+            isScoped = status;
+            cam.fieldOfView = status ? gun.ScopeFOV : 87.5f;
+            scopeUI.SetActive(status);
+            model.SetActive(!status);
+
+            if (PM != null) PM.weight = status ? gun.ScopeSpeedReduction : gun.Weight;
         }
 
         public void Shoot()
         {
             if (!ni.hasAuthority) return;
 
-            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0 && !isSpraying)
-                return;
+            if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0 && !isSpraying) return;
 
             if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
             {
@@ -304,13 +331,14 @@ namespace Game.Player.Gunplay
                         // nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
 
                         if (muzzleFlash != null)
-                        {
                             nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, muzzleFlash.transform.position);
-                        }
                         else
-                        {
                             nsm.CmdShoot(spreadPoint.position, spreadPoint.forward, transform.position);
-                        }
+                    }
+
+                    if (gun.ExitScopeOnShoot)
+                    {
+                        Scope(false);
                     }
 
                     Spread();
@@ -328,45 +356,28 @@ namespace Game.Player.Gunplay
 
         public void Visual()
         {
-            if (muzzleFlash != null)
+            if (!isScoped)
             {
-                muzzleFlash.Play();
-            }
+                if (muzzleFlash != null)
+                    muzzleFlash.Play();
 
-            if (anim != null)
-            {
-                anim.Play(StringKeys.GunShootAnimation, -1, 0f);
+                if (anim != null)
+                    anim.Play(StringKeys.GunShootAnimation, -1, 0f);
             }
 
             if (gun.ShootSounds.Length != 0)
-            {
-                AudioMessage message = new AudioMessage()
-                {
-                    id = AudioDatabase.Instance.clipsToIds[gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)]],
-                    position = cam.position,
-                    maxDistance = gun.SoundMaxDistance,
-                    volume = gun.SoundVolume,
-                    pitch = 1f,
-                    spatialBlend = 1.1f,
-                    priority = gun.SoundPriority
-                };
-                NetworkClient.Send(message);
-                //AudioSystem.PlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1.1f, gun.SoundPriority);
-            }
+                AudioSystem.NetworkPlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
         }
 
         private void Recoil()
         {
-            recoilFactor = Mathf.Clamp(recoilFactor + 1, 0f, gun.SwayAfterRound + 1);
-            dropFactor += gun.Recoil;
+            recoilFactor = Mathf.Clamp(recoilFactor + gun.Recoil, 0f, gun.SwayAfterRecoil + gun.Recoil);
 
-            if (recoilFactor < gun.SwayAfterRound)
-            {
-                PL.MoveCamera(gun.Recoil);
-            }
+            if (recoilFactor < gun.SwayAfterRecoil)
+                PL.MoveCameraVisual(gun.Recoil);
             else
             {
-                PL.MoveCamera(0f, (horizontalDirection ? 1 : -1) * gun.HorizontalRecoil);
+                PL.MoveCameraVisual(0f, (horizontalDirection ? 1 : -1) * gun.HorizontalRecoil);
 
                 horizontalRecoil += gun.HorizontalRecoil;
 
@@ -382,10 +393,8 @@ namespace Game.Player.Gunplay
 
         private void Displacement()
         {
-            if (recoilFactor >= gun.SwayAfterRound / 4)
-            {
+            if (recoilFactor >= gun.SwayAfterRecoil / 4)
                 displacementFactor = Mathf.Clamp(displacementFactor + gun.Displacement, 0f, gun.MaxDisplacement);
-            }
         }
 
         private void Spread()
@@ -404,26 +413,22 @@ namespace Game.Player.Gunplay
         
         private IEnumerator AimPunch()
         {
-            float timer = 0f;
+            float timer = gun.AimPunchDuration;
 
-            while (timer <= gun.AimPunchDuration / 3)
+            while (timer > 0f)
             {
-                PL.MoveCamera(gun.AimPunch / (gun.AimPunchDuration / 3) * Time.fixedDeltaTime);
+                timer -= Time.deltaTime;
 
-                timer += Time.fixedDeltaTime;
+                PL.MoveCameraAimPunch(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
 
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
 
-            timer = 0f;
-
-            while (timer <= gun.AimPunchDuration * 2 / 3)
+            while (PL.GetCameraAimPunchRotation() != Quaternion.Euler(Vector3.zero))
             {
-                PL.MoveCamera(-gun.AimPunch / (gun.AimPunchDuration * 2 / 3) * Time.fixedDeltaTime);
+                PL.SetCameraAimPunch(Quaternion.RotateTowards(PL.GetCameraAimPunchRotation(), Quaternion.Euler(Vector3.zero), gun.AimPunch / gun.AimPunchDropDuration));
 
-                timer += Time.fixedDeltaTime;
-
-                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
             }
         }
 
@@ -437,14 +442,14 @@ namespace Game.Player.Gunplay
             chambered = false;
             finishedReload = false;
 
+            Scope(false);
+
             reloadTimer = nsm.curGun.ReloadTime;
 
             Debug.Log("Reloading... ");
 
             if (anim != null)
-            {
                 anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
-            }
 
             nsm.CmdReload();
         }
@@ -465,9 +470,7 @@ namespace Game.Player.Gunplay
                 chargeupTimer = 0f;
 
                 if (gun.ChargeupTime > 0f)
-                {
                     chargedUp = false;
-                }
 
                 canCharge = true;
                 finishedReload = true;
@@ -482,22 +485,17 @@ namespace Game.Player.Gunplay
             chambered = true;
 
             if (anim != null)
-            {
                 anim.Play(StringKeys.GunDrawAnimation, -1, 0f);
-            }
 
             spread = gun.StartingSpread;
 
             displacementFactor = 0f;
             recoilFactor = 0f;
-            dropFactor = 0f;
 
             yield return new WaitForSeconds(gun.DrawTime);
 
             if (anim != null)
-            {
                 anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
-            }
 
             canCharge = true;
             delay = false;

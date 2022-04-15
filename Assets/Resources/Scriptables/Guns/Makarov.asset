@@ -22,22 +22,25 @@ MonoBehaviour:
   Weight: 0.07
   BulletCount: 1
   GunFiringMode: 1
-  Spread: 2.5
+  Spread: 1.8
   MovementSpread: 1
-  MaxSpread: 5
-  MaxMovementSpread: 15
+  MaxSpread: 3.5
+  MaxMovementSpread: 10
   StartingSpread: 0.2
   Recoil: 1
-  HorizontalRecoil: 1
-  MaxHorizontal: 4
-  RecoilDecay: 1
+  HorizontalRecoil: 0.5
+  MaxHorizontal: 1
+  RecoilDecay: 0.4
+  SpreadDecay: 2
   Displacement: 1
   MaxDisplacement: 4
   CrouchingMultiplier: 0.5
-  SwayAfterRound: 5
-  SwayStartRight: 0
+  SwayAfterRecoil: 4
+  SwayStartRight: 1
   HasScope: 0
+  ExitScopeOnShoot: 0
   ScopeFOV: 67.5
+  ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
   ReloadTime: 1.05
   MaxAmmo: 12
@@ -52,6 +55,7 @@ MonoBehaviour:
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   AimPunch: 0.75
   AimPunchDuration: 0.08
+  AimPunchDropDuration: 0.05
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []
@@ -59,7 +63,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 30b4738632e85a048aa98204922b2dab, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 58c35ce94e18cee458c5214c775fb9ff, type: 3}
-  SoundMaxDistance: 75
+  SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128
   UniqueGunID: 3

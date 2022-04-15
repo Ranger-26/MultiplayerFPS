@@ -49,8 +49,10 @@ namespace Game.Player.Gunplay
         public float HorizontalRecoil = 1f;
         [Tooltip("Max degrees of sway allowed (switches direction when reached)")]
         public float MaxHorizontal = 4f;
-        [Tooltip("Recoil decay per second, this is x10 by default")]
+        [Tooltip("Recoil decay per second")]
         public float RecoilDecay = 1f;
+        [Tooltip("Spread decay per second")]
+        public float SpreadDecay = 2f;
         [Tooltip("Amount of displacement (bullets go over the crosshair) per shot after the displacement phase begins")]
         public float Displacement = 1f;
         [Tooltip("Displacement cap for shooting")]
@@ -60,7 +62,7 @@ namespace Game.Player.Gunplay
         public float CrouchingMultiplier = 0.5f;
 
         [Tooltip("How many rounds must be shot before starting to sway left and right, displacement is applied at 25% of this value")]
-        public int SwayAfterRound = 8;
+        public int SwayAfterRecoil = 8;
 
         [Tooltip("Determines if the swaying starts going right first")]
         public bool SwayStartRight = false;
@@ -68,9 +70,14 @@ namespace Game.Player.Gunplay
         [Header("Scopes")]
         [Tooltip("Determines whether or not you can scope in with this gun")]
         public bool HasScope;
+        [Tooltip("Determines whether or not you exit the scope when you shoot")]
+        public bool ExitScopeOnShoot;
 
         [Tooltip("Zoomed in FOV of player")]
         public float ScopeFOV = 67.5f;
+        [Tooltip("Speed reduction when scoped in percentage, overrides weight")]
+        [Range(0f, 1f)]
+        public float ScopeSpeedReduction = 0.3f;
 
         [Tooltip("The overlay for the scope")]
         public Sprite ScopeImage;
@@ -105,7 +112,9 @@ namespace Game.Player.Gunplay
         [Tooltip("The amount that the camera jumps when shooting in degrees")]
         public float AimPunch = 1f;
         [Tooltip("The duration for the camera jump")]
-        public float AimPunchDuration = 0.05f;
+        public float AimPunchDuration = 0.025f;
+        [Tooltip("The duration for the camera drop")]
+        public float AimPunchDropDuration = 0.05f;
         [Tooltip("The amount that the view model moves back when spread is increasing")]
         public float MaxBacking = 0.1f;
         [Tooltip("The multiplier for the backing speed")]

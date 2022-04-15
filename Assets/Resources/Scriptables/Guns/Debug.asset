@@ -36,9 +36,9 @@ MonoBehaviour:
   CrouchingMultiplier: 0.5
   SwayAfterRound: 7
   SwayStartRight: 0
-  HasScope: 0
+  HasScope: 1
   ScopeFOV: 67.5
-  ScopeImage: {fileID: 0}
+  ScopeImage: {fileID: 21300000, guid: 2b97d134cb49e0c468eecdfa09ec67e1, type: 3}
   ReloadTime: 2
   MaxAmmo: 30
   ReserveAmmo: 90

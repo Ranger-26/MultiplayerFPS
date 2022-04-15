@@ -178,11 +178,6 @@ namespace Game.Player.Gunplay
             }
 
             ServerTracer(visualFiringPoint, _hit.point);
-
-            if (curGun.HitSounds.Length != 0)
-            {
-                AudioSystem.NetworkPlaySound(curGun.HitSounds[UnityEngine.Random.Range(0, curGun.HitSounds.Length - 1)], _hit.point, curGun.SoundMaxDistance, curGun.SoundVolume, 1f, 1f, curGun.SoundPriority);
-            }
         }
 
         [Server]

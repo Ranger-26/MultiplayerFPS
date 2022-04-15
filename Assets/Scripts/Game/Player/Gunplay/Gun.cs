@@ -122,8 +122,6 @@ namespace Game.Player.Gunplay
 
         [Tooltip("Chargeup sounds, a sound in this list will be randomly selected to play when shooting")]
         public AudioClip[] ChargeupSounds;
-        [Tooltip("Hit sounds (not for players), a sound in this list will be randomly selected to play when shooting")]
-        public AudioClip[] HitSounds;
         [Tooltip("Shooting sounds, a sound in this list will be randomly selected to play when shooting")]
         public AudioClip[] ShootSounds;
 

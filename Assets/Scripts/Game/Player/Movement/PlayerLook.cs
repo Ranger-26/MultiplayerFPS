@@ -9,8 +9,10 @@ namespace Game.Player.Movement
 
         public float lookXLimit = 90.0f;
 
-        [SerializeField]
-        Camera cam;
+        public Camera cam;
+        public Transform cameraHolder;
+        public Transform visualCamera;
+        public Transform aimPunchCamera;
 
         float rotationX = 0;
         float rotationY = 0;
@@ -18,8 +20,6 @@ namespace Game.Player.Movement
 
         private void Awake()
         {
-            cam = transform.GetChild(0).GetChild(0).GetComponent<Camera>();
-
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -29,7 +29,7 @@ namespace Game.Player.Movement
             if (!hasAuthority)
             {
                 cam.enabled = false;
-                cam.transform.parent.GetComponentInChildren<AudioListener>().enabled = false;
+                cam.GetComponent<AudioListener>().enabled = false;
                 enabled = false;
             }
         }
@@ -43,25 +43,24 @@ namespace Game.Player.Movement
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             rotationY = Input.GetAxis("Mouse X") * lookSpeed + addY;
             addY = 0f;
-            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, rotationY, 0);
+            UpdateCamera();
         }
+
+        #region Main Camera Movement Overloads
 
         public void MoveCamera(float x, float y)
         {
             rotationX += -x;
             addY = y;
 
-            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, rotationY, 0);
+            UpdateCamera();
         }
 
         public void MoveCamera(float x)
         {
             rotationX += -x;
 
-            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, rotationY, 0);
+            UpdateCamera();
         }
 
         public void MoveCamera(Vector2 move)
@@ -69,7 +68,94 @@ namespace Game.Player.Movement
             rotationX += -move.x;
             addY = move.y;
 
-            cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            UpdateCamera();
+        }
+
+        #endregion
+
+        #region Visual Camera Movement Overloads
+
+        public void MoveCameraVisual(float x, float y)
+        {
+            visualCamera.Rotate(Vector3.right * -x + Vector3.up * y, Space.Self);
+        }
+
+        public void MoveCameraVisual(float x)
+        {
+            visualCamera.Rotate(Vector3.right * -x, Space.Self);
+        }
+
+        public void MoveCameraVisual(Vector2 move)
+        {
+            visualCamera.Rotate(Vector3.right * -move.x + Vector3.up * move.y, Space.Self);
+        }
+
+        public void SetCameraVisual(float x, float y)
+        {
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * y);
+        }
+
+        public void SetCameraVisual(float x)
+        {
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * visualCamera.localRotation.y);
+        }
+
+        public void SetCameraVisual(Vector2 move)
+        {
+            visualCamera.localRotation = Quaternion.Euler(Vector3.right * -move.x + Vector3.up * move.y);
+        }
+
+        public void SetCameraVisual(Quaternion move)
+        {
+            visualCamera.localRotation = move;
+        }
+
+        #endregion
+
+        #region Aim Punch Camera Movement Overloads
+
+        public void MoveCameraAimPunch(float x, float y)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -x + Vector3.up * y, Space.Self);
+        }
+
+        public void MoveCameraAimPunch(float x)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -x, Space.Self);
+        }
+
+        public void MoveCameraAimPunch(Vector2 move)
+        {
+            aimPunchCamera.Rotate(Vector3.right * -move.x + Vector3.up * move.y, Space.Self);
+        }
+
+        public void SetCameraAimPunch(float x, float y)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * y);
+        }
+
+        public void SetCameraAimPunch(float x)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -x + Vector3.up * visualCamera.localRotation.y);
+        }
+
+        public void SetCameraAimPunch(Vector2 move)
+        {
+            aimPunchCamera.localRotation = Quaternion.Euler(Vector3.right * -move.x + Vector3.up * move.y);
+        }
+
+        public void SetCameraAimPunch(Quaternion move)
+        {
+            aimPunchCamera.localRotation = move;
+        }
+
+        #endregion
+
+        #region Misc Camera Functions
+
+        public void UpdateCamera()
+        {
+            cameraHolder.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, rotationY, 0);
         }
 
@@ -77,5 +163,17 @@ namespace Game.Player.Movement
         {
             return new Vector2(rotationX, rotationY);
         }
+
+        public Quaternion GetCameraVisualRotation()
+        {
+            return visualCamera.localRotation;
+        }
+
+        public Quaternion GetCameraAimPunchRotation()
+        {
+            return aimPunchCamera.localRotation;
+        }
+
+        #endregion
     }
 }

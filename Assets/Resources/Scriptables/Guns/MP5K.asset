@@ -30,7 +30,7 @@ MonoBehaviour:
   Recoil: 0.8
   HorizontalRecoil: 0.5
   MaxHorizontal: 2.5
-  RecoilDecay: 1.2
+  RecoilDecay: 0.3
   Displacement: 1
   MaxDisplacement: 3
   CrouchingMultiplier: 0.4
@@ -54,6 +54,7 @@ MonoBehaviour:
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   AimPunch: 0.5
   AimPunchDuration: 0.05
+  AimPunchDropDuration: 0.05
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []

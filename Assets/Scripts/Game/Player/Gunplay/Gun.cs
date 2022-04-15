@@ -49,8 +49,10 @@ namespace Game.Player.Gunplay
         public float HorizontalRecoil = 1f;
         [Tooltip("Max degrees of sway allowed (switches direction when reached)")]
         public float MaxHorizontal = 4f;
-        [Tooltip("Recoil decay per second, this is x10 by default")]
+        [Tooltip("Recoil decay per second")]
         public float RecoilDecay = 1f;
+        [Tooltip("Spread decay per second")]
+        public float SpreadDecay = 2f;
         [Tooltip("Amount of displacement (bullets go over the crosshair) per shot after the displacement phase begins")]
         public float Displacement = 1f;
         [Tooltip("Displacement cap for shooting")]

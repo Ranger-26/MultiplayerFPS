@@ -1,3 +1,4 @@
+using Koenigz.PerfectCulling;
 using Mirror;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ namespace Game.Player.Movement
             {
                 cam.enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
+                cam.GetComponent<PerfectCullingCamera>().enabled = false;
                 enabled = false;
             }
         }

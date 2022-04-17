@@ -18,7 +18,6 @@ namespace AudioUtils
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {

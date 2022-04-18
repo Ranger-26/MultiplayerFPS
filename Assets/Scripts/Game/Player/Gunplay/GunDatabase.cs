@@ -50,7 +50,7 @@ namespace Game.Player.Gunplay
         { 
             if (!idsToModels.ContainsKey(id))
             {
-                Debug.LogError($"Gun id {id} was not found in the dictionary of gun models.");
+                Debug.LogError($"Gun with ID {id} was not found in the dictionary of gun models.");
                 newGunModel = null;
                 return false;
             }

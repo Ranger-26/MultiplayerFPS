@@ -22,6 +22,7 @@ namespace Game.Player.Movement
         //ground stuff
         public Transform groundCheck;
         public float groundDistance = 0.4f;
+        public float noTagDistance = 0.6f;
         [HideInInspector]
         public float weight;
         public LayerMask groundMask;
@@ -79,7 +80,7 @@ namespace Game.Player.Movement
             {
                 airTime += Time.deltaTime;
 
-                if (airTime >= 0.5f)
+                if (airTime >= 0.5f || !Physics.CheckSphere(groundCheck.position, noTagDistance, groundMask))
                     LandTagged = false;
             }
             else

@@ -94,7 +94,9 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
-            if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
+            ni = GetComponentInParent<NetworkIdentity>();
+
+            if (!ni.isLocalPlayer)
             {
                 Transform tempcam = GetComponentInParent<Camera>().transform;
                 Destroy(tempcam.GetComponentInChildren<FiringPoint>().gameObject);
@@ -102,16 +104,14 @@ namespace Game.Player.Gunplay
                 tempcam.GetComponent<Camera>().enabled = false;
                 tempcam.GetComponent<AudioListener>().enabled = false;
                 enabled = false;
-            } 
+            }
 
             nsm = GetComponentInParent<NetworkShootingManager>();
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
-            anim = GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
 
             anim.keepAnimatorControllerStateOnDisable = true;
-
-            ni = GetComponentInParent<NetworkIdentity>();
 
             if (gun.ChargeupTime <= 0f)
                 chargedUp = true;
@@ -132,10 +132,7 @@ namespace Game.Player.Gunplay
 
             scopeUIImage.sprite = gun.ScopeImage;
 
-            if (nsm == null)
-            {
-                Debug.LogError("Network Shooting Manager is null in the start!");
-            }
+            if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
         }
 

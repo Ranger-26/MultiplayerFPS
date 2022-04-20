@@ -96,15 +96,15 @@ namespace Game.Player.Movement
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt16(!MenuOpen.IsOpen);
+            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt16(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
             move = Vector3.ClampMagnitude(move, 1f);
 
             float moddedSpeed = speed - speed * weight;
 
-            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
+            controller.Move(move * (moddedSpeed - moddedSpeed * tagging * Convert.ToInt16(isGrounded)) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

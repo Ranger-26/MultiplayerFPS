@@ -104,15 +104,25 @@ public class Melee : MonoBehaviour
 
         if (!nsm.hasAuthority)
             enabled = false;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            LightAttack();
+        }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            HeavyAttack();
+        }
     }
 
     public void LightAttack()
     {
-
+        if (delay) return;
     }
 
     public void HeavyAttack()
     {
-
+        if (delay) return;
     }
 }

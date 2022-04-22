@@ -32,6 +32,16 @@ namespace Networking
         {
             base.OnClientConnect();
             OnClientJoin?.Invoke();
+            
+            var spawnablePrefabs = Resources.LoadAll<GameObject>("Prefabs/SpawnablePrefabs");
+
+            foreach (var prefab in spawnablePrefabs)
+            {
+                if (prefab.TryGetComponent(out NetworkIdentity identity))
+                {
+                    NetworkClient.RegisterPrefab(prefab);
+                }
+            }
         }
         
         public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnection conn)

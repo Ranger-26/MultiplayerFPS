@@ -23,6 +23,9 @@ public class Melee : MonoBehaviour
 
     GameObject model;
 
+    Transform firingPoint;
+    Transform spreadPoint;
+
     Camera cam;
 
     PlayerMovement PM;
@@ -38,10 +41,14 @@ public class Melee : MonoBehaviour
         PM = GetComponentInParent<PlayerMovement>();
         PL = GetComponentInParent<PlayerLook>();
         PC = GetComponentInParent<PlayerCrouch>();
+
         cam = PL.cam;
         model = transform.GetChild(0).gameObject;
         anim = GetComponentInChildren<Animator>();
         anim.keepAnimatorControllerStateOnDisable = true;
+
+        firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
+        spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
     }
 
     private void Start()
@@ -63,8 +70,7 @@ public class Melee : MonoBehaviour
         if (PM == null) { Debug.LogError("Player movement is null!"); }
         if (PL == null) { Debug.LogError("Player look is null!"); }
 
-        if (PM != null)
-            PM.weight = 0f;
+        if (PM != null) PM.weight = 0f;
 
         if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
 
@@ -102,8 +108,7 @@ public class Melee : MonoBehaviour
             return;
         }
 
-        if (!nsm.hasAuthority)
-            enabled = false;
+        if (!nsm.hasAuthority) enabled = false;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -119,10 +124,26 @@ public class Melee : MonoBehaviour
     public void LightAttack()
     {
         if (delay) return;
+
+        if (anim != null)
+            anim.Play(StringKeys.MeleeLightAnimation, -1, 0f);
     }
 
     public void HeavyAttack()
     {
         if (delay) return;
+
+        if (anim != null)
+            anim.Play(StringKeys.MeleeHeavyAnimation, -1, 0f);
+    }
+
+    public void Light()
+    {
+        nsm.CmdMelee(spreadPoint.position, spreadPoint.forward, 1f);
+    }
+
+    public void Heavy()
+    {
+        nsm.CmdMelee(spreadPoint.position, spreadPoint.forward, 2f);
     }
 }

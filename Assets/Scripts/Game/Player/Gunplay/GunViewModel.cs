@@ -123,8 +123,7 @@ namespace Game.Player.Gunplay
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
 
-            if (PM != null)
-                PM.weight = gun.Weight;
+            if (PM != null) PM.weight = gun.Weight;
 
             Scope(false);
 

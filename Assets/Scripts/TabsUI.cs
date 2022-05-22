@@ -4,7 +4,7 @@ public class TabsUI : MonoBehaviour
 {
     public GameObject[] tabs;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (tabs.Length != 0)
             ActivateTab(0);

@@ -6,7 +6,7 @@ namespace Game.Player.Movement
 {
     public class PlayerLook : NetworkBehaviour
     {
-        public float lookSpeed => GameSettings.Sensitivity;
+        public float lookSpeed => GameSettings.current.Sensitivity;
 
         public float lookXLimit = 90.0f;
 

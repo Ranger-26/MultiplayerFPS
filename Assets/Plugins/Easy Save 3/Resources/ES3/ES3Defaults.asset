@@ -29,10 +29,11 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
+    - Assembly-CSharp
     - PerfectCulling
+    - Assembly-CSharp-firstpass
     - Mirror
     - com.rlabrecque.steamworks.net
-    - Assembly-CSharp
     - Cinemachine
     - FizzySteamworks
     - Telepathy
@@ -41,7 +42,6 @@ MonoBehaviour:
     - SimpleWebTransport
     - where-allocations
     - Mirror.Authenticators
-    - Assembly-CSharp-firstpass
     - com.rlabrecque.steamworks.net.editor
     - Mirror.Editor
     - Mirror.CompilerSymbols

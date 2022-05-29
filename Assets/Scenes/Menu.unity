@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 172410547}
   - component: {fileID: 172410546}
   m_Layer: 5
-  m_Name: Width
+  m_Name: Length
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Width
+  m_Text: Length
 --- !u!222 &172410547
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2024,7 +2024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1009.5547, y: -50}
+  m_AnchoredPosition: {x: 1009.5565, y: -50}
   m_SizeDelta: {x: 500, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764340225
@@ -2667,7 +2667,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: '0
+
+'
 --- !u!222 &956567036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4321,7 +4323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1549.5547, y: -50}
+  m_AnchoredPosition: {x: 1549.5565, y: -50}
   m_SizeDelta: {x: 500, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381301624
@@ -5091,7 +5093,7 @@ GameObject:
   - component: {fileID: 1604493587}
   - component: {fileID: 1604493586}
   m_Layer: 5
-  m_Name: Height
+  m_Name: Thickness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5151,7 +5153,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Height
+  m_Text: Thickness
 --- !u!222 &1604493587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5907,7 +5909,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: '0
+
+'
 --- !u!222 &1821673258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6054,7 +6058,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: '0
+
+'
 --- !u!222 &1843157661
 CanvasRenderer:
   m_ObjectHideFlags: 0

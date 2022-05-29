@@ -53,6 +53,7 @@ public class Crosshair : MonoBehaviour
         foreach (RectTransform rectTrans in CrosshairParts)
         {
             if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
+
             rectTrans.sizeDelta = new Vector2(ch.length, ch.thickness);
             rectTrans.gameObject.GetComponent<Image>().color = ch.color;
         }

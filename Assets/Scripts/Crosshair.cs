@@ -24,6 +24,8 @@ public class Crosshair : MonoBehaviour
     {
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
+
+        rect = GetComponent<RectTransform>();
     }
 
     private void Start() => Init();
@@ -32,23 +34,7 @@ public class Crosshair : MonoBehaviour
 
     private void Init()
     {
-        rect = GetComponent<RectTransform>();
-
-        CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
-        CrosshairParts = CrosshairParts.Skip(1).ToArray();
-        Debug.Log($"Found {CrosshairParts.Length} cross parts.");
-
-        foreach (RectTransform rectTrans in CrosshairParts)
-        {
-            if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
-            rectTrans.sizeDelta = new Vector2(ch.length, ch.thickness);
-            rectTrans.gameObject.GetComponent<Image>().color = ch.color;
-        }
-
-        size = ch.length * 2 + ch.offset;
-        startingSize = size;
-
-        rect.sizeDelta = new Vector2(size, size);
+        UpdateSettings();
     }
 
     public void UpdateSettings() 
@@ -83,8 +69,6 @@ public class Crosshair : MonoBehaviour
             return;
 
         size = startingSize + errorPixelsFire * ch.firingErrorMultiplier;
-
-        //Debug.Log(size);
 
         rect.sizeDelta = new Vector2(size, size);
     }

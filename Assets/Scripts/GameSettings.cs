@@ -1,15 +1,24 @@
 using UnityEngine;
+using System.IO;
 
 public static class GameSettingsLoader
 {
     public static void SaveFile(Settings sett)
     {
-        ES3.Save("settings", sett, Application.persistentDataPath + "/Eternity Studios/SCP Intrusion/Settings");
+        ES3.Save("settings", sett, Application.persistentDataPath + "/Settings/general.dat");
     }
 
     public static Settings LoadFile()
     {
-        return ES3.Load<Settings>("settings", Application.persistentDataPath + "/Eternity Studios/SCP Intrusion/Settings");
+        if (File.Exists(Application.persistentDataPath + "/Settings/general.dat"))
+            return ES3.Load<Settings>("settings", Application.persistentDataPath + "/Settings/general.dat");
+        else
+        {
+            Settings temp = new Settings();
+
+            SaveFile(temp);
+            return temp;
+        }
     }
 }
 
@@ -24,6 +33,12 @@ public class Settings
     public float Sensitivity;
 
     public CrosshairSettings ch = new CrosshairSettings();
+
+    public Settings()
+    {
+        Sensitivity = 1f;
+        ch = new CrosshairSettings();
+    }
 }
 
 [System.Serializable]

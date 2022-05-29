@@ -13,6 +13,11 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField]
     InputField c_offset;
 
+    private void Awake()
+    {
+        GameSettings.current = GameSettingsLoader.LoadFile();
+    }
+
     private void OnEnable()
     {
         sens.text = GameSettings.current.Sensitivity.ToString();

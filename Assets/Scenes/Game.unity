@@ -800,6 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 313973396}
   - component: {fileID: 313973397}
+  - component: {fileID: 313973398}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -850,6 +851,27 @@ MonoBehaviour:
   color: {r: 255, g: 255, b: 255, a: 100}
   firingErrorMultiplier: 5
   firingError: 1
+--- !u!223 &313973398
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313973395}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 1
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &340620554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4667,7 +4689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.72434616, y: -0.000011444092}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 3}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &995152181

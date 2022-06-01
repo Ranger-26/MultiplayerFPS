@@ -75,6 +75,8 @@ namespace Game.Player.Gunplay
 
         [Tooltip("Zoomed in FOV of player")]
         public float ScopeFOV = 67.5f;
+        [Tooltip("Spread amount while scoped for each shot")]
+        public float ScopedSpread = 0f;
         [Tooltip("Speed reduction when scoped in percentage, overrides weight")]
         [Range(0f, 1f)]
         public float ScopeSpeedReduction = 0.3f;

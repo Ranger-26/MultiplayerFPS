@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
-using Unity.VisualScripting;
 using UnityEngine.Rendering.HighDefinition;
 using Random = UnityEngine.Random;
 
@@ -395,7 +394,7 @@ namespace Game.Player.Gunplay
 
         private void Spread()
         {
-            spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
+            spread = Mathf.Clamp(spread + (isScoped ? gun.ScopedSpread : gun.Spread), isScoped ? gun.ScopedSpread : gun.StartingSpread, gun.MaxSpread);
 
             UpdateSpread();
         }

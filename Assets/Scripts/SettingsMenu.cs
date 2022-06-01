@@ -13,6 +13,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField]
     InputField c_offset;
 
+    [SerializeField]
+    FlexibleColorPicker fcp;
+
     private void Awake()
     {
         GameSettings.current = GameSettingsLoader.LoadFile();
@@ -43,6 +46,8 @@ public class SettingsMenu : MonoBehaviour
         GameSettings.current.ch.length = (int)crs.x;
         GameSettings.current.ch.thickness = (int)crs.y;
         GameSettings.current.ch.offset = (int)crs.z;
+
+        GameSettings.current.ch.color = fcp.color;
 
         GameSettingsLoader.SaveFile(GameSettings.current);
     }

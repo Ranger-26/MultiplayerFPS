@@ -61,6 +61,8 @@ public class Crosshair : MonoBehaviour
         size = ch.length * 2 + ch.offset;
         startingSize = size;
 
+        rect.localScale = new Vector3(ch.scale, ch.scale, 1f);
+
         rect.sizeDelta = new Vector2(size, size);
     }
 

@@ -48,6 +48,8 @@ public class CrosshairSettings
     public int length = 10;
     public int thickness = 3;
 
+    public float scale = 1f;
+
     public Color color = new Color(255f, 255f, 255f, 100f);
 
     public float firingErrorMultiplier = 10f;
@@ -59,6 +61,14 @@ public class CrosshairSettings
         offset = 5;
         length = 10;
         thickness = 3;
+
+        scale = 1f;
+
+        color = new Color(255f, 255f, 255f, 100f);
+
+        firingErrorMultiplier = 10f;
+
+        firingError = true;
     }
 
     public CrosshairSettings(int _thickness, int _length, int _offset)

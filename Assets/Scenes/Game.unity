@@ -800,7 +800,6 @@ GameObject:
   m_Component:
   - component: {fileID: 313973396}
   - component: {fileID: 313973397}
-  - component: {fileID: 313973398}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -845,33 +844,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 25
-  offset: 5
-  length: 10
-  thickness: 3
-  color: {r: 255, g: 255, b: 255, a: 100}
-  firingErrorMultiplier: 5
-  firingError: 1
---- !u!223 &313973398
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313973395}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 1
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
+  ch:
+    offset: 5
+    length: 10
+    thickness: 3
+    color: {r: 255, g: 255, b: 255, a: 100}
+    firingErrorMultiplier: 10
+    firingError: 1
 --- !u!1 &340620554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1637,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 3}
+  m_SizeDelta: {x: 8, y: 2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &432210792
 MonoBehaviour:
@@ -2607,7 +2586,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 3}
+  m_SizeDelta: {x: 8, y: 2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &591835416
 MonoBehaviour:
@@ -3648,7 +3627,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 3}
+  m_SizeDelta: {x: 8, y: 2}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &815038892
 MonoBehaviour:
@@ -4690,7 +4669,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 3}
+  m_SizeDelta: {x: 8, y: 2}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &995152181
 MonoBehaviour:
@@ -6239,7 +6218,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh95532
+  m_Name: pb_Mesh34248
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9507,7 +9486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2560, y: 1440}
   m_ScreenMatchMode: 0
@@ -9591,6 +9570,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sens: {fileID: 1723581893}
+  c_width: {fileID: 0}
+  c_height: {fileID: 0}
+  c_offset: {fileID: 0}
+  fcp: {fileID: 0}
 --- !u!1 &2068748887
 GameObject:
   m_ObjectHideFlags: 0

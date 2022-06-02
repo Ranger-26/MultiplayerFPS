@@ -12,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
     InputField c_height;
     [SerializeField]
     InputField c_offset;
+    [SerializeField]
+    InputField c_scale;
 
     [SerializeField]
     FlexibleColorPicker fcp;
@@ -30,6 +32,8 @@ public class SettingsMenu : MonoBehaviour
         c_width.text = ((int)crs.x).ToString();
         c_height.text = ((int)crs.y).ToString();
         c_offset.text = ((int)crs.z).ToString();
+
+        c_scale.text = GameSettings.current.ch.scale.ToString();
     }
 
     public void Sensitivity()
@@ -46,6 +50,8 @@ public class SettingsMenu : MonoBehaviour
         GameSettings.current.ch.length = (int)crs.x;
         GameSettings.current.ch.thickness = (int)crs.y;
         GameSettings.current.ch.offset = (int)crs.z;
+
+        GameSettings.current.ch.scale = float.Parse(c_scale.text);
 
         GameSettings.current.ch.color = fcp.color;
 

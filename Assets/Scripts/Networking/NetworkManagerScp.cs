@@ -44,7 +44,7 @@ namespace Networking
             }
         }
         
-        public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnection conn)
+        public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
         {
             GameObject roomPlayer = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
             allPlayers.Add(roomPlayer.GetComponent<NetworkPlayerLobby>());
@@ -72,7 +72,7 @@ namespace Networking
             }
         }
 
-        public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
+        public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
         {
             NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
             gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
@@ -82,7 +82,7 @@ namespace Networking
             return true;
         }
 
-        public override void OnRoomServerDisconnect(NetworkConnection connection)
+        public override void OnRoomServerDisconnect(NetworkConnectionToClient connection)
         {
             if (connection.identity.TryGetComponent(out NetworkPlayerLobby player))
             {
@@ -99,7 +99,7 @@ namespace Networking
 
         public static NetworkManagerScp Instance => (NetworkManagerScp) singleton;
         
-        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
+        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
         {
             NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
             Transform startPos =

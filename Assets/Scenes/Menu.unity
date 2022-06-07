@@ -15260,6 +15260,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3043139860385302058}
     - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: AllowJoinGameInProgress
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 0
       objectReference: {fileID: 0}

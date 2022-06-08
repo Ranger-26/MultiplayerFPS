@@ -104,7 +104,7 @@ namespace Game.Player.Movement
 
             float moddedSpeed = speed - speed * weight;
 
-            controller.Move(move * (moddedSpeed - moddedSpeed * tagging * Convert.ToInt16(isGrounded)) * Time.deltaTime);
+            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 

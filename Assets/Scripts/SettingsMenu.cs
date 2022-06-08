@@ -34,6 +34,8 @@ public class SettingsMenu : MonoBehaviour
         c_offset.text = ((int)crs.z).ToString();
 
         c_scale.text = GameSettings.current.ch.scale.ToString();
+
+        fcp.color = GameSettings.current.ch.color;
     }
 
     public void Sensitivity()

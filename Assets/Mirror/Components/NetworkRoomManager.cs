@@ -182,7 +182,11 @@ namespace Mirror
                 pendingPlayers.Add(pending);
                 return;
             }
-
+            else
+            {
+                roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = true;
+            }
+            
             GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
             if (gamePlayer == null)
             {

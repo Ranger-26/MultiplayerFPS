@@ -72,16 +72,6 @@ namespace Networking
             }
         }
 
-        public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
-        {
-            NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
-            gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
-            PlayerManager.Instance.TryAddPlayer(roomPlayer.GetComponent<NetworkPlayerLobby>(), gamePlayer.GetComponent<NetworkGamePlayer>());
-            return true;
-        }
-
         public override void OnRoomServerDisconnect(NetworkConnectionToClient connection)
         {
             if (connection.identity.TryGetComponent(out NetworkPlayerLobby player))
@@ -106,7 +96,15 @@ namespace Networking
                 SpawnManager.Instance.GetRandomSpawn(room.assignedRole);
             //change this to instantiate a different prefab based on the role
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
+            NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
+            gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
+            gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
+            gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
+            Debug.Log($"About to add player: {room.playerName}");
+            PlayerManager.Instance.TryAddPlayer(room, gamePlayer.GetComponent<NetworkGamePlayer>());
             return gamePlayer;
         }
+        
+        
     }
 }

@@ -36,6 +36,7 @@ namespace Lobby
         private void CmdSetName(string name)
         {
             playerName = name;
+            Debug.Log($"Calling CmdSetName for {name}");
             id = Room.roomSlots.Count + 1;
         }
 

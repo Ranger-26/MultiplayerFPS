@@ -346,6 +346,7 @@ namespace Mirror
 
             if (!IsSceneActive(RoomScene))
             {
+                Debug.Log($"Name: {conn.identity.gameObject.GetComponent<NetworkRoomPlayer>().index}");
                 SceneLoadedForPlayer(conn, conn.identity.gameObject);
                 OnRoomServerPlayerJoinedInProgress(conn);
             }

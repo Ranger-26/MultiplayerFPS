@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mirror/Components/NetworkRoomManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mirror/Components/NetworkRoomManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AudioUtils/AudioDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Crosshair.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Crosshair.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/PlayerManagment/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/PlayerManagment/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lobby/NetworkPlayerLobby.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/NetworkPlayerLobby.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/NetworkManagerScp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/NetworkManagerScp.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +192,7 @@
       <workItem from="1654489915859" duration="758000" />
       <workItem from="1654642137199" duration="2512000" />
       <workItem from="1654813405194" duration="8302000" />
+      <workItem from="1654898393048" duration="1876000" />
     </task>
     <servers />
   </component>

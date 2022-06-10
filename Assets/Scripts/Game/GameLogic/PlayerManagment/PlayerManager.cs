@@ -59,7 +59,7 @@ namespace Game.GameLogic.PlayerManagment
         {
             if (!players.ContainsKey(playerOrigin) || !lobbyPlayers.Contains(playerOrigin))
             {
-                Debug.LogError($"Something went wrong when removing Player {playerOrigin.id}.");
+                Debug.LogError($"Something went wrong when removing Player {playerOrigin.playerId}.");
                 return;
             }
 

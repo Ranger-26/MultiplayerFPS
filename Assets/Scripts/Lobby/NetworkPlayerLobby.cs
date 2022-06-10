@@ -4,6 +4,7 @@ using Game.GameLogic.PlayerManagment;
 using Mirror;
 using Networking;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Lobby
 {
@@ -14,9 +15,11 @@ namespace Lobby
 
         [SyncVar] public string playerName = String.Empty;
 
-        [SyncVar] public int id;
+        [SyncVar] public int playerId = -1;
         
         private NetworkManagerScp m_room;
+
+
         private NetworkManagerScp Room
         {
             get
@@ -38,12 +41,12 @@ namespace Lobby
         {
             playerName = name;
             Debug.Log($"Calling CmdSetName for {name}");
-            id = Room.roomSlots.Count + 1;
+            playerId = Room.roomSlots.Count;
         }
 
         public override string ToString()
         {
-            return $"Name {playerName}, Id: {id}";
+            return $"Name {playerName}, Id: {playerId}";
         }
         
         [Command]

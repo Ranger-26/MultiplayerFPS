@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Mirror;
 using UnityEngine;
 using System.Collections.Generic;
@@ -94,17 +95,18 @@ namespace Networking
             NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
             Transform startPos =
                 SpawnManager.Instance.GetRandomSpawn(room.assignedRole);
-            //change this to instantiate a different prefab based on the role
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
-            NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
-            gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
-            Debug.Log($"About to add player: {room.playerName}");
-            PlayerManager.Instance.TryAddPlayer(room, gamePlayer.GetComponent<NetworkGamePlayer>());
+            StartCoroutine(SetUpGamePlayer(room, gamePlayer.GetComponent<NetworkGamePlayer>()));
             return gamePlayer;
         }
-        
-        
+
+        IEnumerator SetUpGamePlayer(NetworkPlayerLobby lobby, NetworkGamePlayer game)
+        {
+            yield return new WaitUntil(() => lobby.playerName != "" && lobby.playerId != -1);
+            game.GetComponent<NetworkGamePlayer>().playerId = lobby.playerId;
+            game.GetComponent<NetworkGamePlayer>().playerName = lobby.playerName;
+            game.role = lobby.assignedRole;
+            PlayerManager.Instance.TryAddPlayer(lobby, game);
+        }
     }
 }

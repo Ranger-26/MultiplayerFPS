@@ -48,7 +48,6 @@ public class Crosshair : MonoBehaviour
     {
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
-        Debug.Log($"Found {CrosshairParts.Length} cross parts.");
 
         foreach (RectTransform rectTrans in CrosshairParts)
         {

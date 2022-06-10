@@ -31,14 +31,15 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - PerfectCulling
+    - Mirror.Examples
     - Assembly-CSharp-firstpass
     - Mirror
     - com.rlabrecque.steamworks.net
     - Cinemachine
     - FizzySteamworks
     - Telepathy
-    - kcp2k
     - Mirror.Components
+    - kcp2k
     - SimpleWebTransport
     - where-allocations
     - Mirror.Authenticators

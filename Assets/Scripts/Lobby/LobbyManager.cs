@@ -28,7 +28,7 @@ namespace Lobby
             if (!isServer) return;
             Debug.Log("Toggle player is being invoked.");
             if (ply.kickPlayerButton.gameObject.activeSelf) ply.kickPlayerButton.gameObject.SetActive(false);
-            if (isServer && ply.player != null && ply.player.id != 1) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
+            if (isServer && ply.player != null && ply.player.playerId != 1) ply.kickPlayerButton.gameObject.SetActive(!ply.kickPlayerButton.gameObject.activeSelf);
         }
 
         public void LeaveGame()
@@ -48,7 +48,7 @@ namespace Lobby
         public void UpdateReadyStatus(int playerId, bool status)
         {
             List<LobbyPlayerUi> players =
-                FindObjectsOfType<LobbyPlayerUi>().Where(x => x.player != null && x.player.id == playerId).ToList();
+                FindObjectsOfType<LobbyPlayerUi>().Where(x => x.player != null && x.player.playerId == playerId).ToList();
             if (players[0] == null)
             {
                 Debug.Log("Uh oh");

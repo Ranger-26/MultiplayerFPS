@@ -25,10 +25,11 @@ namespace Lobby
                 return m_room = NetworkManager.singleton as NetworkManagerScp;
             }
         }
-
-        public override void OnStartAuthority()
+        
+        public override void OnStartClient()
         {
-            base.OnStartAuthority();
+            base.OnStartClient();
+            if (!hasAuthority) return;
             CmdSetName(PlayerProfileManager.GetPlayerName());
         }
 

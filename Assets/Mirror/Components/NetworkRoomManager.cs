@@ -182,11 +182,10 @@ namespace Mirror
                 pendingPlayers.Add(pending);
                 return;
             }
-            else
-            {
-                roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = true;
-            }
-            
+
+            Debug.Log("Vallllll");
+            roomPlayer.GetComponent<NetworkRoomPlayer>().readyToBegin = true;
+
             GameObject gamePlayer = OnRoomServerCreateGamePlayer(conn, roomPlayer);
             if (gamePlayer == null)
             {
@@ -294,18 +293,21 @@ namespace Mirror
                 }
             }
 
-            allPlayersReady = false;
-
-            foreach (NetworkRoomPlayer player in roomSlots)
-            {
-                if (player != null)
-                    player.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
-            }
-
             if (IsSceneActive(RoomScene))
+            {
+                allPlayersReady = false;
+
+                foreach (NetworkRoomPlayer player in roomSlots)
+                {
+                    if (player != null)
+                        player.GetComponent<NetworkRoomPlayer>().readyToBegin = false;
+                }
+                
                 RecalculateRoomPlayerIndices();
 
-            OnRoomServerDisconnect(conn);
+                OnRoomServerDisconnect(conn);
+            }
+
             base.OnServerDisconnect(conn);
 
 #if UNITY_SERVER

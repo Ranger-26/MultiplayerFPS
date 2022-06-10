@@ -324,9 +324,6 @@ namespace Game.Player.Gunplay
                     gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
                 }
             }
-
-            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
-            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
         }
 
 
@@ -344,7 +341,6 @@ namespace Game.Player.Gunplay
         [ClientRpc]
         public void RpcAddGunSlot(GunIDs newGun, WeaponSlot slot)
         {
-            Debug.Log("Calling rpc...");
             if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
 
             GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);

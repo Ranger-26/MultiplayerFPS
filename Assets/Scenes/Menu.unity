@@ -6088,6 +6088,7 @@ GameObject:
   - component: {fileID: 1801507974}
   - component: {fileID: 1801507975}
   - component: {fileID: 1801507976}
+  - component: {fileID: 1801507977}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6223,6 +6224,18 @@ MonoBehaviour:
   c_scale: {fileID: 2081924627}
   c_firingError: {fileID: 975997044}
   fcp: {fileID: 2130943085501703158}
+--- !u!114 &1801507977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801507969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b5c136b3e25af418462676f1e46582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1807902846
 GameObject:
   m_ObjectHideFlags: 0
@@ -15000,21 +15013,29 @@ PrefabInstance:
       value: NetworkManager
       objectReference: {fileID: 0}
     - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
-      propertyPath: transport
-      value: 
-      objectReference: {fileID: 3043139860385302058}
-    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
-      propertyPath: showRoomGUI
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
-      propertyPath: AllowJoinGameInProgress
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: spawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: spawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: spawnPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
+    - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+      propertyPath: spawnPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 6735236787260014596, guid: 51e798d5c3bf23849b356e503602a85a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
 --- !u!114 &3043139860385302056 stripped
@@ -15026,17 +15047,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b811e3fbabd4f6445a278572c9b5a0c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3043139860385302058 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3043139860209545190, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
-  m_PrefabInstance: {fileID: 3043139860385302055}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &3309135980938038288

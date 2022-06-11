@@ -6,10 +6,8 @@ namespace Game
     {
         #region Unity Callbacks
 
-        private void Start()
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+        private void Start() => Cursor.lockState = CursorLockMode.None;
+        private void OnEnable() => Cursor.lockState = CursorLockMode.None;
 
         #endregion
     }

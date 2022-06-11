@@ -14,6 +14,8 @@ public class SettingsMenu : MonoBehaviour
     InputField c_offset;
     [SerializeField]
     InputField c_scale;
+    [SerializeField]
+    InputField c_firingError;
 
     [SerializeField]
     FlexibleColorPicker fcp;
@@ -34,6 +36,7 @@ public class SettingsMenu : MonoBehaviour
         c_offset.text = ((int)crs.z).ToString();
 
         c_scale.text = GameSettings.current.ch.scale.ToString();
+        c_firingError.text = GameSettings.current.ch.firingErrorMultiplier.ToString();
 
         fcp.color = GameSettings.current.ch.color;
     }
@@ -54,6 +57,7 @@ public class SettingsMenu : MonoBehaviour
         GameSettings.current.ch.offset = (int)crs.z;
 
         GameSettings.current.ch.scale = float.Parse(c_scale.text);
+        GameSettings.current.ch.firingErrorMultiplier = float.Parse(c_firingError.text);
 
         GameSettings.current.ch.color = fcp.color;
 

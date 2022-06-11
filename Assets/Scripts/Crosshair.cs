@@ -67,9 +67,6 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateError(float errorPixelsFire)
     {
-        if (!ch.firingError)
-            return;
-
         size = startingSize + errorPixelsFire * ch.firingErrorMultiplier;
 
         rect.sizeDelta = new Vector2(size, size);

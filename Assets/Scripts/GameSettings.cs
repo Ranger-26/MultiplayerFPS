@@ -54,8 +54,6 @@ public class CrosshairSettings
 
     public float firingErrorMultiplier = 10f;
 
-    public bool firingError = true;
-
     public CrosshairSettings()
     {
         offset = 5;
@@ -67,8 +65,6 @@ public class CrosshairSettings
         color = new Color(255f, 255f, 255f, 100f);
 
         firingErrorMultiplier = 10f;
-
-        firingError = true;
     }
 
     public CrosshairSettings(int _thickness, int _length, int _offset)

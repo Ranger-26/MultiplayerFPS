@@ -13,6 +13,7 @@ namespace Game.Player.Gunplay
     {
         [Header("Gun storing")]
         public Gun curGun;
+        public Melee melee;
 
         //[SyncVar] public GunIDs curGunId;
         [SyncVar(hook = nameof(OnCurWeaponSlotChanged))] public WeaponSlot heldWeaponSlot = WeaponSlot.Primary;
@@ -109,6 +110,12 @@ namespace Game.Player.Gunplay
         }
 
         [Command]
+        public void CmdMelee(Vector3 start, Vector3 forward, float multiplier)
+        {
+            ServerMelee(start, forward, id, multiplier);
+        }
+
+        [Command]
         public void CmdAmmo()
         {
             if (currentAmmo <= 0) return;
@@ -150,11 +157,56 @@ namespace Game.Player.Gunplay
                         part.ServerTag(curGun.Tagging);
                         part.ServerDamage(curGun.Damage, multiplier);
 
-                        ServerHit(__hit, visualFiringPoint);
+                        ServerTracer(visualFiringPoint, __hit.point);
                     }
                     else
                     {
                         ServerHit(__hit, visualFiringPoint);
+                        return;
+                    }
+                }
+            }
+        }
+
+        [Server]
+        private void ServerMelee(Vector3 start, Vector3 forward, int id, float multiplier)
+        {
+            RaycastHit[] _hits = Physics.RaycastAll(start, forward, Melee.Range, Melee.HitLayers);
+
+            if (_hits.Length != 0)
+            {
+                Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
+
+                foreach (RaycastHit __hit in _hits)
+                {
+                    DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
+
+                    if (part != null)
+                    {
+                        if (part.Player.playerId == id)
+                            continue;
+
+                        Debug.DrawRay(start, forward * Melee.Range, Color.green, 1f);
+                        part.ServerTag(Melee.Tagging);
+
+                        if (Vector3.Dot(transform.forward, part.transform.position - transform.position) > 0f)
+                        {
+                            part.ServerDamage(Melee.Damage, multiplier * 2f);
+                        }
+                        else
+                        {
+                            part.ServerDamage(Melee.Damage, multiplier);
+                        }
+
+                        if (melee.HitObject != null)
+                        {
+                            GameObject hit = Instantiate(melee.HitObject, __hit.point, Quaternion.LookRotation(__hit.normal));
+                            NetworkServer.Spawn(hit);
+                        }
+                    }
+                    else
+                    {
+                        ServerMeleeHit(__hit);
                         return;
                     }
                 }
@@ -178,6 +230,23 @@ namespace Game.Player.Gunplay
             }
 
             ServerTracer(visualFiringPoint, _hit.point);
+        }
+
+        [Server]
+        private void ServerMeleeHit(RaycastHit _hit)
+        {
+            if (melee.HitObject != null)
+            {
+                GameObject hit = Instantiate(melee.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
+                NetworkServer.Spawn(hit);
+            }
+
+            if (melee.HitDecal != null)
+            {
+                GameObject decal = Instantiate(melee.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
+                // decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+                NetworkServer.Spawn(decal);
+            }
         }
 
         [Server]
@@ -255,9 +324,6 @@ namespace Game.Player.Gunplay
                     gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
                 }
             }
-
-            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
-            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
         }
 
 
@@ -275,7 +341,6 @@ namespace Game.Player.Gunplay
         [ClientRpc]
         public void RpcAddGunSlot(GunIDs newGun, WeaponSlot slot)
         {
-            Debug.Log("Calling rpc...");
             if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
 
             GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);

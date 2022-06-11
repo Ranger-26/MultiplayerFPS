@@ -37,6 +37,8 @@ namespace Game.Player.Gunplay
         public float Spread = 0.5f;
         [Tooltip("Multiplier, not actual spread")]
         public float MovementSpread = 5f;
+        [Tooltip("Movement tolerance before applying movement spread")]
+        public float MovementSpreadTolerance = 0.3f;
         [Tooltip("Spread cap for regular shooting")]
         public float MaxSpread = 3f;
         [Tooltip("Spread cap for moving")]
@@ -75,6 +77,8 @@ namespace Game.Player.Gunplay
 
         [Tooltip("Zoomed in FOV of player")]
         public float ScopeFOV = 67.5f;
+        [Tooltip("Spread amount while scoped for each shot")]
+        public float ScopedSpread = 0f;
         [Tooltip("Speed reduction when scoped in percentage, overrides weight")]
         [Range(0f, 1f)]
         public float ScopeSpeedReduction = 0.3f;
@@ -109,12 +113,6 @@ namespace Game.Player.Gunplay
         [Tooltip("The decal it instantiates at the hit point when hitting something")]
         public GameObject Tracer;
 
-        [Tooltip("The amount that the camera jumps when shooting in degrees")]
-        public float AimPunch = 1f;
-        [Tooltip("The duration for the camera jump")]
-        public float AimPunchDuration = 0.025f;
-        [Tooltip("The duration for the camera drop")]
-        public float AimPunchDropDuration = 0.05f;
         [Tooltip("The amount that the view model moves back when spread is increasing")]
         public float MaxBacking = 0.1f;
         [Tooltip("The multiplier for the backing speed")]

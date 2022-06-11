@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
-using Unity.VisualScripting;
 using UnityEngine.Rendering.HighDefinition;
 using Random = UnityEngine.Random;
 
@@ -94,7 +93,9 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
-            if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer)
+            ni = GetComponentInParent<NetworkIdentity>();
+
+            if (!ni.isLocalPlayer)
             {
                 Transform tempcam = GetComponentInParent<Camera>().transform;
                 Destroy(tempcam.GetComponentInChildren<FiringPoint>().gameObject);
@@ -102,16 +103,14 @@ namespace Game.Player.Gunplay
                 tempcam.GetComponent<Camera>().enabled = false;
                 tempcam.GetComponent<AudioListener>().enabled = false;
                 enabled = false;
-            } 
+            }
 
             nsm = GetComponentInParent<NetworkShootingManager>();
             firingPoint = cam.GetComponentInChildren<FiringPoint>().transform;
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
-            anim = GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
 
             anim.keepAnimatorControllerStateOnDisable = true;
-
-            ni = GetComponentInParent<NetworkIdentity>();
 
             if (gun.ChargeupTime <= 0f)
                 chargedUp = true;
@@ -123,8 +122,7 @@ namespace Game.Player.Gunplay
             if (PM == null) { Debug.LogError("Player movement is null!"); }
             if (PL == null) { Debug.LogError("Player look is null!"); }
 
-            if (PM != null)
-                PM.weight = gun.Weight;
+            if (PM != null) PM.weight = gun.Weight;
 
             Scope(false);
 
@@ -132,10 +130,7 @@ namespace Game.Player.Gunplay
 
             scopeUIImage.sprite = gun.ScopeImage;
 
-            if (nsm == null)
-            {
-                Debug.LogError("Network Shooting Manager is null in the start!");
-            }
+            if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
         }
 
@@ -265,7 +260,7 @@ namespace Game.Player.Gunplay
 
             isSwaying = recoilFactor > gun.SwayAfterRecoil;
 
-            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
+            moveSpread = Mathf.Clamp(gun.MovementSpread * (vel.magnitude < gun.MovementSpreadTolerance ? vel.magnitude * 0.1f : vel.magnitude), 0f, gun.MaxMovementSpread);
 
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
@@ -282,10 +277,10 @@ namespace Game.Player.Gunplay
 
                 if (PL.GetCameraVisualRotation() != Quaternion.Euler(Vector3.zero))
                 {
-                    PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay));
+                    PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay / 2f));
                 }
 
-                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 15f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 20f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.SpreadDecay, gun.StartingSpread, gun.MaxSpread);
             }
@@ -349,8 +344,6 @@ namespace Game.Player.Gunplay
                 nsm.CmdAmmo();
 
                 Recoil();
-
-                StartCoroutine(AimPunch());
             }
         }
 
@@ -399,37 +392,16 @@ namespace Game.Player.Gunplay
 
         private void Spread()
         {
-            spread = Mathf.Clamp(spread + gun.Spread, gun.StartingSpread, gun.MaxSpread);
+            spread = Mathf.Clamp(spread + (isScoped ? gun.ScopedSpread : gun.Spread), isScoped ? gun.ScopedSpread : gun.StartingSpread, gun.MaxSpread);
 
             UpdateSpread();
         }
 
         private void UpdateSpread()
         {
-            float totalSpread = spread + moveSpread;
+            float totalSpread = spread * (PC.isCrouching ? 0.5f : 1f) + moveSpread;
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
-        }
-        
-        private IEnumerator AimPunch()
-        {
-            float timer = gun.AimPunchDuration;
-
-            while (timer > 0f)
-            {
-                timer -= Time.deltaTime;
-
-                PL.MoveCameraAimPunch(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            while (PL.GetCameraAimPunchRotation() != Quaternion.Euler(Vector3.zero))
-            {
-                PL.SetCameraAimPunch(Quaternion.RotateTowards(PL.GetCameraAimPunchRotation(), Quaternion.Euler(Vector3.zero), gun.AimPunch / gun.AimPunchDropDuration));
-
-                yield return new WaitForEndOfFrame();
-            }
         }
 
         private void Reload()

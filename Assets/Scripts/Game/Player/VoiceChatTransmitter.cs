@@ -1,6 +1,8 @@
+using System;
 using Mirror;
 using Steamworks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Player
 {
@@ -8,6 +10,14 @@ namespace Game.Player
     {
         public LayerMask PlayerMask;
         public AudioSource audioSource;
+
+        private void Start()
+        {
+            if (!SteamManager.Initialized)
+            {
+                enabled = false;
+            }
+        }
 
         void Update()
         {

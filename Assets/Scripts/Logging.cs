@@ -5,12 +5,6 @@ using UnityEngine;
 public class Logging : MonoBehaviour
 {
     string filename = "";
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void Start()
     {
         string d = System.Environment.GetFolderPath(

@@ -18,7 +18,6 @@ namespace AudioUtils
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -40,7 +39,7 @@ namespace AudioUtils
             foreach (AudioClip au in clips)
             {
                 _clips.Add(new NetworkAudioClip(au.name, au));
-                Debug.Log("Added " + au.name + " to clips");
+                //Debug.Log("Added " + au.name + " to clips");
             }
 
             foreach (var clip in _clips)
@@ -49,7 +48,7 @@ namespace AudioUtils
                 clipsToIds.Add(clip.audioClip, clip.AudioId);
             }
 
-            Debug.Log($"Loaded {clips.Length} clips!");
+            //Debug.Log($"Loaded {clips.Length} clips!");
         }
 
         public NetworkAudioClip TryGetClip(string id)

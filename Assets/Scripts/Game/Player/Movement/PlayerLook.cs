@@ -1,3 +1,4 @@
+using Koenigz.PerfectCulling;
 using Mirror;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace Game.Player.Movement
 {
     public class PlayerLook : NetworkBehaviour
     {
-        public float lookSpeed => GameSettings.Sensitivity;
+        public float lookSpeed => GameSettings.current.Sensitivity;
 
         public float lookXLimit = 90.0f;
 
@@ -30,6 +31,7 @@ namespace Game.Player.Movement
             {
                 cam.enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
+                cam.GetComponent<PerfectCullingCamera>().enabled = false;
                 enabled = false;
             }
         }

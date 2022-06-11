@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Mirror;
 using UnityEngine;
 using System.Collections.Generic;
@@ -32,9 +33,19 @@ namespace Networking
         {
             base.OnClientConnect();
             OnClientJoin?.Invoke();
+            
+            var spawnablePrefabs = Resources.LoadAll<GameObject>("Prefabs/SpawnablePrefabs");
+
+            foreach (var prefab in spawnablePrefabs)
+            {
+                if (prefab.TryGetComponent(out NetworkIdentity identity))
+                {
+                    NetworkClient.RegisterPrefab(prefab);
+                }
+            }
         }
         
-        public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnection conn)
+        public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
         {
             GameObject roomPlayer = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
             allPlayers.Add(roomPlayer.GetComponent<NetworkPlayerLobby>());
@@ -62,17 +73,7 @@ namespace Networking
             }
         }
 
-        public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnection conn, GameObject roomPlayer, GameObject gamePlayer)
-        {
-            NetworkPlayerLobby ply = roomPlayer.GetComponent<NetworkPlayerLobby>();
-            gamePlayer.GetComponent<NetworkGamePlayer>().role = ply.assignedRole;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerId = ply.id;
-            gamePlayer.GetComponent<NetworkGamePlayer>().playerName = ply.playerName;
-            PlayerManager.Instance.TryAddPlayer(roomPlayer.GetComponent<NetworkPlayerLobby>(), gamePlayer.GetComponent<NetworkGamePlayer>());
-            return true;
-        }
-
-        public override void OnRoomServerDisconnect(NetworkConnection connection)
+        public override void OnRoomServerDisconnect(NetworkConnectionToClient connection)
         {
             if (connection.identity.TryGetComponent(out NetworkPlayerLobby player))
             {
@@ -89,14 +90,23 @@ namespace Networking
 
         public static NetworkManagerScp Instance => (NetworkManagerScp) singleton;
         
-        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnection conn, GameObject roomPlayer)
+        public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
         {
             NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
             Transform startPos =
                 SpawnManager.Instance.GetRandomSpawn(room.assignedRole);
-            //change this to instantiate a different prefab based on the role
             GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
+            StartCoroutine(SetUpGamePlayer(room, gamePlayer.GetComponent<NetworkGamePlayer>()));
             return gamePlayer;
+        }
+
+        IEnumerator SetUpGamePlayer(NetworkPlayerLobby lobby, NetworkGamePlayer game)
+        {
+            yield return new WaitUntil(() => lobby.playerName != "" && lobby.playerId != -1);
+            game.GetComponent<NetworkGamePlayer>().playerId = lobby.playerId;
+            game.GetComponent<NetworkGamePlayer>().playerName = lobby.playerName;
+            game.role = lobby.assignedRole;
+            PlayerManager.Instance.TryAddPlayer(lobby, game);
         }
     }
 }

@@ -10,16 +10,9 @@ public class Crosshair : MonoBehaviour
     // Firing Error
     [HideInInspector]
     public float size = 25f;
-    // User Config 
-    public int offset = 5;
-    public int length = 10;
-    public int thickness = 3;
 
-    public Color color = new Color(255f, 255f, 255f, 100f);
-
-    public float firingErrorMultiplier = 10f;
-
-    public bool firingError = true;
+    // User Config
+    public CrosshairSettings ch = new CrosshairSettings();
 
     float startingSize = 25f;
 
@@ -29,54 +22,52 @@ public class Crosshair : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        if (Instance != null) Destroy(gameObject);
+        else Instance = this;
+
+        rect = GetComponent<RectTransform>();
     }
 
-    private void Start()
-    {
-        Init();
-    }
+    private void Start() => Init();
 
-    private void OnEnable()
-    {
-        Init();
-    }
+    private void OnEnable() => Init();
 
     private void Init()
     {
-        rect = GetComponent<RectTransform>();
+        UpdateSettings();
+    }
 
+    public void UpdateSettings() 
+    {
+        ch = GameSettings.current.ch;
+
+        UpdateCrosshair();
+    }
+
+    public void UpdateCrosshair()
+    {
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
-        Debug.Log($"Found {CrosshairParts.Length} cross parts.");
+
         foreach (RectTransform rectTrans in CrosshairParts)
         {
             if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
-            rectTrans.sizeDelta = new Vector2(length, thickness);
-            rectTrans.gameObject.GetComponent<Image>().color = color;
+
+            rectTrans.sizeDelta = new Vector2(ch.length, ch.thickness);
+            rectTrans.gameObject.GetComponent<Image>().color = ch.color;
         }
 
-        size = length * 2 + offset;
+        size = ch.length * 2 + ch.offset;
         startingSize = size;
+
+        rect.localScale = new Vector3(ch.scale, ch.scale, 1f);
 
         rect.sizeDelta = new Vector2(size, size);
     }
 
     public void UpdateError(float errorPixelsFire)
     {
-        if (!firingError)
-            return;
-
-        size = startingSize + errorPixelsFire * firingErrorMultiplier * Convert.ToInt32(firingError);
-
-        //Debug.Log(size);
+        size = startingSize + errorPixelsFire * ch.firingErrorMultiplier;
 
         rect.sizeDelta = new Vector2(size, size);
     }

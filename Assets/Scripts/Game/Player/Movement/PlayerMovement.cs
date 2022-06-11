@@ -22,6 +22,7 @@ namespace Game.Player.Movement
         //ground stuff
         public Transform groundCheck;
         public float groundDistance = 0.4f;
+        public float noTagDistance = 0.6f;
         [HideInInspector]
         public float weight;
         public LayerMask groundMask;
@@ -62,7 +63,7 @@ namespace Game.Player.Movement
                     if (Vector3.Distance(previousStepLocation, transform.position) >= StepDistance)
                     {
                         previousStepLocation = transform.position;
-                        AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
+                        AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.3f, 1f, 1f, 128);
                     }
                 }
             }
@@ -79,7 +80,7 @@ namespace Game.Player.Movement
             {
                 airTime += Time.deltaTime;
 
-                if (airTime >= 0.5f)
+                if (airTime >= 0.5f || !Physics.CheckSphere(groundCheck.position, noTagDistance, groundMask))
                     LandTagged = false;
             }
             else
@@ -91,12 +92,12 @@ namespace Game.Player.Movement
             {
                 Tag(0.8f);
                 previousStepLocation = transform.position;
-                AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 1f, 1f, 1f, 128);
+                AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.4f, 1f, 1f, 128);
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt16(!MenuOpen.IsOpen);
+            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt16(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
             move = Vector3.ClampMagnitude(move, 1f);

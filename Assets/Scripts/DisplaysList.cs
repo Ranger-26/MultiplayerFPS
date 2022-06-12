@@ -1,44 +1,39 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class DisplaysList : MonoBehaviour
 {
-    [SerializeField]
-    TMP_Text option;
+    TMP_Dropdown option;
 
-    [SerializeField]
-    Transform instantiateTo;
+    List<string> displays = new List<string>();
 
-    [SerializeField]
-    GameObject UIObject;
+    private void Awake()
+    {
+        option = GetComponent<TMP_Dropdown>();
+
+        for (int i = 0; i < Display.displays.Length; i++)
+            displays.Add("Display " + (i + 1).ToString());
+    }
 
     private void Start()
     {
-        SpawnOptions();
+        option.ClearOptions();
+        option.AddOptions(displays);
+
+        option.SetValueWithoutNotify(GameSettings.current.MonitorID);
     }
 
     private void OnEnable()
     {
-        UpdateOptions();
+        option.value = GameSettings.current.MonitorID;
     }
 
-    public void SpawnOptions()
+    public void ApplyDisplay(int monitorID)
     {
-        foreach (Transform child in instantiateTo)
-        {
-            Destroy(child.gameObject);
-        }
-
-        for (int d = 0; d < Display.displays.Length; d++)
-        {
-            ChangeDisplay di = Instantiate(UIObject, instantiateTo).GetComponent<ChangeDisplay>();
-
-            di.monitorID = d;
-        }
-    }
-
-    public void UpdateOptions()
-    {
-        option.SetText("Display " + (PlayerPrefs.GetInt("UnitySelectMonitor") + 1).ToString());
+        PlayerPrefs.SetInt("UnitySelectMonitor", monitorID);
+        PlayerPrefs.Save();
+        GameSettings.current.MonitorID = monitorID;
+        GameSettingsLoader.SaveFile();
     }
 }

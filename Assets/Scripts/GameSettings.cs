@@ -3,9 +3,9 @@ using System.IO;
 
 public static class GameSettingsLoader
 {
-    public static void SaveFile(Settings sett)
+    public static void SaveFile()
     {
-        ES3.Save("settings", sett, Application.persistentDataPath + "/Settings/general.dat");
+        ES3.Save("settings", GameSettings.current, Application.persistentDataPath + "/Settings/general.dat");
     }
 
     public static Settings LoadFile()
@@ -16,7 +16,7 @@ public static class GameSettingsLoader
         {
             Settings temp = new Settings();
 
-            SaveFile(temp);
+            SaveFile();
             return temp;
         }
     }
@@ -24,7 +24,18 @@ public static class GameSettingsLoader
 
 public static class GameSettings
 {
-    public static Settings current;
+    public static Settings current
+    {
+        get
+        {
+            if (cur == null)
+                cur = new Settings();
+            return cur;
+        }
+        set => cur = value;
+    }
+
+    static Settings cur;
 }
 
 [System.Serializable]
@@ -32,11 +43,15 @@ public class Settings
 {
     public float Sensitivity;
 
-    public CrosshairSettings ch = new CrosshairSettings();
+    public int MonitorID;
+    public int ScreenMode;
+
+    public CrosshairSettings ch;
 
     public Settings()
     {
         Sensitivity = 1f;
+        MonitorID = 0;
         ch = new CrosshairSettings();
     }
 }

@@ -41,4 +41,9 @@ public class DisplaysList : MonoBehaviour
     {
         option.SetText("Display " + (PlayerPrefs.GetInt("UnitySelectMonitor") + 1).ToString());
     }
+
+    public void UpdateOptions(int _id)
+    {
+        option.SetText("Display " + (_id + 1).ToString());
+    }
 }

@@ -44,6 +44,7 @@ public class Settings
     public float Sensitivity;
 
     public int MonitorID;
+    public int ScreenMode;
 
     public CrosshairSettings ch;
 

@@ -38,7 +38,5 @@ public class ChangeDisplay : MonoBehaviour
         PlayerPrefs.SetInt("UnitySelectMonitor", monitorID);
         PlayerPrefs.Save();
         dl.UpdateOptions(monitorID);
-
-        Display.displays[monitorID].Activate();
     }
 }

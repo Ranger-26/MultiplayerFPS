@@ -3,9 +3,11 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField]
     InputField sens;
 
+    [Header("Crosshair")]
     [SerializeField]
     InputField c_width;
     [SerializeField]
@@ -45,7 +47,7 @@ public class SettingsMenu : MonoBehaviour
     {
         float sen = float.Parse(sens.text);
         GameSettings.current.Sensitivity = sen;
-        GameSettingsLoader.SaveFile(GameSettings.current);
+        GameSettingsLoader.SaveFile();
     }
 
     public void SetCrosshair()
@@ -61,6 +63,6 @@ public class SettingsMenu : MonoBehaviour
 
         GameSettings.current.ch.color = fcp.color;
 
-        GameSettingsLoader.SaveFile(GameSettings.current);
+        GameSettingsLoader.SaveFile();
     }
 }

@@ -51,7 +51,9 @@ namespace Game.Player.Movement
 
             float h = Mathf.Lerp(StandingHeight, CrouchHeight, crouchFactor);
             controller.height = h;
-            controller.Move(new Vector3(0f, h - previousHeight, 0f));
+
+            if (playerMovement.isGrounded)
+                controller.Move(new Vector3(0f, h - previousHeight, 0f));
 
             isCrouching = crouchFactor >= 0.5f;
             isWalking = Input.GetKey(KeyCode.LeftShift);

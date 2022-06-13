@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d07b5bd48c6a8042a808965acf2f6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Reverse: 0
 --- !u!1 &5227915557650034822
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,11 +550,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bb002fada44585b49a8f2a6d18fad3e0, type: 3}
   groundCheck: {fileID: 1769910894114916383}
   groundDistance: 0.4
+  noTagDistance: 0.6
   weight: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 1
   canMakeSound: 0
+  isGrounded: 0
 --- !u!114 &807805569061322819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +624,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   curGun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
+  melee: {fileID: 0}
   heldWeaponSlot: 0
   allGunScriptables: []
   currentAmmo: 0

@@ -3,6 +3,8 @@ using Mirror;
 
 public class DisableOnRemote : MonoBehaviour
 {
+    public bool Reverse = false;
+
     NetworkIdentity ni;
 
     private void Awake()
@@ -12,7 +14,7 @@ public class DisableOnRemote : MonoBehaviour
 
     private void Start()
     {
-        if (!ni.hasAuthority)
+        if (!ni.hasAuthority || (Reverse && ni.hasAuthority))
         {
             gameObject.SetActive(false);
         }

@@ -23,7 +23,7 @@ MonoBehaviour:
   BulletCount: 1
   GunFiringMode: 1
   Spread: 1.8
-  MovementSpread: 2.5
+  MovementSpread: 1.5
   MovementSpreadTolerance: 1.5
   MaxSpread: 3.5
   MaxMovementSpread: 10

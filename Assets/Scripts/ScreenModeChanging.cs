@@ -7,9 +7,9 @@ public class ScreenModeChanging : MonoBehaviour
 
     private void Awake() => option = GetComponent<TMP_Dropdown>();
 
-    private void Start() => option.value = GameSettings.current.ScreenMode;
+    private void Start() => option.SetValueWithoutNotify(GameSettings.current.ScreenMode);
 
-    private void OnEnable() => option.value = GameSettings.current.ScreenMode;
+    private void OnEnable() => option.SetValueWithoutNotify(GameSettings.current.ScreenMode);
 
     public void ChangeScreenMode(int screenMode)
     {

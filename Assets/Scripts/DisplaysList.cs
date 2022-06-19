@@ -26,7 +26,7 @@ public class DisplaysList : MonoBehaviour
 
     private void OnEnable()
     {
-        option.value = GameSettings.current.MonitorID;
+        option.SetValueWithoutNotify(GameSettings.current.MonitorID);
     }
 
     public void ApplyDisplay(int monitorID)

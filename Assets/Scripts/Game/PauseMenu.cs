@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 using Networking;
 
@@ -7,7 +8,7 @@ namespace Game
     {
         #region Methods
 
-        public void ReturnToRoom() => NetworkManagerScp.Instance.ServerChangeScene("Lobby");
+        public void ReturnToRoom() => NetworkManager.singleton.StopClient();
 
         #endregion
     }

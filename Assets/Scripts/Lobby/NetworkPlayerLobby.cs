@@ -19,7 +19,7 @@ namespace Lobby
         
         private NetworkManagerScp m_room;
 
-
+        public static NetworkPlayerLobby localPlayer;
         private NetworkManagerScp Room
         {
             get
@@ -34,6 +34,7 @@ namespace Lobby
             base.OnStartClient();
             if (!hasAuthority) return;
             CmdSetName(PlayerProfileManager.GetPlayerName());
+            localPlayer = this;
         }
 
         [Command]

@@ -39,10 +39,7 @@ namespace Lobby
 
         public void ReadyUp()
         {
-            foreach (var player in FindObjectsOfType<NetworkPlayerLobby>())
-            {
-                player.CmdChangeReadyState(!player.readyToBegin);
-            }
+            NetworkPlayerLobby.localPlayer.CmdChangeReadyState(!NetworkPlayerLobby.localPlayer.readyToBegin);
         }
 
         public void UpdateReadyStatus(int playerId, bool status)

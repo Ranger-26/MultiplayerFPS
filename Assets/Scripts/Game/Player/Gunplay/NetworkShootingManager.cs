@@ -106,6 +106,8 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdShoot(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
         {
+            if (currentAmmo < 0) return;
+            currentAmmo--;
             ServerShoot(start, forward, id, visualFiringPoint);
         }
 
@@ -113,13 +115,6 @@ namespace Game.Player.Gunplay
         public void CmdMelee(Vector3 start, Vector3 forward, float multiplier)
         {
             ServerMelee(start, forward, id, multiplier);
-        }
-
-        [Command]
-        public void CmdAmmo()
-        {
-            if (currentAmmo <= 0) return;
-            currentAmmo--;
         }
 
         [Server]

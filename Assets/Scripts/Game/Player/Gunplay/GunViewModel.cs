@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Game.Player.Gunplay
@@ -33,6 +34,8 @@ namespace Game.Player.Gunplay
         PlayerMovement PM;
         PlayerLook PL;
         PlayerCrouch PC;
+
+        PlayerInput PI;
 
         Camera cam;
 
@@ -85,10 +88,13 @@ namespace Game.Player.Gunplay
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             PC = GetComponentInParent<PlayerCrouch>();
+            PI = GetComponentInParent<PlayerInput>();
             scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
             scopeUIImage = scopeUI.GetComponent<Image>();
             cam = PL.cam;
             model = transform.GetChild(0).gameObject;
+
+            PI.actions.FindAction("Fire").performed += UpdateSpray;
         }
 
         private void Start()
@@ -158,9 +164,7 @@ namespace Game.Player.Gunplay
             if (!nsm.hasAuthority)
                 enabled = false;
 
-            isSpraying = Input.GetMouseButton(0);
-
-            if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
+            if ((isSpraying && gun.GunFiringMode == FiringMode.Auto))
             {
                 if (MenuOpen.IsOpen)
                     return;
@@ -286,6 +290,11 @@ namespace Game.Player.Gunplay
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
+        }
+
+        public void UpdateSpray(InputAction.CallbackContext callbackContext)
+        {
+            isSpraying = callbackContext.performed;
         }
 
         public void Scope(bool status)

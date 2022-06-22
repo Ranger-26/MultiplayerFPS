@@ -1,6 +1,7 @@
 using System;
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Game.Player
@@ -48,14 +49,6 @@ namespace Game.Player
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Menu.SetActive(true);
-            }
-        }
-
         public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();
 
         public void UpdateAmmoUI(int currentAmmo, int reserveAmmo) => _ammoText.text = ((currentAmmo >= 200000) ? "inf" : currentAmmo.ToString()) + " / " + ((reserveAmmo >= 200000) ? "inf" : reserveAmmo.ToString());
@@ -78,6 +71,11 @@ namespace Game.Player
             _gameOverText.gameObject.SetActive(true);
             _gameOverText.text = $"Game over: Restarting in {time}";
             _gameOverText.gameObject.SetActive(!shouldDisable);
+        }
+
+        public void Pause(InputAction.CallbackContext callbackContext)
+        {
+            Menu.SetActive(true);
         }
     }
 }

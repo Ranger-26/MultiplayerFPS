@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Gunplay
 {
@@ -46,11 +47,17 @@ namespace Game.Player.Gunplay
         [SyncVar]
         private float reloadTimer;
 
+        PlayerInput PI;
+
         #region UnityCallbacks
         public void Start()
         {
+            if (!hasAuthority)
+                enabled = false;
+
             currentAmmo = curGun.MaxAmmo;
             reserveAmmo = curGun.ReserveAmmo;
+
             if (primarySlot == null)
             {
                 primarySlot = GetComponentInChildren<PrimarySlot>().transform;
@@ -68,28 +75,18 @@ namespace Game.Player.Gunplay
             {
                 ServerInitGuns();
             }
+
             GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Slot1").performed += Slot1;
+            PI.actions.FindAction("Slot2").performed += Slot2;
+            PI.actions.FindAction("Slot3").performed += Slot3;
         }
 
         private void Update()
         {
-            if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                Debug.Log("Trying to switch to Primary");
-                CmdSwitchGunSlot(WeaponSlot.Primary);
-            }
-            else if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Debug.Log("Trying to switch to Secondary");
-                CmdSwitchGunSlot(WeaponSlot.Secondary);
-            }
-            else if (hasAuthority && !Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                Debug.Log("Trying to switch to Melee");
-                CmdSwitchGunSlot(WeaponSlot.Melee);
-            }
-
-
             if (isServer)
             {
                 reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
@@ -444,6 +441,29 @@ namespace Game.Player.Gunplay
         }
 
         #endregion
+
+        public void Slot1(InputAction.CallbackContext callbackContext) => SwitchSlot(1);
+        public void Slot2(InputAction.CallbackContext callbackContext) => SwitchSlot(2);
+        public void Slot3(InputAction.CallbackContext callbackContext) => SwitchSlot(3);
+
+        public void SwitchSlot(int slot)
+        {
+            if (hasAuthority && slot == 1)
+            {
+                Debug.Log("Trying to switch to Primary");
+                CmdSwitchGunSlot(WeaponSlot.Primary);
+            }
+            else if (hasAuthority && slot == 2)
+            {
+                Debug.Log("Trying to switch to Secondary");
+                CmdSwitchGunSlot(WeaponSlot.Secondary);
+            }
+            else if (hasAuthority && slot == 3)
+            {
+                Debug.Log("Trying to switch to Melee");
+                CmdSwitchGunSlot(WeaponSlot.Melee);
+            }
+        }
     }
 
     public struct GunAmmo

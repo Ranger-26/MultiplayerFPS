@@ -49,6 +49,8 @@ namespace Game.Player.Gunplay
 
         NetworkShootingManager nsm;
 
+        Vector2 movementInput;
+
         Vector3 _prevPosition;
         Vector3 vel;
 
@@ -88,13 +90,20 @@ namespace Game.Player.Gunplay
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             PC = GetComponentInParent<PlayerCrouch>();
-            PI = GetComponentInParent<PlayerInput>();
+            PI = GamePlayerInput.Instance.playerInput;
             scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
             scopeUIImage = scopeUI.GetComponent<Image>();
             cam = PL.cam;
             model = transform.GetChild(0).gameObject;
 
             PI.actions.FindAction("Fire").performed += UpdateSpray;
+            PI.actions.FindAction("Fire").canceled += UpdateSpray;
+
+            PI.actions.FindAction("Reload").performed += Reload;
+
+            PI.actions.FindAction("Inspect").performed += Inspect;
+
+            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
         private void Start()
@@ -208,29 +217,8 @@ namespace Game.Player.Gunplay
                 chargedUp = chargeupTimer >= gun.ChargeupTime;
             }
 
-            if (Input.GetKeyDown(KeyCode.F) && !delay)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                if (anim != null)
-                    anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
-                    Reload();
-            }
-
-            if (Input.GetMouseButtonDown(1) && gun.HasScope && !delay)
-                Scope(!isScoped);
-
-            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxisRaw(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = movementInput.x * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = movementInput.y * Convert.ToInt32(!MenuOpen.IsOpen);
 
             lerpFactor = Mathf.Clamp01(
                 lerpFactor + Mathf.Abs(x * Time.deltaTime * gun.BackingMultiplier) + Mathf.Abs(z * Time.deltaTime * gun.BackingMultiplier)
@@ -296,8 +284,37 @@ namespace Game.Player.Gunplay
         {
             if (callbackContext.performed) 
                 isSpraying = true;
-            else if (callbackContext.canceled) 
+            else if (callbackContext.canceled)
                 isSpraying = false;
+        }
+
+        public void Inspect(InputAction.CallbackContext callbackContext)
+        {
+            if (!delay && !MenuOpen.IsOpen)
+            {
+                if (anim != null)
+                    anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
+            }
+        }
+
+        public void Reload(InputAction.CallbackContext callbackContext)
+        {
+            if (MenuOpen.IsOpen)
+                return;
+
+            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
+                Reload();
+        }
+
+        public void UpdateScope(InputAction.CallbackContext callbackContext)
+        {
+            if (gun.HasScope && !delay)
+                Scope(!isScoped);
+        }
+
+        public void UpdateMovement(InputAction.CallbackContext callbackContext)
+        {
+            movementInput = callbackContext.ReadValue<Vector2>();
         }
 
         public void Scope(bool status)

@@ -1,6 +1,7 @@
 using System;
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Gunplay
 {
@@ -10,6 +11,8 @@ namespace Game.Player.Gunplay
         [SerializeField] private float smooth;
         [SerializeField] private float multiplier;
 
+        Vector2 mouse;
+
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().hasAuthority)
@@ -18,15 +21,16 @@ namespace Game.Player.Gunplay
             }
         }
 
-
-        private void Update()
+        public void UpdateMouse(InputAction.CallbackContext callbackContext)
         {
+            mouse = callbackContext.ReadValue<Vector2>();
+
             if (MenuOpen.IsOpen)
                 return;
 
             // get mouse input
-            float mouseX = Input.GetAxisRaw("Mouse X") * multiplier;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * multiplier;
+            float mouseX = mouse.x * multiplier;
+            float mouseY = mouse.y * multiplier;
 
             // calculate target rotation
             Quaternion rotationX = Quaternion.AngleAxis(mouseY, Vector3.right);

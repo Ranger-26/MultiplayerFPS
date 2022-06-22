@@ -1,6 +1,7 @@
 using Koenigz.PerfectCulling;
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Movement
 {
@@ -19,6 +20,10 @@ namespace Game.Player.Movement
         float rotationY = 0;
         float addY;
 
+        Vector2 mouse;
+
+        PlayerInput PI;
+
         private void Awake()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -34,17 +39,25 @@ namespace Game.Player.Movement
                 cam.GetComponent<PerfectCullingCamera>().enabled = false;
                 enabled = false;
             }
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Look").performed += UpdateLook;
+            PI.actions.FindAction("Look").canceled += UpdateLook;
         }
 
-        private void Update()
+        public void UpdateLook(InputAction.CallbackContext callbackContext)
         {
             if (MenuOpen.IsOpen)
                 return;
 
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            mouse = callbackContext.ReadValue<Vector2>();
+
+            rotationX += -mouse.y * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            rotationY = Input.GetAxis("Mouse X") * lookSpeed + addY;
+            rotationY = mouse.x * lookSpeed + addY;
             addY = 0f;
+
             UpdateCamera();
         }
 

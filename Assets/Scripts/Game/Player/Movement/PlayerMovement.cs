@@ -2,6 +2,7 @@ using Mirror;
 using System;
 using AudioUtils;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Movement
 {
@@ -15,6 +16,8 @@ namespace Game.Player.Movement
         public float StepDistance = 1.2f;
 
         public AudioClip[] stepClips;
+
+        Vector2 movementInput;
 
         Vector3 velocity;
         Vector3 previousStepLocation;
@@ -36,7 +39,9 @@ namespace Game.Player.Movement
         float airTime;
 
         bool LandTagged;
-        
+
+        PlayerInput PI;
+
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;
@@ -46,6 +51,13 @@ namespace Game.Player.Movement
             LandTagged = true;
 
             canMakeSound = true;
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("WASD").performed += UpdateMovement;
+            PI.actions.FindAction("WASD").canceled += UpdateMovement;
+
+            PI.actions.FindAction("Jump").performed += Jump;
         }
 
         private void Update()
@@ -69,14 +81,6 @@ namespace Game.Player.Movement
                 }
             }
 
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
-
             if (!isGrounded)
             {
                 airTime += Time.deltaTime;
@@ -97,8 +101,8 @@ namespace Game.Player.Movement
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt16(!MenuOpen.IsOpen);
-            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt16(!MenuOpen.IsOpen);
+            float x = movementInput.x * Convert.ToInt16(!MenuOpen.IsOpen);
+            float z = movementInput.y * Convert.ToInt16(!MenuOpen.IsOpen);
 
             Vector3 move = transform.right * x + transform.forward * z;
             move = Vector3.ClampMagnitude(move, 1f);
@@ -122,5 +126,21 @@ namespace Game.Player.Movement
 
         [TargetRpc]
         public void TargetTag(float amount) => Tag(amount);
+
+        public void Jump(InputAction.CallbackContext callbackContext)
+        {
+            if (isGrounded)
+            {
+                if (MenuOpen.IsOpen)
+                    return;
+
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+        }
+
+        public void UpdateMovement(InputAction.CallbackContext callbackContext)
+        {
+            movementInput = callbackContext.ReadValue<Vector2>();
+        }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mirror;
 
 namespace Game.Player.Movement
@@ -21,6 +22,8 @@ namespace Game.Player.Movement
         [HideInInspector]
         public bool isWalking;
 
+        bool crouching;
+
         CharacterController controller;
         PlayerMovement playerMovement;
 
@@ -38,7 +41,7 @@ namespace Game.Player.Movement
 
         private void Update()
         {
-            crouchFactor = Mathf.Clamp01(crouchFactor + Time.deltaTime * CrouchRate * (Input.GetKey(KeyCode.LeftControl) ? 1 : -1));
+            crouchFactor = Mathf.Clamp01(crouchFactor + Time.deltaTime * CrouchRate * (crouching ? 1 : -1));
 
             playerMovement.speed = Mathf.Lerp(NormalSpeed, CrouchSpeed, crouchFactor);
 
@@ -59,6 +62,11 @@ namespace Game.Player.Movement
             isWalking = Input.GetKey(KeyCode.LeftShift);
 
             playerMovement.canMakeSound = !isCrouching && !isWalking;
+        }
+
+        public void UpdateCrouch(InputAction.CallbackContext callbackContext)
+        {
+            crouching = callbackContext.performed;
         }
     }
 }

@@ -294,7 +294,10 @@ namespace Game.Player.Gunplay
 
         public void UpdateSpray(InputAction.CallbackContext callbackContext)
         {
-            isSpraying = callbackContext.performed;
+            if (callbackContext.performed) 
+                isSpraying = true;
+            else if (callbackContext.canceled) 
+                isSpraying = false;
         }
 
         public void Scope(bool status)

@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 1b41b223ea5fb64469c366e610437c64, type: 3}
-  m_NotificationBehavior: 3
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -813,16 +813,40 @@ MonoBehaviour:
     m_ActionId: 0c547b6b-6e5a-4938-bbb5-c8406b269e7b
     m_ActionName: Movement/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3519a23f-0723-40cc-8f20-39777e6145db
-    m_ActionName: Shooting/Fire[/Mouse/leftButton]
+      m_Calls:
+      - m_Target: {fileID: 4888084586005480500}
+        m_TargetAssemblyTypeName: Game.Player.Movement.PlayerCrouch, Assembly-CSharp
+        m_MethodName: UpdateCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7078aae6-67de-495c-a686-ad11211252b6
+    m_ActionName: Movement/Crouch[/Keyboard/leftCtrl]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: fc1a9733-f265-430f-a8b4-4e2eb8809658
-    m_ActionName: Shooting/AltFire[/Mouse/rightButton]
+    m_ActionId: 4819cb6b-3d73-498e-9c0b-7916749b2f0c
+    m_ActionName: Movement/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81aa542f-7024-49e8-a2b7-d546bd2b3a0d
+    m_ActionName: Movement/Walk[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74e04766-63c4-4c43-9cb6-2b035d245a62
+    m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dd16ab2e-9313-40e9-9ef7-2ac2881b1b4c
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Movement
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &5789010012695376366

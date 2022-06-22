@@ -2,7 +2,7 @@
     "name": "Game",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "f678c017-6d37-41bd-a9d3-693b2078f98b",
             "actions": [
                 {
@@ -22,6 +22,51 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "7078aae6-67de-495c-a686-ad11211252b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "4819cb6b-3d73-498e-9c0b-7916749b2f0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Walk",
+                    "type": "Button",
+                    "id": "81aa542f-7024-49e8-a2b7-d546bd2b3a0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "74e04766-63c4-4c43-9cb6-2b035d245a62",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AltFire",
+                    "type": "Button",
+                    "id": "dd16ab2e-9313-40e9-9ef7-2ac2881b1b4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -90,36 +135,43 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Shooting",
-            "id": "237b31da-baaa-48f6-a109-ddcaf9bf5b79",
-            "actions": [
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "3519a23f-0723-40cc-8f20-39777e6145db",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
-                    "name": "AltFire",
-                    "type": "Button",
-                    "id": "fc1a9733-f265-430f-a8b4-4e2eb8809658",
-                    "expectedControlType": "Button",
-                    "processors": "",
+                    "name": "",
+                    "id": "89b929ed-a63a-4a8e-9dd4-3e242b355f06",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
-                    "id": "56dd418d-97a6-4f44-ae68-1969a41efa6c",
+                    "id": "84a939c2-d790-4f7a-b617-12f67110e84a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "638c72a4-46a0-470d-ac9b-a25024016be5",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "856e7faf-4e99-4024-9d35-b4fa3495e586",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -130,7 +182,7 @@
                 },
                 {
                     "name": "",
-                    "id": "94306bd1-d8be-4c97-998e-a5c31f6e0520",
+                    "id": "52e3e8e4-b2ae-4169-8798-6f5b24df14e6",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",

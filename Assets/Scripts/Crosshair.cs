@@ -48,7 +48,6 @@ public class Crosshair : MonoBehaviour
     {
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
-        Debug.Log($"Found {CrosshairParts.Length} cross parts.");
 
         foreach (RectTransform rectTrans in CrosshairParts)
         {
@@ -68,9 +67,6 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateError(float errorPixelsFire)
     {
-        if (!ch.firingError)
-            return;
-
         size = startingSize + errorPixelsFire * ch.firingErrorMultiplier;
 
         rect.sizeDelta = new Vector2(size, size);

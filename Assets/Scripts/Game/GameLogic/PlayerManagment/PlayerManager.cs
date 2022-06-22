@@ -38,11 +38,7 @@ namespace Game.GameLogic.PlayerManagment
                 Destroy(this);
             }
         }
-
-        private void Start()
-        {
-            lobbyPlayers.AddRange(NetworkManagerScp.Instance.allPlayers);
-        }
+        
 
         [Server]
         public void TryAddPlayer(NetworkPlayerLobby playerOrigin, NetworkGamePlayer currentPlayer)
@@ -52,6 +48,7 @@ namespace Game.GameLogic.PlayerManagment
                 Debug.LogError($"Something went wrong when adding Player {currentPlayer}.");
                 return;
             }
+            lobbyPlayers.Add(playerOrigin);
             players.Add(playerOrigin, currentPlayer);
             alivePlayers.Add(currentPlayer);
             Debug.Log($"Game Player Count: {players.Count}");
@@ -62,7 +59,7 @@ namespace Game.GameLogic.PlayerManagment
         {
             if (!players.ContainsKey(playerOrigin) || !lobbyPlayers.Contains(playerOrigin))
             {
-                Debug.LogError($"Something went wrong when removing Player {playerOrigin.id}.");
+                Debug.LogError($"Something went wrong when removing Player {playerOrigin.playerId}.");
                 return;
             }
 

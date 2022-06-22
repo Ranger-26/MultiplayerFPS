@@ -29,11 +29,12 @@ namespace Game.Player.Movement
 
         [HideInInspector]
         public bool canMakeSound;
+        [HideInInspector]
+        public bool isGrounded;
 
         float tagging;
         float airTime;
 
-        bool isGrounded;
         bool LandTagged;
         
         private void Start()

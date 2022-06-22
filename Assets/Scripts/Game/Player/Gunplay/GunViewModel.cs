@@ -260,7 +260,7 @@ namespace Game.Player.Gunplay
 
             isSwaying = recoilFactor > gun.SwayAfterRecoil;
 
-            moveSpread = Mathf.Clamp(gun.MovementSpread * vel.magnitude, 0f, gun.MaxMovementSpread);
+            moveSpread = Mathf.Clamp(gun.MovementSpread * (vel.magnitude < gun.MovementSpreadTolerance ? vel.magnitude * 0.1f : vel.magnitude), 0f, gun.MaxMovementSpread);
 
             vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
             _prevPosition = PM.transform.position;
@@ -341,11 +341,7 @@ namespace Game.Player.Gunplay
                     Visual();
                 }
 
-                nsm.CmdAmmo();
-
                 Recoil();
-
-                StartCoroutine(AimPunch());
             }
         }
 
@@ -401,30 +397,9 @@ namespace Game.Player.Gunplay
 
         private void UpdateSpread()
         {
-            float totalSpread = spread + moveSpread;
+            float totalSpread = spread * (PC.isCrouching ? 0.5f : 1f) + moveSpread;
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
-        }
-        
-        private IEnumerator AimPunch()
-        {
-            float timer = gun.AimPunchDuration;
-
-            while (timer > 0f)
-            {
-                timer -= Time.deltaTime;
-
-                PL.MoveCameraAimPunch(gun.AimPunch / gun.AimPunchDuration * Time.deltaTime);
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            while (PL.GetCameraAimPunchRotation() != Quaternion.Euler(Vector3.zero))
-            {
-                PL.SetCameraAimPunch(Quaternion.RotateTowards(PL.GetCameraAimPunchRotation(), Quaternion.Euler(Vector3.zero), gun.AimPunch / gun.AimPunchDropDuration));
-
-                yield return new WaitForEndOfFrame();
-            }
         }
 
         private void Reload()

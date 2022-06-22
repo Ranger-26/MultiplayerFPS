@@ -106,6 +106,8 @@ namespace Game.Player.Gunplay
         [Command]
         public void CmdShoot(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
         {
+            if (currentAmmo < 0) return;
+            currentAmmo--;
             ServerShoot(start, forward, id, visualFiringPoint);
         }
 
@@ -113,13 +115,6 @@ namespace Game.Player.Gunplay
         public void CmdMelee(Vector3 start, Vector3 forward, float multiplier)
         {
             ServerMelee(start, forward, id, multiplier);
-        }
-
-        [Command]
-        public void CmdAmmo()
-        {
-            if (currentAmmo <= 0) return;
-            currentAmmo--;
         }
 
         [Server]
@@ -324,9 +319,6 @@ namespace Game.Player.Gunplay
                     gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
                 }
             }
-
-            allGuns.Keys.ToList().ForEach(x => Debug.Log($"All gun keys: {x}, player {id}"));
-            allGuns.Values.ToList().ForEach(x => Debug.Log($"All gun values: {x}, player {id}"));
         }
 
 
@@ -344,7 +336,6 @@ namespace Game.Player.Gunplay
         [ClientRpc]
         public void RpcAddGunSlot(GunIDs newGun, WeaponSlot slot)
         {
-            Debug.Log("Calling rpc...");
             if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
 
             GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);

@@ -23,7 +23,8 @@ MonoBehaviour:
   BulletCount: 1
   GunFiringMode: 0
   Spread: 0.5
-  MovementSpread: 2
+  MovementSpread: 1
+  MovementSpreadTolerance: 1.7
   MaxSpread: 2.5
   MaxMovementSpread: 10
   StartingSpread: 0.07
@@ -40,6 +41,7 @@ MonoBehaviour:
   HasScope: 0
   ExitScopeOnShoot: 0
   ScopeFOV: 45
+  ScopedSpread: 0
   ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
   ReloadTime: 1.75
@@ -53,9 +55,6 @@ MonoBehaviour:
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
-  AimPunch: 0.5
-  AimPunchDuration: 0.05
-  AimPunchDropDuration: 0.05
   MaxBacking: 0.05
   BackingMultiplier: 3
   ChargeupSounds: []

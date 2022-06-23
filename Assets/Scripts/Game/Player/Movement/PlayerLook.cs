@@ -1,3 +1,5 @@
+using System;
+using Inputs;
 using Koenigz.PerfectCulling;
 using Mirror;
 using UnityEngine;
@@ -41,18 +43,14 @@ namespace Game.Player.Movement
             }
 
             PI = GamePlayerInput.Instance.playerInput;
-
-            PI.actions.FindAction("Look").performed += UpdateLook;
-            PI.actions.FindAction("Look").canceled += UpdateLook;
         }
 
-        public void UpdateLook(InputAction.CallbackContext callbackContext)
+        private void Update()
         {
             if (MenuOpen.IsOpen)
                 return;
 
-            mouse = callbackContext.ReadValue<Vector2>();
-
+            mouse = GameInputManager.PlayerActions.Look.ReadValue<Vector2>();
             rotationX += -mouse.y * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             rotationY = mouse.x * lookSpeed + addY;
@@ -60,6 +58,7 @@ namespace Game.Player.Movement
 
             UpdateCamera();
         }
+        
 
         #region Main Camera Movement Overloads
 
@@ -190,11 +189,5 @@ namespace Game.Player.Movement
         }
 
         #endregion
-        
-        private void OnDestroy()
-        {
-            PI.actions.FindAction("Look").performed -= UpdateLook;
-            PI.actions.FindAction("Look").canceled -= UpdateLook;
-        }
     }
 }

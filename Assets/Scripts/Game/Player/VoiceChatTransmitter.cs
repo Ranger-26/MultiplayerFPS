@@ -21,10 +21,10 @@ namespace Game.Player
 
         void Update()
         {
-            if (isLocalPlayer && Input.GetKeyDown(KeyCode.V))
+/*            if (isLocalPlayer && Input.GetKeyDown(KeyCode.V))
                 SteamUser.StartVoiceRecording();
             else if (isLocalPlayer && Input.GetKeyUp(KeyCode.V))
-                SteamUser.StopVoiceRecording();
+                SteamUser.StopVoiceRecording();*/
 
             if (isLocalPlayer)
             {

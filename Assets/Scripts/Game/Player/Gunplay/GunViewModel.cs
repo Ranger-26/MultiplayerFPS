@@ -90,24 +90,16 @@ namespace Game.Player.Gunplay
             PM = GetComponentInParent<PlayerMovement>();
             PL = GetComponentInParent<PlayerLook>();
             PC = GetComponentInParent<PlayerCrouch>();
-            PI = GamePlayerInput.Instance.playerInput;
             scopeUI = GameObject.Find("Canvas").transform.Find("Scope").gameObject;
             scopeUIImage = scopeUI.GetComponent<Image>();
             cam = PL.cam;
             model = transform.GetChild(0).gameObject;
-
-            PI.actions.FindAction("Fire").performed += UpdateSpray;
-            PI.actions.FindAction("Fire").canceled += UpdateSpray;
-
-            PI.actions.FindAction("Reload").performed += Reload;
-
-            PI.actions.FindAction("Inspect").performed += Inspect;
-
-            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
         private void Start()
         {
+            PI = GamePlayerInput.Instance.playerInput;
+
             ni = GetComponentInParent<NetworkIdentity>();
 
             if (!ni.isLocalPlayer)
@@ -147,6 +139,15 @@ namespace Game.Player.Gunplay
 
             if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
+
+            PI.actions.FindAction("Fire").performed += UpdateSpray;
+            PI.actions.FindAction("Fire").canceled += UpdateSpray;
+
+            PI.actions.FindAction("Reload").performed += Reload;
+
+            PI.actions.FindAction("Inspect").performed += Inspect;
+
+            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
 
@@ -160,6 +161,17 @@ namespace Game.Player.Gunplay
             StartCoroutine(Draw());
 
             scopeUIImage.sprite = gun.ScopeImage;
+
+            if (PI == null) PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Fire").performed += UpdateSpray;
+            PI.actions.FindAction("Fire").canceled += UpdateSpray;
+
+            PI.actions.FindAction("Reload").performed += Reload;
+
+            PI.actions.FindAction("Inspect").performed += Inspect;
+
+            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
         private void Update()

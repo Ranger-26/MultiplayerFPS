@@ -2,6 +2,7 @@ using Mirror;
 using System;
 using AudioUtils;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Movement
 {
@@ -10,11 +11,17 @@ namespace Game.Player.Movement
         public CharacterController controller;
 
         public float speed = 5f;
+        public float acceleration = 1.5f;
+        public float deceleration = 1.5f;
+        public float speedCap = 2f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
         public float StepDistance = 1.2f;
 
         public AudioClip[] stepClips;
+
+        Vector2 movementInput;
+        Vector2 vel;
 
         Vector3 velocity;
         Vector3 previousStepLocation;
@@ -32,11 +39,12 @@ namespace Game.Player.Movement
         [HideInInspector]
         public bool isGrounded;
 
-        float tagging;
         float airTime;
 
         bool LandTagged;
-        
+
+        PlayerInput PI;
+
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;
@@ -46,6 +54,13 @@ namespace Game.Player.Movement
             LandTagged = true;
 
             canMakeSound = true;
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("WASD").performed += UpdateMovement;
+            PI.actions.FindAction("WASD").canceled += UpdateMovement;
+
+            PI.actions.FindAction("Jump").performed += Jump;
         }
 
         private void Update()
@@ -69,14 +84,6 @@ namespace Game.Player.Movement
                 }
             }
 
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
-
             if (!isGrounded)
             {
                 airTime += Time.deltaTime;
@@ -91,36 +98,59 @@ namespace Game.Player.Movement
 
             if (!LandTagged && isGrounded)
             {
-                Tag(0.8f);
+                Tag();
                 previousStepLocation = transform.position;
                 AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.4f, 1f, 1f, 128);
                 LandTagged = true;
             }
 
-            float x = Input.GetAxis(StringKeys.InputHorizontal) * Convert.ToInt16(!MenuOpen.IsOpen);
-            float z = Input.GetAxis(StringKeys.InputVertical) * Convert.ToInt16(!MenuOpen.IsOpen);
-
-            Vector3 move = transform.right * x + transform.forward * z;
-            move = Vector3.ClampMagnitude(move, 1f);
+            float x = movementInput.x * Convert.ToInt16(!MenuOpen.IsOpen);
+            float z = movementInput.y * Convert.ToInt16(!MenuOpen.IsOpen);
 
             float moddedSpeed = speed - speed * weight;
 
-            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
+            Vector2 temp = Vector2.zero;
+            temp.x = Mathf.Clamp(vel.x + x * acceleration * Time.deltaTime, -speedCap, speedCap);
+            temp.y = Mathf.Clamp(vel.y + z * acceleration * Time.deltaTime, -speedCap, speedCap);
+            vel = Vector3.ClampMagnitude(temp, 1f);
+
+            controller.Move((transform.forward * vel.y + transform.right * vel.x) * moddedSpeed * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
 
-            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.9f);
+            vel = Vector2.MoveTowards(vel, Vector2.zero, deceleration * Time.deltaTime);
         }
 
         
         public void Tag(float amount)
         {
-            tagging = Mathf.Clamp01(tagging + amount);
+            vel = Vector2.MoveTowards(vel, Vector2.zero, amount);
+        }
+
+        public void Tag()
+        {
+            vel = Vector2.MoveTowards(vel, Vector2.zero, Mathf.Infinity);
         }
 
         [TargetRpc]
         public void TargetTag(float amount) => Tag(amount);
+
+        public void Jump(InputAction.CallbackContext callbackContext)
+        {
+            if (isGrounded)
+            {
+                if (MenuOpen.IsOpen)
+                    return;
+
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+        }
+
+        public void UpdateMovement(InputAction.CallbackContext callbackContext)
+        {
+            movementInput = callbackContext.ReadValue<Vector2>();
+        }
     }
 }

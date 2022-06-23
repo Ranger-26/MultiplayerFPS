@@ -19,8 +19,7 @@ namespace Game.Player.Gunplay
         public float RPM = 735f;
         [Tooltip("Weapon chargeup delay, basically a delay before shooting (in seconds), like revolvers")]
         public float ChargeupTime = 0f;
-        [Range(0, 1)]
-        [Tooltip("Amount of slow when getting hit by this gun, percentage based")]
+        [Tooltip("Amount of slow when getting hit by this gun")]
         public float Tagging = 0.9f;
         [Range(0, 1)]
         [Tooltip("Amount of speed reduction when equipped, percentage based")]

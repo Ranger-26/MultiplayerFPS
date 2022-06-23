@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game.Player.Spectating
 {
@@ -14,7 +15,11 @@ namespace Game.Player.Spectating
         public float minimumY = -60f;
         public float maximumY = 60f;
 
-        float rotationY = 0F;
+        float rotationY = 0f;
+
+        Vector2 mouseInput;
+
+        PlayerInput PI;
 
         void Update()
         {
@@ -23,20 +28,20 @@ namespace Game.Player.Spectating
 
             if (axes == RotationAxes.MouseXAndY)
             {
-                float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * GameSettings.current.Sensitivity;
+                float rotationX = transform.localEulerAngles.y + mouseInput.x * GameSettings.current.Sensitivity;
 			
-                rotationY += Input.GetAxis("Mouse Y") * GameSettings.current.Sensitivity;
+                rotationY += mouseInput.y * GameSettings.current.Sensitivity;
                 rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
                 transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
             }
             else if (axes == RotationAxes.MouseX)
             {
-                transform.Rotate(0, Input.GetAxis("Mouse X") * GameSettings.current.Sensitivity, 0);
+                transform.Rotate(0, mouseInput.x * GameSettings.current.Sensitivity, 0);
             }
             else
             {
-                rotationY += Input.GetAxis("Mouse Y") * GameSettings.current.Sensitivity;
+                rotationY += mouseInput.y * GameSettings.current.Sensitivity;
                 rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
                 transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
@@ -49,6 +54,16 @@ namespace Game.Player.Spectating
             // Make the rigid body not change rotation
             if (TryGetComponent(out Rigidbody rb))
                 rb.freezeRotation = true;
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Look").performed += UpdateLook;
+            PI.actions.FindAction("Look").canceled += UpdateLook;
+        }
+
+        public void UpdateLook(InputAction.CallbackContext callbackContext)
+        {
+            mouseInput = callbackContext.ReadValue<Vector2>();
         }
     }
 }

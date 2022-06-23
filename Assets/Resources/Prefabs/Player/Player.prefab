@@ -535,7 +535,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
-  speed: 7
+  speed: 1
+  acceleration: 8
+  deceleration: 5.5
+  speedCap: 1
   gravity: -17
   jumpHeight: 1
   StepDistance: 2.7

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Mirror;
 
 namespace Game.Player.Movement
@@ -21,8 +22,12 @@ namespace Game.Player.Movement
         [HideInInspector]
         public bool isWalking;
 
+        bool crouching;
+
         CharacterController controller;
         PlayerMovement playerMovement;
+
+        PlayerInput PI;
 
         private void Awake()
         {
@@ -34,11 +39,19 @@ namespace Game.Player.Movement
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Crouch").performed += UpdateCrouch;
+            PI.actions.FindAction("Crouch").canceled += UpdateCrouch;
+
+            PI.actions.FindAction("Walk").performed += UpdateWalk;
+            PI.actions.FindAction("Walk").canceled += UpdateWalk;
         }
 
         private void Update()
         {
-            crouchFactor = Mathf.Clamp01(crouchFactor + Time.deltaTime * CrouchRate * (Input.GetKey(KeyCode.LeftControl) ? 1 : -1));
+            crouchFactor = Mathf.Clamp01(crouchFactor + Time.deltaTime * CrouchRate * (crouching ? 1 : -1));
 
             playerMovement.speed = Mathf.Lerp(NormalSpeed, CrouchSpeed, crouchFactor);
 
@@ -46,7 +59,7 @@ namespace Game.Player.Movement
 
             if (!isCrouching)
             {
-                playerMovement.speed = Input.GetKey(KeyCode.LeftShift) ? WalkingSpeed : NormalSpeed;
+                playerMovement.speed = isWalking ? WalkingSpeed : NormalSpeed;
             }
 
             float h = Mathf.Lerp(StandingHeight, CrouchHeight, crouchFactor);
@@ -56,9 +69,20 @@ namespace Game.Player.Movement
                 controller.Move(new Vector3(0f, h - previousHeight, 0f));
 
             isCrouching = crouchFactor >= 0.5f;
-            isWalking = Input.GetKey(KeyCode.LeftShift);
 
             playerMovement.canMakeSound = !isCrouching && !isWalking;
+        }
+
+        public void UpdateCrouch(InputAction.CallbackContext callbackContext)
+        {
+            if (callbackContext.performed) crouching = true;
+            else if (callbackContext.canceled) crouching = false;
+        }
+
+        public void UpdateWalk(InputAction.CallbackContext callbackContext)
+        {
+            if (callbackContext.performed) isWalking = true;
+            else if (callbackContext.canceled) isWalking = false;
         }
     }
 }

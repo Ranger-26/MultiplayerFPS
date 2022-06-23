@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.VFX;
 using Mirror;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Game.Player.Gunplay
@@ -34,6 +35,8 @@ namespace Game.Player.Gunplay
         PlayerLook PL;
         PlayerCrouch PC;
 
+        PlayerInput PI;
+
         Camera cam;
 
         Transform firingPoint;
@@ -45,6 +48,8 @@ namespace Game.Player.Gunplay
         Image scopeUIImage;
 
         NetworkShootingManager nsm;
+
+        Vector2 movementInput;
 
         Vector3 _prevPosition;
         Vector3 vel;
@@ -74,7 +79,6 @@ namespace Game.Player.Gunplay
         bool chargedUp;
         bool chargeupSound;
         bool canCharge;
-        bool shootQueue;
         bool chambered;
         bool finishedReload;
 
@@ -93,6 +97,8 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
+            PI = GamePlayerInput.Instance.playerInput;
+
             ni = GetComponentInParent<NetworkIdentity>();
 
             if (!ni.isLocalPlayer)
@@ -132,6 +138,16 @@ namespace Game.Player.Gunplay
 
             if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
+
+            PI.actions.FindAction("Fire").performed += UpdateSpray;
+            PI.actions.FindAction("Fire").performed += SemiAuto;
+            PI.actions.FindAction("Fire").canceled += UpdateSpray;
+
+            PI.actions.FindAction("Reload").performed += Reload;
+
+            PI.actions.FindAction("Inspect").performed += Inspect;
+
+            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
 
@@ -158,26 +174,12 @@ namespace Game.Player.Gunplay
             if (!nsm.hasAuthority)
                 enabled = false;
 
-            isSpraying = Input.GetMouseButton(0);
-
-            if ((isSpraying && gun.GunFiringMode == FiringMode.Auto) || (Input.GetMouseButtonDown(0) && gun.GunFiringMode == FiringMode.SemiAuto))
+            if (isSpraying && gun.GunFiringMode == FiringMode.Auto)
             {
                 if (MenuOpen.IsOpen)
                     return;
 
                 Shoot();
-
-                if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.2f && shootTimer > 0f)
-                    shootQueue = true;
-            }
-
-            if (shootQueue)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                Shoot();
-                shootQueue = false;
             }
 
             if (gun.ChargeupTime > 0f && isSpraying && nsm.currentAmmo > 0 && canCharge)
@@ -204,29 +206,8 @@ namespace Game.Player.Gunplay
                 chargedUp = chargeupTimer >= gun.ChargeupTime;
             }
 
-            if (Input.GetKeyDown(KeyCode.F) && !delay)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                if (anim != null)
-                    anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
-                    Reload();
-            }
-
-            if (Input.GetMouseButtonDown(1) && gun.HasScope && !delay)
-                Scope(!isScoped);
-
-            float x = Input.GetAxisRaw(StringKeys.InputHorizontal) * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = Input.GetAxisRaw(StringKeys.InputVertical) * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = movementInput.x * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = movementInput.y * Convert.ToInt32(!MenuOpen.IsOpen);
 
             lerpFactor = Mathf.Clamp01(
                 lerpFactor + Mathf.Abs(x * Time.deltaTime * gun.BackingMultiplier) + Mathf.Abs(z * Time.deltaTime * gun.BackingMultiplier)
@@ -286,6 +267,54 @@ namespace Game.Player.Gunplay
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
+        }
+
+        public void UpdateSpray(InputAction.CallbackContext callbackContext)
+        {
+            if (callbackContext.performed) 
+                isSpraying = true;
+            else if (callbackContext.canceled)
+                isSpraying = false;
+        }
+
+        public void SemiAuto(InputAction.CallbackContext callbackContext)
+        {
+            if (MenuOpen.IsOpen)
+                return;
+
+            if (!delay && gun.GunFiringMode == FiringMode.SemiAuto)
+            {
+                Shoot();
+            }
+        }
+
+        public void Inspect(InputAction.CallbackContext callbackContext)
+        {
+            if (!delay && !MenuOpen.IsOpen)
+            {
+                if (anim != null)
+                    anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
+            }
+        }
+
+        public void Reload(InputAction.CallbackContext callbackContext)
+        {
+            if (MenuOpen.IsOpen)
+                return;
+
+            if (!delay && !isSpraying && nsm.currentAmmo < gun.MaxAmmo && nsm.reserveAmmo > 0 && nsm.hasAuthority)
+                Reload();
+        }
+
+        public void UpdateScope(InputAction.CallbackContext callbackContext)
+        {
+            if (gun.HasScope && !delay)
+                Scope(!isScoped);
+        }
+
+        public void UpdateMovement(InputAction.CallbackContext callbackContext)
+        {
+            movementInput = callbackContext.ReadValue<Vector2>();
         }
 
         public void Scope(bool status)

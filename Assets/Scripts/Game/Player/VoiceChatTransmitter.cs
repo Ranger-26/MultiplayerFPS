@@ -2,6 +2,7 @@ using System;
 using Mirror;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Game.Player
@@ -11,20 +12,24 @@ namespace Game.Player
         public LayerMask PlayerMask;
         public AudioSource audioSource;
 
+        PlayerInput PI;
+
         private void Start()
         {
             if (!SteamManager.Initialized)
             {
                 enabled = false;
             }
+
+            PI = GamePlayerInput.Instance.playerInput;
+
+            PI.actions.FindAction("Voice").performed += Voice;
+            PI.actions.FindAction("Voice").canceled += Voice;
         }
 
         void Update()
         {
-            if (isLocalPlayer && Input.GetKeyDown(KeyCode.V))
-                SteamUser.StartVoiceRecording();
-            else if (isLocalPlayer && Input.GetKeyUp(KeyCode.V))
-                SteamUser.StopVoiceRecording();
+
 
             if (isLocalPlayer)
             {
@@ -42,6 +47,14 @@ namespace Game.Player
                     }
                 }
             }
+        }
+
+        public void Voice(InputAction.CallbackContext callbackContext)
+        {
+            if (isLocalPlayer && callbackContext.performed)
+                SteamUser.StartVoiceRecording();
+            else if (isLocalPlayer && callbackContext.canceled)
+                SteamUser.StopVoiceRecording();
         }
 
         [Command(channel = Channels.Unreliable)]

@@ -11,6 +11,9 @@ namespace Game.Player.Movement
         public CharacterController controller;
 
         public float speed = 5f;
+        public float acceleration = 1.5f;
+        public float deceleration = 1.5f;
+        public float speedCap = 2f;
         public float gravity = -9.81f;
         public float jumpHeight = 3f;
         public float StepDistance = 1.2f;
@@ -18,6 +21,7 @@ namespace Game.Player.Movement
         public AudioClip[] stepClips;
 
         Vector2 movementInput;
+        Vector2 vel;
 
         Vector3 velocity;
         Vector3 previousStepLocation;
@@ -35,7 +39,6 @@ namespace Game.Player.Movement
         [HideInInspector]
         public bool isGrounded;
 
-        float tagging;
         float airTime;
 
         bool LandTagged;
@@ -95,7 +98,7 @@ namespace Game.Player.Movement
 
             if (!LandTagged && isGrounded)
             {
-                Tag(0.8f);
+                Tag();
                 previousStepLocation = transform.position;
                 AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.4f, 1f, 1f, 128);
                 LandTagged = true;
@@ -104,24 +107,31 @@ namespace Game.Player.Movement
             float x = movementInput.x * Convert.ToInt16(!MenuOpen.IsOpen);
             float z = movementInput.y * Convert.ToInt16(!MenuOpen.IsOpen);
 
-            Vector3 move = transform.right * x + transform.forward * z;
-            move = Vector3.ClampMagnitude(move, 1f);
-
             float moddedSpeed = speed - speed * weight;
 
-            controller.Move(move * (moddedSpeed - moddedSpeed * tagging) * Time.deltaTime);
+            Vector2 temp = Vector2.zero;
+            temp.x = Mathf.Clamp(vel.x + x * acceleration * Time.deltaTime, -speedCap, speedCap);
+            temp.y = Mathf.Clamp(vel.y + z * acceleration * Time.deltaTime, -speedCap, speedCap);
+            vel = Vector3.ClampMagnitude(temp, 1f);
+
+            controller.Move((transform.forward * vel.y + transform.right * vel.x) * moddedSpeed * Time.deltaTime);
 
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
 
-            tagging = Mathf.Clamp01(tagging - Time.deltaTime * 0.9f);
+            vel = Vector2.MoveTowards(vel, Vector2.zero, deceleration * Time.deltaTime);
         }
 
         
         public void Tag(float amount)
         {
-            tagging = Mathf.Clamp01(tagging + amount);
+            vel = Vector2.MoveTowards(vel, Vector2.zero, amount);
+        }
+
+        public void Tag()
+        {
+            vel = Vector2.MoveTowards(vel, Vector2.zero, Mathf.Infinity);
         }
 
         [TargetRpc]

@@ -190,5 +190,11 @@ namespace Game.Player.Movement
         }
 
         #endregion
+        
+        private void OnDestroy()
+        {
+            PI.actions.FindAction("Look").performed -= UpdateLook;
+            PI.actions.FindAction("Look").canceled -= UpdateLook;
+        }
     }
 }

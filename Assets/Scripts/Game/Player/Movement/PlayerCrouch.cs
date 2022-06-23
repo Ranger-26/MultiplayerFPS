@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
@@ -29,6 +30,8 @@ namespace Game.Player.Movement
 
         PlayerInput PI;
 
+        private InputAction moveAction;
+        
         private void Awake()
         {
             playerMovement = GetComponent<PlayerMovement>();
@@ -83,6 +86,15 @@ namespace Game.Player.Movement
         {
             if (callbackContext.performed) isWalking = true;
             else if (callbackContext.canceled) isWalking = false;
+        }
+
+        private void OnDestroy()
+        {
+            PI.actions.FindAction("Crouch").performed -= UpdateCrouch;
+            PI.actions.FindAction("Crouch").canceled -= UpdateCrouch;
+
+            PI.actions.FindAction("Walk").performed -= UpdateWalk;
+            PI.actions.FindAction("Walk").canceled -= UpdateWalk;
         }
     }
 }

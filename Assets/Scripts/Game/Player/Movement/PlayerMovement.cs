@@ -152,5 +152,13 @@ namespace Game.Player.Movement
         {
             movementInput = callbackContext.ReadValue<Vector2>();
         }
+
+        private void OnDestroy()
+        {
+            PI.actions.FindAction("WASD").performed -= UpdateMovement;
+            PI.actions.FindAction("WASD").canceled -= UpdateMovement;
+
+            PI.actions.FindAction("Jump").performed -= Jump;
+        }
     }
 }

@@ -499,5 +499,18 @@ namespace Game.Player.Gunplay
             canCharge = true;
             delay = false;
         }
+
+        private void OnDestroy()
+        {
+            PI.actions.FindAction("Fire").performed -= UpdateSpray;
+            PI.actions.FindAction("Fire").performed -= SemiAuto;
+            PI.actions.FindAction("Fire").canceled -= UpdateSpray;
+
+            PI.actions.FindAction("Reload").performed -= Reload;
+
+            PI.actions.FindAction("Inspect").performed -= Inspect;
+
+            PI.actions.FindAction("AltFire").performed -= UpdateScope;
+        }
     }
 }

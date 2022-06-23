@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38768893, g: 0.38768893, b: 0.38768893, a: 1}
+  m_IndirectSpecularColor: {r: 0.38842773, g: 0.38842773, b: 0.38842773, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9794,6 +9794,7 @@ GameObject:
   - component: {fileID: 1999213448}
   - component: {fileID: 1999213449}
   - component: {fileID: 1999213450}
+  - component: {fileID: 1999213451}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -9905,6 +9906,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 37f841e0-b658-4eb8-86a2-0a5e7e617ebd
     m_ActionName: Player/Inspect[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db358d72-65a4-4e4b-9ac7-66069470b6c6
+    m_ActionName: Player/Voice[/Keyboard/v]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -9923,6 +9928,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
+--- !u!114 &1999213451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999213447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7114ba93e5844663afcc4aac81df8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2003682842
 GameObject:
   m_ObjectHideFlags: 0

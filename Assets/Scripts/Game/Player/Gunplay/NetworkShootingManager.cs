@@ -5,6 +5,7 @@ using Mirror;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,7 +48,6 @@ namespace Game.Player.Gunplay
         [SyncVar]
         private float reloadTimer;
 
-        PlayerInput PI;
 
         #region UnityCallbacks
         public void Start()
@@ -77,12 +77,18 @@ namespace Game.Player.Gunplay
             }
 
             GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
+            
+            
+            GameInputManager.PlayerActions.Num1.performed += Slot1;
+            GameInputManager.PlayerActions.Num2.performed += Slot2;
+            GameInputManager.PlayerActions.Num1.performed += Slot3;
+        }
 
-            PI = GamePlayerInput.Instance.playerInput;
-
-            PI.actions.FindAction("Slot1").performed += Slot1;
-            PI.actions.FindAction("Slot2").performed += Slot2;
-            PI.actions.FindAction("Slot3").performed += Slot3;
+        private void OnDestroy()
+        {
+            GameInputManager.PlayerActions.Num1.performed -= Slot1;
+            GameInputManager.PlayerActions.Num2.performed -= Slot2;
+            GameInputManager.PlayerActions.Num1.performed -= Slot3;
         }
 
         private void Update()

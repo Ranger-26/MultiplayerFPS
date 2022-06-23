@@ -1,4 +1,5 @@
 using System;
+using Inputs;
 using Mirror;
 using Steamworks;
 using UnityEngine;
@@ -23,8 +24,9 @@ namespace Game.Player
 
             PI = GamePlayerInput.Instance.playerInput;
 
-            PI.actions.FindAction("Voice").performed += Voice;
-            PI.actions.FindAction("Voice").canceled += Voice;
+            GameInputManager.PlayerActions.Voice.performed += Voice;
+            GameInputManager.PlayerActions.Voice.canceled += Voice;
+            
         }
 
         void Update()

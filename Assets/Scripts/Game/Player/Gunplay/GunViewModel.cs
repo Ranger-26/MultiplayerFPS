@@ -79,7 +79,6 @@ namespace Game.Player.Gunplay
         bool chargedUp;
         bool chargeupSound;
         bool canCharge;
-        bool shootQueue;
         bool chambered;
         bool finishedReload;
 
@@ -141,6 +140,7 @@ namespace Game.Player.Gunplay
             //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
 
             PI.actions.FindAction("Fire").performed += UpdateSpray;
+            PI.actions.FindAction("Fire").performed += SemiAuto;
             PI.actions.FindAction("Fire").canceled += UpdateSpray;
 
             PI.actions.FindAction("Reload").performed += Reload;
@@ -161,17 +161,6 @@ namespace Game.Player.Gunplay
             StartCoroutine(Draw());
 
             scopeUIImage.sprite = gun.ScopeImage;
-
-            if (PI == null) PI = GamePlayerInput.Instance.playerInput;
-
-            PI.actions.FindAction("Fire").performed += UpdateSpray;
-            PI.actions.FindAction("Fire").canceled += UpdateSpray;
-
-            PI.actions.FindAction("Reload").performed += Reload;
-
-            PI.actions.FindAction("Inspect").performed += Inspect;
-
-            PI.actions.FindAction("AltFire").performed += UpdateScope;
         }
 
         private void Update()
@@ -185,24 +174,12 @@ namespace Game.Player.Gunplay
             if (!nsm.hasAuthority)
                 enabled = false;
 
-            if ((isSpraying && gun.GunFiringMode == FiringMode.Auto))
+            if (isSpraying && gun.GunFiringMode == FiringMode.Auto)
             {
                 if (MenuOpen.IsOpen)
                     return;
 
                 Shoot();
-
-                if (delay && gun.GunFiringMode == FiringMode.SemiAuto && shootTimer <= 0.2f && shootTimer > 0f)
-                    shootQueue = true;
-            }
-
-            if (shootQueue)
-            {
-                if (MenuOpen.IsOpen)
-                    return;
-
-                Shoot();
-                shootQueue = false;
             }
 
             if (gun.ChargeupTime > 0f && isSpraying && nsm.currentAmmo > 0 && canCharge)
@@ -298,6 +275,17 @@ namespace Game.Player.Gunplay
                 isSpraying = true;
             else if (callbackContext.canceled)
                 isSpraying = false;
+        }
+
+        public void SemiAuto(InputAction.CallbackContext callbackContext)
+        {
+            if (MenuOpen.IsOpen)
+                return;
+
+            if (!delay && gun.GunFiringMode == FiringMode.SemiAuto)
+            {
+                Shoot();
+            }
         }
 
         public void Inspect(InputAction.CallbackContext callbackContext)

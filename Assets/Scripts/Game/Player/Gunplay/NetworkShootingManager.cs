@@ -448,6 +448,9 @@ namespace Game.Player.Gunplay
 
         public void SwitchSlot(int slot)
         {
+            if (MenuOpen.IsOpen)
+                return;
+
             if (hasAuthority && slot == 1)
             {
                 Debug.Log("Trying to switch to Primary");

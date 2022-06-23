@@ -1,6 +1,7 @@
 using Mirror;
 using System;
 using AudioUtils;
+using Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -54,13 +55,8 @@ namespace Game.Player.Movement
             LandTagged = true;
 
             canMakeSound = true;
-
-            PI = GamePlayerInput.Instance.playerInput;
-
-            PI.actions.FindAction("WASD").performed += UpdateMovement;
-            PI.actions.FindAction("WASD").canceled += UpdateMovement;
-
-            PI.actions.FindAction("Jump").performed += Jump;
+            
+            GameInputManager.PlayerActions.Jump.performed += Jump;
         }
 
         private void Update()
@@ -104,6 +100,7 @@ namespace Game.Player.Movement
                 LandTagged = true;
             }
 
+            movementInput = GameInputManager.PlayerActions.WASD.ReadValue<Vector2>();
             float x = movementInput.x * Convert.ToInt16(!MenuOpen.IsOpen);
             float z = movementInput.y * Convert.ToInt16(!MenuOpen.IsOpen);
 
@@ -148,17 +145,9 @@ namespace Game.Player.Movement
             }
         }
 
-        public void UpdateMovement(InputAction.CallbackContext callbackContext)
-        {
-            movementInput = callbackContext.ReadValue<Vector2>();
-        }
-
         private void OnDestroy()
         {
-            PI.actions.FindAction("WASD").performed -= UpdateMovement;
-            PI.actions.FindAction("WASD").canceled -= UpdateMovement;
-
-            PI.actions.FindAction("Jump").performed -= Jump;
+            GameInputManager.PlayerActions.Jump.performed -= Jump;
         }
     }
 }

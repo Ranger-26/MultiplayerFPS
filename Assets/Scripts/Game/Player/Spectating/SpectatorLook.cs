@@ -1,3 +1,4 @@
+using Inputs;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,8 @@ namespace Game.Player.Spectating
             if (MenuOpen.IsOpen)
                 return;
 
+            mouseInput = GameInputManager.PlayerActions.Look.ReadValue<Vector2>();
+            
             if (axes == RotationAxes.MouseXAndY)
             {
                 float rotationX = transform.localEulerAngles.y + mouseInput.x * GameSettings.current.Sensitivity;
@@ -54,16 +57,6 @@ namespace Game.Player.Spectating
             // Make the rigid body not change rotation
             if (TryGetComponent(out Rigidbody rb))
                 rb.freezeRotation = true;
-
-            PI = GamePlayerInput.Instance.playerInput;
-
-            PI.actions.FindAction("Look").performed += UpdateLook;
-            PI.actions.FindAction("Look").canceled += UpdateLook;
-        }
-
-        public void UpdateLook(InputAction.CallbackContext callbackContext)
-        {
-            mouseInput = callbackContext.ReadValue<Vector2>();
         }
     }
 }

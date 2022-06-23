@@ -12,7 +12,7 @@ namespace Game.Player.Spectating
 
         private void Start()
         {
-            //if (!hasAuthority) enabled = false;
+            if (!hasAuthority) enabled = false;
         }
 
         void Update () 

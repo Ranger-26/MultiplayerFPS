@@ -23,9 +23,7 @@ namespace Game.Player.Movement
         float addY;
 
         Vector2 mouse;
-
-        PlayerInput PI;
-
+        
         private void Awake()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -41,8 +39,6 @@ namespace Game.Player.Movement
                 cam.GetComponent<PerfectCullingCamera>().enabled = false;
                 enabled = false;
             }
-
-            PI = GamePlayerInput.Instance.playerInput;
         }
 
         private void Update()

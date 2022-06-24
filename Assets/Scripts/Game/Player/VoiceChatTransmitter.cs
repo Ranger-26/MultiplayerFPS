@@ -12,18 +12,14 @@ namespace Game.Player
     {
         public LayerMask PlayerMask;
         public AudioSource audioSource;
-
-        PlayerInput PI;
-
+        
         private void Start()
         {
             if (!SteamManager.Initialized)
             {
                 enabled = false;
             }
-
-            PI = GamePlayerInput.Instance.playerInput;
-
+            
             GameInputManager.PlayerActions.Voice.performed += Voice;
             GameInputManager.PlayerActions.Voice.canceled += Voice;
             
@@ -31,8 +27,6 @@ namespace Game.Player
 
         void Update()
         {
-
-
             if (isLocalPlayer)
             {
                 uint Compressed;

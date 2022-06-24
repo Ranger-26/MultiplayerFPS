@@ -43,9 +43,7 @@ namespace Game.Player.Movement
         float airTime;
 
         bool LandTagged;
-
-        PlayerInput PI;
-
+        
         private void Start()
         {
             if (!isLocalPlayer) enabled = false;

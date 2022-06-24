@@ -1,4 +1,5 @@
 using System;
+using Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
@@ -27,9 +28,7 @@ namespace Game.Player.Movement
 
         CharacterController controller;
         PlayerMovement playerMovement;
-
-        PlayerInput PI;
-
+        
         private InputAction moveAction;
         
         private void Awake()
@@ -43,13 +42,11 @@ namespace Game.Player.Movement
         {
             if (!isLocalPlayer) enabled = false;
 
-            PI = GamePlayerInput.Instance.playerInput;
+            GameInputManager.PlayerActions.Crouch.performed += UpdateCrouch;
+            GameInputManager.PlayerActions.Crouch.canceled += UpdateCrouch;
 
-            PI.actions.FindAction("Crouch").performed += UpdateCrouch;
-            PI.actions.FindAction("Crouch").canceled += UpdateCrouch;
-
-            PI.actions.FindAction("Walk").performed += UpdateWalk;
-            PI.actions.FindAction("Walk").canceled += UpdateWalk;
+            GameInputManager.PlayerActions.Walk.performed += UpdateWalk;
+            GameInputManager.PlayerActions.Walk.canceled += UpdateWalk;
         }
 
         private void Update()
@@ -90,11 +87,11 @@ namespace Game.Player.Movement
 
         private void OnDestroy()
         {
-            PI.actions.FindAction("Crouch").performed -= UpdateCrouch;
-            PI.actions.FindAction("Crouch").canceled -= UpdateCrouch;
+            GameInputManager.PlayerActions.Crouch.performed -= UpdateCrouch;
+            GameInputManager.PlayerActions.Crouch.canceled -= UpdateCrouch;
 
-            PI.actions.FindAction("Walk").performed -= UpdateWalk;
-            PI.actions.FindAction("Walk").canceled -= UpdateWalk;
+            GameInputManager.PlayerActions.Walk.performed -= UpdateWalk;
+            GameInputManager.PlayerActions.Walk.canceled -= UpdateWalk;
         }
     }
 }

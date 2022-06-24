@@ -3,6 +3,7 @@ using Game.Player.Movement;
 using System.Collections;
 using AudioUtils;
 using Game.Player.Gunplay.IdentifierComponents;
+using Inputs;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -35,7 +36,6 @@ namespace Game.Player.Gunplay
         PlayerLook PL;
         PlayerCrouch PC;
 
-        PlayerInput PI;
 
         Camera cam;
 
@@ -97,8 +97,6 @@ namespace Game.Player.Gunplay
 
         private void Start()
         {
-            PI = GamePlayerInput.Instance.playerInput;
-
             ni = GetComponentInParent<NetworkIdentity>();
 
             if (!ni.isLocalPlayer)
@@ -137,17 +135,16 @@ namespace Game.Player.Gunplay
             scopeUIImage.sprite = gun.ScopeImage;
 
             if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
-            //nsm.CmdSendDebug($"Spread point pos: {spreadPoint.position}", GetComponentInParent<NetworkGamePlayer>().playerId);
 
-            PI.actions.FindAction("Fire").performed += UpdateSpray;
-            PI.actions.FindAction("Fire").performed += SemiAuto;
-            PI.actions.FindAction("Fire").canceled += UpdateSpray;
+            GameInputManager.PlayerActions.Fire.performed += UpdateSpray;
+            GameInputManager.PlayerActions.Fire.performed += SemiAuto;
+            GameInputManager.PlayerActions.Fire.canceled += UpdateSpray;
 
-            PI.actions.FindAction("Reload").performed += Reload;
+            GameInputManager.PlayerActions.Reload.performed += Reload;
+            
+            GameInputManager.PlayerActions.Inspect.performed += Inspect;
 
-            PI.actions.FindAction("Inspect").performed += Inspect;
-
-            PI.actions.FindAction("AltFire").performed += UpdateScope;
+            GameInputManager.PlayerActions.AltFire.performed += UpdateScope;
         }
 
 
@@ -502,15 +499,15 @@ namespace Game.Player.Gunplay
 
         private void OnDestroy()
         {
-            PI.actions.FindAction("Fire").performed -= UpdateSpray;
-            PI.actions.FindAction("Fire").performed -= SemiAuto;
-            PI.actions.FindAction("Fire").canceled -= UpdateSpray;
+            GameInputManager.PlayerActions.Fire.performed -= UpdateSpray;
+            GameInputManager.PlayerActions.Fire.performed -= SemiAuto;
+            GameInputManager.PlayerActions.Fire.canceled -= UpdateSpray;
 
-            PI.actions.FindAction("Reload").performed -= Reload;
+            GameInputManager.PlayerActions.Reload.performed -= Reload;
+            
+            GameInputManager.PlayerActions.Inspect.performed -= Inspect;
 
-            PI.actions.FindAction("Inspect").performed -= Inspect;
-
-            PI.actions.FindAction("AltFire").performed -= UpdateScope;
+            GameInputManager.PlayerActions.AltFire.performed -= UpdateScope;
         }
     }
 }

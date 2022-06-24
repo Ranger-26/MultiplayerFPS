@@ -19,9 +19,7 @@ namespace Game.Player.Spectating
         float rotationY = 0f;
 
         Vector2 mouseInput;
-
-        PlayerInput PI;
-
+        
         void Update()
         {
             if (MenuOpen.IsOpen)

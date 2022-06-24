@@ -81,14 +81,14 @@ namespace Game.Player.Gunplay
             
             GameInputManager.PlayerActions.Num1.performed += Slot1;
             GameInputManager.PlayerActions.Num2.performed += Slot2;
-            GameInputManager.PlayerActions.Num1.performed += Slot3;
+            GameInputManager.PlayerActions.Num3.performed += Slot3;
         }
 
         private void OnDestroy()
         {
             GameInputManager.PlayerActions.Num1.performed -= Slot1;
             GameInputManager.PlayerActions.Num2.performed -= Slot2;
-            GameInputManager.PlayerActions.Num1.performed -= Slot3;
+            GameInputManager.PlayerActions.Num3.performed -= Slot3;
         }
 
         private void Update()

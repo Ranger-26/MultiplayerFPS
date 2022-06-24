@@ -90,14 +90,6 @@ namespace Game.Player.Movement
                 airTime = 0f;
             }
 
-            if (!LandTagged && isGrounded)
-            {
-                Tag();
-                previousStepLocation = transform.position;
-                AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.4f, 1f, 1f, 128);
-                LandTagged = true;
-            }
-
             movementInput = GameInputManager.PlayerActions.WASD.ReadValue<Vector2>();
             float x = movementInput.x * Convert.ToInt16(!MenuOpen.IsOpen);
             float z = movementInput.y * Convert.ToInt16(!MenuOpen.IsOpen);
@@ -116,17 +108,20 @@ namespace Game.Player.Movement
             controller.Move(velocity * Time.deltaTime);
 
             vel = Vector2.MoveTowards(vel, Vector2.zero, deceleration * Time.deltaTime);
+
+            if (!LandTagged && isGrounded)
+            {
+                Tag(0.5f);
+                previousStepLocation = transform.position;
+                AudioSystem.NetworkPlaySound(stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], transform.position, 20f, 0.4f, 1f, 1f, 128);
+                LandTagged = true;
+            }
         }
 
         
         public void Tag(float amount)
         {
             vel = Vector2.MoveTowards(vel, Vector2.zero, amount);
-        }
-
-        public void Tag()
-        {
-            vel = Vector2.MoveTowards(vel, Vector2.zero, Mathf.Infinity);
         }
 
         [TargetRpc]

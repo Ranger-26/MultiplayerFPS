@@ -37,6 +37,7 @@ namespace AudioUtils
                 spatialBlend = _spatialBlend,
                 priority = _priority
             };
+            OnClientReceiveAudioMessage(message);
             NetworkClient.Send(message, Channels.Unreliable);
         }
         
@@ -48,7 +49,7 @@ namespace AudioUtils
         
         public static void OnServerRecieveAudioMessage(NetworkConnection conn, AudioMessage message)
         {
-            NetworkServer.SendToAll(message, Channels.Unreliable);
+            NetworkUtils.SendToAllExceptOne(message, conn as NetworkConnectionToClient, Channels.Unreliable); 
         }
         
         public static void RegisterHandlers()

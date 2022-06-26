@@ -1,5 +1,6 @@
 using System;
 using Mirror;
+using Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -33,6 +34,8 @@ namespace Game.Player
                 }
                 NetworkManager.singleton.StopClient();
             });
+
+            GameInputManager.PlayerActions.Pause.performed += Pause;
         }
 
 
@@ -47,6 +50,11 @@ namespace Game.Player
             {
                 Instance = this;
             }
+        }
+
+        private void OnDestroy()
+        {
+            GameInputManager.PlayerActions.Pause.performed -= Pause;
         }
 
         public void UpdateHealthUI(int newHealth) => _healthText.text = newHealth.ToString();

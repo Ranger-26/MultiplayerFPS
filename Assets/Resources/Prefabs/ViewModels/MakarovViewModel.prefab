@@ -28,7 +28,6 @@ Transform:
   m_LocalRotation: {x: 0.70710665, y: -1.5700923e-16, z: -6.617445e-24, w: -0.7071069}
   m_LocalPosition: {x: 0, y: 0.065934345, z: 0.010297088}
   m_LocalScale: {x: 0.1509621, y: 0.15096214, z: 0.15096214}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6849217335516239783}
   m_RootOrder: 3
@@ -111,7 +110,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.29284224, y: 0.29284227, z: 0.29284227}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6849217335516239783}
   m_RootOrder: 0
@@ -194,7 +192,6 @@ Transform:
   m_LocalRotation: {x: 0.00000011920929, y: 0.000000029802322, z: -0.30070576, w: 0.953717}
   m_LocalPosition: {x: -0.0006253004, y: -0.01621653, z: 0.008319714}
   m_LocalScale: {x: 0.108591095, y: 0.10859109, z: 0.10859109}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6849217335516239783}
   m_RootOrder: 4
@@ -277,7 +274,6 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2986887672353967667}
   - {fileID: 663714746295547370}
@@ -365,7 +361,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0044256807, y: -0.026314627, z: -0.0016208078}
   m_LocalScale: {x: 0.9543578, y: 1.117475, z: 1.117475}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6079247785213604484}
   m_RootOrder: 0
@@ -446,7 +441,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.23, y: -2.25, z: -4.48}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6079247785213604484}
   - {fileID: 6849217335516239783}
@@ -482,7 +476,6 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 1.0500586, z: -4.5107136}
   m_LocalScale: {x: 24.66557, y: 21.065145, z: 21.065145}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5309356340140612006}
   m_Father: {fileID: 6930042796250343905}
@@ -566,7 +559,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.008199998, z: -0.012789999}
   m_LocalScale: {x: 0.26741427, y: 0.3222575, z: 0.03992183}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6849217335516239783}
   m_RootOrder: 2
@@ -650,7 +642,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6930042796250343905}
   m_Father: {fileID: 0}
@@ -674,7 +665,7 @@ MonoBehaviour:
   gunId: 3
 --- !u!95 &6725289208620413639
 Animator:
-  serializedVersion: 4
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -687,7 +678,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -732,7 +722,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.052837595, z: 0.002901678}
   m_LocalScale: {x: 0.036773097, y: 0.0367731, z: 0.0367731}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6849217335516239783}
   m_RootOrder: 1
@@ -868,13 +857,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
---- !u!2083052967 &836145610334071336 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 6996477868075680447, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
-  m_PrefabInstance: {fileID: 7674957908898900119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &836145610334071350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6996477868075680417, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+  m_PrefabInstance: {fileID: 7674957908898900119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &836145610334071336 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6996477868075680447, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
   m_PrefabInstance: {fileID: 7674957908898900119}
   m_PrefabAsset: {fileID: 0}

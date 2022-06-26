@@ -54,7 +54,6 @@ namespace Game.Player.Gunplay
         Vector3 _prevPosition;
         Vector3 vel;
 
-        [HideInInspector]
         public Animator anim;
 
         NetworkIdentity ni;
@@ -291,7 +290,7 @@ namespace Game.Player.Gunplay
             if (!delay && !MenuOpen.IsOpen)
             {
                 if (anim != null)
-                    anim.SetTrigger(StringKeys.GunInspectAnimation);
+                    anim.Play(StringKeys.GunInspectAnimation, -1, 0f);
             }
         }
 
@@ -380,7 +379,7 @@ namespace Game.Player.Gunplay
                     muzzleFlash.Play();
 
                 if (anim != null)
-                    anim.SetTrigger(StringKeys.GunShootAnimation);
+                    anim.Play(StringKeys.GunShootAnimation, -1, 0f);
             }
 
             if (gun.ShootSounds.Length != 0)
@@ -446,7 +445,7 @@ namespace Game.Player.Gunplay
             Debug.Log("Reloading... ");
 
             if (anim != null)
-                anim.SetTrigger(StringKeys.GunReloadAnimation);
+                anim.Play(StringKeys.GunReloadAnimation, -1, 0f);
 
             nsm.CmdReload();
         }
@@ -481,15 +480,18 @@ namespace Game.Player.Gunplay
             canCharge = false;
             chambered = true;
 
+            if (anim != null)
+                anim.Play(StringKeys.GunDrawAnimation, -1, 0f);
+
             spread = gun.StartingSpread;
 
             displacementFactor = 0f;
             recoilFactor = 0f;
 
-            if (anim != null)
-                anim.SetTrigger(StringKeys.GunDrawAnimation);
-
             yield return new WaitForSeconds(gun.DrawTime);
+
+            if (anim != null)
+                anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
 
             canCharge = true;
             delay = false;

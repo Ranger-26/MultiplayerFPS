@@ -1,3 +1,4 @@
+using Game.UI;
 using UnityEngine;
 
 public class Menu : MonoBehaviour

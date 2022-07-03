@@ -1,8 +1,7 @@
 using Mirror;
 using UnityEngine;
-using Networking;
 
-namespace Game
+namespace Game.UI
 {
     public class PauseMenu : MonoBehaviour
     {

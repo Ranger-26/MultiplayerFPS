@@ -1,6 +1,4 @@
-using Mirror;
-
-namespace Game
+namespace Game.UI
 {
     public interface IDamageable
     {

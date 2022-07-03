@@ -3,6 +3,7 @@ using Game.Player.Movement;
 using System.Collections;
 using AudioUtils;
 using Game.Player.Gunplay.IdentifierComponents;
+using Game.UI;
 using Inputs;
 using UnityEngine;
 using UnityEngine.UI;

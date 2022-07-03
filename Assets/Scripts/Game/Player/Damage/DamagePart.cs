@@ -1,5 +1,6 @@
 using System;
 using Game.Player.Movement;
+using Game.UI;
 using Mirror;
 using UnityEngine;
 

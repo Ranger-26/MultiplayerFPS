@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MakarovItem
   m_EditorClassIdentifier: 
   ItemIdentifier: 4
-  ItemDrawTime: 0
+  ItemDrawTime: 0.95

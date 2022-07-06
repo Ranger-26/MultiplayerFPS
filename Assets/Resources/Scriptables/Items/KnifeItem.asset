@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: KnifeItem
   m_EditorClassIdentifier: 
   ItemIdentifier: 1
-  ItemDrawTime: 1
+  ItemDrawTime: 0.58

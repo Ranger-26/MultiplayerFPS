@@ -35,6 +35,11 @@ namespace Game.GameLogic.ItemSystem.Core
         {
             return true;
         }
+
+        public virtual void ResetViewModel()
+        {
+            transform.localRotation = Quaternion.Euler(0,180,0);
+        }
         
         public virtual bool ValidateRuntimeData(IRuntimeData runtimeData)
         {

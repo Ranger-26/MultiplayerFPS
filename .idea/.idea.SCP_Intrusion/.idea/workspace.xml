@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Knife/KnifeItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Knife/KnifeItem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +223,7 @@
       <workItem from="1657402823063" duration="3364000" />
       <workItem from="1657413735376" duration="3074000" />
       <workItem from="1657417292296" duration="1025000" />
-      <workItem from="1657421329185" duration="7329000" />
+      <workItem from="1657421329185" duration="11397000" />
     </task>
     <servers />
   </component>

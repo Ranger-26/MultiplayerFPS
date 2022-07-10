@@ -1,3 +1,4 @@
+using System;
 using Game.GameLogic.ItemSystem.Core;
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.Player;
@@ -43,10 +44,19 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             if (Owner.hasAuthority)
             {
+                Debug.Log("Unsubscribing from events!");
                 UnSubscribeFromInputEvents();
             }
 
             return true;
+        }
+
+        public void OnDestroy()
+        {
+            if (Owner.hasAuthority)
+            {
+                UnSubscribeFromInputEvents();
+            }
         }
     }
 }

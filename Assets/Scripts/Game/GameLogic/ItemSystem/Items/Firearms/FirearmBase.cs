@@ -40,6 +40,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
             }
             if (Owner.hasAuthority)
             {
+                GameUiManager.Instance.SetAmmoTextState(true);
                 Invoke(nameof(SubscribeToEvents), ItemData.ItemDrawTime);
             }
             return true;
@@ -56,6 +57,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
             if (Owner.hasAuthority)
             {
                 Debug.Log("Unsubscribing from events!");
+                GameUiManager.Instance.SetAmmoTextState(false);
                 UnSubscribeFromEvents();
             }
             

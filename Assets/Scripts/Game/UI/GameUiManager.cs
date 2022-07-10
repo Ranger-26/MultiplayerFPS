@@ -34,11 +34,15 @@ namespace Game.Player
                 }
                 NetworkManager.singleton.StopClient();
             });
-
+            
+            _ammoText.gameObject.SetActive(false);
+            
             GameInputManager.PlayerActions.Pause.performed += Pause;
         }
 
-
+        public void SetAmmoTextState(bool state) => _ammoText.gameObject.SetActive(state);
+        
+        
         private void Awake()
         {
             if (Instance != null)
@@ -69,7 +73,7 @@ namespace Game.Player
 
         public void OnRespawn()
         {
-            _ammoText.gameObject.SetActive(true);
+            //_ammoText.gameObject.SetActive(true);
             UpdateHealthUI(100);
             _healthText.gameObject.SetActive(true);
         }

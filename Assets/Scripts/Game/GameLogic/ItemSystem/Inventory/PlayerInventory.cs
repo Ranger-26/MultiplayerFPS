@@ -26,6 +26,9 @@ namespace Game.GameLogic.ItemSystem.Inventory
         [SyncVar]
         public ItemIdentifier currentItem;
 
+        [SyncVar(hook = nameof(OnIndexChange))]
+        public int heldItemIndex = -1;
+
         public ItemBase CurrentItemBase;
         private void Start()
         {
@@ -111,6 +114,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
             if (CurrentItemBase == null) return true;
             if (CurrentItemBase.OnDeEquip())
             {
+                heldItemIndex = -1;
                 CurrentItemBase.gameObject.SetActive(false);
                 CurrentItemBase = null;
                 currentItem = ItemIdentifier.None;
@@ -171,14 +175,18 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 CurrentItemBase = allItemBases[id];
                 CurrentItemBase.gameObject.SetActive(true);
                 CurrentItemBase.ResetViewModel();
-                RpcEquipItem(id);
+                heldItemIndex = id;
             }
         }
 
-        [ClientRpc(includeOwner = false)]
-        public void RpcEquipItem(int id)
+        public void OnIndexChange(int _, int cur)
         {
-            if (isServer) return;
+            OtherClientEquipItem(cur);
+        }
+        
+        public void OtherClientEquipItem(int id)
+        {
+            if (isServer || hasAuthority) return;
             if (allItemBases.ContainsKey(id))
             {
                 Debug.Log("Found item base, equiping.");
@@ -186,18 +194,24 @@ namespace Game.GameLogic.ItemSystem.Inventory
             }
             else
             {
-                Debug.Log("Couldnt find item base, creating new one.");
-                GameObject obj = Instantiate(ItemDatabase.TryGetItem(allItems[id]).gameObject, ItemParent);
-                ItemBase baseItem = obj.GetComponent<ItemBase>();
-                CurrentItemBase = baseItem;
-                CurrentItemBase.InitItem(Player);
-                allItemBases.Add(id, CurrentItemBase);
+                if (allItems.ContainsKey(id))
+                {
+                    Debug.Log("Couldnt find item base but item exists, creating new base.");
+                    GameObject obj = Instantiate(ItemDatabase.TryGetItem(allItems[id]).gameObject, ItemParent);
+                    ItemBase baseItem = obj.GetComponent<ItemBase>();
+                    CurrentItemBase = baseItem;
+                    CurrentItemBase.InitItem(Player);
+                    allItemBases.Add(id, CurrentItemBase);
+                }
+                else
+                {
+                    Debug.Log($"No item found for item id {id}, skipping.");
+                    return;
+                }
             }
             CurrentItemBase.gameObject.SetActive(true);
             CurrentItemBase.ResetViewModel();
         }
-
-        
         
         private void OnDestroy()
         {

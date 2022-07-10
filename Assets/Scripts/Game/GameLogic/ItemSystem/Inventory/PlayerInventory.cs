@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using Game.GameLogic.ItemSystem.Core;
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.GameLogic.ItemSystem.Core.RuntimeData.DefaultRuntimeData;
+using Game.GameLogic.ItemSystem.Items.Firearms;
 using Game.Player;
 using Inputs;
 using Mirror;
@@ -42,14 +43,23 @@ namespace Game.GameLogic.ItemSystem.Inventory
             {
                 GameInputManager.Actions.Player.Num1.performed += Test1;
                 GameInputManager.Actions.Player.Num2.performed += Test2;
+                GameInputManager.Actions.Player.Num3.performed += Test3;
             }
         }
 
-        public void Test0() => ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
+        public void Test0()
+        {
+           // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
+        }
         
         public void Test1(InputAction.CallbackContext ctx) => EquipItem(0);
 
-        public void Test2(InputAction.CallbackContext ctx) => DeEquipHeldItem();
+        public void Test2(InputAction.CallbackContext ctx) => EquipItem(1);
+        
+        public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
         
         #region AddItem
         [Server]

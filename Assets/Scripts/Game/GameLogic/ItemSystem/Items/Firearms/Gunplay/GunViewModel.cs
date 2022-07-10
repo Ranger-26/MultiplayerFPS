@@ -449,7 +449,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             if (anim != null)
                 anim.SetTrigger(StringKeys.GunReloadAnimation);
 
-            nsm.CmdReload();
+            nsm.CmdReloadGun();
         }
 
         private void Chamber()

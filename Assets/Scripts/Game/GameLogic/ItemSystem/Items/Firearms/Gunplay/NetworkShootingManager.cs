@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Game.Player;
 using Game.Player.Damage;
 using Mirror;
@@ -44,6 +45,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         private void Update()
         {
+            /*
             if (isServer && curGun != null)
             {
                 reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
@@ -53,6 +55,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             {
                 FillMagazine();
             }
+            */
         }
         #endregion
 
@@ -213,6 +216,22 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         #endregion
 
         #region ReloadingLogic
+
+        [Command]
+        public void CmdReloadGun()
+        {
+            if (currentAmmo == curGun.MaxAmmo || reserveAmmo <= 0 || isReloading) return;
+            isReloading = true;
+            StartCoroutine(HandleReload());
+        }
+
+        public IEnumerator HandleReload()
+        {
+            yield return new WaitForSeconds(curGun.ReloadTime);
+            FillMagazine();
+        }
+        
+        
         [Command]
         public void CmdReload()
         {

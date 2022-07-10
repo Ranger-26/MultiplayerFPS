@@ -47,6 +47,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
 
         public override bool OnDeEquip()
         {
+            if (nsm.isReloading) return false;
             if (NetworkPlayerLobby.localPlayer.isServer)
             {
                 FirearmData.currentAmmo = nsm.currentAmmo;
@@ -57,6 +58,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
                 Debug.Log("Unsubscribing from events!");
                 UnSubscribeFromEvents();
             }
+            
             return true;
         }
 

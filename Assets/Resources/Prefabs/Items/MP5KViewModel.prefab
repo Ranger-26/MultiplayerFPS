@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8106971214724037098}
   m_RootOrder: 2
@@ -110,6 +111,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8106971214724037098}
   m_RootOrder: 3
@@ -192,6 +194,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8106971214724037098}
   m_RootOrder: 1
@@ -274,6 +277,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8106971214724037098}
   m_RootOrder: 0
@@ -340,6 +344,7 @@ GameObject:
   - component: {fileID: 7288043380750043804}
   - component: {fileID: 6725289208620413639}
   - component: {fileID: 3507044941570330950}
+  - component: {fileID: 1270660066529271993}
   m_Layer: 3
   m_Name: MP5KViewModel
   m_TagString: Untagged
@@ -357,6 +362,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8106971214724037098}
   m_Father: {fileID: 0}
@@ -380,7 +386,7 @@ MonoBehaviour:
   gunId: 12
 --- !u!95 &6725289208620413639
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -393,6 +399,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -409,6 +416,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ac814cc9f96c44ca6004b980dbd99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1270660066529271993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636920317891238347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9fce9d50c34be194c876a6147bb2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemData: {fileID: 11400000, guid: 2a8d5a1c3a2793d4b950925b1ca683e8, type: 2}
+  Owner: {fileID: 0}
+  GunViewModel: {fileID: 0}
+  nsm: {fileID: 0}
 --- !u!1 &8920065099738194768
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +458,7 @@ Transform:
   m_LocalRotation: {x: -0.025642913, y: -0.02392409, z: -0.04480952, w: 0.99837977}
   m_LocalPosition: {x: -3.058, y: -2.61, z: -5.07}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1202960033355947994}
   - {fileID: 588251599758679750}
@@ -525,13 +549,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
---- !u!4 &836145610334071350 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6996477868075680417, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
-  m_PrefabInstance: {fileID: 7674957908898900119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!2083052967 &836145610334071336 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 6996477868075680447, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+  m_PrefabInstance: {fileID: 7674957908898900119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &836145610334071350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6996477868075680417, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
   m_PrefabInstance: {fileID: 7674957908898900119}
   m_PrefabAsset: {fileID: 0}

@@ -139,7 +139,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         public void EquipItem(int id)
         {
-            if (allItems[id] == currentItem) return;
+            if (!allItems.ContainsKey(id) || allItems[id] == currentItem) return;
             
             if (DeEquipHeldItem() && allItems.ContainsKey(id) && allItemBases[id].OnEquip())
             {
@@ -178,17 +178,32 @@ namespace Game.GameLogic.ItemSystem.Inventory
         [ClientRpc(includeOwner = false)]
         public void RpcEquipItem(int id)
         {
-            CurrentItemBase = allItemBases[id];
+            if (isServer) return;
+            if (allItemBases.ContainsKey(id))
+            {
+                Debug.Log("Found item base, equiping.");
+                CurrentItemBase = allItemBases[id];
+            }
+            else
+            {
+                Debug.Log("Couldnt find item base, creating new one.");
+                GameObject obj = Instantiate(ItemDatabase.TryGetItem(allItems[id]).gameObject, ItemParent);
+                ItemBase baseItem = obj.GetComponent<ItemBase>();
+                CurrentItemBase = baseItem;
+                CurrentItemBase.InitItem(Player);
+                allItemBases.Add(id, CurrentItemBase);
+            }
             CurrentItemBase.gameObject.SetActive(true);
             CurrentItemBase.ResetViewModel();
         }
 
+        
+        
         private void OnDestroy()
         {
             GameInputManager.Actions.Player.Num1.performed -= Test1;
             GameInputManager.Actions.Player.Num2.performed -= Test2;
         }
-
         #endregion
     }
 }

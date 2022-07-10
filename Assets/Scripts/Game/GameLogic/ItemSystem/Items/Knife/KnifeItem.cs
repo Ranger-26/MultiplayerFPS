@@ -34,7 +34,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             if (Owner.hasAuthority)
             {
-                SubscribeToInputEvents();
+                Invoke(nameof(SubscribeToInputEvents), ItemData.ItemDrawTime);
             }
 
             return true;

@@ -44,7 +44,5 @@ namespace Game.GameLogic.ItemSystem.Core
         {
             return true;
         }
-        
-        
     }
 }

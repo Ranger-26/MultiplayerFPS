@@ -19,12 +19,6 @@ namespace Game.Player.Gunplay
         public Melee melee;
 
         //[SyncVar] public GunIDs curGunId;
-        [SyncVar(hook = nameof(OnCurWeaponSlotChanged))] public WeaponSlot heldWeaponSlot = WeaponSlot.Primary;
-
-        private readonly SyncDictionary<WeaponSlot, GunIDs> allGuns = new SyncDictionary<WeaponSlot, GunIDs>();
-
-        [SerializeField]
-        private List<Gun> allGunScriptables = new List<Gun>();
 
 
         [Header("Ammo info")]
@@ -34,15 +28,6 @@ namespace Game.Player.Gunplay
         public int reserveAmmo;
         [SyncVar]
         public bool isReloading = false;
-
-        private readonly SyncDictionary<GunIDs, GunAmmo> gunsToAmmo = new SyncDictionary<GunIDs, GunAmmo>();
-
-        [Header("Weapon Holder Transforms")]
-        public Transform primarySlot;
-
-        public Transform secondarySlot;
-
-        public Transform meleeSlot;
 
         private int id => GetComponent<NetworkGamePlayer>().playerId;
 
@@ -58,48 +43,19 @@ namespace Game.Player.Gunplay
 
             currentAmmo = curGun.MaxAmmo;
             reserveAmmo = curGun.ReserveAmmo;
-
-            if (primarySlot == null)
-            {
-                primarySlot = GetComponentInChildren<PrimarySlot>().transform;
-            }
-            if (secondarySlot == null)
-            {
-                secondarySlot = GetComponentInChildren<SecondarySlot>().transform;
-            }
-            if (meleeSlot == null)
-            {
-                meleeSlot = GetComponentInChildren<MeleeSlot>().transform;
-            }
-
-            if (isServer)
-            {
-                ServerInitGuns();
-            }
-
+            
             GameUiManager.Instance.UpdateAmmoUI(currentAmmo, reserveAmmo);
-            
-            
-            GameInputManager.PlayerActions.Num1.performed += Slot1;
-            GameInputManager.PlayerActions.Num2.performed += Slot2;
-            GameInputManager.PlayerActions.Num3.performed += Slot3;
         }
-
-        private void OnDestroy()
-        {
-            GameInputManager.PlayerActions.Num1.performed -= Slot1;
-            GameInputManager.PlayerActions.Num2.performed -= Slot2;
-            GameInputManager.PlayerActions.Num3.performed -= Slot3;
-        }
+        
 
         private void Update()
         {
-            if (isServer)
+            if (isServer && curGun != null)
             {
                 reloadTimer = Mathf.Clamp(reloadTimer - Time.deltaTime, 0f, curGun.ReloadTime);
             }
 
-            if (reloadTimer == 0f && isServer)
+            if (reloadTimer == 0f && isServer && curGun != null)
             {
                 FillMagazine();
             }
@@ -171,7 +127,7 @@ namespace Game.Player.Gunplay
         private void ServerMelee(Vector3 start, Vector3 forward, int id, float multiplier)
         {
             RaycastHit[] _hits = Physics.RaycastAll(start, forward, Melee.Range, Melee.HitLayers);
-
+            Debug.Log($"Server melee: {_hits.Length} hits.");
             if (_hits.Length != 0)
             {
                 Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
@@ -307,138 +263,6 @@ namespace Game.Player.Gunplay
         }
         #endregion
 
-        #region GunSwitchLogic
-        [Server]
-        private void ServerInitGuns()
-        {
-            allGuns.Add(WeaponSlot.Primary, GunIDs.None);
-            allGuns.Add(WeaponSlot.Secondary, GunIDs.None);
-            allGuns.Add(WeaponSlot.Melee, GunIDs.None);
-
-            foreach (var gun in GetComponentsInChildren<GunViewModel>(true))
-            {
-                if (GunDatabase.TryGetGun(gun.gunId, out Gun newGun))
-                {
-                    allGuns[newGun.GunSlot] = gun.gunId;
-                    gunsToAmmo.Add(gun.gunId, new GunAmmo(newGun.MaxAmmo, newGun.ReserveAmmo));
-                }
-            }
-        }
-
-
-
-        [Command]
-        public void CmdSetNewGunSlot(GunIDs newGun, WeaponSlot slot)
-        {
-            Debug.Log("Calling command...");
-            StopReload();
-            allGuns[slot] = newGun;
-            RpcAddGunSlot(newGun, slot);
-            ServerSwitchGunSlot(slot);
-        }
-
-        [ClientRpc]
-        public void RpcAddGunSlot(GunIDs newGun, WeaponSlot slot)
-        {
-            if (!GunDatabase.TryGetGunModel(newGun, out GunViewModel model)) return;
-
-            GameObject newGunModel = Instantiate(model.gameObject, transform.position, Quaternion.identity);
-
-            switch (slot)
-            {
-                case WeaponSlot.Primary:
-                    Destroy(primarySlot.GetChild(0).gameObject);
-                    newGunModel.transform.parent = primarySlot;
-                    break;
-                case WeaponSlot.Secondary:
-                    Destroy(secondarySlot.GetChild(0).gameObject);
-                    newGunModel.transform.parent = secondarySlot;
-                    break;
-                case WeaponSlot.Melee:
-                    Destroy(meleeSlot.GetChild(0).gameObject);
-                    newGunModel.transform.parent = meleeSlot;
-                    break;
-            }
-
-            newGunModel.transform.localPosition = Vector3.zero;
-            newGunModel.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        }
-
-        public void OnCurWeaponSlotChanged(WeaponSlot old, WeaponSlot newSlot)
-        {
-            switch (old)
-            {
-                case WeaponSlot.Primary:
-                    primarySlot.GetChild(0).gameObject.SetActive(false);
-                    break;
-                case WeaponSlot.Secondary:
-                    secondarySlot.GetChild(0).gameObject.SetActive(false);
-                    break;
-                case WeaponSlot.Melee:
-                    meleeSlot.GetChild(0).gameObject.SetActive(false);
-                    break;
-            }
-
-            switch (newSlot)
-            {
-                case WeaponSlot.Primary:
-                    primarySlot.GetChild(0).gameObject.SetActive(true);
-                    break;
-                case WeaponSlot.Secondary:
-                    secondarySlot.GetChild(0).gameObject.SetActive(true);
-                    break;
-                case WeaponSlot.Melee:
-                    meleeSlot.GetChild(0).gameObject.SetActive(true);
-                    break;
-            }
-        }
-
-        [Command]
-        private void CmdSwitchGunSlot(WeaponSlot newSlot)
-        {
-            StopReload();
-            ServerSwitchGunSlot(newSlot);
-        }
-
-        [Server]
-        private void ServerCalcAmmo(GunIDs oldGun, GunIDs newGun)
-        {
-            if (!gunsToAmmo.ContainsKey(oldGun))
-            {
-                gunsToAmmo.Add(oldGun, new GunAmmo(currentAmmo, reserveAmmo));
-            }
-            else
-            {
-                gunsToAmmo[oldGun] = new GunAmmo(currentAmmo, reserveAmmo);
-            }
-
-            if (gunsToAmmo.ContainsKey(newGun))
-            {
-                currentAmmo = gunsToAmmo[newGun].currentAmmo;
-                reserveAmmo = gunsToAmmo[newGun].reserveAmmo;
-            }
-            else if (GunDatabase.TryGetGun(newGun, out Gun gun))
-            {
-                currentAmmo = gun.MaxAmmo;
-                reserveAmmo = gun.ReserveAmmo;
-            }
-        }
-
-
-        [Server]
-        private void ServerSwitchGunSlot(WeaponSlot newSlot)
-        {
-            isReloading = false;
-
-            if (GunDatabase.TryGetGun(allGuns[newSlot], out Gun newGun))
-            {
-                ServerCalcAmmo(allGuns[heldWeaponSlot], newGun.UniqueGunID);
-                curGun = newGun;
-            }
-            heldWeaponSlot = newSlot;
-        }
-        #endregion
-
         #region AmmoText
 
         private void UpdateAmmoUI(int oldValue, int newValue)
@@ -448,43 +272,5 @@ namespace Game.Player.Gunplay
         }
 
         #endregion
-
-        public void Slot1(InputAction.CallbackContext callbackContext) => SwitchSlot(1);
-        public void Slot2(InputAction.CallbackContext callbackContext) => SwitchSlot(2);
-        public void Slot3(InputAction.CallbackContext callbackContext) => SwitchSlot(3);
-
-        public void SwitchSlot(int slot)
-        {
-            if (MenuOpen.IsOpen)
-                return;
-
-            if (hasAuthority && slot == 1)
-            {
-                Debug.Log("Trying to switch to Primary");
-                CmdSwitchGunSlot(WeaponSlot.Primary);
-            }
-            else if (hasAuthority && slot == 2)
-            {
-                Debug.Log("Trying to switch to Secondary");
-                CmdSwitchGunSlot(WeaponSlot.Secondary);
-            }
-            else if (hasAuthority && slot == 3)
-            {
-                Debug.Log("Trying to switch to Melee");
-                CmdSwitchGunSlot(WeaponSlot.Melee);
-            }
-        }
-    }
-
-    public struct GunAmmo
-    {
-        public int currentAmmo;
-        public int reserveAmmo;
-
-        public GunAmmo(int curAmmo, int resAmmo)
-        {
-            currentAmmo = curAmmo;
-            reserveAmmo = resAmmo;
-        }
     }
 }

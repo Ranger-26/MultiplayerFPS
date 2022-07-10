@@ -12,9 +12,6 @@ namespace Game.GameLogic.ItemSystem.Core
 
         public IRuntimeData RuntimeData;
         
-        public abstract void SubscribeToInputEvents();
-
-        public abstract void UnSubscribeFromInputEvents();
 
         public virtual void InitItem(NetworkGamePlayer owner, IRuntimeData runtimeData)
         {
@@ -38,6 +35,7 @@ namespace Game.GameLogic.ItemSystem.Core
 
         public virtual void ResetViewModel()
         {
+            transform.localPosition = new Vector3(0, 0, 0);
             transform.localRotation = Quaternion.Euler(0,180,0);
         }
         

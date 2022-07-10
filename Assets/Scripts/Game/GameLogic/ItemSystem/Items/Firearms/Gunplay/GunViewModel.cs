@@ -1,19 +1,19 @@
 using System;
-using Game.Player.Movement;
 using System.Collections;
 using AudioUtils;
-using Game.Player.Gunplay.IdentifierComponents;
+using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay.IdentifierComponents;
+using Game.Player.Movement;
 using Game.UI;
 using Inputs;
+using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 using UnityEngine.VFX;
-using Mirror;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-namespace Game.Player.Gunplay
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 {
     public class GunViewModel : MonoBehaviour
     {

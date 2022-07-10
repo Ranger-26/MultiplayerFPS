@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Player.Gunplay
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 {
     [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
     public class Gun : ScriptableObject

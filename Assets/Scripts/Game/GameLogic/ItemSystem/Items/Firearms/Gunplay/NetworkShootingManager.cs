@@ -1,16 +1,10 @@
-using AudioUtils;
-using Game.Player.Damage;
-using Game.Player.Gunplay.IdentifierComponents;
-using Mirror;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Game.UI;
-using Inputs;
+using Game.Player;
+using Game.Player.Damage;
+using Mirror;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Game.Player.Gunplay
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 {
     public class NetworkShootingManager : NetworkBehaviour
     {

@@ -1,16 +1,17 @@
 using System.Collections;
-using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay;
 using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay.IdentifierComponents;
 using Game.Player.Movement;
 using Mirror;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Rendering.HighDefinition;
 
-namespace Game.GameLogic.ItemSystem.Items.Knife
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 {
-    public class KnifeComponent : MonoBehaviour
+    public class Melee : MonoBehaviour
     {
+        public static float Range = 2f;
+        public static float Tagging = 1f;
+        public static float Damage = 40f;
         public static float DrawTime = 0.5f;
         public static LayerMask HitLayers = 6;
 
@@ -109,36 +110,42 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
             }
 
             if (!nsm.hasAuthority) enabled = false;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                LightAttack();
+            }
+        
+            if (Input.GetMouseButtonDown(1))
+            {
+                HeavyAttack();
+            }
         }
 
-        public void LightAttack(InputAction.CallbackContext ctx)
+        public void LightAttack()
         {
             if (delay) return;
 
             if (anim != null)
-            {
-               anim.SetTrigger(StringKeys.MeleeLightAnimation);
-            }
-            NetworkClient.Send(new KnifeStrikeMessage()
-            {
-                Start = spreadPoint.position,
-                forward = spreadPoint.forward
-            });
+                anim.Play(StringKeys.MeleeLightAnimation, -1, 0f);
         }
 
-        public void HeavyAttack(InputAction.CallbackContext ctx)
+        public void HeavyAttack()
         {
             if (delay) return;
 
             if (anim != null)
-            {
-                anim.SetTrigger(StringKeys.MeleeHeavyAnimation);
-            }
-            NetworkClient.Send(new KnifeStrikeMessage()
-            {
-                Start = spreadPoint.position,
-                forward = spreadPoint.forward
-            });
+                anim.Play(StringKeys.MeleeHeavyAnimation, -1, 0f);
+        }
+
+        public void Light()
+        {
+            nsm.CmdMelee(spreadPoint.position, spreadPoint.forward, 1f);
+        }
+
+        public void Heavy()
+        {
+            nsm.CmdMelee(spreadPoint.position, spreadPoint.forward, 2f);
         }
     }
 }

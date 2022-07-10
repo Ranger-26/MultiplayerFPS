@@ -1,10 +1,9 @@
-using System;
 using Game.UI;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Game.Player.Gunplay
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 {
     public class GunSway : MonoBehaviour
     {

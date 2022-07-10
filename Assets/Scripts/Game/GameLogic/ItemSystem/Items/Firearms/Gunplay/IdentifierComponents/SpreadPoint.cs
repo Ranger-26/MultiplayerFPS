@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Player.Gunplay.IdentifierComponents
+namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay.IdentifierComponents
 {
     public class SpreadPoint : MonoBehaviour
     {

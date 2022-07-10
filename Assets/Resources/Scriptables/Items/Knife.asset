@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4797d07b97bc482296f3ca7419d4d55a, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  ItemIdentifier: 0
+  ItemIdentifier: 1
   ItemDrawTime: 0

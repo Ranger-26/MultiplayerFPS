@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.GameLogic.ItemSystem.Core;
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
+using Game.GameLogic.ItemSystem.Core.RuntimeData.DefaultRuntimeData;
 using Game.Player;
 using Mirror;
 using UnityEngine;
@@ -25,6 +26,10 @@ namespace Game.GameLogic.ItemSystem.Inventory
         private void Start()
         {
             Player = GetComponent<NetworkGamePlayer>();
+            if (isServer)
+            {
+                ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
+            }
         }
 
         #region AddItem

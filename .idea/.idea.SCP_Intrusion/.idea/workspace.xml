@@ -5,48 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Knife/KnifeItem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Knife/KnifeItem.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/UnityUtils.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/UnityUtils.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ItemBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ItemBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ItemIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ItemIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ScriptableItemBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Core/ScriptableItemBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/Gunplay/NetworkShootingManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Equippable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Equippable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Gun.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Gun.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Item.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Hierarchy/Item.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Inventory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Inventory.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/EquippableItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/EquippableItem.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/Firearm.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/Firearm/FirearmBase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/Firearm/FirearmBase.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/Firearm/GunModeType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/Firearm/GunModeType.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/UseableItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/Equippable/Useable/UseableItem.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/ItemBase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/ItemBase.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/ItemHandlers.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InventorySystem/Items/ItemHandlers.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/Knife.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +223,7 @@
       <workItem from="1657402823063" duration="3364000" />
       <workItem from="1657413735376" duration="3074000" />
       <workItem from="1657417292296" duration="1025000" />
-      <workItem from="1657421329185" duration="6865000" />
+      <workItem from="1657421329185" duration="7329000" />
     </task>
     <servers />
   </component>

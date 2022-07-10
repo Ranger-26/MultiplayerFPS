@@ -12,9 +12,9 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
     {
         public KnifeComponent KnifeComponent;
 
-        public override void InitItem(NetworkGamePlayer owner, IRuntimeData runtimeData)
+        public override void InitItem(NetworkGamePlayer owner)
         {
-            base.InitItem(owner, runtimeData);
+            base.InitItem(owner);
             KnifeComponent = GetComponent<KnifeComponent>();
         }
 
@@ -50,10 +50,10 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
             return true;
         }
-
+        
         public void OnDestroy()
         {
-            if (Owner.hasAuthority)
+            if (NetworkPlayerLobby.localPlayer.hasAuthority)
             {
                 UnSubscribeFromInputEvents();
             }

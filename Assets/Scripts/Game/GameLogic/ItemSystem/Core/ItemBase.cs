@@ -9,20 +9,21 @@ namespace Game.GameLogic.ItemSystem.Core
         public ScriptableItemBase ItemData;
 
         public NetworkGamePlayer Owner;
-
-        public IRuntimeData RuntimeData;
         
-
-        public virtual void InitItem(NetworkGamePlayer owner, IRuntimeData runtimeData)
+        public virtual void InitItem(NetworkGamePlayer owner)
         {
             Owner = owner;
-            RuntimeData = runtimeData;
-            if (!ValidateRuntimeData(runtimeData))
+        }
+
+        public virtual void ServerSetRuntimeData(IRuntimeData data)
+        {
+            if (!ValidateRuntimeData(data))
             {
                 Debug.LogError($"Problem when validating runtime data! Item {ItemData.ItemIdentifier}");
             }
         }
-        
+
+
         public virtual bool OnEquip()
         {
             return true;
@@ -43,5 +44,7 @@ namespace Game.GameLogic.ItemSystem.Core
         {
             return true;
         }
+        
+        
     }
 }

@@ -23,9 +23,7 @@ namespace Game.Player.Spectating
             
 
             var input = GameInputManager.PlayerActions.WASD.ReadValue<Vector2>();
-            
-            Debug.Log(input);
-            
+
             Vector3 movementDelta = new Vector3(input.x * movementForwardMultiplier * Time.deltaTime, 0f, input.y* movementSideMultiplier * Time.deltaTime);
             transform.position += transform.TransformDirection(movementDelta);
         }

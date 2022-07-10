@@ -54,22 +54,26 @@ namespace Game.GameLogic.ItemSystem.Inventory
         {
             allItems.Add(allItems.Count, id);
             CreateItemInstance(id, data);
-            RpcAddItem(id, data);
+            RpcAddItem(id);
         }
 
         [ClientRpc]
-        public void RpcAddItem(ItemIdentifier id, IRuntimeData data)
+        public void RpcAddItem(ItemIdentifier id)
         {
             if (!isServer)
             {
-                CreateItemInstance(id, data);
+                CreateItemInstance(id, null);
             }
         }
         public void CreateItemInstance(ItemIdentifier item, IRuntimeData data)
         {
             GameObject obj = Instantiate(ItemDatabase.TryGetItem(item).gameObject, ItemParent);
             ItemBase baseItem = obj.GetComponent<ItemBase>();
-            baseItem.InitItem(Player, data);
+            baseItem.InitItem(Player);
+            if (isServer)
+            {
+                baseItem.ServerSetRuntimeData(data);
+            }
             obj.SetActive(false);
             allItemBases.Add(allItemBases.Count, baseItem);
         }

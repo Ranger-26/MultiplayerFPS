@@ -44,6 +44,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 GameInputManager.Actions.Player.Num1.performed += Test1;
                 GameInputManager.Actions.Player.Num2.performed += Test2;
                 GameInputManager.Actions.Player.Num3.performed += Test3;
+                GameInputManager.Actions.Player.DropItem.performed += Test4;
             }
         }
 
@@ -60,6 +61,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void Test2(InputAction.CallbackContext ctx) => EquipItem(1);
         
         public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
+
+        public void Test4(InputAction.CallbackContext ctx) => RemoveHeldItem(heldItemIndex);
         
         #region AddItem
         [Server]
@@ -221,6 +224,58 @@ namespace Game.GameLogic.ItemSystem.Inventory
             }
             CurrentItemBase.gameObject.SetActive(true);
             CurrentItemBase.ResetViewModel();
+        }
+
+        public void RemoveHeldItem(int id)
+        {
+            if (!allItems.ContainsKey(id) || !allItemBases.ContainsKey(id)) return;
+            
+            if (heldItemIndex == id)
+            {
+                if (DeEquipHeldItem())
+                {
+                    if (isServer)
+                    {
+                        ServerDestroyItem(id);
+                    }
+                    else
+                    {
+                        CmdDestroyItem(id);
+                    }
+                }
+            }
+            else
+            {
+                if (isServer)
+                {
+                    ServerDestroyItem(id);
+                }
+                else
+                {
+                    CmdDestroyItem(id);
+                }
+            }
+        }
+        
+        [Command]
+        public void CmdDestroyItem(int id)
+        {
+            ServerDestroyItem(id);
+        }
+        
+        [Server]
+        public void ServerDestroyItem(int id)
+        {
+            if (!allItems.ContainsKey(id) || !allItemBases.ContainsKey(id)) return;
+            allItems.Remove(id);
+            RpcDestroyItem(id);
+        }
+
+        [ClientRpc]
+        public void RpcDestroyItem(int id)
+        {
+            if (!allItemBases.ContainsKey(id)) return;
+            Destroy(allItemBases[id].gameObject);
         }
         
         private void OnDestroy()

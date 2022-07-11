@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputAsset/Game.inputactions.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inputs/InputActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inputs/InputActions.cs" afterDir="false" />
-    </list>
+    <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -229,7 +223,7 @@
       <workItem from="1657476053233" duration="324000" />
       <workItem from="1657478069520" duration="2538000" />
       <workItem from="1657481636778" duration="4032000" />
-      <workItem from="1657502785258" duration="3156000" />
+      <workItem from="1657502785258" duration="3498000" />
     </task>
     <servers />
   </component>

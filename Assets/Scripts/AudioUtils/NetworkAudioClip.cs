@@ -3,7 +3,7 @@ using UnityEngine;
 namespace AudioUtils
 {
     [System.Serializable]
-    public class NetworkAudioClip
+    public struct NetworkAudioClip
     {
         public string AudioId;
 

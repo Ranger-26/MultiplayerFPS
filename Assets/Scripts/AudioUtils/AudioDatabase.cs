@@ -53,12 +53,16 @@ namespace AudioUtils
 
         public NetworkAudioClip TryGetClip(string id)
         {
-            if (idsToAudio[id] == null)
+            try
+            {
+                return idsToAudio[id];
+            }
+            catch (Exception e)
             {
                 Debug.LogError($"Found no audio clip for id {id}");
-                return null;
             }
-            return idsToAudio[id];
+
+            return new NetworkAudioClip("NULL", null);
         }
     }
 }

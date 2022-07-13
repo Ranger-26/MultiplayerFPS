@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class Utilities
 {
@@ -30,8 +31,9 @@ public static class Utilities
             "Omega"
         };
 
-    public static string RandomGreekLetter(int a, int b)
+    public static string RandomGreekLetter(int a = 0, int b = 0)
     {
-        return GreekLetter[Random.Range(a, b)];
+        bool specifiedRange = a != 0 && b != 0;
+        return specifiedRange ? GreekLetter[Random.Range(a, b)] : GreekLetter[Random.Range(0, GreekLetter.Length - 1)];
     }
 }

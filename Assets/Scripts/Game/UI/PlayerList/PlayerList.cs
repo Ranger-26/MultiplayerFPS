@@ -58,12 +58,14 @@ namespace Game.UI.PlayerList
             //Canvas.ForceUpdateCanvases();
         }
 
-        public static string[] GetAllPlayerNames()
+        public string[] GetAllPlayerNames()
         {
-            string[] players = new string[NetworkManagerScp.Instance.allPlayers.Count];
-            for (int i = 0; i < players.Length; i++)
+            Debug.Log($"Player count: {NetworkManagerScp.Instance.roomSlots.Count}");
+            string[] players = new string[NetworkManagerScp.Instance.roomSlots.Count];
+            for (int i = 0; i < NetworkManagerScp.Instance.roomSlots.Count; i++)
             {
-                players[i] =  NetworkManagerScp.Instance.allPlayers[i].playerName; 
+                NetworkPlayerLobby ply = (NetworkPlayerLobby) NetworkManagerScp.Instance.roomSlots[i];
+                players[i] = ply.playerName;
             }
             return players;
         }

@@ -31,21 +31,21 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - PerfectCulling
+    - SimpleWebTransport
     - Mirror.Examples
     - Assembly-CSharp-firstpass
     - Mirror
-    - com.rlabrecque.steamworks.net
+    - Mirror.Components
     - Cinemachine
+    - com.rlabrecque.steamworks.net
     - FizzySteamworks
     - Telepathy
-    - Mirror.Components
     - kcp2k
-    - SimpleWebTransport
     - where-allocations
     - Mirror.Authenticators
-    - com.rlabrecque.steamworks.net.editor
     - Mirror.Editor
     - Mirror.CompilerSymbols
+    - com.rlabrecque.steamworks.net.editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

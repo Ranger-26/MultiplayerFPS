@@ -5,9 +5,60 @@ using UnityEngine;
 
 namespace Game.UI.PlayerList
 {
+    using System;
+    using System.Linq;
+    using Inputs;
+    using Telepathy;
+    using TMPro;
+    using UnityEngine.InputSystem;
+    using UnityEngine.UI;
+    using UnityEngine.UIElements;
+
     public class PlayerList : MonoBehaviour
     {
-        public string[] GetAllPlayerNames()
+        public bool IsOpen { get; private set; }
+        [SerializeField] 
+        private TextMeshProUGUI _playerListText;
+        [SerializeField]
+        private Canvas _playerListCanvas;
+
+        private void Start()
+        {
+            GameInputManager.PlayerActions.PlayerList.performed += ToggleList;
+        }
+
+        private void OnDestroy()
+        {
+            GameInputManager.PlayerActions.PlayerList.performed -= ToggleList;
+        }
+
+        private void ToggleList(InputAction.CallbackContext callbackContext)
+        {
+            if (callbackContext.performed && !IsOpen)
+                ShowList();
+            else
+                HideList();
+        }
+
+        private void ShowList()
+        {
+            IsOpen = true;
+            _playerListCanvas.gameObject.SetActive(true);
+            _playerListText.text = String.Empty;
+            foreach (var name in GetAllPlayerNames())
+            {
+                _playerListText.text += $"{name}{Environment.NewLine}";
+            }
+        }
+
+        private void HideList()
+        {
+            IsOpen = false;
+            _playerListCanvas.gameObject.SetActive(false);
+            //Canvas.ForceUpdateCanvases();
+        }
+
+        public static string[] GetAllPlayerNames()
         {
             string[] players = new string[NetworkManagerScp.Instance.allPlayers.Count];
             for (int i = 0; i < players.Length; i++)

@@ -6,7 +6,6 @@ using Game.Player;
 using Lobby;
 using Mirror;
 using Networking;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.GameLogic.PlayerManagment
@@ -16,7 +15,7 @@ namespace Game.GameLogic.PlayerManagment
         [SerializeField]
         private List<NetworkPlayerLobby> lobbyPlayers = new List<NetworkPlayerLobby>();
         
-        public Dictionary<NetworkPlayerLobby, NetworkGamePlayer> players { get; } = new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
+        public Dictionary<NetworkPlayerLobby, NetworkGamePlayer> players { get; private set; } = new Dictionary<NetworkPlayerLobby, NetworkGamePlayer>();
 
         public static PlayerManager Instance;
 
@@ -113,18 +112,15 @@ namespace Game.GameLogic.PlayerManagment
             }
         }
 
-        
-        
         public bool GameEnded => alivePlayers.Count <= 1;
         
         [Server]
         public void ResetPlayers(Dictionary<NetworkPlayerLobby, NetworkGamePlayer> newPlayers)
         {
             lobbyPlayers.Clear();
-            players.Clear();
             alivePlayers.Clear();
             spectators.Clear();
-            players.AddRange(newPlayers);
+            players = newPlayers;
             lobbyPlayers.AddRange(players.Keys);
             alivePlayers.AddRange(players.Values);
         }

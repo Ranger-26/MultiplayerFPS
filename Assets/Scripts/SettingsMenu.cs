@@ -58,7 +58,7 @@ public class SettingsMenu : MonoBehaviour
         GameSettings.current.ch.thickness = (int)crs.y;
         GameSettings.current.ch.offset = (int)crs.z;
 
-        GameSettings.current.ch.scale = float.Parse(c_scale.text);
+        GameSettings.current.ch.scale = int.Parse(c_scale.text);
         GameSettings.current.ch.firingErrorMultiplier = float.Parse(c_firingError.text);
 
         GameSettings.current.ch.color = fcp.color;

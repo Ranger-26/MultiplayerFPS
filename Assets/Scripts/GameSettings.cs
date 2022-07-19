@@ -63,7 +63,7 @@ public class CrosshairSettings
     public int length = 10;
     public int thickness = 3;
 
-    public float scale = 1f;
+    public int scale = 1;
 
     public Color color = new Color(255f, 255f, 255f, 100f);
 
@@ -75,7 +75,7 @@ public class CrosshairSettings
         length = 10;
         thickness = 3;
 
-        scale = 1f;
+        scale = 1;
 
         color = new Color(255f, 255f, 255f, 100f);
 

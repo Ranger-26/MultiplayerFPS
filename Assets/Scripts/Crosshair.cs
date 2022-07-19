@@ -9,12 +9,12 @@ public class Crosshair : MonoBehaviour
 
     // Firing Error
     [HideInInspector]
-    public float size = 25f;
+    public float size = 24f;
 
     // User Config
     public CrosshairSettings ch = new CrosshairSettings();
 
-    float startingSize = 25f;
+    float startingSize = 24f;
 
     RectTransform[] CrosshairParts;
 
@@ -53,11 +53,11 @@ public class Crosshair : MonoBehaviour
         {
             if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
 
-            rectTrans.sizeDelta = new Vector2(ch.length, ch.thickness);
+            rectTrans.sizeDelta = new Vector2(ch.length * 2f, ch.thickness * 2f);
             rectTrans.gameObject.GetComponent<Image>().color = ch.color;
         }
 
-        size = ch.length * 2 + ch.offset;
+        size = ch.length * 4f + ch.offset * 2f;
         startingSize = size;
 
         rect.localScale = new Vector3(ch.scale, ch.scale, 1f);
@@ -67,7 +67,7 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateError(float errorPixelsFire)
     {
-        size = startingSize + errorPixelsFire * ch.firingErrorMultiplier;
+        size = startingSize + errorPixelsFire * ch.firingErrorMultiplier * 2f;
 
         rect.sizeDelta = new Vector2(size, size);
     }

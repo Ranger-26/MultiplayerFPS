@@ -1,6 +1,7 @@
 using Mirror;
 using Networking;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace AudioUtils
 {
@@ -12,6 +13,7 @@ namespace AudioUtils
             AudioSource au = soundObj.GetComponent<AudioSource>();
             DestroyAfter des = soundObj.GetComponent<DestroyAfter>();
             soundObj.transform.position = _position;
+            des.Timer = _sound.length;
             au.playOnAwake = false;
             au.clip = _sound;
             au.maxDistance = _maxDistance;
@@ -19,7 +21,6 @@ namespace AudioUtils
             au.pitch = _pitch;
             au.spatialBlend = _spatialBlend;
             au.priority = _priority;
-            des.Timer = _sound.length - 0.1f;
             au.rolloffMode = AudioRolloffMode.Linear;
             au.minDistance = 1.5f;
             au.Play();

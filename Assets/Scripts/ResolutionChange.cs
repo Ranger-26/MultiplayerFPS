@@ -9,6 +9,8 @@ public class ResolutionChange : MonoBehaviour
 
     Resolution[] reses;
 
+    int cur;
+
     private void Awake()
     {
         option = GetComponent<TMP_Dropdown>();
@@ -19,21 +21,23 @@ public class ResolutionChange : MonoBehaviour
 
         List<string> vs = new List<string>();
 
+        cur = 0;
         for (int i = 0; i < reses.Length; i++)
         {
             vs.Add(reses[i].ToString());
+
+            if (reses[i].width == Screen.currentResolution.width && reses[i].height == Screen.currentResolution.height) cur = i;
         }
 
         option.AddOptions(vs);
     }
 
-    private void Start() => option.SetValueWithoutNotify(GameSettings.current.ScreenMode); // change this
+    private void Start() => option.SetValueWithoutNotify(cur);
 
-    private void OnEnable() => option.SetValueWithoutNotify(GameSettings.current.ScreenMode);
+    private void OnEnable() => option.SetValueWithoutNotify(cur);
 
     public void ChangeResolution(int index)
     {
         Screen.SetResolution(reses[index].width, reses[index].height, Screen.fullScreenMode, reses[index].refreshRate);
-        GameSettings.current.resolution = reses[index];
     }
 }

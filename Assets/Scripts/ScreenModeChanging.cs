@@ -15,5 +15,6 @@ public class ScreenModeChanging : MonoBehaviour
     {
         Screen.fullScreenMode = (FullScreenMode)screenMode;
         GameSettings.current.ScreenMode = screenMode;
+        GameSettingsLoader.SaveFile();
     }
 }

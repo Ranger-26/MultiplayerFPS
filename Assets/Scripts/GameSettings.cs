@@ -45,8 +45,7 @@ public class Settings
 
     public int MonitorID;
     public int ScreenMode;
-
-    public Resolution resolution;
+    public int QualityLvl;
 
     public CrosshairSettings ch;
 
@@ -54,6 +53,9 @@ public class Settings
     {
         Sensitivity = 1f;
         MonitorID = 0;
+        ScreenMode = 0;
+        QualityLvl = 0;
+
         ch = new CrosshairSettings();
     }
 }

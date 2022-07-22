@@ -1224,7 +1224,6 @@ GameObject:
   - component: {fileID: 255094563}
   - component: {fileID: 255094562}
   - component: {fileID: 255094561}
-  - component: {fileID: 255094560}
   m_Layer: 5
   m_Name: Resolution
   m_TagString: Untagged
@@ -1255,18 +1254,6 @@ RectTransform:
   m_AnchoredPosition: {x: 261, y: 107}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &255094560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255094558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b69455c1d88c4f4c9078251b8b66301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &255094561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,19 +1310,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 255094560}
-        m_TargetAssemblyTypeName: ScreenModeChanging, Assembly-CSharp
-        m_MethodName: ChangeScreenMode
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &255094562
 MonoBehaviour:

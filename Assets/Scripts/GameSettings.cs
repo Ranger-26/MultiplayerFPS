@@ -46,6 +46,8 @@ public class Settings
     public int MonitorID;
     public int ScreenMode;
 
+    public Resolution resolution;
+
     public CrosshairSettings ch;
 
     public Settings()

@@ -11043,8 +11043,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124cfbd068c44a1cbaee7b513b043bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mtfSpawn: []
-  _chaosSpawn: []
+  _mtfSpawn:
+  - {fileID: 1537267119}
+  _chaosSpawn:
+  - {fileID: 2062589143}
   _curChaosSpawn: []
   _curMtfSpawn: []
 --- !u!1 &1108004932

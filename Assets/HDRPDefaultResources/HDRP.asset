@@ -18,7 +18,7 @@ MonoBehaviour:
     supportSSRTransparent: 0
     supportSSAO: 0
     supportSSGI: 0
-    supportSubsurfaceScattering: 1
+    supportSubsurfaceScattering: 0
     sssSampleBudget:
       m_Values: 140000002800000050000000
       m_SchemaId:
@@ -26,7 +26,7 @@ MonoBehaviour:
     supportVolumetrics: 0
     supportVolumetricClouds: 0
     supportLightLayers: 1
-    supportDistortion: 1
+    supportDistortion: 0
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
       m_SchemaId:
         m_Id: With3Levels
     supportDecals: 1
-    supportDecalLayers: 0
+    supportDecalLayers: 1
     supportSurfaceGradient: 1
     decalNormalBufferHP: 1
     msaaSampleCount: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
       maxPunctualLightsOnScreen: 512
       maxAreaLightsOnScreen: 64
       maxEnvLightsOnScreen: 32
-      maxDecalsOnScreen: 128
+      maxDecalsOnScreen: 32
       maxPlanarReflectionOnScreen: 16
       maxLightsPerClusterCell: 16
       maxLocalVolumetricFogSize: 32
@@ -126,7 +126,7 @@ MonoBehaviour:
       DLSSSharpness: 0.5
       maxPercentage: 100
       minPercentage: 100
-      dynResType: 1
+      dynResType: 0
       upsampleFilter: 1
       forceResolution: 0
       forcedPercentage: 100
@@ -155,7 +155,7 @@ MonoBehaviour:
       DoFResolution: 040000000200000002000000
       DoFHighQualityFiltering: 000001
       DoFPhysicallyBased: 000000
-      MotionBlurSampleCount: 04000000080000000c000000
+      MotionBlurSampleCount: 02000000080000000c000000
       BloomRes: 040000000200000002000000
       BloomHighQualityFiltering: 000101
       BloomHighQualityPrefiltering: 000001

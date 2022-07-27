@@ -398,8 +398,8 @@ CharacterController:
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.0001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5634619221568210415
 MonoBehaviour:
@@ -491,9 +491,9 @@ MonoBehaviour:
   syncInterval: 0.1
   controller: {fileID: 4797266027872760663}
   speed: 1
-  acceleration: 7.5
-  deceleration: 5.5
-  speedCap: 1
+  acceleration: 12
+  deceleration: 9
+  speedCap: 2
   gravity: -17
   jumpHeight: 1
   StepDistance: 2.7
@@ -734,6 +734,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   ItemParent: {fileID: 1838809099793417575}
   currentItem: 0
+  heldItemIndex: -1
   CurrentItemBase: {fileID: 0}
 --- !u!1 &5789010012695376366
 GameObject:

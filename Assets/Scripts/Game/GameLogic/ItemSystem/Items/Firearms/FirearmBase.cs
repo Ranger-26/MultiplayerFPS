@@ -25,7 +25,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
 
         public override bool OnEquip()
         {
-            if (NetworkPlayerLobby.localPlayer.isServer)
+            if (IsServer)
             {
                 if (FirearmData.currentAmmo < 0 || FirearmData.ReserveAmmo < 0)
                 {
@@ -38,7 +38,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
                     nsm.currentAmmo = FirearmData.currentAmmo;
                 }
             }
-            if (Owner.hasAuthority)
+            if (IsItemOwner)
             {
                 GameUiManager.Instance.SetAmmoTextState(true);
                 Invoke(nameof(SubscribeToEvents), ItemData.ItemDrawTime);

@@ -1,5 +1,6 @@
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.Player;
+using Lobby;
 using UnityEngine;
 
 namespace Game.GameLogic.ItemSystem.Core
@@ -9,6 +10,10 @@ namespace Game.GameLogic.ItemSystem.Core
         public ScriptableItemBase ItemData;
 
         public NetworkGamePlayer Owner;
+
+        public bool IsItemOwner => Owner.hasAuthority;
+
+        public bool IsServer => NetworkPlayerLobby.localPlayer.isServer;
         
         public virtual void InitItem(NetworkGamePlayer owner)
         {

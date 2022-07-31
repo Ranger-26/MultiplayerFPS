@@ -32,7 +32,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         public override bool OnEquip()
         {
-            if (Owner.hasAuthority)
+            if (IsItemOwner)
             {
                 Invoke(nameof(SubscribeToInputEvents), ItemData.ItemDrawTime);
             }
@@ -42,7 +42,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         public override bool OnDeEquip()
         {
-            if (Owner.hasAuthority)
+            if (IsItemOwner)
             {
                 Debug.Log("Unsubscribing from events!");
                 UnSubscribeFromInputEvents();
@@ -53,7 +53,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         
         public void OnDestroy()
         {
-            if (NetworkPlayerLobby.localPlayer.hasAuthority)
+            if (IsItemOwner)
             {
                 UnSubscribeFromInputEvents();
             }

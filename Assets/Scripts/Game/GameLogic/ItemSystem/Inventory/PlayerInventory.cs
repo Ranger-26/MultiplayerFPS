@@ -232,17 +232,18 @@ namespace Game.GameLogic.ItemSystem.Inventory
             
             if (heldItemIndex == id)
             {
-                if (DeEquipHeldItem())
+                if (isServer)
                 {
-                    if (isServer)
-                    {
-                        ServerDestroyItem(id);
-                    }
-                    else
+                    ServerDestroyItem(id);
+                }
+                else
+                {
+                    if (DeEquipHeldItem())
                     {
                         CmdDestroyItem(id);
                     }
                 }
+                
             }
             else
             {
@@ -267,8 +268,19 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void ServerDestroyItem(int id)
         {
             if (!allItems.ContainsKey(id) || !allItemBases.ContainsKey(id)) return;
-            allItems.Remove(id);
-            RpcDestroyItem(id);
+            if (id == heldItemIndex)
+            {
+                if (DeEquipHeldItem())
+                {
+                    allItems.Remove(id);
+                    RpcDestroyItem(id);
+                }
+            }
+            else
+            {
+                allItems.Remove(id);
+                RpcDestroyItem(id);
+            }
         }
 
         [ClientRpc]

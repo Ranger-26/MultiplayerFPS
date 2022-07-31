@@ -1,3 +1,4 @@
+using System.Collections;
 using Game.GameLogic.PlayerManagment;
 using Mirror;
 using Networking;
@@ -36,6 +37,20 @@ namespace Game.Player.Damage
             }
             TargetDisplayHealth(currentHealth);
         }
+
+        [Server]
+        public void ServerHealPlayer(float amount, float delay)
+        {
+            StartCoroutine(ServerHealPlayerInternal(amount, delay));
+        }
+        
+        [Server]
+        public IEnumerator ServerHealPlayerInternal(float amount, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            ServerHealPlayer(amount);
+        }
+        
         
         [ClientRpc]
         public void RpcDamagePlayer()

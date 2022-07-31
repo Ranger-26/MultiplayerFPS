@@ -22,7 +22,7 @@ namespace Game.GameLogic.ItemSystem.Core
         {
             if (IsItemOwner)
             {
-                RegisterInputEvents();
+                Invoke(nameof(RegisterInputEvents), ItemData.ItemDrawTime);
             }
 
             return true;

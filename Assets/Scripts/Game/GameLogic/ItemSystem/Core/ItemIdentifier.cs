@@ -6,6 +6,7 @@ namespace Game.GameLogic.ItemSystem.Core
         Knife,
         DebugGun,
         MP5K,
-        Makarov
+        Makarov,
+        SCP500
     }
 }

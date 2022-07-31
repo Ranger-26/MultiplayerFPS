@@ -62,7 +62,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         
         public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
 
-        public void Test4(InputAction.CallbackContext ctx) => RemoveHeldItem(heldItemIndex);
+        public void Test4(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
         
         #region AddItem
         [Server]
@@ -226,7 +226,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
             CurrentItemBase.ResetViewModel();
         }
 
-        public void RemoveHeldItem(int id)
+        public void RemoveItem(int id)
         {
             if (!allItems.ContainsKey(id) || !allItemBases.ContainsKey(id)) return;
             
@@ -283,6 +283,13 @@ namespace Game.GameLogic.ItemSystem.Inventory
             }
         }
 
+        [Server]
+        public void ServerDestroyHeldItem()
+        {
+            ServerDestroyItem(heldItemIndex);
+        } 
+        
+        
         [ClientRpc]
         public void RpcDestroyItem(int id)
         {

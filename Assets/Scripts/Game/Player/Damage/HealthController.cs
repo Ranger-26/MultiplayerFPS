@@ -17,15 +17,26 @@ namespace Game.Player.Damage
             if (currentHealth - amount > 0)
             {
                 currentHealth -= (int)amount;
-                TargetDamagePlayer(currentHealth);
+                TargetDisplayHealth(currentHealth);
                 return;
             }
             
             currentHealth = 0;
-            TargetDamagePlayer(0);
+            TargetDisplayHealth(0);
             ServerKillPlayer();
         }
 
+        [Server]
+        public void ServerHealPlayer(float amount)
+        {
+            currentHealth += (int) amount;
+            if (currentHealth > 100)
+            {
+                currentHealth = 100;
+            }
+            TargetDisplayHealth(currentHealth);
+        }
+        
         [ClientRpc]
         public void RpcDamagePlayer()
         {
@@ -33,7 +44,7 @@ namespace Game.Player.Damage
         }
 
         [TargetRpc]
-        private void TargetDamagePlayer(int newHealth)
+        private void TargetDisplayHealth(int newHealth)
         {
             GameUiManager.Instance.UpdateHealthUI(newHealth);
         }

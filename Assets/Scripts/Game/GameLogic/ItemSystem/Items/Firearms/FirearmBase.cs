@@ -97,7 +97,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
         
         public void OnDestroy()
         {
-            if (NetworkPlayerLobby.localPlayer.hasAuthority)
+            if (IsItemOwner)
             {
                 UnSubscribeFromEvents();
             }

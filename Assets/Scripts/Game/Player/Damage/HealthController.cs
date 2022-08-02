@@ -45,7 +45,7 @@ namespace Game.Player.Damage
         }
         
         [Server]
-        public IEnumerator ServerHealPlayerInternal(float amount, float delay)
+        private IEnumerator ServerHealPlayerInternal(float amount, float delay)
         {
             yield return new WaitForSeconds(delay);
             ServerHealPlayer(amount);

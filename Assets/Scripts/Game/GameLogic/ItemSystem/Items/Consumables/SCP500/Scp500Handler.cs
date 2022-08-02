@@ -16,10 +16,10 @@ namespace Game.GameLogic.ItemSystem.Items.Consumables.SCP500
             if (plr.currentItem == ItemIdentifier.SCP500)
             {
                 UsableItemData d = (UsableItemData) ItemDatabase.TryGetItem(ItemIdentifier.SCP500).ItemData;
-                double time =  d.Usetime - (NetworkTime.time - message.time);
+                double time =  d.Usetime - (NetworkTime.rtt/2);
                 plr.GetComponent<HealthController>().ServerHealPlayer(100, (float)time);
+                plr.ServerDestroyHeldItem();
             }
-            plr.ServerDestroyHeldItem();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

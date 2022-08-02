@@ -190,7 +190,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                     chargeupSound = true;
 
                     if (gun.ChargeupSounds.Length != 0)
-                        AudioSystem.NetworkPlaySound(gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                        AudioSystem.NetworkPlaySound(Sound: gun.ChargeupSounds[Random.Range(0, gun.ChargeupSounds.Length - 1)], Position: cam.transform.position + cam.transform.forward, MaxDistance: gun.SoundMaxDistance, Volume: gun.SoundVolume, Priority: gun.SoundPriority);
                 }
             }
             else if (gun.ChargeupTime > 0f && !isSpraying && nsm.currentAmmo > 0)
@@ -385,7 +385,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             }
 
             if (gun.ShootSounds.Length != 0)
-                AudioSystem.NetworkPlaySound(gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], cam.transform.position + cam.transform.forward, gun.SoundMaxDistance, gun.SoundVolume, 1f, 1f, gun.SoundPriority);
+                AudioSystem.NetworkPlaySound(Sound: gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], Position: cam.transform.position + cam.transform.forward, MaxDistance: gun.SoundMaxDistance, Volume: gun.SoundVolume, Priority: gun.SoundPriority);
         }
 
         private void Recoil()

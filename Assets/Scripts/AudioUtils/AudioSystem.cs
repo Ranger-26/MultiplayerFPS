@@ -7,36 +7,38 @@ namespace AudioUtils
 {
     public static class AudioSystem
     {
-        public static void PlaySound(this AudioClip _sound, Vector3 _position, float _maxDistance, float _volume, float _pitch, float _spatialBlend, int _priority)
+        public static void PlaySound(this AudioClip Sound, Vector3 Position, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
         {
-            GameObject soundObj = new GameObject("Sound", typeof(AudioSource), typeof(DestroyAfter));
-            AudioSource au = soundObj.GetComponent<AudioSource>();
-            DestroyAfter des = soundObj.GetComponent<DestroyAfter>();
-            soundObj.transform.position = _position;
-            des.Timer = _sound.length;
-            au.playOnAwake = false;
-            au.clip = _sound;
-            au.maxDistance = _maxDistance;
-            au.volume = _volume;
-            au.pitch = _pitch;
-            au.spatialBlend = _spatialBlend;
-            au.priority = _priority;
-            au.rolloffMode = AudioRolloffMode.Linear;
-            au.minDistance = 1.5f;
-            au.Play();
+            GameObject SoundObject = new GameObject("Sound", typeof(AudioSource), typeof(DestroyAfter));
+            AudioSource Clip = SoundObject.GetComponent<AudioSource>();
+            DestroyAfter AutoDestroy = SoundObject.GetComponent<DestroyAfter>();
+            SoundObject.transform.position = Position;
+            AutoDestroy.Timer = Sound.length;
+
+            Clip.playOnAwake = false;
+            Clip.clip = Sound;
+            Clip.maxDistance = MaxDistance;
+            Clip.volume = Volume;
+            Clip.pitch = Pitch;
+            Clip.spatialBlend = SpatialBlend;
+            Clip.priority = Priority;
+            Clip.rolloffMode = AudioRolloffMode.Linear;
+            Clip.minDistance = MinDistance;
+            Clip.Play();
         }
 
-        public static void NetworkPlaySound(this AudioClip _sound, Vector3 _position, float _maxDistance, float _volume, float _pitch, float _spatialBlend, int _priority)
+        public static void NetworkPlaySound(this AudioClip Sound, Vector3 Position, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
         {
             AudioMessage message = new AudioMessage()
             {
-                id = AudioDatabase.Instance.clipsToIds[_sound],
-                position = _position,
-                maxDistance = _maxDistance,
-                volume = _volume,
-                pitch = _pitch,
-                spatialBlend = _spatialBlend,
-                priority = _priority
+                Id = AudioDatabase.Instance.clipsToIds[Sound],
+                Position = Position,
+                MaxDistance = MaxDistance,
+                MinDistance = MinDistance,
+                Volume = Volume,
+                Pitch = Pitch,
+                SpatialBlend = SpatialBlend,
+                Priority = Priority
             };
             OnClientReceiveAudioMessage(message);
             NetworkClient.Send(message, Channels.Unreliable);
@@ -44,8 +46,8 @@ namespace AudioUtils
         
         public static void OnClientReceiveAudioMessage(AudioMessage message)
         { 
-            AudioDatabase.Instance.TryGetClip(message.id).audioClip.PlaySound(message.position, message.maxDistance, message.volume,
-                message.pitch, message.spatialBlend, message.priority);
+            AudioDatabase.Instance.TryGetClip(message.Id).audioClip.PlaySound(Position: message.Position, MaxDistance: message.MaxDistance, MinDistance: message.MinDistance, Volume: message.Volume,
+                Pitch: message.Pitch, SpatialBlend: message.SpatialBlend, Priority: message.Priority);
         }
         
         public static void OnServerRecieveAudioMessage(NetworkConnection conn, AudioMessage message)

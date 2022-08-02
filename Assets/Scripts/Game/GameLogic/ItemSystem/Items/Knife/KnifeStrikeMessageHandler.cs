@@ -1,4 +1,6 @@
 using System;
+using Game.GameLogic.ItemSystem.Core;
+using Game.GameLogic.ItemSystem.Inventory;
 using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay;
 using Game.Player;
 using Game.Player.Damage;
@@ -21,6 +23,8 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         
         public static void OnReceiveMessage(NetworkConnection conn, KnifeStrikeMessage message)
         {
+            PlayerInventory plr = conn.identity.GetComponent<PlayerInventory>();
+            if (plr.currentItem != ItemIdentifier.Knife) return;
             RaycastHit[] _hits = Physics.RaycastAll(message.Start, message.forward, Range, HitLayers);
             Debug.DrawRay(message.Start, message.forward, Color.blue);
             if (_hits.Length != 0)

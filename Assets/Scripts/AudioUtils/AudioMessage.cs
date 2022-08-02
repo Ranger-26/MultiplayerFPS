@@ -5,15 +5,16 @@ namespace AudioUtils
 {
     public struct AudioMessage : NetworkMessage
     {
-        public string id;
+        public string Id;
 
-        public Vector3 position;
+        public Vector3 Position;
 
-        public float maxDistance;
-        public float volume;
-        public float pitch;
-        public float spatialBlend;
+        public float MaxDistance;
+        public float MinDistance;
+        public float Volume;
+        public float Pitch;
+        public float SpatialBlend;
 
-        public int priority;
+        public int Priority;
     }
 }

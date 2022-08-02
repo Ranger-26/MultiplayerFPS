@@ -57,7 +57,7 @@ namespace AudioUtils
             {
                 return idsToAudio[id];
             }
-            catch (Exception e)
+            catch
             {
                 Debug.LogError($"Found no audio clip for id {id}");
             }

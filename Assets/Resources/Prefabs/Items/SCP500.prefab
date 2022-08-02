@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 869296399533351943}
   - component: {fileID: 6269591739656399745}
   - component: {fileID: 4506980055293992881}
-  - component: {fileID: 2563261449754868879}
   m_Layer: 0
   m_Name: SCP500
   m_TagString: Untagged
@@ -113,23 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemData: {fileID: 11400000, guid: ab1a8f86e7623e54dab444fdef765192, type: 2}
   Owner: {fileID: 0}
---- !u!95 &2563261449754868879
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5680469149520723162}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 655c3989185f29748a179bde3171b4df, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  Animator: {fileID: 0}

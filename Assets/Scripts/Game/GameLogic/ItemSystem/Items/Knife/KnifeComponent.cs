@@ -34,6 +34,8 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         Animator anim;
 
+        float attackTimer;
+
         bool delay;
 
         private void Awake()
@@ -109,16 +111,22 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
             }
 
             if (!nsm.hasAuthority) enabled = false;
+
+            if (attackTimer > 0f)
+                attackTimer -= Time.deltaTime;
         }
 
         public void LightAttack(InputAction.CallbackContext ctx)
         {
-            if (delay) return;
+            if (delay || attackTimer > 0f) return;
+
+            attackTimer = 0.75f;
 
             if (anim != null)
             {
                anim.SetTrigger(StringKeys.MeleeLightAnimation);
             }
+
             NetworkClient.Send(new KnifeStrikeMessage()
             {
                 Start = spreadPoint.position,
@@ -128,12 +136,15 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         public void HeavyAttack(InputAction.CallbackContext ctx)
         {
-            if (delay) return;
+            if (delay || attackTimer > 0f) return;
+
+            attackTimer = 1.5f;
 
             if (anim != null)
             {
                 anim.SetTrigger(StringKeys.MeleeHeavyAnimation);
             }
+
             NetworkClient.Send(new KnifeStrikeMessage()
             {
                 Start = spreadPoint.position,

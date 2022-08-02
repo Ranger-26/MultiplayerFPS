@@ -7,6 +7,7 @@ public class Crosshair : MonoBehaviour
 {
     public static Crosshair Instance;
 
+    // Firing Error
     [HideInInspector]
     public float size = 24f;
 
@@ -24,6 +25,7 @@ public class Crosshair : MonoBehaviour
         if (Instance != null) Destroy(gameObject);
         else Instance = this;
 
+        rect = GetComponent<RectTransform>();
     }
 
     private void Start() => Init();
@@ -44,7 +46,6 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateCrosshair()
     {
-        rect = transform.GetComponent<RectTransform>();
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
 

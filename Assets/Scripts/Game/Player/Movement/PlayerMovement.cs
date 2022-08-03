@@ -112,7 +112,7 @@ namespace Game.Player.Movement
 
             if (!LandTagged && isGrounded)
             {
-                Tag(0.5f);
+                Tag(0.6f);
                 previousStepLocation = transform.position;
                 AudioSystem.NetworkPlaySound(Sound: stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], Position: transform.position, MaxDistance: 20f, Volume: 0.4f, SpatialBlend: 1f, Priority: 128);
                 LandTagged = true;

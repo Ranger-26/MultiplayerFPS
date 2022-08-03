@@ -74,7 +74,7 @@ namespace Game.Player.Movement
                     if (Vector3.Distance(previousStepLocation, transform.position) >= StepDistance)
                     {
                         previousStepLocation = transform.position;
-                        AudioSystem.NetworkPlaySound(Sound: stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], Position: transform.position, MaxDistance: 20f, Volume: 0.3f, Priority: 128);
+                        AudioSystem.NetworkPlaySound(Sound: stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], Parent: GetComponent<NetworkTransform>(), Position: transform.position, MaxDistance: 20f, Volume: 0.3f, Priority: 128);
                     }
                 }
             }
@@ -114,7 +114,7 @@ namespace Game.Player.Movement
             {
                 Tag(0.5f);
                 previousStepLocation = transform.position;
-                AudioSystem.NetworkPlaySound(Sound: stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], Position: transform.position, MaxDistance: 20f, Volume: 0.4f, SpatialBlend: 1f, Priority: 128);
+                AudioSystem.NetworkPlaySound(Sound: stepClips[UnityEngine.Random.Range(0, stepClips.Length - 1)], Position: transform.position, Parent: GetComponent<NetworkTransform>(), MaxDistance: 20f, Volume: 0.4f, SpatialBlend: 1f, Priority: 128);
                 LandTagged = true;
             }
         }

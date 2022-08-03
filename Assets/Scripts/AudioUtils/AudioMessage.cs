@@ -8,6 +8,7 @@ namespace AudioUtils
         public string Id;
 
         public Vector3 Position;
+        public NetworkTransform Parent;
 
         public float MaxDistance;
         public float MinDistance;

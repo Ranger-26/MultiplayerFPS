@@ -7,12 +7,16 @@ namespace AudioUtils
 {
     public static class AudioSystem
     {
-        public static void PlaySound(this AudioClip Sound, Vector3 Position, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
+        public static void PlaySound(this AudioClip Sound, Vector3 Position, Transform Parent = null, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
         {
             GameObject SoundObject = new GameObject("Sound", typeof(AudioSource), typeof(DestroyAfter));
             AudioSource Clip = SoundObject.GetComponent<AudioSource>();
             DestroyAfter AutoDestroy = SoundObject.GetComponent<DestroyAfter>();
             SoundObject.transform.position = Position;
+            if (Parent != null)
+            {
+                SoundObject.transform.SetParent(Parent);
+            }
             AutoDestroy.Timer = Sound.length;
 
             Clip.playOnAwake = false;
@@ -27,12 +31,13 @@ namespace AudioUtils
             Clip.Play();
         }
 
-        public static void NetworkPlaySound(this AudioClip Sound, Vector3 Position, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
+        public static void NetworkPlaySound(this AudioClip Sound, Vector3 Position, NetworkTransform Parent = default, float MinDistance = 0.0f, float MaxDistance = 10f, float Volume = 1f, float Pitch = 1f, float SpatialBlend = 1f, int Priority = 0)
         {
             AudioMessage message = new AudioMessage()
             {
                 Id = AudioDatabase.Instance.clipsToIds[Sound],
                 Position = Position,
+                Parent = Parent,
                 MaxDistance = MaxDistance,
                 MinDistance = MinDistance,
                 Volume = Volume,
@@ -45,8 +50,9 @@ namespace AudioUtils
         }
         
         public static void OnClientReceiveAudioMessage(AudioMessage message)
-        { 
-            AudioDatabase.Instance.TryGetClip(message.Id).audioClip.PlaySound(Position: message.Position, MaxDistance: message.MaxDistance, MinDistance: message.MinDistance, Volume: message.Volume,
+        {
+            Transform ParentTransform = message.Parent != null || message.Parent != default ? message.Parent.transform : null;
+            AudioDatabase.Instance.TryGetClip(message.Id).audioClip.PlaySound(Position: message.Position, Parent: ParentTransform, MaxDistance: message.MaxDistance, MinDistance: message.MinDistance, Volume: message.Volume,
                 Pitch: message.Pitch, SpatialBlend: message.SpatialBlend, Priority: message.Priority);
         }
         

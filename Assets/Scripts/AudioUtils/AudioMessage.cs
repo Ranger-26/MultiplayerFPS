@@ -7,7 +7,8 @@ namespace AudioUtils
     {
         public string id;
 
-        public Vector3 position;
+        public Vector3 Position;
+        public NetworkTransform Parent;
 
         public float maxDistance;
         public float volume;

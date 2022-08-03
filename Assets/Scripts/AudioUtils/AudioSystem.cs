@@ -13,7 +13,10 @@ namespace AudioUtils
             AudioSource Clip = SoundObject.GetComponent<AudioSource>();
             DestroyAfter AutoDestroy = SoundObject.GetComponent<DestroyAfter>();
             SoundObject.transform.position = Position;
-            SoundObject.transform.SetParent(Parent);
+            if (Parent != null)
+            {
+                SoundObject.transform.SetParent(Parent);
+            }
             AutoDestroy.Timer = Sound.length;
 
             Clip.playOnAwake = false;

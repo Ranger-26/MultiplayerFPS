@@ -68,10 +68,7 @@ namespace Game.GameLogic
             }
 
             RpcSendTimer(0, true);
-            foreach (var spawnable in FindObjectsOfType<MapSpawnableObject>())
-            {
-                Destroy(spawnable.gameObject);
-            }
+            MapSpawnableObject.DestroyAllMapObjects();
             PlayerManager.Instance.ResetPlayers(RespawnAllPlayers(PlayerManager.Instance.players));
             
 

@@ -43,6 +43,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
                 GameUiManager.Instance.SetAmmoTextState(true);
                 Invoke(nameof(SubscribeToEvents), ItemData.ItemDrawTime);
             }
+
+            nsm.curGun = GunViewModel.gun;
             return true;
         }
 

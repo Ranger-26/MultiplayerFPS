@@ -172,9 +172,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         // T Rifles
 
         [Tooltip("Half Buy Rifle")]
-        VSS, 
+        ASVAL,
         [Tooltip("Full Buy Rifle (One tap headshot)")]
-        AN94, 
+        AK19, 
 
         // T Shotguns
 
@@ -186,7 +186,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         // CT Pistols
 
         [Tooltip("Basic Free Pistol")]
-        HK45CT, 
+        Glock, 
         [Tooltip("Better Pistol (One tap headshot with no armor)")]
         M1911,
 
@@ -195,7 +195,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         [Tooltip("Eco SMG")]
         MP5K,
         [Tooltip("Half Buy SMG")]
-        MP7, 
+        KrissVector, 
 
         // CT Rifles
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MP5K
   m_EditorClassIdentifier: 
   Damage: 22
-  HeadMultiplier: 2
+  HeadMultiplier: 3
   LimbMultiplier: 0.4
   Range: 80
   RPM: 900
@@ -27,7 +27,7 @@ MonoBehaviour:
   MovementSpreadTolerance: 1.7
   MaxSpread: 1.8
   MaxMovementSpread: 5
-  StartingSpread: 0.2
+  StartingSpread: 0.4
   Recoil: 0.5
   HorizontalRecoil: 0.5
   MaxHorizontal: 2.5

@@ -10,57 +10,56 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
-  m_Name: Knife
+  m_Name: Deagle
   m_EditorClassIdentifier: 
-  Damage: 50
-  HeadMultiplier: 2
-  LimbMultiplier: 0.5
-  Range: 2
-  RPM: 120
+  Damage: 55
+  HeadMultiplier: 4
+  LimbMultiplier: 0.8
+  Range: 60
+  RPM: 267
   ChargeupTime: 0
-  Tagging: 1
-  Weight: 0
+  Tagging: 0.9
+  Weight: 0.08
   BulletCount: 1
   GunFiringMode: 1
-  Spread: 0
-  MovementSpread: 0
-  MaxSpread: 0
-  MaxMovementSpread: 0
-  StartingSpread: 0
-  Recoil: 0.01
-  HorizontalRecoil: 0.01
-  MaxHorizontal: 0.01
-  RecoilDecay: 1000
+  Spread: 1
+  MovementSpread: 8
+  MovementSpreadTolerance: 0.3
+  MaxSpread: 4
+  MaxMovementSpread: 20
+  StartingSpread: 0.15
+  Recoil: 1
+  HorizontalRecoil: 2
+  MaxHorizontal: 6
+  RecoilDecay: 1
   SpreadDecay: 2
-  Displacement: 0
-  MaxDisplacement: 0
+  Displacement: 1
+  MaxDisplacement: 4
   CrouchingMultiplier: 0.5
-  SwayAfterRecoil: 8
+  SwayAfterRecoil: 2
   SwayStartRight: 0
   HasScope: 0
   ExitScopeOnShoot: 0
   ScopeFOV: 67.5
+  ScopedSpread: 0
   ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
-  ReloadTime: 0.01
-  MaxAmmo: 2147483647
-  ReserveAmmo: 0
+  ReloadTime: 2
+  MaxAmmo: 7
+  ReserveAmmo: 21
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
-  GunSlot: 2
-  DrawTime: 0.58
+  GunSlot: 1
+  DrawTime: 0.75
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
-  Tracer: {fileID: 0}
-  AimPunch: 0.01
-  AimPunchDuration: 0.01
-  AimPunchDropDuration: 0.01
-  MaxBacking: 0.05
+  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
+  MaxBacking: 0.1
   BackingMultiplier: 3
   ChargeupSounds: []
   ShootSounds: []
-  SoundMaxDistance: 10
+  SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128
-  UniqueGunID: 2
+  UniqueGunID: 20

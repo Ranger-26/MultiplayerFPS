@@ -10,57 +10,56 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
-  m_Name: Makarov
+  m_Name: Intervention
   m_EditorClassIdentifier: 
-  Damage: 22
+  Damage: 200
   HeadMultiplier: 4
-  LimbMultiplier: 0.6
-  Range: 70
-  RPM: 580
+  LimbMultiplier: 0.5
+  Range: 200
+  RPM: 40
   ChargeupTime: 0
   Tagging: 0.9
-  Weight: 0.07
+  Weight: 0.3
   BulletCount: 1
   GunFiringMode: 1
   Spread: 1
-  MovementSpread: 1.5
-  MovementSpreadTolerance: 1.5
-  MaxSpread: 2
-  MaxMovementSpread: 4.5
-  StartingSpread: 0.3
-  Recoil: 1
-  HorizontalRecoil: 0.5
-  MaxHorizontal: 1
-  RecoilDecay: 0.4
-  SpreadDecay: 2
-  Displacement: 1
-  MaxDisplacement: 4
+  MovementSpread: 10
+  MovementSpreadTolerance: 0.3
+  MaxSpread: 3
+  MaxMovementSpread: 10
+  StartingSpread: 6
+  Recoil: 2
+  HorizontalRecoil: 0
+  MaxHorizontal: 0
+  RecoilDecay: 2
+  SpreadDecay: 4
+  Displacement: 0
+  MaxDisplacement: 0
   CrouchingMultiplier: 0.5
-  SwayAfterRecoil: 4
-  SwayStartRight: 1
-  HasScope: 0
-  ExitScopeOnShoot: 0
+  SwayAfterRecoil: 8
+  SwayStartRight: 0
+  HasScope: 1
+  ExitScopeOnShoot: 1
   ScopeFOV: 67.5
   ScopedSpread: 0
   ScopeSpeedReduction: 0.3
-  ScopeImage: {fileID: 0}
-  ReloadTime: 1.05
-  MaxAmmo: 12
-  ReserveAmmo: 48
+  ScopeImage: {fileID: 21300000, guid: 2b97d134cb49e0c468eecdfa09ec67e1, type: 3}
+  ReloadTime: 5
+  MaxAmmo: 7
+  ReserveAmmo: 14
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
-  GunSlot: 1
-  DrawTime: 0.95
+  GunSlot: 0
+  DrawTime: 1.5
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
-  MaxBacking: 0.05
-  BackingMultiplier: 3
+  MaxBacking: 0.11
+  BackingMultiplier: 1.5
   ChargeupSounds: []
-  ShootSounds:
-  - {fileID: 8300000, guid: 58c35ce94e18cee458c5214c775fb9ff, type: 3}
+  ShootSounds: []
   SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128
-  UniqueGunID: 3
+  UniqueGunID: 19

@@ -9,6 +9,8 @@ namespace Game.GameLogic.Map.Doors
     {
         public NetworkAnimator Animator;
 
+        public GameObject Light;
+        
         [SyncVar]
         public DoorState State;
         
@@ -62,6 +64,11 @@ namespace Game.GameLogic.Map.Doors
         {
             if (State == DoorState.Moving) return;
             CmdInteract();
+        }
+
+        public void OnDoorStateChange(DoorState _, DoorState cur)
+        {
+            //change light color, play sound based on cur
         }
     }
 }

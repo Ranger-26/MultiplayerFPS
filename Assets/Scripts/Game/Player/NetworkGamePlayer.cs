@@ -35,6 +35,7 @@ namespace Game.Player
                 GameUiManager.Instance.OnRespawn();
             }
             cam.transform.tag = "MainCamera";
+            gameObject.tag = "Player";
             localPlayer = this;
         }
 

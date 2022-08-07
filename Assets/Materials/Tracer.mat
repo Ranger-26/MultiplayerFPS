@@ -16,7 +16,7 @@ Material:
   m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
   - _NORMALMAP_TANGENT_SPACE
-  m_LightmapFlags: 0
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -313,8 +313,8 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 24.95, g: 0.27429226, b: 0, a: 24.95}
-    - _EmissiveColorLDR: {r: 1, g: 0.10608761, b: 0, a: 1}
+    - _EmissiveColor: {r: 24.949999, g: 0.09835397, b: 0, a: 24.949999}
+    - _EmissiveColorLDR: {r: 1, g: 0.050067823, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}

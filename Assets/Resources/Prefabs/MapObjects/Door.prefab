@@ -285,9 +285,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  CanInteract: 0
   allowedInteractions: []
   Animator: {fileID: 0}
+  Light: {fileID: 4797337327640312693}
   State: 0
 --- !u!114 &-3934133169601335138
 MonoBehaviour:

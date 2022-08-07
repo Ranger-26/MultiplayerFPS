@@ -9,14 +9,15 @@ namespace Game.GameLogic.Map.Doors
     {
         public NetworkAnimator Animator;
 
-        public GameObject Light;
+        public MeshRenderer Light;
         
-        [SyncVar]
+        [SyncVar(hook = nameof(OnDoorStateChange))]
         public DoorState State;
         
         private void Start()
         {
             Animator = GetComponent<NetworkAnimator>();
+            OnDoorStateChange(DoorState.Closed, State);
         }
 
         public override void ServerInteract()
@@ -68,7 +69,18 @@ namespace Game.GameLogic.Map.Doors
 
         public void OnDoorStateChange(DoorState _, DoorState cur)
         {
-            //change light color, play sound based on cur
+            switch (cur)
+            {
+                case DoorState.Moving:
+                    Light.material.color = Color.yellow;
+                    break;
+                case DoorState.Closed:
+                    Light.material.color = Color.blue;
+                    break;
+                case DoorState.Open:
+                    Light.material.color = Color.green;
+                    break;
+            }
         }
     }
 }

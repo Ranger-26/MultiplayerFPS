@@ -112,4 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemData: {fileID: 11400000, guid: ab1a8f86e7623e54dab444fdef765192, type: 2}
   Owner: {fileID: 0}
-  Animator: {fileID: 0}
+  ConsumableData: {fileID: 0}

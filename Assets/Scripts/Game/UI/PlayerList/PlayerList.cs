@@ -1,60 +1,55 @@
-using System.Collections.Generic;
-using Lobby;
-using Networking;
+using System;
+using Inputs;
+using TMPro;
+using UnityEngine.InputSystem;
 using UnityEngine;
+using Networking;
+using Lobby;
 
 namespace Game.UI.PlayerList
 {
-    using System;
-    using System.Linq;
-    using Inputs;
-    using Telepathy;
-    using TMPro;
-    using UnityEngine.InputSystem;
-    using UnityEngine.UI;
-    using UnityEngine.UIElements;
-
     public class PlayerList : MonoBehaviour
     {
         public bool IsOpen { get; private set; }
         [SerializeField] 
-        private TextMeshProUGUI _playerListText;
+        private TMP_Text _playerListText;
         [SerializeField]
-        private Canvas _playerListCanvas;
+        private GameObject _playerListCanvas;
 
         private void Start()
         {
             GameInputManager.PlayerActions.PlayerList.performed += ToggleList;
+            GameInputManager.PlayerActions.PlayerList.canceled += ToggleList;
         }
 
         private void OnDestroy()
         {
             GameInputManager.PlayerActions.PlayerList.performed -= ToggleList;
+            GameInputManager.PlayerActions.PlayerList.canceled -= ToggleList;
         }
 
         private void ToggleList(InputAction.CallbackContext callbackContext)
         {
-            if (callbackContext.performed && !IsOpen)
+            if (callbackContext.performed)
                 ShowList();
-            else
+            else if (callbackContext.canceled)
                 HideList();
         }
 
         private void ShowList()
         {
             IsOpen = true;
-            _playerListCanvas.gameObject.SetActive(true);
-            _playerListText.text = String.Empty;
+            _playerListCanvas.SetActive(true);
+            _playerListText.text = string.Empty;
+
             foreach (var name in GetAllPlayerNames())
-            {
-                _playerListText.text += $"{name}{Environment.NewLine}";
-            }
+                _playerListText.text += $"{name}\t\t\tK\tD\tA{Environment.NewLine}";
         }
 
         private void HideList()
         {
             IsOpen = false;
-            _playerListCanvas.gameObject.SetActive(false);
+            _playerListCanvas.SetActive(false);
             //Canvas.ForceUpdateCanvases();
         }
 

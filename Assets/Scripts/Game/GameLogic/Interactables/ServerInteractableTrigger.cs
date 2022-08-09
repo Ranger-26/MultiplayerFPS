@@ -60,5 +60,15 @@ namespace Game.GameLogic.Interactables
                 ServerInteract();
             }
         }
+
+        public virtual void Highlight()
+        {
+            
+        }
+
+        public virtual void UnHighlight()
+        {
+            
+        }
     }
 }

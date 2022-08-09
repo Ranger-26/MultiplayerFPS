@@ -36,10 +36,12 @@ namespace Game.Player
             {
                 CurrentInteractable = interactable;
             }
+            CurrentInteractable.Highlight();
         }
 
         public void OnTriggerExit(Collider other)
         {
+            CurrentInteractable.UnHighlight();
             if (other.TryGetComponent(out IInteractable interactable))
             {
                 CurrentInteractable = null;

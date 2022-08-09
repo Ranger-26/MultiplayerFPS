@@ -5,5 +5,9 @@ namespace Game.GameLogic.Interactables
         void ServerInteract();
 
         void ClientInteract();
+
+        void Highlight();
+
+        void UnHighlight();
     }
 }

@@ -1,4 +1,4 @@
-namespace Game.UI
+namespace Game.Player
 {
     public interface IDamageable
     {

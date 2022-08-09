@@ -44,7 +44,10 @@ namespace Game.Player
             CurrentInteractable.UnHighlight();
             if (other.TryGetComponent(out IInteractable interactable))
             {
-                CurrentInteractable = null;
+                if (interactable == CurrentInteractable)
+                {
+                    CurrentInteractable = null;
+                }
             }
         }
 

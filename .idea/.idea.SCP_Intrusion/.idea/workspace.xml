@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ab237a5-c93e-4120-9e50-6bb044fb7ddf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/ConsumableBase.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/ConsumableBase.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/ConsumableData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/ConsumableData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/GenericConsumableMessage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/GenericConsumableMessage.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/GenericConsumableMessageHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/GenericConsumableMessageHandler.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/IConsumable.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/GenericConsumables/IConsumable.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP_Intrusion/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Easy Save 3/Legacy/Easy Save 2.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Items/SCP500.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Items/SCP500.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/SCP500.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/SCP500.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/SCP500.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scriptables/Items/SCP500.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Inventory/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/SCP500/Scp500Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameLogic/ItemSystem/Items/Consumables/SCP500/Scp500Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InteractionScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/InteractionScript.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

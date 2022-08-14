@@ -77,7 +77,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         [Server]
         private void ServerShoot(Vector3 start, Vector3 forward, int id, Vector3 visualFiringPoint)
         {
-            RaycastHit[] _hits = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers);
+            RaycastHit[] _hits = Physics.RaycastAll(start, forward, curGun.Range, curGun.HitLayers, QueryTriggerInteraction.Ignore);
 
             if (_hits.Length != 0)
             {

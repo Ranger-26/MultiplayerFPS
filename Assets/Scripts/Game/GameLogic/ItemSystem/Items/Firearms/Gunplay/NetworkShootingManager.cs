@@ -83,6 +83,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             {
                 Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
 
+                int curDmg = curGun.Damage;
+                float curPene = curGun.Penetration;
+
                 foreach (RaycastHit __hit in _hits)
                 {
                     DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
@@ -107,14 +110,25 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                                 break;
                         }
                         part.ServerTag(curGun.Tagging);
-                        part.ServerDamage(curGun.Damage, multiplier);
+                        part.ServerDamage(curDmg, multiplier);
 
                         ServerTracer(visualFiringPoint, __hit.point);
                     }
                     else
                     {
+                        Vector3 temp = __hit.point + forward * curPene;
+
                         ServerHit(__hit, visualFiringPoint);
-                        return;
+
+                        RaycastHit hit;
+                        if (Physics.Raycast(temp, -forward, out hit, curGun.Penetration, curGun.HitLayers))
+                        {
+                            float tempDist = Vector3.Distance(hit.point, __hit.point);
+                            curPene = Mathf.Clamp(curPene - tempDist, 0f, curPene);
+                            ServerHit(hit);
+                        }
+                        else
+                            return;
                     }
                 }
             }
@@ -182,6 +196,23 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             }
 
             ServerTracer(visualFiringPoint, _hit.point);
+        }
+
+        [Server]
+        private void ServerHit(RaycastHit _hit)
+        {
+            if (curGun.HitObject != null)
+            {
+                GameObject hit = Instantiate(curGun.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
+                NetworkServer.Spawn(hit);
+            }
+
+            if (curGun.HitDecal != null)
+            {
+                GameObject decal = Instantiate(curGun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
+                // decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
+                NetworkServer.Spawn(decal);
+            }
         }
 
         [Server]

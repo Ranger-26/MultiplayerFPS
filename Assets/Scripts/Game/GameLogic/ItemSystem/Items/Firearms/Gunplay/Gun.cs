@@ -9,6 +9,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         [Tooltip("Amount of damage the gun applies")]
         public int Damage = 40;
 
+        [Tooltip("Amount of penetration the gun has, measured in unity units")]
+        public float Penetration = 0.5f;
         [Tooltip("Multiplier of damage for headshots")]
         public float HeadMultiplier = 4f;
         [Tooltip("Multiplier of damage for limbshots")]

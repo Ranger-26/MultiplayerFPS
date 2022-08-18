@@ -123,8 +123,14 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                         RaycastHit hit;
                         if (Physics.Raycast(temp, -forward, out hit, curGun.Penetration, curGun.HitLayers))
                         {
+                            float modifier = 1f;
+
+                            if (hit.transform.TryGetComponent(out MaterialModifier material))
+                                modifier = material.mat.WallbangMultiplier;
+
                             float tempDist = Vector3.Distance(hit.point, __hit.point);
-                            curPene = Mathf.Clamp(curPene - tempDist, 0f, curPene);
+                            curPene = Mathf.Clamp(curPene * modifier - tempDist, 0f, curPene);
+                            curDmg = curDmg - (int)((1f - curPene / curGun.Penetration) * curDmg / modifier);
                             ServerHit(hit);
                         }
                         else

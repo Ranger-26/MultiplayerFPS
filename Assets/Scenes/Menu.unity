@@ -2685,7 +2685,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter IP...
+  m_Text: Enter Steam ID...
 --- !u!222 &489682220
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -5,35 +5,36 @@ using UnityEngine;
 public class Logging : MonoBehaviour
 {
     string filename = "";
+
     private void Start()
     {
-        string d = System.Environment.GetFolderPath(
-            System.Environment.SpecialFolder.ApplicationData) + "/SCP_INTRUSION_LOGS";
-        System.IO.Directory.CreateDirectory(d);
-        filename = d + "/scp_intrusion_log.txt";
-        if (System.IO.File.Exists(filename))
+        string d = Environment.GetFolderPath(
+            Environment.SpecialFolder.ApplicationData) + "/Eternity Studios/SCP Intrusion/Logs";
+        Directory.CreateDirectory(d);
+        filename = d + $"/{DateTime.Now}_session_log.txt";
+        if (File.Exists(filename))
         {
-            File.WriteAllText(filename, String.Empty);
+            File.WriteAllText(filename, string.Empty);
         }
     }
 
-    void OnEnable() { Application.logMessageReceived += Log;  }
+    void OnEnable() { Application.logMessageReceived += Log; }
     void OnDisable() { Application.logMessageReceived -= Log; }
- 
+
     public void Log(string logString, string stackTrace, LogType type)
     {
         if (filename == "")
         {
-            string d = System.Environment.GetFolderPath(
-                System.Environment.SpecialFolder.ApplicationData) + "/SCP_INTRUSION_LOGS";
-            System.IO.Directory.CreateDirectory(d);
-            filename = d + "/scp_intrusion_log.txt";
+            string d = Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData) + "/Eternity Studios/SCP Intrusion/Logs";
+            Directory.CreateDirectory(d);
+            filename = d + $"/{DateTime.Now}_session_log.txt";
         }
- 
+
         try
         {
             string content = $"[{DateTime.Now}] {logString}";
-            System.IO.File.AppendAllText(filename, logString + "\n");
+            File.AppendAllText(filename, logString + "\n");
         }
         catch { }
     }

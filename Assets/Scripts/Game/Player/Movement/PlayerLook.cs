@@ -2,6 +2,7 @@ using System;
 using Game.UI;
 using Inputs;
 using Koenigz.PerfectCulling;
+using Menu;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,7 @@ namespace Game.Player.Movement
 {
     public class PlayerLook : NetworkBehaviour
     {
-        public float lookSpeed => GameSettings.current.Sensitivity;
+        public float lookSpeed => Settings.Current.Sensitivity;
 
         public float lookXLimit = 90.0f;
 

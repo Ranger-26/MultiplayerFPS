@@ -56,6 +56,10 @@ namespace Menu
 
         #region Gameplay
 
+        public float Sensitivity;
+
+        public CrosshairSettings ch;
+
         #endregion
 
         #region Methods
@@ -75,6 +79,40 @@ namespace Menu
         public Setting()
         {
 
+        }
+    }
+
+    [System.Serializable]
+    public class CrosshairSettings
+    {
+        public int offset = 5;
+        public int length = 10;
+        public int thickness = 3;
+
+        public int scale = 1;
+
+        public Color color = new Color(255f, 255f, 255f, 100f);
+
+        public float firingErrorMultiplier = 10f;
+
+        public CrosshairSettings()
+        {
+            offset = 5;
+            length = 10;
+            thickness = 3;
+
+            scale = 1;
+
+            color = new Color(255f, 255f, 255f, 100f);
+
+            firingErrorMultiplier = 10f;
+        }
+
+        public CrosshairSettings(int _thickness, int _length, int _offset)
+        {
+            offset = _offset;
+            length = _length;
+            thickness = _thickness;
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using Menu;
 
 public class Crosshair : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateSettings() 
     {
-        ch = GameSettings.current.ch;
+        ch = Settings.Current.ch;
 
         UpdateCrosshair();
     }

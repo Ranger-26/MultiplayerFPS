@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Makarov
   m_EditorClassIdentifier: 
   Damage: 22
+  Penetration: 0.5
   HeadMultiplier: 4
   LimbMultiplier: 0.6
   Range: 70

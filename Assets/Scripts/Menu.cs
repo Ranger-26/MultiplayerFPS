@@ -1,19 +1,22 @@
 using Game.UI;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+namespace Menu
 {
-    private void OnEnable()
+    public class Menu : MonoBehaviour
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        MenuOpen.IsOpen = true;
-    }
+        private void OnEnable()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            MenuOpen.IsOpen = true;
+        }
 
-    private void OnDisable()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        MenuOpen.IsOpen = false;
+        private void OnDisable()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            MenuOpen.IsOpen = false;
+        }
     }
 }

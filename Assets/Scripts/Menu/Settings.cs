@@ -8,15 +8,15 @@ namespace Menu
 
         public static void SaveSettings()
         {
-            Debug.Log("Saved settings to \"" + Application.persistentDataPath + "/settings.tcrs\"");
-            ES3.Save("Settings", Current, Application.persistentDataPath + "/settings.tcrs");
+            Debug.Log("Saved settings to \"" + Application.persistentDataPath + "/settings.scp\"");
+            ES3.Save("Settings", Current, Application.persistentDataPath + "/settings.scp");
         }
 
         public static Setting LoadSettings()
         {
-            Debug.Log("Loaded settings from \"" + Application.persistentDataPath + "/settings.tcrs\"");
-            if (ES3.FileExists(Application.persistentDataPath + "/settings.tcrs"))
-                Current = ES3.Load<Setting>("Settings", Application.persistentDataPath + "/settings.tcrs");
+            Debug.Log("Loaded settings from \"" + Application.persistentDataPath + "/settings.scp\"");
+            if (ES3.FileExists(Application.persistentDataPath + "/settings.scp"))
+                Current = ES3.Load<Setting>("Settings", Application.persistentDataPath + "/settings.scp");
             else
             {
                 Current = new Setting();
@@ -42,7 +42,7 @@ namespace Menu
 
         // Quality
 
-        public float RenderResolution = 1;
+
 
         #endregion
 
@@ -58,7 +58,16 @@ namespace Menu
 
         public float Sensitivity;
 
-        public CrosshairSettings ch;
+        // Crosshair
+
+        public int cOffset = 5;
+        public int cLength = 10;
+        public int cThickness = 3;
+        public int cScale = 1;
+
+        public int cColor = 0;
+
+        public float cFiringErrorMultiplier = 10f;
 
         #endregion
 
@@ -79,40 +88,6 @@ namespace Menu
         public Setting()
         {
 
-        }
-    }
-
-    [System.Serializable]
-    public class CrosshairSettings
-    {
-        public int offset = 5;
-        public int length = 10;
-        public int thickness = 3;
-
-        public int scale = 1;
-
-        public Color color = new Color(255f, 255f, 255f, 100f);
-
-        public float firingErrorMultiplier = 10f;
-
-        public CrosshairSettings()
-        {
-            offset = 5;
-            length = 10;
-            thickness = 3;
-
-            scale = 1;
-
-            color = new Color(255f, 255f, 255f, 100f);
-
-            firingErrorMultiplier = 10f;
-        }
-
-        public CrosshairSettings(int _thickness, int _length, int _offset)
-        {
-            offset = _offset;
-            length = _length;
-            thickness = _thickness;
         }
     }
 }

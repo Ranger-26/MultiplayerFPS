@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace Menu
 {
+    using System;
+
     public static class Settings
     {
         public static Setting Current;
@@ -75,6 +77,11 @@ namespace Menu
 
         public void SetVariable<T>(string name, T value)
         {
+            if (value is float single)
+            {
+                GetType().GetField(name).SetValue(this, Convert.ToInt32(single));
+                return;
+            }
             GetType().GetField(name).SetValue(this, value);
         }
 
@@ -87,7 +94,6 @@ namespace Menu
 
         public Setting()
         {
-
         }
     }
 }

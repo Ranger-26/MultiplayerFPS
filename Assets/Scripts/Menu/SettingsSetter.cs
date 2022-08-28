@@ -31,7 +31,7 @@ namespace Menu
             if (input != null)
                 input.SetTextWithoutNotify(Settings.Current.GetVariableByName<string>(VariableName).ToString());
             if (slider != null)
-                slider.SetValueWithoutNotify((float)Settings.Current.GetVariableByName<float>(VariableName));
+                slider.SetValueWithoutNotify(Convert.ToSingle(Settings.Current.GetVariableByName<float>(VariableName)));
         }
 
         public void SetDropdown(int value)

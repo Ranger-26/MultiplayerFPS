@@ -20,6 +20,7 @@ namespace Menu
             SetVolumeEffects(Settings.Current.EffectsVolume);
             SetVolumeMusic(Settings.Current.MusicVolume);
             SetVolumeMaster(Settings.Current.MasterVolume);
+            TextureQuality(Settings.Current.TextureQuality);
         }
 
         public void SetVolumeMaster(float value)
@@ -45,6 +46,11 @@ namespace Menu
         public void VSync(bool value)
         {
             QualitySettings.vSyncCount = value ? 2 : 0;
+        }
+
+        public void TextureQuality(int value)
+        {
+            QualitySettings.masterTextureLimit = value;
         }
     }
 }

@@ -42,9 +42,10 @@ namespace Menu
         public bool Fullscreen = true;
         public bool VSync = false;
 
-        // Quality
+        // Graphics
 
-
+        public int TextureQuality = 2;
+        public int AntiAliasing = 2;
 
         #endregion
 

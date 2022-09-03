@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using Menu;
 
 public class Crosshair : MonoBehaviour
 {
@@ -9,9 +10,6 @@ public class Crosshair : MonoBehaviour
 
     [HideInInspector]
     public float size = 24f;
-
-    // User Config
-    public CrosshairSettings ch = new CrosshairSettings();
 
     float startingSize = 24f;
 
@@ -35,10 +33,8 @@ public class Crosshair : MonoBehaviour
         UpdateSettings();
     }
 
-    public void UpdateSettings() 
+    public void UpdateSettings()
     {
-        ch = GameSettings.current.ch;
-
         UpdateCrosshair();
     }
 
@@ -52,21 +48,48 @@ public class Crosshair : MonoBehaviour
         {
             if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
 
-            rectTrans.sizeDelta = new Vector2(ch.length * 2f, ch.thickness * 2f);
-            rectTrans.gameObject.GetComponent<Image>().color = ch.color;
+            rectTrans.sizeDelta = new Vector2(Settings.Current.cLength * 2f, Settings.Current.cThickness * 2f);
+
+            switch (Settings.Current.cColor)
+            {
+                case 0:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.white;
+                    break;
+                case 1:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.red;
+                    break;
+                case 2:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.green;
+                    break;
+                case 3:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.blue;
+                    break;
+                case 4:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.yellow;
+                    break;
+                case 5:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.magenta;
+                    break;
+                case 6:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.cyan;
+                    break;
+                case 7:
+                    rectTrans.gameObject.GetComponent<Image>().color = Color.black;
+                    break;
+            }
         }
 
-        size = ch.length * 4f + ch.offset * 2f;
+        size = Settings.Current.cLength * 4f + Settings.Current.cOffset * 2f;
         startingSize = size;
 
-        rect.localScale = new Vector3(ch.scale, ch.scale, 1f);
+        rect.localScale = new Vector3(Settings.Current.cScale, Settings.Current.cScale, 1f);
 
         rect.sizeDelta = new Vector2(size, size);
     }
 
     public void UpdateError(float errorPixelsFire)
     {
-        size = startingSize + errorPixelsFire * ch.firingErrorMultiplier * 2f;
+        size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 2f;
 
         rect.sizeDelta = new Vector2(size, size);
     }

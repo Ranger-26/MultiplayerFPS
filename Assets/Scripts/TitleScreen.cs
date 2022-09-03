@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
+using Menu;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class TitleScreen : MonoBehaviour
             Instance = this;
         }
 
-        GameSettingsLoader.LoadFile();
+        Settings.LoadSettings();
     }
 
     public void QuitGame()

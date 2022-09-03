@@ -1,5 +1,6 @@
 using Game.UI;
 using Inputs;
+using Menu;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,20 +31,20 @@ namespace Game.Player.Spectating
             
             if (axes == RotationAxes.MouseXAndY)
             {
-                float rotationX = transform.localEulerAngles.y + mouseInput.x * GameSettings.current.Sensitivity;
+                float rotationX = transform.localEulerAngles.y + mouseInput.x * Settings.Current.Sensitivity;
 			
-                rotationY += mouseInput.y * GameSettings.current.Sensitivity;
+                rotationY += mouseInput.y * Settings.Current.Sensitivity;
                 rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
                 transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
             }
             else if (axes == RotationAxes.MouseX)
             {
-                transform.Rotate(0, mouseInput.x * GameSettings.current.Sensitivity, 0);
+                transform.Rotate(0, mouseInput.x * Settings.Current.Sensitivity, 0);
             }
             else
             {
-                rotationY += mouseInput.y * GameSettings.current.Sensitivity;
+                rotationY += mouseInput.y * Settings.Current.Sensitivity;
                 rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 			
                 transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);

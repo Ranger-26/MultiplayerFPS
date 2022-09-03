@@ -62,10 +62,10 @@ namespace Menu
 
         // Crosshair
 
-        public int cOffset = 5;
-        public int cLength = 10;
-        public int cThickness = 3;
-        public int cScale = 1;
+        public float cOffset = 5;
+        public float cLength = 10;
+        public float cThickness = 3;
+        public float cScale = 1;
 
         public int cColor = 0;
 
@@ -77,11 +77,6 @@ namespace Menu
 
         public void SetVariable<T>(string name, T value)
         {
-            if (value is float single)
-            {
-                GetType().GetField(name).SetValue(this, Convert.ToInt32(single));
-                return;
-            }
             GetType().GetField(name).SetValue(this, value);
         }
 

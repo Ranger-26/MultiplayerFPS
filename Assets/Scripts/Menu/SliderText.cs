@@ -15,13 +15,17 @@ namespace Menu
         {
             text = GetComponent<TMP_InputField>();
             slider = GetComponentInParent<Slider>();
+        }
 
+        private void OnEnable()
+        {
             text.text = Math.Round(slider.value, 2, MidpointRounding.ToEven).ToString();
         }
 
         public void UpdateValue(float value)
         {
             text.text = Math.Round(value, 2, MidpointRounding.ToEven).ToString();
+            slider.SetValueWithoutNotify(Convert.ToSingle(Math.Round(value, 2, MidpointRounding.ToEven)));
         }
 
         public void UpdateSlider(string value)

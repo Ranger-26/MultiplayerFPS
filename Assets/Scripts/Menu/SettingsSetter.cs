@@ -57,7 +57,7 @@ namespace Menu
 
         public void SetSlider(float value)
         {
-            Settings.Current.SetVariable(VariableName, value);
+            Settings.Current.SetVariable(VariableName, Convert.ToSingle(Math.Round(value, 2, MidpointRounding.ToEven)));
 
             Settings.SaveSettings();
         }

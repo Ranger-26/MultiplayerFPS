@@ -53,7 +53,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
            // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
-            ServerAddItem(ItemIdentifier.SCP500, new DefaultRuntimeData());
+            ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
         }
         
         public void Test1(InputAction.CallbackContext ctx) => EquipItem(0);

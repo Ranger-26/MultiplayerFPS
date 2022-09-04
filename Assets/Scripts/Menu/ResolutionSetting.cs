@@ -35,7 +35,7 @@ namespace Menu
 
         public void ChangeRes(int index)
         {
-            Screen.SetResolution(reses[index].width, reses[index].height, Settings.Current.Fullscreen);
+            Screen.SetResolution(reses[index].width, reses[index].height, Settings.Current.Fullscreen, reses[index].refreshRate);
         }
     }
 }

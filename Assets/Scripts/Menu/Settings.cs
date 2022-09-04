@@ -63,10 +63,10 @@ namespace Menu
 
         // Crosshair
 
-        public float cOffset = 5;
-        public float cLength = 10;
-        public float cThickness = 3;
-        public float cScale = 1;
+        public float cOffset = 2f;
+        public float cLength = 4f;
+        public float cThickness = 2f;
+        public float cScale = 1f;
 
         public int cColor = 0;
 

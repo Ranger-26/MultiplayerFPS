@@ -19,9 +19,8 @@ public class Crosshair : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
+        if (Instance != null) gameObject.SetActive(false);
         else Instance = this;
-
     }
 
     private void Start() => Init();
@@ -92,5 +91,12 @@ public class Crosshair : MonoBehaviour
         size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 2f;
 
         rect.sizeDelta = new Vector2(size, size);
+    }
+
+    public void ActivateCrosshair()
+    {
+        Instance.gameObject.SetActive(false);
+        Instance = this;
+        gameObject.SetActive(true);
     }
 }

@@ -10,13 +10,11 @@ namespace Menu
 
         public static void SaveSettings()
         {
-            Debug.Log("Saved settings to \"" + Application.persistentDataPath + "/settings.scp\"");
             ES3.Save("Settings", Current, Application.persistentDataPath + "/settings.scp");
         }
 
         public static Setting LoadSettings()
         {
-            Debug.Log("Loaded settings from \"" + Application.persistentDataPath + "/settings.scp\"");
             if (ES3.FileExists(Application.persistentDataPath + "/settings.scp"))
                 Current = ES3.Load<Setting>("Settings", Application.persistentDataPath + "/settings.scp");
             else

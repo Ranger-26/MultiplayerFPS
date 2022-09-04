@@ -11,7 +11,7 @@ public class Logging : MonoBehaviour
         string d = Environment.GetFolderPath(
             Environment.SpecialFolder.ApplicationData) + "/Eternity Studios/SCP Intrusion/Logs";
         Directory.CreateDirectory(d);
-        filename = d + $"/{DateTime.Now}_session_log.txt";
+        filename = d + "/y" + DateTime.Now.Year.ToString() + "_m" + DateTime.Now.Month.ToString() + "_d" + DateTime.Now.Day.ToString() + "_hr" + DateTime.Now.Hour.ToString() + "_min" + DateTime.Now.Minute.ToString() + "_sec" + DateTime.Now.Second.ToString() + "_mil" + DateTime.Now.Millisecond.ToString() + "_session_log.txt";
         if (File.Exists(filename))
         {
             File.WriteAllText(filename, string.Empty);
@@ -28,7 +28,7 @@ public class Logging : MonoBehaviour
             string d = Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData) + "/Eternity Studios/SCP Intrusion/Logs";
             Directory.CreateDirectory(d);
-            filename = d + $"/{DateTime.Now}_session_log.txt";
+            filename = d + "/y" + DateTime.Now.Year.ToString() + "_m" + DateTime.Now.Month.ToString() + "_d" + DateTime.Now.Day.ToString() + "_hr" + DateTime.Now.Hour.ToString() + "_min" + DateTime.Now.Minute.ToString() + "_sec" + DateTime.Now.Second.ToString() + "_mil" + DateTime.Now.Millisecond.ToString() + "_session_log.txt";
         }
 
         try

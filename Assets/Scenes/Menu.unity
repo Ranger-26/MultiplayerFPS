@@ -3587,7 +3587,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4982,7 +4982,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6354,7 +6354,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9041,7 +9041,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14184,7 +14184,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17615,14 +17615,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 2
+  m_ContentType: 3
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 2
+  m_CharacterValidation: 3
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0
@@ -19458,7 +19458,7 @@ PrefabInstance:
     - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: transport
       value: 
-      objectReference: {fileID: 3043139860385302058}
+      objectReference: {fileID: 3043139860385302057}
     - target: {fileID: 3043139860209545189, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
       propertyPath: playerPrefab
       value: 
@@ -19500,15 +19500,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b811e3fbabd4f6445a278572c9b5a0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3043139860385302058 stripped
+--- !u!114 &3043139860385302057 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1506649697, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3043139860209545190, guid: 581eedfd5406b074280ccd7744e4bdee, type: 3}
   m_PrefabInstance: {fileID: 3043139860385302055}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!33 &3309135980938038288
@@ -23987,7 +23987,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1857818641}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: UpdateSettings
+        m_MethodName: UpdateCrosshair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

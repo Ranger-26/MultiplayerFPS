@@ -12,6 +12,7 @@ public class Crosshair : MonoBehaviour
     public float size = 24f;
 
     float startingSize = 24f;
+    float offsetAddition = 1f;
 
     RectTransform[] CrosshairParts;
 
@@ -29,11 +30,6 @@ public class Crosshair : MonoBehaviour
 
     private void Init()
     {
-        UpdateSettings();
-    }
-
-    public void UpdateSettings()
-    {
         UpdateCrosshair();
     }
 
@@ -43,11 +39,22 @@ public class Crosshair : MonoBehaviour
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
 
+        if ((Settings.Current.cThickness % 2f) > 0f)
+        {
+            rect.localPosition = new Vector2(1, 1);
+            offsetAddition = 1f;
+        }
+        else
+        {
+            rect.localPosition = Vector2.zero;
+            offsetAddition = 0f;
+        }
+
         foreach (RectTransform rectTrans in CrosshairParts)
         {
             if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
 
-            rectTrans.sizeDelta = new Vector2(Settings.Current.cLength * 2f, Settings.Current.cThickness * 2f);
+            rectTrans.sizeDelta = new Vector2(Settings.Current.cLength, Settings.Current.cThickness);
 
             switch (Settings.Current.cColor)
             {
@@ -78,7 +85,7 @@ public class Crosshair : MonoBehaviour
             }
         }
 
-        size = Settings.Current.cLength * 4f + Settings.Current.cOffset * 2f;
+        size = Settings.Current.cLength * 2f + Settings.Current.cOffset * 2f + offsetAddition;
         startingSize = size;
 
         rect.localScale = new Vector3(Settings.Current.cScale, Settings.Current.cScale, 1f);
@@ -88,7 +95,7 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateError(float errorPixelsFire)
     {
-        size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 2f;
+        size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 10f;
 
         rect.sizeDelta = new Vector2(size, size);
     }

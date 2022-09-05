@@ -375,14 +375,17 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         public void Visual()
         {
+            if (anim != null)
+                anim.ResetTrigger(StringKeys.GunShootAnimation);
+
             if (!isScoped)
             {
                 if (muzzleFlash != null)
                     muzzleFlash.Play();
-
-                if (anim != null)
-                    anim.SetTrigger(StringKeys.GunShootAnimation);
             }
+
+            if (anim != null)
+                anim.SetTrigger(StringKeys.GunShootAnimation);
 
             if (gun.ShootSounds.Length != 0)
                 AudioSystem.NetworkPlaySound(Sound: gun.ShootSounds[Random.Range(0, gun.ShootSounds.Length - 1)], Position: cam.transform.position + cam.transform.forward, Parent: PM.transform.GetComponent<NetworkTransform>(), MaxDistance: gun.SoundMaxDistance, Volume: gun.SoundVolume, Priority: gun.SoundPriority);
@@ -439,6 +442,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             canCharge = false;
             chambered = false;
             finishedReload = false;
+
+            if (anim != null)
+                anim.ResetTrigger(StringKeys.GunReloadAnimation);
 
             Scope(false);
 

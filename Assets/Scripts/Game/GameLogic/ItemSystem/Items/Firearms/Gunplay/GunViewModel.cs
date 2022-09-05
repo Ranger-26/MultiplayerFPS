@@ -341,7 +341,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
             if (nsm.currentAmmo <= 0 && !delay && nsm.reserveAmmo > 0 && !isSpraying) return;
 
-            if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f))
+            if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f) && !MenuOpen.IsOpen)
             {
                 shootTimer = 60f / gun.RPM;
 
@@ -487,6 +487,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             delay = true;
             canCharge = false;
             chambered = true;
+
+            if (anim != null)
+                anim.ResetTrigger(StringKeys.GunDrawAnimation);
 
             spread = gun.StartingSpread;
 

@@ -22,12 +22,14 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             GameInputManager.Actions.Player.Fire.performed += KnifeComponent.LightAttack;
             GameInputManager.Actions.Player.AltFire.performed += KnifeComponent.HeavyAttack;
+            GameInputManager.Actions.Player.Inspect.performed += KnifeComponent.Inspect;
         }
 
         public void UnSubscribeFromInputEvents()
         {
             GameInputManager.Actions.Player.Fire.performed -= KnifeComponent.LightAttack;
             GameInputManager.Actions.Player.AltFire.performed -= KnifeComponent.HeavyAttack;
+            GameInputManager.Actions.Player.Inspect.performed -= KnifeComponent.Inspect;
         }
 
         public override bool OnEquip()

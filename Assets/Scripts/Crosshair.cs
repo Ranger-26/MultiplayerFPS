@@ -11,6 +11,11 @@ public class Crosshair : MonoBehaviour
     [HideInInspector]
     public float size = 24f;
 
+    [SerializeField]
+    RectTransform Reticles;
+    [SerializeField]
+    RectTransform Dot;
+
     float startingSize = 24f;
     float offsetAddition = 1f;
 
@@ -39,22 +44,40 @@ public class Crosshair : MonoBehaviour
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
 
+        #region Offsetting Crosshair Part
+
         if ((Settings.Current.cThickness % 2f) > 0f)
         {
-            rect.localPosition = new Vector2(1, 1);
+            Reticles.localPosition = new Vector2(1, 1);
             offsetAddition = 1f;
         }
         else
         {
-            rect.localPosition = Vector2.zero;
+            Reticles.localPosition = Vector2.zero;
             offsetAddition = 0f;
         }
 
+        if ((Settings.Current.cDotSize % 2f) > 0f)
+        {
+            Dot.localPosition = new Vector2(1, 1);
+            offsetAddition = 1f;
+        }
+        else
+        {
+            Dot.localPosition = Vector2.zero;
+            offsetAddition = 0f;
+        }
+
+        #endregion
+
         foreach (RectTransform rectTrans in CrosshairParts)
         {
-            if (rectTrans.gameObject.GetComponent<Image>() == null) Debug.Log($"Crosshair part image null...");
+            if (rectTrans.gameObject.GetComponent<Image>() == null) { Debug.Log($"Crosshair part image null..."); continue; }
 
-            rectTrans.sizeDelta = new Vector2(Settings.Current.cLength, Settings.Current.cThickness);
+            if (rectTrans.gameObject.name == "Reticle")
+                rectTrans.sizeDelta = new Vector2(Settings.Current.cLength, Settings.Current.cThickness);
+            else if (rectTrans.gameObject.name == "Dot")
+                rectTrans.sizeDelta = new Vector2(Settings.Current.cDotSize, Settings.Current.cDotSize);
 
             switch (Settings.Current.cColor)
             {

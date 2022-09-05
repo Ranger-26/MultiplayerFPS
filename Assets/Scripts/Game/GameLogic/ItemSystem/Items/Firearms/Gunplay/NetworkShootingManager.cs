@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Game.GameLogic.ItemSystem.Items.Knife;
 using Game.Player;
 using Game.Player.Damage;
 using Mirror;
@@ -11,7 +12,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
     {
         [Header("Gun storing")]
         public Gun curGun;
-        public Melee melee;
+        public KnifeComponent Melee;
 
         //[SyncVar] public GunIDs curGunId;
 
@@ -66,12 +67,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             if (currentAmmo < 0) return;
             currentAmmo--;
             ServerShoot(start, forward, id, visualFiringPoint);
-        }
-
-        [Command]
-        public void CmdMelee(Vector3 start, Vector3 forward, float multiplier)
-        {
-            ServerMelee(start, forward, id, multiplier);
         }
 
         [Server]
@@ -141,51 +136,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         }
 
         [Server]
-        private void ServerMelee(Vector3 start, Vector3 forward, int id, float multiplier)
-        {
-            RaycastHit[] _hits = Physics.RaycastAll(start, forward, Melee.Range, Melee.HitLayers);
-            Debug.Log($"Server melee: {_hits.Length} hits.");
-            if (_hits.Length != 0)
-            {
-                Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));
-
-                foreach (RaycastHit __hit in _hits)
-                {
-                    DamagePart part = __hit.transform.GetComponentInChildren<DamagePart>();
-
-                    if (part != null)
-                    {
-                        if (part.Player.playerId == id)
-                            continue;
-
-                        Debug.DrawRay(start, forward * Melee.Range, Color.green, 1f);
-                        part.ServerTag(Melee.Tagging);
-
-                        if (Vector3.Dot(transform.forward, part.transform.position - transform.position) > 0f)
-                        {
-                            part.ServerDamage(Melee.Damage, multiplier * 2f);
-                        }
-                        else
-                        {
-                            part.ServerDamage(Melee.Damage, multiplier);
-                        }
-
-                        if (melee.HitObject != null)
-                        {
-                            GameObject hit = Instantiate(melee.HitObject, __hit.point, Quaternion.LookRotation(__hit.normal));
-                            NetworkServer.Spawn(hit);
-                        }
-                    }
-                    else
-                    {
-                        ServerMeleeHit(__hit);
-                        return;
-                    }
-                }
-            }
-        }
-
-        [Server]
         private void ServerHit(RaycastHit _hit, Vector3 visualFiringPoint)
         {
             if (curGun.HitObject != null)
@@ -216,23 +166,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             if (curGun.HitDecal != null)
             {
                 GameObject decal = Instantiate(curGun.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
-                // decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
-                NetworkServer.Spawn(decal);
-            }
-        }
-
-        [Server]
-        private void ServerMeleeHit(RaycastHit _hit)
-        {
-            if (melee.HitObject != null)
-            {
-                GameObject hit = Instantiate(melee.HitObject, _hit.point, Quaternion.LookRotation(_hit.normal));
-                NetworkServer.Spawn(hit);
-            }
-
-            if (melee.HitDecal != null)
-            {
-                GameObject decal = Instantiate(melee.HitDecal, _hit.point, Quaternion.LookRotation(-_hit.normal));
                 // decal.transform.parent = _hit.transform.GetComponentInChildren<MeshRenderer>().transform;
                 NetworkServer.Spawn(decal);
             }

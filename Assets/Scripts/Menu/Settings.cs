@@ -34,8 +34,8 @@ namespace Menu
 
         // Display
 
-        public int DisplayNumber;
-        public int DisplayRes;
+        public int DisplayNumber = 0;
+        public int DisplayRes = 0;
 
         public bool Fullscreen = true;
         public bool VSync = false;
@@ -49,21 +49,22 @@ namespace Menu
 
         #region Audio
 
-        public float MasterVolume;
-        public float MusicVolume;
-        public float EffectsVolume;
+        public float MasterVolume = 0f;
+        public float MusicVolume = 0f;
+        public float EffectsVolume = 0f;
 
         #endregion
 
         #region Gameplay
 
-        public float Sensitivity;
+        public float Sensitivity = 1f;
 
         // Crosshair
 
         public float cOffset = 2f;
         public float cLength = 4f;
         public float cThickness = 2f;
+        public float cDotSize = 2f;
         public float cScale = 1f;
 
         public int cColor = 0;

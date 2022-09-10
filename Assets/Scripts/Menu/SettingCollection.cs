@@ -7,6 +7,9 @@ namespace Menu
     {
         static HDRenderPipelineAsset hdrp;
 
+        [SerializeField]
+        ResolutionSetting resolutionSetting;
+
         private void Awake()
         {
             var rp = QualitySettings.renderPipeline;
@@ -15,6 +18,7 @@ namespace Menu
 
         private void Start()
         {
+            resolutionSetting.ChangeRes(Settings.Current.DisplayRes);
             Fullscreen(Settings.Current.Fullscreen);
             VSync(Settings.Current.VSync);
             SetVolumeEffects(Settings.Current.EffectsVolume);

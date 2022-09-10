@@ -2,6 +2,7 @@ using System.Collections;
 using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay;
 using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay.IdentifierComponents;
 using Game.Player.Movement;
+using Game.UI;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,9 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
     {
         public static float DrawTime = 0.5f;
         public static LayerMask HitLayers = 6;
+        public static float Range = 2f;
+        public static float Tagging = 0.5f;
+        public static float Damage = 50f;
 
         public GameObject HitObject;
         public GameObject HitDecal;
@@ -92,12 +96,12 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
             delay = true;
 
             if (anim != null)
-                anim.Play(StringKeys.GunDrawAnimation, -1, 0f);
-
-            yield return new WaitForSeconds(DrawTime);
+                anim.ResetTrigger(StringKeys.GunDrawAnimation);
 
             if (anim != null)
-                anim.Play(StringKeys.GunIdleAnimation, -1, 0f);
+                anim.SetTrigger(StringKeys.GunDrawAnimation);
+
+            yield return new WaitForSeconds(DrawTime);
 
             delay = false;
         }
@@ -120,17 +124,20 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             if (delay || attackTimer > 0f) return;
 
-            attackTimer = 0.75f;
+            if (anim != null)
+                anim.ResetTrigger(StringKeys.MeleeLightAnimation);
+
+            attackTimer = 0.5f;
 
             if (anim != null)
-            {
                anim.SetTrigger(StringKeys.MeleeLightAnimation);
-            }
 
             NetworkClient.Send(new KnifeStrikeMessage()
             {
                 Start = spreadPoint.position,
-                forward = spreadPoint.forward
+                forward = spreadPoint.forward,
+
+                Heavy = false
             });
         }
 
@@ -138,18 +145,30 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             if (delay || attackTimer > 0f) return;
 
-            attackTimer = 1.5f;
+            if (anim != null)
+                anim.ResetTrigger(StringKeys.MeleeHeavyAnimation);
+
+            attackTimer = 0.75f;
 
             if (anim != null)
-            {
                 anim.SetTrigger(StringKeys.MeleeHeavyAnimation);
-            }
 
             NetworkClient.Send(new KnifeStrikeMessage()
             {
                 Start = spreadPoint.position,
-                forward = spreadPoint.forward
+                forward = spreadPoint.forward,
+
+                Heavy = true
             });
+        }
+
+        public void Inspect(InputAction.CallbackContext callbackContext)
+        {
+            if (!delay && !MenuOpen.IsOpen)
+            {
+                if (anim != null)
+                    anim.SetTrigger(StringKeys.GunInspectAnimation);
+            }
         }
     }
 }

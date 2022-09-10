@@ -35,6 +35,13 @@ namespace Menu
 
         public void ChangeRes(int index)
         {
+            if (reses == null)
+            {
+                reses = Screen.resolutions;
+
+                Array.Reverse(reses);
+            }
+
             Screen.SetResolution(reses[index].width, reses[index].height, Settings.Current.Fullscreen, reses[index].refreshRate);
         }
     }

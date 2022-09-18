@@ -10,12 +10,12 @@ namespace Game.GameLogic.Spawning
 
         public void Start()
         {
-            SpawnManager.Instance.RegisterSpawnPoint(transform, type);
+            SpawnManager.Instance.RegisterSpawnPoint(transform.position, type);
         }
 
         public void OnDestroy()
         {
-            SpawnManager.Instance.RemoveSpawnPoint(transform, type);
+            SpawnManager.Instance.RemoveSpawnPoint(transform.position, type);
         }
     }
 }

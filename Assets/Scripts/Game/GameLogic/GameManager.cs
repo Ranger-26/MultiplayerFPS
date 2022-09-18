@@ -29,7 +29,7 @@ namespace Game.GameLogic
         private GameObject CreateNewPlayer(Role role, NetworkGamePlayer ply)
         {
             GameObject player = Instantiate(NetworkManagerScp.Instance.playerPrefab,
-                SpawnManager.Instance.GetRandomSpawn(role).position, Quaternion.identity);
+                SpawnManager.Instance.GetRandomSpawn(role), Quaternion.identity);
             NetworkGamePlayer playerNew = player.GetComponent<NetworkGamePlayer>();
             playerNew.playerName = ply.playerName;
             playerNew.playerId = ply.playerId;

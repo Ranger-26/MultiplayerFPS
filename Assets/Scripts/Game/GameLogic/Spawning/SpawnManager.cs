@@ -10,16 +10,16 @@ namespace Game.GameLogic.Spawning
         public static SpawnManager Instance;
         
         [SerializeField]
-        private List<Transform> _mtfSpawn = new List<Transform>();
+        private List<Vector3> _mtfSpawn = new() ;
         
         [SerializeField]
-        private List<Transform> _chaosSpawn = new List<Transform>();
+        private List<Vector3> _chaosSpawn = new();
 
         [SerializeField]
-        private List<Transform> _curChaosSpawn = new List<Transform>();
+        private List<Vector3> _curChaosSpawn = new();
         
         [SerializeField]
-        private List<Transform> _curMtfSpawn = new List<Transform>();
+        private List<Vector3> _curMtfSpawn = new();
         
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace Game.GameLogic.Spawning
             }
         }
         
-        public void RegisterSpawnPoint(Transform point, SpawnType type)
+        public void RegisterSpawnPoint(Vector3 point, SpawnType type)
         {
             switch (type)
             {
@@ -51,7 +51,7 @@ namespace Game.GameLogic.Spawning
             }
         }
 
-        public void RemoveSpawnPoint(Transform point, SpawnType type)
+        public void RemoveSpawnPoint(Vector3 point, SpawnType type)
         {
             switch (type)
             {
@@ -68,20 +68,30 @@ namespace Game.GameLogic.Spawning
             }
         }
         
-        private Transform GetRandomSpawn(SpawnType type)
+        private Vector3 GetRandomSpawn(SpawnType type)
         {
-            Transform transform;
+            Vector3 transform;
             if (type == SpawnType.Mtf)
             {
+                if (_curChaosSpawn.Count == 0)
+                {
+                    transform = _curMtfSpawn[UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1)];
+                    return transform;
+                }
                 int index = UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1);
-                Debug.Log($"Getting random spawn point of {_curMtfSpawn[index].position}");
+                Debug.Log($"Getting random spawn point of {_curMtfSpawn[index]}");
                 transform = _curMtfSpawn[index]; 
                 _curMtfSpawn.Remove(_curMtfSpawn[index]);
             }
             else
             {
+                if (_curChaosSpawn.Count == 0)
+                {
+                    transform = _curMtfSpawn[UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1)];
+                    return transform;
+                }
                 int indexChaos = UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1);
-                Debug.Log($"Getting random spawn point of {_curChaosSpawn[indexChaos].position}");
+                Debug.Log($"Getting random spawn point of {_curChaosSpawn[indexChaos]}");
                 transform = _curChaosSpawn[indexChaos];
                 _curChaosSpawn.Remove(_curChaosSpawn[indexChaos]);
             }
@@ -89,7 +99,7 @@ namespace Game.GameLogic.Spawning
             return transform;
         }
 
-        public Transform GetRandomSpawn(Role role) =>
+        public Vector3 GetRandomSpawn(Role role) =>
             GetRandomSpawn(role == Role.Mtf ? SpawnType.Mtf : SpawnType.Chaos);
 
         public void ResetSpawnPoints()

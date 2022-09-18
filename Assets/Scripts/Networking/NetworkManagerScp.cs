@@ -93,9 +93,9 @@ namespace Networking
         public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
         {
             NetworkPlayerLobby room = roomPlayer.GetComponent<NetworkPlayerLobby>();
-            Transform startPos =
+            Vector3 startPos =
                 SpawnManager.Instance.GetRandomSpawn(room.assignedRole);
-            GameObject gamePlayer = Instantiate(playerPrefab, startPos.position, Quaternion.identity);
+            GameObject gamePlayer = Instantiate(playerPrefab, startPos, Quaternion.identity);
             StartCoroutine(SetUpGamePlayer(room, gamePlayer.GetComponent<NetworkGamePlayer>()));
             return gamePlayer;
         }

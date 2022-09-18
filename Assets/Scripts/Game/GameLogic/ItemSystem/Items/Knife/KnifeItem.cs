@@ -11,7 +11,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
     public class KnifeItem : ItemBase
     {
         public KnifeComponent KnifeComponent;
-
+        public LayerMask Mask;
         public override void InitItem(NetworkGamePlayer owner)
         {
             base.InitItem(owner);
@@ -34,6 +34,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         public override bool OnEquip()
         {
+            Debug.Log("Layer Mask:"+Mask.value);
             if (IsItemOwner)
             {
                 Invoke(nameof(SubscribeToInputEvents), ItemData.ItemDrawTime);

@@ -36,7 +36,6 @@ MonoBehaviour:
     - Assembly-CSharp-firstpass
     - Mirror
     - Mirror.Components
-    - Cinemachine
     - com.rlabrecque.steamworks.net
     - FizzySteamworks
     - Telepathy

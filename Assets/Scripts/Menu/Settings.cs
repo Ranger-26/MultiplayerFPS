@@ -73,6 +73,12 @@ namespace Menu
 
         #endregion
 
+        #region Developer
+
+        public int Transport = 1;
+
+        #endregion
+
         #region Methods
 
         public void SetVariable<T>(string name, T value)

@@ -180,6 +180,9 @@ MonoBehaviour:
   ItemData: {fileID: 11400000, guid: 5692e3d2ed71af841b483ab631a2001f, type: 2}
   Owner: {fileID: 0}
   KnifeComponent: {fileID: 0}
+  Mask:
+    serializedVersion: 2
+    m_Bits: 65
 --- !u!1 &5328628982947776741
 GameObject:
   m_ObjectHideFlags: 0

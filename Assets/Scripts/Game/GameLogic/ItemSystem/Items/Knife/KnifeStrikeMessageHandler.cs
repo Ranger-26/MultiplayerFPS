@@ -18,8 +18,9 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
         {
             PlayerInventory plr = conn.identity.GetComponent<PlayerInventory>();
             if (plr.currentItem != ItemIdentifier.Knife) return;
-            RaycastHit[] _hits = Physics.RaycastAll(message.Start, message.forward, KnifeComponent.Range, KnifeComponent.HitLayers);
+            RaycastHit[] _hits = Physics.RaycastAll(message.Start, message.forward, KnifeComponent.Range, KnifeComponent.HitLayers, QueryTriggerInteraction.Ignore);
             Debug.DrawRay(message.Start, message.forward, Color.blue);
+            Debug.Log("Knife message recieved");
             if (_hits.Length != 0)
             {
                 Array.Sort(_hits, (x, y) => x.distance.CompareTo(y.distance));

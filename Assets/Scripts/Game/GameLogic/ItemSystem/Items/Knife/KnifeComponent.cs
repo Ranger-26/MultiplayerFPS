@@ -13,7 +13,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
     public class KnifeComponent : MonoBehaviour
     {
         public static float DrawTime = 0.5f;
-        public static LayerMask HitLayers = 6;
+        public static LayerMask HitLayers = 65;
         public static float Range = 2f;
         public static float Tagging = 0.5f;
         public static float Damage = 50f;

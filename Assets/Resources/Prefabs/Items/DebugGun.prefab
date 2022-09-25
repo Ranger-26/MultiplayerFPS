@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 9204d8d0037319c4298cd436c5ffca24, type: 2}
-  muzzleFlash: {fileID: 5071467466835144659}
+  muzzleFlash: {fileID: 6261253133246857839}
   anim: {fileID: 0}
   gunId: 1
 --- !u!114 &-9027195104956469736
@@ -213,8 +213,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6996477868075680417, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
   m_PrefabInstance: {fileID: 2844308246479514988}
   m_PrefabAsset: {fileID: 0}
---- !u!2083052967 &5071467466835144659 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 6996477868075680447, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+--- !u!198 &6261253133246857839 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8186827012554043139, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
   m_PrefabInstance: {fileID: 2844308246479514988}
   m_PrefabAsset: {fileID: 0}

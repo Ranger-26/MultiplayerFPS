@@ -31,7 +31,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         [Header("Visuals")]
         [SerializeField]
-        VisualEffect muzzleFlash;
+        ParticleSystem muzzleFlash;
 
         PlayerMovement PM;
         PlayerLook PL;

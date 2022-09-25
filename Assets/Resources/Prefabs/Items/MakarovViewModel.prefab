@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 131a07a691c10834989f2b4f1d77d37e, type: 2}
-  muzzleFlash: {fileID: 836145610334071336}
+  muzzleFlash: {fileID: 1954454791638042516}
   anim: {fileID: 0}
   gunId: 3
 --- !u!95 &6725289208620413639
@@ -885,13 +885,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
---- !u!2083052967 &836145610334071336 stripped
-VisualEffect:
-  m_CorrespondingSourceObject: {fileID: 6996477868075680447, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
-  m_PrefabInstance: {fileID: 7674957908898900119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &836145610334071350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6996477868075680417, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
+  m_PrefabInstance: {fileID: 7674957908898900119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1954454791638042516 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8186827012554043139, guid: 20e7dbbc41c7aaf4ab78ab0500dfce44, type: 3}
   m_PrefabInstance: {fileID: 7674957908898900119}
   m_PrefabAsset: {fileID: 0}

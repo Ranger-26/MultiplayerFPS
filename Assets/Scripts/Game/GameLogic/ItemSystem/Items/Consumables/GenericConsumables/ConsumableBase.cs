@@ -1,5 +1,6 @@
 using System.Collections;
 using Game.GameLogic.ItemSystem.Core;
+using Game.GameLogic.ItemSystem.Core.UsableItems;
 using Game.GameLogic.ItemSystem.Inventory;
 using Game.Player;
 using Inputs;
@@ -9,7 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace Game.GameLogic.ItemSystem.Items.Consumables.GenericConsumables
 {
-    public class ConsumableBase : ItemBase, IConsumable
+    public class ConsumableBase : UsableItemBase
     {
         [HideInInspector]
         public ConsumableData ConsumableData;

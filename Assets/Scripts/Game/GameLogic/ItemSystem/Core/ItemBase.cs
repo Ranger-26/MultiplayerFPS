@@ -1,5 +1,6 @@
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.Player;
+using Inputs;
 using Lobby;
 using UnityEngine;
 
@@ -30,14 +31,35 @@ namespace Game.GameLogic.ItemSystem.Core
         
         public virtual bool OnEquip()
         {
+            if (IsItemOwner)
+            {
+                Invoke(nameof(RegisterInputEvents), ItemData.ItemDrawTime);
+                //call item draw animation
+            }
+
             return true;
         }
 
         public virtual bool OnDeEquip()
         {
+            if (IsItemOwner)
+            {
+                UnRegisterInputEvents();
+            }
+
             return true;
         }
 
+        protected virtual void RegisterInputEvents()
+        {
+            
+        }
+
+        protected virtual void UnRegisterInputEvents()
+        {
+            
+        }
+        
         public virtual void ResetViewModel()
         {
             transform.localPosition = new Vector3(0, 0, 0);

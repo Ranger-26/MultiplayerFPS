@@ -85,7 +85,9 @@ namespace Game.GameLogic.ItemSystem.Inventory
         {
             GameObject obj = Instantiate(ItemDatabase.TryGetItem(item).gameObject, ItemParent);
             ItemBase baseItem = obj.GetComponent<ItemBase>();
+            SetPlayer();
             baseItem.InitItem(Player);
+            
             if (isServer)
             {
                 baseItem.ServerSetRuntimeData(data);
@@ -301,6 +303,12 @@ namespace Game.GameLogic.ItemSystem.Inventory
         {
             GameInputManager.Actions.Player.Num1.performed -= Test1;
             GameInputManager.Actions.Player.Num2.performed -= Test2;
+        }
+
+        public void SetPlayer()
+        {
+            if (Player == null)
+                Player = GetComponent<NetworkGamePlayer>();
         }
         #endregion
     }

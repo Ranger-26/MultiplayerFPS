@@ -7,13 +7,13 @@ namespace Game.GameLogic.ItemSystem.Core.UsableItems
 {
     public abstract class UsableItemBase : ItemBase
     {
-        public virtual void OnUse(InputAction.CallbackContext ctx)
+        public virtual void OnClientUse(InputAction.CallbackContext ctx)
         {
             //client stuff
             SendUseMessage();
         }
 
-        private void SendUseMessage()
+        protected void SendUseMessage()
         {
             NetworkClient.Send(new UseUsableItemMessage()
             {
@@ -28,12 +28,12 @@ namespace Game.GameLogic.ItemSystem.Core.UsableItems
         
         protected override void RegisterInputEvents()
         {
-            GameInputManager.Actions.Player.Fire.performed += OnUse;
+            GameInputManager.Actions.Player.Fire.performed += OnClientUse;
         }
 
         protected override void UnRegisterInputEvents()
         {
-            GameInputManager.Actions.Player.Fire.performed -= OnUse;
+            GameInputManager.Actions.Player.Fire.performed -= OnClientUse;
         }
 
         public void OnDestroy()

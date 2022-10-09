@@ -1,10 +1,9 @@
-using System;
 using Game.GameLogic.ItemSystem.Inventory;
 using Inputs;
-using UnityEngine;
+using Mirror;
 using UnityEngine.InputSystem;
 
-namespace Game.GameLogic.ItemSystem.Core
+namespace Game.GameLogic.ItemSystem.Core.UsableItems
 {
     public abstract class UsableItemBase : ItemBase
     {
@@ -23,6 +22,7 @@ namespace Game.GameLogic.ItemSystem.Core
             if (IsItemOwner)
             {
                 Invoke(nameof(RegisterInputEvents), ItemData.ItemDrawTime);
+                //call item draw animation
             }
 
             return true;
@@ -40,9 +40,22 @@ namespace Game.GameLogic.ItemSystem.Core
 
         public virtual void OnUse(InputAction.CallbackContext ctx)
         {
-            
+            SendUseMessage();
         }
 
+        protected void SendUseMessage()
+        {
+            NetworkClient.Send(new UseUsableItemMessage()
+            {
+                item = ItemData.ItemIdentifier
+            });
+        }
+
+        public virtual void OnServerReceiveUseMessage()
+        {
+            
+        }
+        
         protected virtual void RegisterInputEvents()
         {
             GameInputManager.Actions.Player.Fire.performed += OnUse;

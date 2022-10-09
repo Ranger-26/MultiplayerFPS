@@ -27,8 +27,7 @@ namespace Game.GameLogic.ItemSystem.Core
                 Debug.LogError($"Problem when validating runtime data! Item {ItemData.ItemIdentifier}");
             }
         }
-
-
+        
         public virtual bool OnEquip()
         {
             return true;

@@ -37,7 +37,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         PlayerLook PL;
         PlayerCrouch PC;
 
-
         Camera cam;
 
         Transform firingPoint;
@@ -49,8 +48,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         Image scopeUIImage;
 
         NetworkShootingManager nsm;
-
-        Vector2 movementInput;
 
         Vector3 _prevPosition;
         Vector3 vel;
@@ -205,8 +202,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                 chargedUp = chargeupTimer >= gun.ChargeupTime;
             }
 
-            float x = movementInput.x * Convert.ToInt32(!MenuOpen.IsOpen);
-            float z = movementInput.y * Convert.ToInt32(!MenuOpen.IsOpen);
+            float x = PM.movementInput.x * Convert.ToInt32(!MenuOpen.IsOpen);
+            float z = PM.movementInput.y * Convert.ToInt32(!MenuOpen.IsOpen);
 
             lerpFactor = Mathf.Clamp01(
                 lerpFactor + Mathf.Abs(x * Time.deltaTime * gun.BackingMultiplier) + Mathf.Abs(z * Time.deltaTime * gun.BackingMultiplier)
@@ -215,7 +212,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             if ((x == 0) && (z == 0))
                 lerpFactor = Mathf.Clamp01(lerpFactor - Time.deltaTime * gun.BackingMultiplier);
 
-            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, gun.MaxBacking), lerpFactor);
+            Vector3 temp = Vector3.Slerp(Vector3.zero, new Vector3(0f, -gun.MaxBacking / 2f, -gun.MaxBacking), lerpFactor);
 
             transform.localPosition = Vector3.Lerp(transform.localPosition, temp, 14f * Time.deltaTime);
 
@@ -309,11 +306,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         {
             if (gun.HasScope && !delay)
                 Scope(!isScoped);
-        }
-
-        public void UpdateMovement(InputAction.CallbackContext callbackContext)
-        {
-            movementInput = callbackContext.ReadValue<Vector2>();
         }
 
         public void Scope(bool status)

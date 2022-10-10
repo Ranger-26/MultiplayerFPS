@@ -1,4 +1,5 @@
 using Game.UI;
+using Inputs;
 using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,13 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         Vector2 mouse;
 
+        InputAction action;
+
+        private void Awake()
+        {
+            action = GameInputManager.Actions.Player.Look;
+        }
+
         private void Start()
         {
             if (!GetComponentInParent<NetworkIdentity>().hasAuthority)
@@ -21,9 +29,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             }
         }
 
-        public void UpdateMouse(InputAction.CallbackContext callbackContext)
+        private void Update()
         {
-            mouse = callbackContext.ReadValue<Vector2>();
+            mouse = action.ReadValue<Vector2>();
 
             if (MenuOpen.IsOpen)
                 return;

@@ -22,7 +22,8 @@ namespace Game.Player.Movement
 
         public AudioClip[] stepClips;
 
-        Vector2 movementInput;
+        [HideInInspector]
+        public Vector2 movementInput;
         Vector2 vel;
 
         Vector3 velocity;

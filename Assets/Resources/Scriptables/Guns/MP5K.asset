@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MP5K
   m_EditorClassIdentifier: 
   Damage: 22
+  Penetration: 0.5
   HeadMultiplier: 3
   LimbMultiplier: 0.4
   Range: 80
@@ -31,12 +32,12 @@ MonoBehaviour:
   Recoil: 0.5
   HorizontalRecoil: 0.5
   MaxHorizontal: 2.5
-  RecoilDecay: 0.3
+  RecoilDecay: 0.2
   SpreadDecay: 2
-  Displacement: 1
-  MaxDisplacement: 3
+  Displacement: 1.5
+  MaxDisplacement: 4
   CrouchingMultiplier: 0.4
-  SwayAfterRecoil: 6
+  SwayAfterRecoil: 7
   SwayStartRight: 1
   HasScope: 0
   ExitScopeOnShoot: 0

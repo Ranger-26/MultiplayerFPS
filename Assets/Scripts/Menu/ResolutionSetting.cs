@@ -42,7 +42,8 @@ namespace Menu
                 Array.Reverse(reses);
             }
 
-            Screen.SetResolution(reses[index].width, reses[index].height, Settings.Current.Fullscreen, reses[index].refreshRate);
+            if (reses.Length - 1 > index)
+                Screen.SetResolution(reses[index].width, reses[index].height, Settings.Current.Fullscreen, reses[index].refreshRate);
         }
     }
 }

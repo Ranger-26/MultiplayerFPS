@@ -228,6 +228,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fee64ced-615e-411d-87fe-2d1d2453d1eb",
+                    "path": "<Joystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "89b929ed-a63a-4a8e-9dd4-3e242b355f06",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",

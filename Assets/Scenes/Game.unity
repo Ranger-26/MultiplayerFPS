@@ -61650,13 +61650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 443624e4861cee3499d0e4c8592a55b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: {fileID: 0}
-  c_width: {fileID: 0}
-  c_height: {fileID: 0}
-  c_offset: {fileID: 0}
-  c_scale: {fileID: 0}
-  c_firingError: {fileID: 0}
-  fcp: {fileID: 0}
 --- !u!114 &2012427765
 MonoBehaviour:
   m_ObjectHideFlags: 0

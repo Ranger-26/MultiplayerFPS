@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13750318, g: 0.13750318, b: 0.13750318, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -33292,10 +33292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124cfbd068c44a1cbaee7b513b043bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mtfSpawn:
-  - {x: -3.8506865e+9, y: 7.6e-43, z: 0.00000021161472}
-  _chaosSpawn:
-  - {x: -3.8506865e+9, y: 7.6e-43, z: 0.00000021161472}
+  _mtfSpawn: []
+  _chaosSpawn: []
   _curChaosSpawn: []
   _curMtfSpawn: []
 --- !u!1 &1081901995

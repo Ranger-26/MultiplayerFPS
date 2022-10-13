@@ -18,7 +18,7 @@ namespace Menu
 
         private void Start()
         {
-            resolutionSetting.ChangeRes(Settings.Current.DisplayRes);
+            resolutionSetting?.ChangeRes(Settings.Current.DisplayRes);
             Fullscreen(Settings.Current.Fullscreen);
             VSync(Settings.Current.VSync);
             SetVolumeEffects(Settings.Current.EffectsVolume);

@@ -42,6 +42,7 @@ MonoBehaviour:
     - kcp2k
     - where-allocations
     - Mirror.Authenticators
+    - ParrelSync
     - Mirror.Editor
     - Mirror.CompilerSymbols
     - com.rlabrecque.steamworks.net.editor

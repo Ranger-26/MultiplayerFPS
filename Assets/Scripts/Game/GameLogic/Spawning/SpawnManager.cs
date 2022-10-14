@@ -80,8 +80,8 @@ namespace Game.GameLogic.Spawning
                 }
                 int index = UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1);
                 Debug.Log($"Getting random spawn point of {_curMtfSpawn[index]}");
-                transform = _curMtfSpawn[index]; 
-                _curMtfSpawn.Remove(_curMtfSpawn[index]);
+                transform = _curMtfSpawn[index];
+                _curMtfSpawn.RemoveAt(index);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace Game.GameLogic.Spawning
                 int indexChaos = UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1);
                 Debug.Log($"Getting random spawn point of {_curChaosSpawn[indexChaos]}");
                 transform = _curChaosSpawn[indexChaos];
-                _curChaosSpawn.Remove(_curChaosSpawn[indexChaos]);
+                _curChaosSpawn.RemoveAt(indexChaos);
             }
 
             return transform;

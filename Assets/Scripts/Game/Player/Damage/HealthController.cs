@@ -75,10 +75,9 @@ namespace Game.Player.Damage
             deadPlayer.GetComponent<NetworkGamePlayer>().playerId = GetComponent<NetworkGamePlayer>().playerId;
             deadPlayer.GetComponent<NetworkGamePlayer>().role = GetComponent<NetworkGamePlayer>().role;
             deadPlayer.GetComponent<NetworkGamePlayer>().isSpectating = true;
-            NetworkServer.Spawn(deadPlayer);
+            NetworkServer.Spawn(deadPlayer, connectionToClient);
             GameObject rag = Instantiate(NetworkManagerScp.Instance.ragDoll, transform.position, Quaternion.identity);
             NetworkServer.Spawn(rag);
-            NetworkServer.ReplacePlayerForConnection(connectionToClient, deadPlayer);
             PlayerManager.Instance.TryHandleDeadPlayer(GetComponent<NetworkGamePlayer>(), deadPlayer.GetComponent<NetworkGamePlayer>());
             Destroy(gameObject);
         }

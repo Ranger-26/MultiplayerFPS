@@ -64,7 +64,7 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
             if (!ni.isLocalPlayer)
             {
                 Transform tempcam = GetComponentInParent<Camera>().transform;
-                Destroy(tempcam.GetComponentInChildren<FiringPoint>().gameObject);
+                Destroy(tempcam.GetComponentInChildren<FiringPoint>()?.gameObject);
                 tempcam.GetComponent<HDAdditionalCameraData>().enabled = false;
                 tempcam.GetComponent<Camera>().enabled = false;
                 tempcam.GetComponent<AudioListener>().enabled = false;

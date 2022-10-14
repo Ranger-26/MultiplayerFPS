@@ -40,6 +40,7 @@ namespace Networking
             {
                 if (prefab.TryGetComponent(out NetworkIdentity identity))
                 {
+                    Debug.Log($"Registered prefab {prefab.name}.");
                     NetworkClient.RegisterPrefab(prefab);
                 }
             }

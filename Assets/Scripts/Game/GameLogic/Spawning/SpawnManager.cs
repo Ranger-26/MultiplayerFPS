@@ -70,33 +70,31 @@ namespace Game.GameLogic.Spawning
         
         private Vector3 GetRandomSpawn(SpawnType type)
         {
-            Vector3 transform;
-            if (type == SpawnType.Mtf)
+            Vector3 position = Vector3.zero;
+
+            List<Vector3> spawnList;
+            switch (type) 
             {
-                if (_curChaosSpawn.Count == 0)
-                {
-                    transform = _curMtfSpawn[UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1)];
-                    return transform;
-                }
-                int index = UnityEngine.Random.Range(0, _curMtfSpawn.Count - 1);
-                Debug.Log($"Getting random spawn point of {_curMtfSpawn[index]}");
-                transform = _curMtfSpawn[index];
-                _curMtfSpawn.RemoveAt(index);
-            }
-            else
-            {
-                if (_curChaosSpawn.Count == 0)
-                {
-                    transform = _curMtfSpawn[UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1)];
-                    return transform;
-                }
-                int indexChaos = UnityEngine.Random.Range(0, _curChaosSpawn.Count - 1);
-                Debug.Log($"Getting random spawn point of {_curChaosSpawn[indexChaos]}");
-                transform = _curChaosSpawn[indexChaos];
-                _curChaosSpawn.RemoveAt(indexChaos);
+                case SpawnType.Chaos:
+                    spawnList = _curChaosSpawn;
+                    break;
+                case SpawnType.Mtf:
+                    spawnList = _curMtfSpawn;
+                    break;
+                default:
+                    return position;
             }
 
-            return transform;
+            int index = UnityEngine.Random.Range(0, spawnList.Count - 1);
+            position = spawnList[index];
+
+            if (spawnList.Count != 0)
+            {
+                Debug.Log($"Getting random spawn point of {spawnList[index]}");
+                spawnList.RemoveAt(index);
+            }
+
+            return position;
         }
 
         public Vector3 GetRandomSpawn(Role role) =>

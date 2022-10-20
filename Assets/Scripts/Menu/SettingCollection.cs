@@ -25,6 +25,7 @@ namespace Menu
             SetVolumeMusic(Settings.Current.MusicVolume);
             SetVolumeMaster(Settings.Current.MasterVolume);
             TextureQuality(Settings.Current.TextureQuality);
+            AntiAliasing(Settings.Current.AntiAliasing);
         }
 
         public void SetVolumeMaster(float value)
@@ -55,6 +56,25 @@ namespace Menu
         public void TextureQuality(int value)
         {
             QualitySettings.masterTextureLimit = value;
+        }
+
+        public void AntiAliasing(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    QualitySettings.antiAliasing = 0;
+                    break;
+                case 1:
+                    QualitySettings.antiAliasing = 2;
+                    break;
+                case 2:
+                    QualitySettings.antiAliasing = 4;
+                    break;
+                case 3:
+                    QualitySettings.antiAliasing = 8;
+                    break;
+            }
         }
     }
 }

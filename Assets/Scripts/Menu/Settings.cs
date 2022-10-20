@@ -40,6 +40,8 @@ namespace Menu
         public bool Fullscreen = true;
         public bool VSync = false;
 
+        public float FrameLimit = 200f;
+
         // Graphics
 
         public int TextureQuality = 2;

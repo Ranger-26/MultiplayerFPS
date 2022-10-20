@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
@@ -26,6 +27,7 @@ namespace Menu
             SetVolumeMaster(Settings.Current.MasterVolume);
             TextureQuality(Settings.Current.TextureQuality);
             AntiAliasing(Settings.Current.AntiAliasing);
+            FrameLimit(Settings.Current.FrameLimit);
         }
 
         public void SetVolumeMaster(float value)
@@ -75,6 +77,11 @@ namespace Menu
                     QualitySettings.antiAliasing = 8;
                     break;
             }
+        }
+
+        public void FrameLimit(float value)
+        {
+            Application.targetFrameRate = Convert.ToInt32(value);
         }
     }
 }

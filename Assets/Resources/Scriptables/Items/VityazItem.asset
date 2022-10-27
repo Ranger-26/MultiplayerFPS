@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VityazItem
   m_EditorClassIdentifier: 
   ItemIdentifier: 5
-  ItemDrawTime: 3
+  ItemDrawTime: 1

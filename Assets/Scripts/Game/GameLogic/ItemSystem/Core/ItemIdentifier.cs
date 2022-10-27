@@ -7,6 +7,7 @@ namespace Game.GameLogic.ItemSystem.Core
         DebugGun,
         MP5K,
         Makarov,
+        Vityaz,
         SCP500
     }
 }

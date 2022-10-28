@@ -51,7 +51,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void Test0()
         {
            // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
-            ServerAddItem(ItemIdentifier.Vityaz, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
         }

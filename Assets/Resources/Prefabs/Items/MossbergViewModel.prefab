@@ -80,10 +80,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2f62838b9cc5c4a9e2689d40e41dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 0cbe3429069d8844e86847d0ceed21f6, type: 2}
+  gun: {fileID: 11400000, guid: 8561e1649de3433439357082689b613f, type: 2}
   muzzleFlash: {fileID: 1954454791638042516}
   anim: {fileID: 0}
-  gunId: 12
+  gunId: 17
 --- !u!95 &6725289208620413639
 Animator:
   serializedVersion: 4
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec9fce9d50c34be194c876a6147bb2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemData: {fileID: 11400000, guid: 2a8d5a1c3a2793d4b950925b1ca683e8, type: 2}
+  ItemData: {fileID: 11400000, guid: cd11b36ddd27e354699a1e80eafe3c3d, type: 2}
   Owner: {fileID: 0}
   GunViewModel: {fileID: 0}
   nsm: {fileID: 0}

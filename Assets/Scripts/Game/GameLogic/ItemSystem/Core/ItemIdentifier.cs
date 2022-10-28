@@ -8,6 +8,7 @@ namespace Game.GameLogic.ItemSystem.Core
         MP5K,
         Makarov,
         Vityaz,
+        Mossberg,
         SCP500
     }
 }

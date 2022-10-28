@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff796a87fec20645a3dc1ad8791521d, type: 3}
+  m_Name: Mossberg
+  m_EditorClassIdentifier: 
+  Damage: 16
+  Penetration: 0.2
+  HeadMultiplier: 3
+  LimbMultiplier: 0.5
+  Range: 50
+  RPM: 80
+  ChargeupTime: 0
+  Tagging: 0.7
+  Weight: 0.2
+  BulletCount: 12
+  GunFiringMode: 1
+  Spread: 1
+  MovementSpread: 0.5
+  MovementSpreadTolerance: 0.3
+  MaxSpread: 3
+  MaxMovementSpread: 0.5
+  StartingSpread: 4
+  Recoil: 1.5
+  HorizontalRecoil: 0
+  MaxHorizontal: 0
+  RecoilDecay: 2
+  SpreadDecay: 4
+  Displacement: 0
+  MaxDisplacement: 0
+  CrouchingMultiplier: 0.7
+  SwayAfterRecoil: 5
+  SwayStartRight: 0
+  HasScope: 0
+  ExitScopeOnShoot: 0
+  ScopeFOV: 67.5
+  ScopedSpread: 0
+  ScopeSpeedReduction: 0.3
+  ScopeImage: {fileID: 0}
+  ReloadTime: 2.5
+  MaxAmmo: 5
+  ReserveAmmo: 15
+  HitLayers:
+    serializedVersion: 2
+    m_Bits: 65
+  GunSlot: 0
+  DrawTime: 1
+  HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
+  HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
+  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
+  MaxBacking: 0.11
+  BackingMultiplier: 1.5
+  ChargeupSounds: []
+  ShootSounds:
+  - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}
+  SoundMaxDistance: 100
+  SoundVolume: 1
+  SoundPriority: 128
+  UniqueGunID: 19

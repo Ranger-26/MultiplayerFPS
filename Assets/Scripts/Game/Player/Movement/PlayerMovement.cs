@@ -41,6 +41,10 @@ namespace Game.Player.Movement
         public bool canMakeSound;
         [HideInInspector]
         public bool isGrounded;
+        [HideInInspector]
+        public Vector2 velocityGun;
+
+        Vector3 _prevPosition;
 
         float airTime;
 
@@ -51,6 +55,7 @@ namespace Game.Player.Movement
             if (!isLocalPlayer) enabled = false;
 
             previousStepLocation = transform.position;
+            _prevPosition = transform.position;
 
             LandTagged = true;
 
@@ -120,7 +125,15 @@ namespace Game.Player.Movement
             }
         }
 
-        
+        private void FixedUpdate()
+        {
+            Vector3 tempvel = (transform.position - _prevPosition) / Time.fixedDeltaTime;
+            _prevPosition = transform.position;
+
+            velocityGun = new Vector2(tempvel.x, tempvel.z);
+        }
+
+
         public void Tag(float amount)
         {
             vel = Vector2.MoveTowards(vel, Vector2.zero, amount);

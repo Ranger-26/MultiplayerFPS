@@ -49,9 +49,6 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         NetworkShootingManager nsm;
 
-        Vector3 _prevPosition;
-        Vector3 vel;
-
         [HideInInspector]
         public Animator anim;
 
@@ -237,10 +234,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
             isSwaying = recoilFactor > gun.SwayAfterRecoil;
 
-            moveSpread = Mathf.Clamp(gun.MovementSpread * (vel.magnitude < gun.MovementSpreadTolerance ? vel.magnitude * 0.1f : vel.magnitude), 0f, gun.MaxMovementSpread);
-
-            vel = (PM.transform.position - _prevPosition) / Time.fixedDeltaTime;
-            _prevPosition = PM.transform.position;
+            moveSpread = Mathf.Clamp(gun.MovementSpread * (PM.velocityGun.magnitude - gun.MovementSpreadTolerance) + gun.MaxMovementSpread * Convert.ToInt32(!PM.isGrounded), 0f, gun.MaxMovementSpread);
 
             if (shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto || gun.GunFiringMode == FiringMode.SemiAuto) || nsm.currentAmmo == 0)
             {

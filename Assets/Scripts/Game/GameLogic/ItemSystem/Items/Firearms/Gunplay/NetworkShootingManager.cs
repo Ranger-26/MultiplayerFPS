@@ -65,8 +65,19 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         public void CmdShoot(Vector3 start, Vector3 forward, Vector3 visualFiringPoint)
         {
             if (currentAmmo < 0) return;
-            currentAmmo--;
             ServerShoot(start, forward, id, visualFiringPoint);
+        }
+
+        [Command]
+        public void CmdAmmo()
+        {
+            ServerAmmo();
+        }
+
+        [Server]
+        private void ServerAmmo()
+        {
+            currentAmmo--;
         }
 
         [Server]

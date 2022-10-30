@@ -17,7 +17,7 @@ MonoBehaviour:
   HeadMultiplier: 3
   LimbMultiplier: 0.5
   Range: 50
-  RPM: 80
+  RPM: 100
   ChargeupTime: 0
   Tagging: 0.7
   Weight: 0.2
@@ -28,16 +28,16 @@ MonoBehaviour:
   MovementSpreadTolerance: 0.3
   MaxSpread: 3
   MaxMovementSpread: 0.5
-  StartingSpread: 4
+  StartingSpread: 2.25
   Recoil: 1.5
   HorizontalRecoil: 0
   MaxHorizontal: 0
-  RecoilDecay: 2
+  RecoilDecay: 0.85
   SpreadDecay: 4
   Displacement: 0
   MaxDisplacement: 0
   CrouchingMultiplier: 0.7
-  SwayAfterRecoil: 5
+  SwayAfterRecoil: 1000
   SwayStartRight: 0
   HasScope: 0
   ExitScopeOnShoot: 0

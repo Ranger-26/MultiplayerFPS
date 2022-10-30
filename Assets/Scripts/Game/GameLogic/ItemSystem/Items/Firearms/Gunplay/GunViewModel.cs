@@ -251,9 +251,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                     PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay / 2f));
                 }
 
-                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * 10f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
-                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * 20f * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
-                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * 10f * gun.SpreadDecay, gun.StartingSpread, gun.MaxSpread);
+                recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
+                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * gun.SpreadDecay, gun.StartingSpread, gun.MaxSpread);
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
@@ -330,6 +330,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             if (!delay && nsm.currentAmmo > 0 && shootTimer == 0f && (chargedUp && gun.ChargeupTime > 0f || gun.ChargeupTime <= 0f) && !MenuOpen.IsOpen)
             {
                 shootTimer = 60f / gun.RPM;
+
+                nsm.CmdAmmo();
 
                 for (int i = 0; i < nsm.curGun.BulletCount; i++)
                 {

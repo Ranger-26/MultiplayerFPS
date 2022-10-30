@@ -28,7 +28,7 @@ QualitySettings:
     billboardsFaceCameraPosition: 1
     vSyncCount: 0
     lodBias: 1
-    maximumLODLevel: 0
+    maximumLODLevel: 3
     streamingMipmapsActive: 1
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 256

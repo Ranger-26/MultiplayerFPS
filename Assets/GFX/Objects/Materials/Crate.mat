@@ -11,15 +11,13 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ValidKeywords:
   - _ADD_PRECOMPUTED_VELOCITY
+  - _DISABLE_SSR
   - _DISABLE_SSR_TRANSPARENT
-  - _DISPLACEMENT_LOCK_TILING_SCALE
   - _NORMALMAP
   - _NORMALMAP_TANGENT_SPACE
-  - _PIXEL_DISPLACEMENT
-  - _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
   stringTagMap: {}
@@ -37,7 +35,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: f8794a08a7922c3479f2dbb83b22a54f, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4a1e059bc28b95409cdac4e8ae4818d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap0:
@@ -129,7 +127,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
-        m_Texture: {fileID: 2800000, guid: 3457673ac7e8c5045b7e6f2459a36d40, type: 3}
+        m_Texture: {fileID: 2800000, guid: 70ab464ae790a0f4eac18fa51db1d0e0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap0:
@@ -165,7 +163,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f8794a08a7922c3479f2dbb83b22a54f, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4a1e059bc28b95409cdac4e8ae4818d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -189,7 +187,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 5c2a216a353db9e4ca68fc76572b7248, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04d6056f775a0454394408192c5d96d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap0:
@@ -358,7 +356,7 @@ Material:
     - _DiffusionProfileHash3: 0
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
-    - _DisplacementMode: 2
+    - _DisplacementMode: 0
     - _DistortionBlendMode: 0
     - _DistortionBlurBlendMode: 0
     - _DistortionBlurDstBlend: 1
@@ -379,7 +377,7 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _EmissiveColorMode: 1
-    - _EmissiveExposureWeight: 1
+    - _EmissiveExposureWeight: 0
     - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -391,7 +389,7 @@ Material:
     - _HeightAmplitude1: 0.02
     - _HeightAmplitude2: 0.02
     - _HeightAmplitude3: 0.02
-    - _HeightCenter: 1
+    - _HeightCenter: 0.5
     - _HeightCenter0: 0.5
     - _HeightCenter1: 0.5
     - _HeightCenter2: 0.5
@@ -416,7 +414,7 @@ Material:
     - _HeightOffset1: 0
     - _HeightOffset2: 0
     - _HeightOffset3: 0
-    - _HeightPoMAmplitude: 2
+    - _HeightPoMAmplitude: 0.1
     - _HeightPoMAmplitude0: 2
     - _HeightPoMAmplitude1: 2
     - _HeightPoMAmplitude2: 2
@@ -457,7 +455,7 @@ Material:
     - _LinkDetailsWithBase2: 1
     - _LinkDetailsWithBase3: 1
     - _MaterialID: 1
-    - _Metallic: 1
+    - _Metallic: 0.52
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0
@@ -477,7 +475,7 @@ Material:
     - _NormalMapSpace1: 0
     - _NormalMapSpace2: 0
     - _NormalMapSpace3: 0
-    - _NormalScale: 2.33
+    - _NormalScale: 8
     - _NormalScale0: 1
     - _NormalScale1: 1
     - _NormalScale2: 1
@@ -494,10 +492,10 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _RayTracing: 0
-    - _ReceivesSSR: 1
+    - _ReceivesSSR: 0
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _Smoothness: 0.329
+    - _Smoothness: 0.098
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
@@ -517,10 +515,10 @@ Material:
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 8
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 40
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4

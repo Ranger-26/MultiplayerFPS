@@ -14,7 +14,8 @@ namespace Game.Player.Damage
         [Server]
         public void ServerDamagePlayer(float amount)
         {
-            Debug.Log("Damaging player on the server...");
+            Debug.Log($"Damaging player on the server. Current Health: {currentHealth}, Damage Amount: {amount}");
+            if (currentHealth <= 0) return;
             if (currentHealth - amount > 0)
             {
                 currentHealth -= (int)amount;

@@ -105,6 +105,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                         Debug.Log($"Hit something! {__hit.transform.name}, position {__hit.point}, shot by from player {id}");
                         
                         Debug.Log($"Found body part {part.bodyPart} on {__hit.transform.name} when raycasting! ");
+                        //TODO: Use IDamageable and move this logic in health controller
                         float multiplier;
                         switch (part.bodyPart)
                         {

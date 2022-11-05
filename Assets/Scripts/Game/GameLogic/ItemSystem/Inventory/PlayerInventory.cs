@@ -15,6 +15,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
 {
     public class PlayerInventory : NetworkBehaviour
     {
+        public static PlayerInventory Local;
+
         public NetworkGamePlayer Player;
         
         public readonly SyncDictionary<int, ItemIdentifier> allItems = new();
@@ -30,7 +32,27 @@ namespace Game.GameLogic.ItemSystem.Inventory
         [SyncVar(hook = nameof(OnIndexChange))]
         public int heldItemIndex = -1;
 
-        public ItemBase CurrentItemBase;
+        public ItemBase CurrentItemBase
+        {
+            get
+            {
+                return cur;
+            }
+            set
+            {
+                OnEquip(value);
+                cur = value;
+            }
+        }
+
+        ItemBase cur;
+
+        private void Awake()
+        {
+            if (hasAuthority)
+                Local = this;
+        }
+
         private void Start()
         {
             Player = GetComponent<NetworkGamePlayer>();
@@ -310,6 +332,24 @@ namespace Game.GameLogic.ItemSystem.Inventory
             if (Player == null)
                 Player = GetComponent<NetworkGamePlayer>();
         }
+        #endregion
+
+        #region Events
+
+        public event Action<ItemBase> onEquip;
+        public void OnEquip(ItemBase id)
+        {
+            if (onEquip != null)
+                onEquip(id);
+        }
+
+        public event Action onInventoryUpdate;
+        public void OnInventoryUpdate()
+        {
+            if (onInventoryUpdate != null)
+                onInventoryUpdate();
+        }
+
         #endregion
     }
 }

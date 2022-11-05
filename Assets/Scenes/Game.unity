@@ -37820,7 +37820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1178335428
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51918,6 +51918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1595666337}
   - component: {fileID: 1595666338}
+  - component: {fileID: 1595666339}
   m_Layer: 5
   m_Name: ItemList
   m_TagString: Untagged
@@ -51972,6 +51973,19 @@ MonoBehaviour:
   m_Spacing: {x: 25, y: 25}
   m_Constraint: 1
   m_ConstraintCount: 1
+--- !u!114 &1595666339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595666336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf4fa7ec37068a4d9af4056658ed5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIPrefab: {fileID: 2050282777065981791, guid: 0b93c3e4fd6b6364482f4b59e914e603, type: 3}
 --- !u!1 &1595957147
 GameObject:
   m_ObjectHideFlags: 0

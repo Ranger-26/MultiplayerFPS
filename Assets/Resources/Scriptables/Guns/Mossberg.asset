@@ -45,7 +45,7 @@ MonoBehaviour:
   ScopedSpread: 0
   ScopeSpeedReduction: 0.3
   ScopeImage: {fileID: 0}
-  ReloadTime: 2.5
+  ReloadTime: 1.7
   MaxAmmo: 5
   ReserveAmmo: 15
   HitLayers:

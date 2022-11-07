@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5227915557650034822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -518,6 +518,7 @@ MonoBehaviour:
     m_Bits: 1
   canMakeSound: 0
   isGrounded: 0
+  velocityGun: {x: 0, y: 0}
 --- !u!114 &807805569061322819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,7 +739,6 @@ MonoBehaviour:
   ItemParent: {fileID: 1838809099793417575}
   currentItem: 0
   heldItemIndex: -1
-  CurrentItemBase: {fileID: 0}
 --- !u!114 &3986808220876477268
 MonoBehaviour:
   m_ObjectHideFlags: 0

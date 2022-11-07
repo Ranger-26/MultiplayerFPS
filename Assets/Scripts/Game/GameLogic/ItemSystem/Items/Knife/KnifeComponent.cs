@@ -81,6 +81,8 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
             if (nsm == null) { Debug.LogError("Network Shooting Manager is null in the start!"); }
 
             StartCoroutine(Draw());
+
+            Crosshair.Instance.UpdateError(0f);
         }
 
         private void OnEnable()

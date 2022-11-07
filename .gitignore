@@ -72,7 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .idea/.idea.SCP_Intrusion/.idea/workspace.xml
-ProjectSettings/ProjectSettings.asset
 *.xml
-ProjectSettings/ProjectSettings.asset
 Assets/Plugins/Easy Save 3/Legacy/Easy Save 2.unitypackage.meta

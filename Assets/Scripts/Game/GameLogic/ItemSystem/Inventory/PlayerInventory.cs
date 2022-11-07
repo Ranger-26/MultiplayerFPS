@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using Game.GameLogic.ItemSystem.Core;
 using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.GameLogic.ItemSystem.Core.RuntimeData.DefaultRuntimeData;
@@ -8,6 +5,8 @@ using Game.GameLogic.ItemSystem.Items.Firearms;
 using Game.Player;
 using Inputs;
 using Mirror;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,28 +14,44 @@ namespace Game.GameLogic.ItemSystem.Inventory
 {
     public class PlayerInventory : NetworkBehaviour
     {
+        public static PlayerInventory Local;
+
         public NetworkGamePlayer Player;
-        
+
         public readonly SyncDictionary<int, ItemIdentifier> allItems = new();
 
         public Dictionary<int, ItemBase> allItemBases = new();
 
         [SerializeField]
         private Transform ItemParent;
-        
+
         [SyncVar]
         public ItemIdentifier currentItem;
 
         [SyncVar(hook = nameof(OnIndexChange))]
         public int heldItemIndex = -1;
 
-        public ItemBase CurrentItemBase;
+        public ItemBase CurrentItemBase
+        {
+            get
+            {
+                return cur;
+            }
+            set
+            {
+                OnEquip(value);
+                cur = value;
+            }
+        }
+
+        ItemBase cur;
+
         private void Start()
         {
             Player = GetComponent<NetworkGamePlayer>();
             if (isServer)
             {
-                Invoke(nameof(Test0), 1f);
+                Invoke(nameof(Test0), 0.05f);
             }
 
             if (hasAuthority)
@@ -45,25 +60,27 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 GameInputManager.Actions.Player.Num2.performed += Test2;
                 GameInputManager.Actions.Player.Num3.performed += Test3;
                 GameInputManager.Actions.Player.DropItem.performed += Test4;
+
+                Local = this;
             }
         }
 
         public void Test0()
         {
-           // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
         }
-        
+
         public void Test1(InputAction.CallbackContext ctx) => EquipItem(0);
 
         public void Test2(InputAction.CallbackContext ctx) => EquipItem(1);
-        
+
         public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
 
         public void Test4(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
-        
+
         #region AddItem
         [Server]
         public void ServerAddItem(ItemIdentifier id, IRuntimeData data)
@@ -87,7 +104,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
             ItemBase baseItem = obj.GetComponent<ItemBase>();
             SetPlayer();
             baseItem.InitItem(Player);
-            
+
             if (isServer)
             {
                 baseItem.ServerSetRuntimeData(data);
@@ -122,7 +139,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         [Command]
         public void CmdDeEquipHeldItem() => ServerDeEquipHeldItem();
-        
+
         [Server]
         public bool ServerDeEquipHeldItem()
         {
@@ -159,7 +176,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void EquipItem(int id)
         {
             if (!allItems.ContainsKey(id) || allItems[id] == currentItem) return;
-            
+
             if (DeEquipHeldItem() && allItems.ContainsKey(id) && allItemBases[id].OnEquip())
             {
                 CurrentItemBase = allItemBases[id];
@@ -178,7 +195,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         [Command]
         public void CmdEquipItem(int id) => ServerEquipItem(id);
-        
+
         [Server]
         public void ServerEquipItem(int id)
         {
@@ -198,7 +215,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         {
             OtherClientEquipItem(cur);
         }
-        
+
         public void OtherClientEquipItem(int id)
         {
             if (isServer || hasAuthority) return;
@@ -231,7 +248,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void RemoveItem(int id)
         {
             if (!allItems.ContainsKey(id) || !allItemBases.ContainsKey(id)) return;
-            
+
             if (heldItemIndex == id)
             {
                 if (isServer)
@@ -245,7 +262,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
                         CmdDestroyItem(id);
                     }
                 }
-                
+
             }
             else
             {
@@ -259,13 +276,13 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 }
             }
         }
-        
+
         [Command]
         public void CmdDestroyItem(int id)
         {
             ServerDestroyItem(id);
         }
-        
+
         [Server]
         public void ServerDestroyItem(int id)
         {
@@ -289,16 +306,16 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void ServerDestroyHeldItem()
         {
             ServerDestroyItem(heldItemIndex);
-        } 
-        
-        
+        }
+
+
         [ClientRpc]
         public void RpcDestroyItem(int id)
         {
             if (!allItemBases.ContainsKey(id)) return;
             Destroy(allItemBases[id].gameObject);
         }
-        
+
         private void OnDestroy()
         {
             GameInputManager.Actions.Player.Num1.performed -= Test1;
@@ -310,6 +327,24 @@ namespace Game.GameLogic.ItemSystem.Inventory
             if (Player == null)
                 Player = GetComponent<NetworkGamePlayer>();
         }
+        #endregion
+
+        #region Events
+
+        public event Action<ItemBase> onEquip;
+        public void OnEquip(ItemBase id)
+        {
+            if (onEquip != null)
+                onEquip(id);
+        }
+
+        public event Action onInventoryUpdate;
+        public void OnInventoryUpdate()
+        {
+            if (onInventoryUpdate != null)
+                onInventoryUpdate();
+        }
+
         #endregion
     }
 }

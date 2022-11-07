@@ -19,6 +19,16 @@ namespace Game.Player
         
         public static NetworkGamePlayer localPlayer;
 
+        private void Start()
+        {
+            GameUiManager.OnLocalPlayerSpawn();
+        }
+
+        private void OnDestroy()
+        {
+            GameUiManager.OnLocalPlayerDisconnect();
+        }
+
         public override void OnStartAuthority()
         {
             base.OnStartAuthority();

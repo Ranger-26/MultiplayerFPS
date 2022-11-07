@@ -1,5 +1,6 @@
 using Game.GameLogic.ItemSystem.Core;
 using Game.GameLogic.ItemSystem.Inventory;
+using Game.Player;
 using UnityEngine;
 
 public class ItemUIManager : MonoBehaviour
@@ -14,24 +15,51 @@ public class ItemUIManager : MonoBehaviour
 
     public void Enable()
     {
-        PlayerInventory.Local.onInventoryUpdate += UpdateInventory; // Need to run this after the player spawns in
-
-        UpdateInventory();
+        GameUiManager.onLocalPlayerSpawn += SubscribeToEvents;
+        GameUiManager.onLocalPlayerDisconnect += UnSubscribeToEvents;
     }
 
     public void Disable()
     {
-        PlayerInventory.Local.onInventoryUpdate -= UpdateInventory; // Note: This will cause a null ref since this gets destroyed after the player when they leave
+        GameUiManager.onLocalPlayerSpawn -= SubscribeToEvents;
+        GameUiManager.onLocalPlayerDisconnect -= UnSubscribeToEvents;
+    }
+
+    public void SubscribeToEvents()
+    {
+        Invoke(nameof(SubEvents), 0.1f);
+    }
+
+    public void UnSubscribeToEvents()
+    {
+        Invoke(nameof(UnSubEvents), 0.1f);
+    }
+
+    void SubEvents()
+    {
+        PlayerInventory.Local.onInventoryUpdate += UpdateInventory;
+
+        UpdateInventory();
+    }
+
+    void UnSubEvents()
+    {
+        PlayerInventory.Local.onInventoryUpdate -= UpdateInventory;
     }
 
     public void UpdateInventory()
     {
-        foreach (Transform tr in transform)
-        {
-            if (tr != transform)
-                Destroy(tr.gameObject);
+        Debug.Log("Count: " + PlayerInventory.Local.allItemBases.Count);
 
-            Debug.Log("Destroying UI");
+        if (transform.childCount > 0)
+        {
+            foreach (Transform tr in transform)
+            {
+                if (tr != transform)
+                    Destroy(tr.gameObject);
+
+                Debug.Log("Destroying UI");
+            }
         }
 
         for (int i = 0; i < PlayerInventory.Local.allItemBases.Count; i++)

@@ -89,5 +89,19 @@ namespace Game.Player
         {
             Menu.SetActive(true);
         }
+
+        public static event Action onLocalPlayerSpawn;
+        public static void OnLocalPlayerSpawn()
+        {
+            if (onLocalPlayerSpawn != null)
+                onLocalPlayerSpawn();
+        }
+
+        public static event Action onLocalPlayerDisconnect;
+        public static void OnLocalPlayerDisconnect()
+        {
+            if (onLocalPlayerDisconnect != null)
+                onLocalPlayerDisconnect();
+        }
     }
 }

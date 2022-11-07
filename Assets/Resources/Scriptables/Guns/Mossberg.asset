@@ -17,23 +17,23 @@ MonoBehaviour:
   HeadMultiplier: 3
   LimbMultiplier: 0.5
   Range: 50
-  RPM: 100
+  RPM: 120
   ChargeupTime: 0
   Tagging: 0.7
   Weight: 0.2
-  BulletCount: 12
+  BulletCount: 8
   GunFiringMode: 1
-  Spread: 1
-  MovementSpread: 0.5
+  Spread: 1.5
+  MovementSpread: 0.3
   MovementSpreadTolerance: 0.3
-  MaxSpread: 3
+  MaxSpread: 6
   MaxMovementSpread: 0.5
-  StartingSpread: 2.25
-  Recoil: 1.5
+  StartingSpread: 2.1
+  Recoil: 3.5
   HorizontalRecoil: 0
   MaxHorizontal: 0
-  RecoilDecay: 8.5
-  SpreadDecay: 40
+  RecoilDecay: 6.5
+  SpreadDecay: 2.5
   Displacement: 0
   MaxDisplacement: 0
   CrouchingMultiplier: 0.7
@@ -56,8 +56,8 @@ MonoBehaviour:
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
-  MaxBacking: 0.11
-  BackingMultiplier: 1.5
+  MaxBacking: 0.025
+  BackingMultiplier: 3
   ChargeupSounds: []
   ShootSounds:
   - {fileID: 8300000, guid: a0d1fa0950d4ee946b2b9c1b668aed43, type: 3}

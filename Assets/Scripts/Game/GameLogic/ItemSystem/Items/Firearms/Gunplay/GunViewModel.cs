@@ -1,16 +1,15 @@
-using System;
-using System.Collections;
 using AudioUtils;
 using Game.GameLogic.ItemSystem.Items.Firearms.Gunplay.IdentifierComponents;
 using Game.Player.Movement;
 using Game.UI;
 using Inputs;
 using Mirror;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
-using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
@@ -137,7 +136,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             GameInputManager.PlayerActions.Fire.canceled += UpdateSpray;
 
             GameInputManager.PlayerActions.Reload.performed += Reload;
-            
+
             GameInputManager.PlayerActions.Inspect.performed += Inspect;
 
             GameInputManager.PlayerActions.AltFire.performed += UpdateScope;
@@ -236,7 +235,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
             moveSpread = Mathf.Clamp(gun.MovementSpread * (PM.velocityGun.magnitude - gun.MovementSpreadTolerance) + gun.MaxMovementSpread * Convert.ToInt32(!PM.isGrounded), 0f, gun.MaxMovementSpread);
 
-            if (shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto || gun.GunFiringMode == FiringMode.SemiAuto) || nsm.currentAmmo == 0)
+            if (shootTimer <= 0f && (!isSpraying && gun.GunFiringMode == FiringMode.Auto) || nsm.currentAmmo == 0 || shootTimer <= 60f / gun.RPM - 0.1f && gun.GunFiringMode == FiringMode.SemiAuto)
             {
                 UpdateSpread();
 
@@ -248,7 +247,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
                 if (PL.GetCameraVisualRotation() != Quaternion.Euler(Vector3.zero))
                 {
-                    PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay / 2f));
+                    PL.SetCameraVisual(Quaternion.RotateTowards(PL.GetCameraVisualRotation(), Quaternion.Euler(Vector3.zero), gun.RecoilDecay * Time.fixedDeltaTime));
                 }
 
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
@@ -261,7 +260,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         public void UpdateSpray(InputAction.CallbackContext callbackContext)
         {
-            if (callbackContext.performed) 
+            if (callbackContext.performed)
                 isSpraying = true;
             else if (callbackContext.canceled)
                 isSpraying = false;
@@ -500,7 +499,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             GameInputManager.PlayerActions.Fire.canceled -= UpdateSpray;
 
             GameInputManager.PlayerActions.Reload.performed -= Reload;
-            
+
             GameInputManager.PlayerActions.Inspect.performed -= Inspect;
 
             GameInputManager.PlayerActions.AltFire.performed -= UpdateScope;

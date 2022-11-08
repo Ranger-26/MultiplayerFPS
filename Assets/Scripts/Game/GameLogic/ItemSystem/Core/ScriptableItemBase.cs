@@ -7,5 +7,7 @@ namespace Game.GameLogic.ItemSystem.Core
     {
         public ItemIdentifier ItemIdentifier;
         public float ItemDrawTime;
+
+        public Sprite Icon;
     }
 }

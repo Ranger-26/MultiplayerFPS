@@ -46,6 +46,11 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         ItemBase cur;
 
+        private void Awake()
+        {
+            
+        }
+
         private void Start()
         {
             Player = GetComponent<NetworkGamePlayer>();

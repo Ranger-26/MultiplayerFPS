@@ -38,11 +38,13 @@ public class ItemUI : MonoBehaviour
 
     public void Enable()
     {
-        PlayerInventory.Local.onEquip += UpdateItem; // Need to run this after the player spawns in
+        image.sprite = itemBase.ItemData.Icon;
+
+        PlayerInventory.Local.onEquip += UpdateItem; 
     }
 
     public void Disable()
     {
-        PlayerInventory.Local.onEquip -= UpdateItem; // Note: This will cause a null ref since this gets destroyed after the player when they leave
+        PlayerInventory.Local.onEquip -= UpdateItem; 
     }
 }

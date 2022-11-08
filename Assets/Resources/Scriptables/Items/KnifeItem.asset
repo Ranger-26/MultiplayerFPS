@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemIdentifier: 1
   ItemDrawTime: 0.58
+  Icon: {fileID: 21300000, guid: 4c3495905d9c52d4992e70be1203b3c5, type: 3}

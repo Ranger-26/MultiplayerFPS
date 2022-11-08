@@ -351,10 +351,12 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                         Scope(false);
                     }
 
-                    Spread();
+                    UpdateSpread();
 
                     Visual();
                 }
+
+                Spread();
 
                 Recoil();
             }

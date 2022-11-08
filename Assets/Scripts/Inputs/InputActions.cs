@@ -127,6 +127,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Num4"",
+                    ""type"": ""Button"",
+                    ""id"": ""27186ad2-3950-469c-b092-78c3c8bff20f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""c9d06276-cb03-4376-b6ec-d8a0678cd0ac"",
@@ -423,6 +432,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f42561ca-ef0e-44e4-a99f-2c10dac63df7"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -442,6 +462,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Num1 = m_Player.FindAction("Num1", throwIfNotFound: true);
         m_Player_Num2 = m_Player.FindAction("Num2", throwIfNotFound: true);
         m_Player_Num3 = m_Player.FindAction("Num3", throwIfNotFound: true);
+        m_Player_Num4 = m_Player.FindAction("Num4", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Inspect = m_Player.FindAction("Inspect", throwIfNotFound: true);
         m_Player_Voice = m_Player.FindAction("Voice", throwIfNotFound: true);
@@ -518,6 +539,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Num1;
     private readonly InputAction m_Player_Num2;
     private readonly InputAction m_Player_Num3;
+    private readonly InputAction m_Player_Num4;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Inspect;
     private readonly InputAction m_Player_Voice;
@@ -539,6 +561,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Num1 => m_Wrapper.m_Player_Num1;
         public InputAction @Num2 => m_Wrapper.m_Player_Num2;
         public InputAction @Num3 => m_Wrapper.m_Player_Num3;
+        public InputAction @Num4 => m_Wrapper.m_Player_Num4;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Inspect => m_Wrapper.m_Player_Inspect;
         public InputAction @Voice => m_Wrapper.m_Player_Voice;
@@ -587,6 +610,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Num3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum3;
                 @Num3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum3;
                 @Num3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum3;
+                @Num4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum4;
+                @Num4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum4;
+                @Num4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNum4;
                 @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
@@ -642,6 +668,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Num3.started += instance.OnNum3;
                 @Num3.performed += instance.OnNum3;
                 @Num3.canceled += instance.OnNum3;
+                @Num4.started += instance.OnNum4;
+                @Num4.performed += instance.OnNum4;
+                @Num4.canceled += instance.OnNum4;
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
@@ -677,6 +706,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnNum1(InputAction.CallbackContext context);
         void OnNum2(InputAction.CallbackContext context);
         void OnNum3(InputAction.CallbackContext context);
+        void OnNum4(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInspect(InputAction.CallbackContext context);
         void OnVoice(InputAction.CallbackContext context);

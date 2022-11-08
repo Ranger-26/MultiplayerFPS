@@ -65,7 +65,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 GameInputManager.Actions.Player.Num1.performed += Test1;
                 GameInputManager.Actions.Player.Num2.performed += Test2;
                 GameInputManager.Actions.Player.Num3.performed += Test3;
-                GameInputManager.Actions.Player.DropItem.performed += Test4;
+                GameInputManager.Actions.Player.Num4.performed += Test4;
+                GameInputManager.Actions.Player.DropItem.performed += Test5;
 
                 Local = this;
             }
@@ -100,6 +101,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
+            ServerAddItem(ItemIdentifier.SCP500, new DefaultRuntimeData());
         }
 
         public void Test1(InputAction.CallbackContext ctx) => EquipItem(0);
@@ -108,7 +110,9 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
 
-        public void Test4(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
+        public void Test4(InputAction.CallbackContext ctx) => EquipItem(3);
+
+        public void Test5(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
 
         #region AddItem
         [Server]

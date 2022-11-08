@@ -33,10 +33,10 @@ MonoBehaviour:
   HorizontalRecoil: 0
   MaxHorizontal: 0
   RecoilDecay: 6.5
-  SpreadDecay: 2.5
+  SpreadDecay: 3
   Displacement: 0
   MaxDisplacement: 0
-  CrouchingMultiplier: 0.7
+  CrouchingMultiplier: 0.75
   SwayAfterRecoil: 1000
   SwayStartRight: 0
   HasScope: 0

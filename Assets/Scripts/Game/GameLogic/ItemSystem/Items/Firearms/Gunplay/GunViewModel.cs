@@ -252,7 +252,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
-                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * gun.SpreadDecay, gun.StartingSpread, gun.MaxSpread);
+                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * gun.SpreadDecay, gun.StartingSpread * (PC.isCrouching ? gun.CrouchingMultiplier : 1f), gun.MaxSpread);
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
@@ -410,14 +410,14 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         private void Spread()
         {
-            spread = Mathf.Clamp(spread + (isScoped ? gun.ScopedSpread : gun.Spread), isScoped ? gun.ScopedSpread : gun.StartingSpread, gun.MaxSpread);
+            spread = Mathf.Clamp(spread + gun.Spread * (PC.isCrouching ? gun.CrouchingMultiplier : 1f), isScoped ? gun.ScopedSpread : gun.StartingSpread, gun.MaxSpread);
 
             UpdateSpread();
         }
 
         private void UpdateSpread()
         {
-            float totalSpread = spread * (PC.isCrouching ? 0.5f : 1f) + moveSpread;
+            float totalSpread = spread + moveSpread;
 
             spreadPoint.localRotation = Quaternion.Euler(Random.Range(-totalSpread, totalSpread), Random.Range(-totalSpread, totalSpread), 0f);
         }

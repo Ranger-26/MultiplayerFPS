@@ -33,6 +33,11 @@ public class Crosshair : MonoBehaviour
 
     private void OnEnable() => Init();
 
+    private void Update()
+    {
+        rect.sizeDelta = Vector2.Lerp(rect.sizeDelta, new Vector2(size, size), 0.5f);
+    }
+
     private void Init()
     {
         UpdateCrosshair();
@@ -118,9 +123,7 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateError(float errorPixelsFire)
     {
-        size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 10f;
-
-        rect.sizeDelta = new Vector2(size, size);
+        size = startingSize + errorPixelsFire * Settings.Current.cFiringErrorMultiplier * 9f;
     }
 
     public void ActivateCrosshair()

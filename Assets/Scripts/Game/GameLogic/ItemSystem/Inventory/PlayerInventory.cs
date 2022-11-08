@@ -4,6 +4,7 @@ using Game.GameLogic.ItemSystem.Core.RuntimeData.DefaultRuntimeData;
 using Game.GameLogic.ItemSystem.Items.Firearms;
 using Game.Player;
 using Inputs;
+using Menu;
 using Mirror;
 using System;
 using System.Collections.Generic;
@@ -73,7 +74,30 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void Test0()
         {
             // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
-            ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            #if UNITY_STANDALONE && !DEBUG && !UNITY_EDITOR
+
+            ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+
+            #elif UNITY_EDITOR || DEBUG
+            
+            switch (Settings.Current.StartingWeapon)
+            {
+                case 0:
+                    ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    break;
+                case 1:
+                    ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    break;
+                case 2:
+                    ServerAddItem(ItemIdentifier.Vityaz, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    break;
+                case 3:
+                    ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    break;
+            }
+
+            #endif
+
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
         }

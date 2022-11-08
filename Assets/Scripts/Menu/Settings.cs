@@ -79,6 +79,12 @@ namespace Menu
 
         public int Transport = 1;
 
+        #if UNITY_EDITOR || DEBUG
+
+        public int StartingWeapon = 0;
+
+        #endif
+
         #endregion
 
         #region Methods

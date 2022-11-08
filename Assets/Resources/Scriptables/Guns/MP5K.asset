@@ -36,7 +36,7 @@ MonoBehaviour:
   SpreadDecay: 9
   Displacement: 2.5
   MaxDisplacement: 7
-  CrouchingMultiplier: 0.4
+  CrouchingMultiplier: 0.6
   SwayAfterRecoil: 7
   SwayStartRight: 1
   HasScope: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AK19
   m_EditorClassIdentifier: 
   Damage: 40
+  Penetration: 0.5
   HeadMultiplier: 4
   LimbMultiplier: 0.8
   Range: 80
@@ -35,7 +36,7 @@ MonoBehaviour:
   SpreadDecay: 2
   Displacement: 1
   MaxDisplacement: 4
-  CrouchingMultiplier: 0.5
+  CrouchingMultiplier: 0.35
   SwayAfterRecoil: 7
   SwayStartRight: 1
   HasScope: 0

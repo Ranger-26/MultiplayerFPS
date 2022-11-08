@@ -13,26 +13,27 @@ MonoBehaviour:
   m_Name: Debug
   m_EditorClassIdentifier: 
   Damage: 32
+  Penetration: 0.5
   HeadMultiplier: 4
   LimbMultiplier: 0.5
   Range: 100
   RPM: 735
-  ChargeupTime: 0.45
+  ChargeupTime: 0.2
   Tagging: 0.9
   Weight: 0.1
   BulletCount: 2
   GunFiringMode: 0
-  Spread: 0.1
+  Spread: 0.5
   MovementSpread: 3
-  MovementSpreadTolerance: 0.5
+  MovementSpreadTolerance: 0.3
   MaxSpread: 1.5
-  MaxMovementSpread: 15
+  MaxMovementSpread: 7
   StartingSpread: 0.05
   Recoil: 1.25
   HorizontalRecoil: 0.5
   MaxHorizontal: 2.5
-  RecoilDecay: 1
-  SpreadDecay: 2
+  RecoilDecay: 10
+  SpreadDecay: 10
   Displacement: 1
   MaxDisplacement: 5
   CrouchingMultiplier: 0.5
@@ -54,11 +55,8 @@ MonoBehaviour:
   DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
-  Tracer: {fileID: 0}
-  AimPunch: 1
-  AimPunchDuration: 0.05
-  AimPunchDropDuration: 0.05
-  MaxBacking: 0.05
+  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
+  MaxBacking: 0.025
   BackingMultiplier: 3
   ChargeupSounds:
   - {fileID: 8300000, guid: 1d0f6238ddca17a42a8af609f604419d, type: 3}

@@ -26,7 +26,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         public void Select(bool state)
         {
-            image.color = state ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0.15f);
+            if (image != null)
+                image.color = state ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0.15f);
         }
 
         public void UpdateItem(ItemBase id)

@@ -18,7 +18,8 @@ namespace Game.GameLogic.ItemSystem.Items.Consumables.SCP500
 
         public override void OnClientUse(InputAction.CallbackContext ctx)
         {
-            StartCoroutine(Test());
+            if (gameObject.activeSelf)
+                StartCoroutine(Test());
         }
 
         public override void OnServerReceiveUseMessage()

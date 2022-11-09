@@ -64,7 +64,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
             for (int i = 0; i < PlayerInventory.Local.allItemBases.Count; i++)
             {
-                ItemUI ui = Instantiate(UIPrefab, transform).GetComponent<ItemUI>();
+                GameObject _ui = Instantiate(UIPrefab, transform);
+                ItemUI ui = _ui.GetComponent<ItemUI>();
                 ui.itemBase = PlayerInventory.Local.allItemBases[i];
 
                 Debug.Log("Spawning UI");

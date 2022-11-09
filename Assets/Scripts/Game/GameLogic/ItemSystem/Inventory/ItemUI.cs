@@ -40,7 +40,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         public void Enable()
         {
-            image.sprite = itemBase.ItemData.Icon;
+            if (image != null && itemBase != null)
+                image.sprite = itemBase.ItemData.Icon;
 
             PlayerInventory.Local.onEquip += UpdateItem; 
         }

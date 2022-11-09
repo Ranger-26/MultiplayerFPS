@@ -371,6 +371,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
             if (Player == null)
                 Player = GetComponent<NetworkGamePlayer>();
         }
+
         #endregion
 
         #region Events

@@ -114,6 +114,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Num5",
+                    "type": "Button",
+                    "id": "bf85517f-e039-410e-89ad-82e831751424",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "c9d06276-cb03-4376-b6ec-d8a0678cd0ac",
@@ -419,6 +428,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Num4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdea6b48-df6c-4adf-a34b-6da63da48aad",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Num5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

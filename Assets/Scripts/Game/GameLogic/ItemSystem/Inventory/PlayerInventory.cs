@@ -62,11 +62,12 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
             if (hasAuthority)
             {
-                GameInputManager.Actions.Player.Num1.performed += Test1;
-                GameInputManager.Actions.Player.Num2.performed += Test2;
-                GameInputManager.Actions.Player.Num3.performed += Test3;
-                GameInputManager.Actions.Player.Num4.performed += Test4;
-                GameInputManager.Actions.Player.DropItem.performed += Test5;
+                GameInputManager.Actions.Player.Num1.performed += Slot1;
+                GameInputManager.Actions.Player.Num2.performed += Slot2;
+                GameInputManager.Actions.Player.Num3.performed += Slot3;
+                GameInputManager.Actions.Player.Num4.performed += Slot4;
+                GameInputManager.Actions.Player.Num5.performed += Slot5;
+                GameInputManager.Actions.Player.DropItem.performed += Drop;
 
                 Local = this;
             }
@@ -78,6 +79,8 @@ namespace Game.GameLogic.ItemSystem.Inventory
             #if UNITY_STANDALONE && !DEBUG && !UNITY_EDITOR
 
             ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.Vityaz, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+            ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
 
             #elif UNITY_EDITOR || DEBUG
             
@@ -101,18 +104,19 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
             ServerAddItem(ItemIdentifier.Makarov, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
             ServerAddItem(ItemIdentifier.Knife, new DefaultRuntimeData());
-            ServerAddItem(ItemIdentifier.SCP500, new DefaultRuntimeData());
         }
 
-        public void Test1(InputAction.CallbackContext ctx) => EquipItem(0);
+        public void Slot1(InputAction.CallbackContext ctx) => EquipItem(0);
 
-        public void Test2(InputAction.CallbackContext ctx) => EquipItem(1);
+        public void Slot2(InputAction.CallbackContext ctx) => EquipItem(1);
 
-        public void Test3(InputAction.CallbackContext ctx) => EquipItem(2);
+        public void Slot3(InputAction.CallbackContext ctx) => EquipItem(2);
 
-        public void Test4(InputAction.CallbackContext ctx) => EquipItem(3);
+        public void Slot4(InputAction.CallbackContext ctx) => EquipItem(3);
 
-        public void Test5(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
+        public void Slot5(InputAction.CallbackContext ctx) => EquipItem(4);
+
+        public void Drop(InputAction.CallbackContext ctx) => RemoveItem(heldItemIndex);
 
         #region AddItem
         [Server]
@@ -353,11 +357,12 @@ namespace Game.GameLogic.ItemSystem.Inventory
         {
             if (hasAuthority)
             {
-                GameInputManager.Actions.Player.Num1.performed -= Test1;
-                GameInputManager.Actions.Player.Num2.performed -= Test2;
-                GameInputManager.Actions.Player.Num3.performed -= Test3;
-                GameInputManager.Actions.Player.Num4.performed -= Test4;
-                GameInputManager.Actions.Player.DropItem.performed += Test5;
+                GameInputManager.Actions.Player.Num1.performed -= Slot1;
+                GameInputManager.Actions.Player.Num2.performed -= Slot2;
+                GameInputManager.Actions.Player.Num3.performed -= Slot3;
+                GameInputManager.Actions.Player.Num4.performed -= Slot4;
+                GameInputManager.Actions.Player.Num5.performed -= Slot5;
+                GameInputManager.Actions.Player.DropItem.performed += Drop;
             }
         }
 

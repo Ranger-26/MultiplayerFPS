@@ -1,73 +1,74 @@
-using Game.GameLogic.ItemSystem.Core;
-using Game.GameLogic.ItemSystem.Inventory;
 using Game.Player;
 using UnityEngine;
 
-public class ItemUIManager : MonoBehaviour
+namespace Game.GameLogic.ItemSystem.Inventory
 {
-    public GameObject UIPrefab;
-
-    private void Start() => Enable();
-    private void OnEnable() => Enable();
-
-    private void OnDisable() => Disable();
-    private void OnDestroy() => Disable();
-
-    public void Enable()
+    public class ItemUIManager : MonoBehaviour
     {
-        GameUiManager.onLocalPlayerSpawn += SubscribeToEvents;
-        GameUiManager.onLocalPlayerDisconnect += UnSubscribeToEvents;
-    }
+        public GameObject UIPrefab;
 
-    public void Disable()
-    {
-        GameUiManager.onLocalPlayerSpawn -= SubscribeToEvents;
-        GameUiManager.onLocalPlayerDisconnect -= UnSubscribeToEvents;
-    }
+        private void Start() => Enable();
+        private void OnEnable() => Enable();
 
-    public void SubscribeToEvents()
-    {
-        Invoke(nameof(SubEvents), 0.1f);
-    }
+        private void OnDisable() => Disable();
+        private void OnDestroy() => Disable();
 
-    public void UnSubscribeToEvents()
-    {
-        Invoke(nameof(UnSubEvents), 0.1f);
-    }
-
-    void SubEvents()
-    {
-        PlayerInventory.Local.onInventoryUpdate += UpdateInventory;
-
-        UpdateInventory();
-    }
-
-    void UnSubEvents()
-    {
-        PlayerInventory.Local.onInventoryUpdate -= UpdateInventory;
-    }
-
-    public void UpdateInventory()
-    {
-        Debug.Log("Count: " + PlayerInventory.Local.allItemBases.Count);
-
-        if (transform.childCount > 0)
+        public void Enable()
         {
-            foreach (Transform tr in transform)
-            {
-                if (tr != transform)
-                    Destroy(tr.gameObject);
-
-                Debug.Log("Destroying UI");
-            }
+            GameUiManager.onLocalPlayerSpawn += SubscribeToEvents;
+            GameUiManager.onLocalPlayerDisconnect += UnSubscribeToEvents;
         }
 
-        for (int i = 0; i < PlayerInventory.Local.allItemBases.Count; i++)
+        public void Disable()
         {
-            ItemUI ui = Instantiate(UIPrefab, transform).GetComponent<ItemUI>();
-            ui.itemBase = PlayerInventory.Local.allItemBases[i];
+            GameUiManager.onLocalPlayerSpawn -= SubscribeToEvents;
+            GameUiManager.onLocalPlayerDisconnect -= UnSubscribeToEvents;
+        }
 
-            Debug.Log("Spawning UI");
+        public void SubscribeToEvents()
+        {
+            Invoke(nameof(SubEvents), 0.1f);
+        }
+
+        public void UnSubscribeToEvents()
+        {
+            Invoke(nameof(UnSubEvents), 0.1f);
+        }
+
+        void SubEvents()
+        {
+            PlayerInventory.Local.onInventoryUpdate += UpdateInventory;
+
+            UpdateInventory();
+        }
+
+        void UnSubEvents()
+        {
+            PlayerInventory.Local.onInventoryUpdate -= UpdateInventory;
+        }
+
+        public void UpdateInventory()
+        {
+            Debug.Log("Count: " + PlayerInventory.Local.allItemBases.Count);
+
+            if (transform.childCount > 0)
+            {
+                foreach (Transform tr in transform)
+                {
+                    if (tr != transform)
+                        Destroy(tr.gameObject);
+
+                    Debug.Log("Destroying UI");
+                }
+            }
+
+            for (int i = 0; i < PlayerInventory.Local.allItemBases.Count; i++)
+            {
+                ItemUI ui = Instantiate(UIPrefab, transform).GetComponent<ItemUI>();
+                ui.itemBase = PlayerInventory.Local.allItemBases[i];
+
+                Debug.Log("Spawning UI");
+            }
         }
     }
 }

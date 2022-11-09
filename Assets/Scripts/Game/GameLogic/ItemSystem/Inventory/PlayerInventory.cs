@@ -351,8 +351,14 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         private void OnDestroy()
         {
-            GameInputManager.Actions.Player.Num1.performed -= Test1;
-            GameInputManager.Actions.Player.Num2.performed -= Test2;
+            if (hasAuthority)
+            {
+                GameInputManager.Actions.Player.Num1.performed -= Test1;
+                GameInputManager.Actions.Player.Num2.performed -= Test2;
+                GameInputManager.Actions.Player.Num3.performed -= Test3;
+                GameInputManager.Actions.Player.Num4.performed -= Test4;
+                GameInputManager.Actions.Player.DropItem.performed += Test5;
+            }
         }
 
         public void SetPlayer()

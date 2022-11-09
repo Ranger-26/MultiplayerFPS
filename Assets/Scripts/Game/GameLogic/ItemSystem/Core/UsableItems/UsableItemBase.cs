@@ -1,6 +1,8 @@
 using Game.GameLogic.ItemSystem.Inventory;
 using Inputs;
 using Mirror;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Game.GameLogic.ItemSystem.Core.UsableItems
@@ -33,7 +35,27 @@ namespace Game.GameLogic.ItemSystem.Core.UsableItems
         /// </summary>
         public virtual void OnServerReceiveUseMessage()
         {
-            
+            StartCoroutine(Use());
+        }
+
+        public IEnumerator Use()
+        {
+            if (ItemData.GetType() == typeof(UsableItemData))
+            {
+                UsableItemData uid = (UsableItemData)ItemData;
+
+                if (anim != null)
+                    anim.SetTrigger(StringKeys.ItemUseAnimation);
+
+                yield return new WaitForSeconds(uid.Usetime);
+
+                Effect();
+            }
+        }
+
+        public virtual void Effect()
+        {
+
         }
         
         protected override void RegisterInputEvents()

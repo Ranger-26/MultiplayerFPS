@@ -8,21 +8,13 @@ namespace Game.GameLogic.ItemSystem.Items.Consumables.SCP500
 {
     public class Scp500Item : UsableItemBase
     {
-        public IEnumerator Test()
-        {
-            transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
-            yield return new WaitForSeconds(3f);
-            transform.Rotate(-90.0f, 0.0f, 0.0f, Space.Self);
-            SendUseMessage();
-        }
-
         public override void OnClientUse(InputAction.CallbackContext ctx)
         {
             if (gameObject.activeSelf)
-                StartCoroutine(Test());
+                SendUseMessage();
         }
 
-        public override void OnServerReceiveUseMessage()
+        public override void Effect()
         {
             Owner.GetComponent<HealthController>().ServerHealPlayer(100);
         }

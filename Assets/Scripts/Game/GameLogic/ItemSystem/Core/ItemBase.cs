@@ -15,10 +15,14 @@ namespace Game.GameLogic.ItemSystem.Core
         public bool IsItemOwner => Owner.hasAuthority;
 
         public bool IsServer => NetworkPlayerLobby.localPlayer.isServer;
+
+        [HideInInspector]
+        public Animator anim;
         
         public virtual void InitItem(NetworkGamePlayer owner)
         {
             Owner = owner;
+            anim = GetComponent<Animator>();
         }
 
         public virtual void ServerSetRuntimeData(IRuntimeData data)
@@ -34,7 +38,9 @@ namespace Game.GameLogic.ItemSystem.Core
             if (IsItemOwner)
             {
                 Invoke(nameof(RegisterInputEvents), ItemData.ItemDrawTime);
-                //call item draw animation
+                
+                if (anim != null)
+                    anim.SetTrigger(StringKeys.GunDrawAnimation);
             }
 
             return true;

@@ -47,11 +47,6 @@ namespace Game.GameLogic.ItemSystem.Inventory
 
         ItemBase cur;
 
-        private void Awake()
-        {
-            
-        }
-
         private void Start()
         {
             Player = GetComponent<NetworkGamePlayer>();
@@ -76,6 +71,7 @@ namespace Game.GameLogic.ItemSystem.Inventory
         public void Test0()
         {
             // ServerAddItem(ItemIdentifier.DebugGun, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+
             #if UNITY_STANDALONE && !DEBUG && !UNITY_EDITOR
 
             ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));

@@ -58,6 +58,9 @@ MonoBehaviour:
   Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
   MaxBacking: 0.025
   BackingMultiplier: 3
+  AimPunch: 1
+  AimPunchRiseSpeed: 200
+  AimPunchDropSpeed: 100
   ChargeupSounds: []
   ShootSounds:
   - {fileID: 8300000, guid: 87982b73589ab51419a5db3c6662e086, type: 3}

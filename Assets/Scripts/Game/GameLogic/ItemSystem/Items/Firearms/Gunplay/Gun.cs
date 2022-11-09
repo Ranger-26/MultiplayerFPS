@@ -118,6 +118,12 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
         public float MaxBacking = 0.1f;
         [Tooltip("The multiplier for the backing speed")]
         public float BackingMultiplier = 3f;
+        [Tooltip("The bobbing of the camera when firing")]
+        public float AimPunch = 1f;
+        [Tooltip("Aim punch rise speed")]
+        public float AimPunchRiseSpeed = 20f;
+        [Tooltip("Aim punch fall speed")]
+        public float AimPunchDropSpeed = 10f;
 
         [Tooltip("Chargeup sounds, a sound in this list will be randomly selected to play when shooting")]
         public AudioClip[] ChargeupSounds;

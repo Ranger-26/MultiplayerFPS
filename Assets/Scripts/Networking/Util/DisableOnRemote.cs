@@ -14,13 +14,11 @@ public class DisableOnRemote : MonoBehaviour
 
     private void Start()
     {
-        if (!ni.hasAuthority || (Reverse && ni.hasAuthority))
-        {
+        if (Reverse && ni.hasAuthority)
             gameObject.SetActive(false);
-        }
+        else if (!Reverse && !ni.hasAuthority)
+            gameObject.SetActive(false);
         else
-        {
             enabled = false;
-        }
     }
 }

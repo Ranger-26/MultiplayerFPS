@@ -1,8 +1,7 @@
+using Menu;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Linq;
-using Menu;
 
 public class Crosshair : MonoBehaviour
 {
@@ -137,7 +136,9 @@ public class Crosshair : MonoBehaviour
 
     public void CrosshairVisibility(bool state)
     {
-        Reticles.gameObject.SetActive(state);
-        Dot.gameObject.SetActive(state);
+        if (Reticles != null)
+            Reticles.gameObject.SetActive(state);
+        if (Dot != null)
+            Dot.gameObject.SetActive(state);
     }
 }

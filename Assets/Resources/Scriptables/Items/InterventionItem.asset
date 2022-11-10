@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7cfda7af1a44aa199d26527eb933a3b, type: 3}
-  m_Name: Scp 500
+  m_Script: {fileID: 11500000, guid: 4797d07b97bc482296f3ca7419d4d55a, type: 3}
+  m_Name: InterventionItem
   m_EditorClassIdentifier: 
-  ItemIdentifier: 8
+  ItemIdentifier: 7
   ItemDrawTime: 1
-  Icon: {fileID: 21300000, guid: 394e93ce356b57344903a08ff72fcab2, type: 3}
-  Usetime: 1
+  Icon: {fileID: 21300000, guid: 555723a7bcdf0364085d68dc6a0f6e97, type: 3}

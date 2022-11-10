@@ -13,52 +13,54 @@ MonoBehaviour:
   m_Name: Intervention
   m_EditorClassIdentifier: 
   Damage: 200
-  HeadMultiplier: 4
-  LimbMultiplier: 0.5
+  Penetration: 0.75
+  HeadMultiplier: 2
+  LimbMultiplier: 0.8
   Range: 200
-  RPM: 40
+  RPM: 60
   ChargeupTime: 0
-  Tagging: 0.9
-  Weight: 0.3
+  Tagging: 1
+  Weight: 0.33
   BulletCount: 1
   GunFiringMode: 1
   Spread: 1
   MovementSpread: 10
   MovementSpreadTolerance: 0.3
-  MaxSpread: 3
+  MaxSpread: 8
   MaxMovementSpread: 10
   StartingSpread: 6
-  Recoil: 2
+  Recoil: 5
   HorizontalRecoil: 0
   MaxHorizontal: 0
-  RecoilDecay: 2
-  SpreadDecay: 4
+  RecoilDecay: 5
+  SpreadDecay: 600
   Displacement: 0
   MaxDisplacement: 0
-  CrouchingMultiplier: 0.5
+  CrouchingMultiplier: 0.75
   SwayAfterRecoil: 8
   SwayStartRight: 0
   HasScope: 1
   ExitScopeOnShoot: 1
-  ScopeFOV: 67.5
+  ScopeFOV: 25
   ScopedSpread: 0
-  ScopeSpeedReduction: 0.3
+  ScopeSpeedReduction: 0.45
   ScopeImage: {fileID: 21300000, guid: 2b97d134cb49e0c468eecdfa09ec67e1, type: 3}
-  ReloadTime: 5
+  ReloadTime: 3
   MaxAmmo: 7
-  ReserveAmmo: 14
+  ReserveAmmo: 21
   HitLayers:
     serializedVersion: 2
     m_Bits: 65
   GunSlot: 0
-  DrawTime: 1.5
+  DrawTime: 1
   HitObject: {fileID: 389512984250178928, guid: 4089ddf1161a17b4ab79cb0f6f900e31, type: 3}
   HitDecal: {fileID: 2286638164126399630, guid: de866c6b796e66745ae12786ba2e1134, type: 3}
-  Tracer: {fileID: 7789423977170713373, guid: 99100a9038338f74abad7bab4cb33c6e, type: 3}
-  MaxBacking: 0.11
+  Tracer: {fileID: 7789423977170713373, guid: c689ab67ad024d24090f9bcc2cd2af28, type: 3}
+  MaxBacking: 0.08
   BackingMultiplier: 1.5
   ChargeupSounds: []
-  ShootSounds: []
+  ShootSounds:
+  - {fileID: 8300000, guid: 8e153c3f5d08f1b4cb076ebe885d297a, type: 3}
   SoundMaxDistance: 100
   SoundVolume: 1
   SoundPriority: 128

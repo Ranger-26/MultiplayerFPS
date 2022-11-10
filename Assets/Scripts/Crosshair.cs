@@ -45,6 +45,8 @@ public class Crosshair : MonoBehaviour
 
     public void UpdateCrosshair()
     {
+        CrosshairVisibility(true);
+
         rect = transform.GetComponent<RectTransform>();
         CrosshairParts = transform.GetComponentsInChildren<RectTransform>();
         CrosshairParts = CrosshairParts.Skip(1).ToArray();
@@ -131,5 +133,11 @@ public class Crosshair : MonoBehaviour
         Instance.gameObject.SetActive(false);
         Instance = this;
         gameObject.SetActive(true);
+    }
+
+    public void CrosshairVisibility(bool state)
+    {
+        Reticles.gameObject.SetActive(state);
+        Dot.gameObject.SetActive(state);
     }
 }

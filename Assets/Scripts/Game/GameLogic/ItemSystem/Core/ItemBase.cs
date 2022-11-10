@@ -2,6 +2,7 @@ using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.Player;
 using Inputs;
 using Lobby;
+using Mirror;
 using UnityEngine;
 
 namespace Game.GameLogic.ItemSystem.Core
@@ -10,6 +11,7 @@ namespace Game.GameLogic.ItemSystem.Core
     {
         public ScriptableItemBase ItemData;
 
+        [HideInInspector]
         public NetworkGamePlayer Owner;
 
         public bool IsItemOwner => Owner.hasAuthority;

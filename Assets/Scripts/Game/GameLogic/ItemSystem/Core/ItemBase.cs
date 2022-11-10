@@ -2,6 +2,7 @@ using Game.GameLogic.ItemSystem.Core.RuntimeData;
 using Game.Player;
 using Inputs;
 using Lobby;
+using Mirror;
 using UnityEngine;
 
 namespace Game.GameLogic.ItemSystem.Core
@@ -14,7 +15,7 @@ namespace Game.GameLogic.ItemSystem.Core
 
         public bool IsItemOwner => Owner.hasAuthority;
 
-        public bool IsServer => NetworkPlayerLobby.localPlayer.isServer;
+        public bool IsServer => NetworkServer.active;
         
         public virtual void InitItem(NetworkGamePlayer owner)
         {

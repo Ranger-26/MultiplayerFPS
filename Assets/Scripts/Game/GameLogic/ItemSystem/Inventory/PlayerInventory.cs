@@ -95,6 +95,13 @@ namespace Game.GameLogic.ItemSystem.Inventory
                 case 3:
                     ServerAddItem(ItemIdentifier.Mossberg, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
                     break;
+                case 4:
+                    ServerAddItem(ItemIdentifier.Intervention, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    break;
+                default:
+                    ServerAddItem(ItemIdentifier.MP5K, new FirearmRuntimeData(ItemIdentifier.DebugGun, -1, -1));
+                    Debug.Log("Primary weapon not set in settings, defaulting to MP5K");
+                    break;
             }
 
             #endif

@@ -11,6 +11,7 @@ namespace Game.GameLogic.ItemSystem.Core
     {
         public ScriptableItemBase ItemData;
 
+        [HideInInspector]
         public NetworkGamePlayer Owner;
 
         public bool IsItemOwner => Owner.hasAuthority;

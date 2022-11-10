@@ -109,7 +109,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             spreadPoint = cam.GetComponentInChildren<SpreadPoint>().transform;
             anim = GetComponentInChildren<Animator>();
 
-            anim.keepAnimatorControllerStateOnDisable = true;
+            if (anim != null)
+                anim.keepAnimatorControllerStateOnDisable = true;
 
             if (gun.ChargeupTime <= 0f)
                 chargedUp = true;
@@ -252,7 +253,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
                 recoilFactor = Mathf.Clamp(recoilFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
                 displacementFactor = Mathf.Clamp(displacementFactor - Time.fixedDeltaTime * gun.RecoilDecay, 0f, gun.SwayAfterRecoil + 1);
-                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * gun.SpreadDecay, gun.StartingSpread * (PC.isCrouching ? gun.CrouchingMultiplier : 1f), gun.MaxSpread);
+                spread = Mathf.Clamp(spread - Time.fixedDeltaTime * gun.SpreadDecay, (isScoped ? gun.ScopedSpread : gun.StartingSpread) * (PC.isCrouching ? gun.CrouchingMultiplier : 1f), gun.MaxSpread);
             }
 
             firingPoint.localRotation = Quaternion.Euler(-displacementFactor, 0f, 0f);
@@ -272,9 +273,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                 return;
 
             if (!delay && gun.GunFiringMode == FiringMode.SemiAuto)
-            {
                 Shoot();
-            }
         }
 
         public void Inspect(InputAction.CallbackContext callbackContext)
@@ -297,7 +296,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         public void UpdateScope(InputAction.CallbackContext callbackContext)
         {
-            if (gun.HasScope && !delay)
+            if (gun.HasScope && shootTimer <= 0f && !delay)
                 Scope(!isScoped);
         }
 
@@ -313,6 +312,7 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             }
 
             isScoped = status;
+            Crosshair.Instance.CrosshairVisibility(!status);
             cam.fieldOfView = status ? gun.ScopeFOV : 87.5f;
             scopeUI.SetActive(status);
             model.SetActive(!status);
@@ -349,6 +349,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                     if (gun.ExitScopeOnShoot)
                     {
                         Scope(false);
+
+                        Crosshair.Instance.CrosshairVisibility(true);
                     }
 
                     UpdateSpread();
@@ -505,6 +507,13 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             GameInputManager.PlayerActions.Inspect.performed -= Inspect;
 
             GameInputManager.PlayerActions.AltFire.performed -= UpdateScope;
+        }
+
+        private void OnDisable()
+        {
+            Crosshair.Instance.CrosshairVisibility(true);
+            Crosshair.Instance.UpdateError(0f);
+            Scope(false);
         }
     }
 }

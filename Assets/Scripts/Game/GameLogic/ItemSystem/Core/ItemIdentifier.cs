@@ -9,6 +9,7 @@ namespace Game.GameLogic.ItemSystem.Core
         Makarov,
         Vityaz,
         Mossberg,
+        Intervention,
         SCP500
     }
 }

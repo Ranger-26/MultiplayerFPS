@@ -10,8 +10,10 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms
 {
     public class FirearmBase : ItemBase
     {
+        [HideInInspector]
         public GunViewModel GunViewModel;
 
+        [HideInInspector]
         public NetworkShootingManager nsm;
         
         public FirearmRuntimeData FirearmData; 

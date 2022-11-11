@@ -93,7 +93,8 @@ namespace Game.GameLogic.ItemSystem.Items.Knife
 
         private IEnumerator Draw()
         {
-            Crosshair.Instance.UpdateError(0f);
+            if (nsm.hasAuthority)
+                Crosshair.Instance.UpdateError(0f);
 
             delay = true;
 

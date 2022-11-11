@@ -225,7 +225,8 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
                     FinishReload();
             }
 
-            Crosshair.Instance.UpdateError(spread);
+            if (nsm.hasAuthority)
+                Crosshair.Instance.UpdateError(spread);
         }
 
         private void FixedUpdate()
@@ -314,7 +315,10 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
             isScoped = status;
             Crosshair.Instance.CrosshairVisibility(!status);
             cam.fieldOfView = status ? gun.ScopeFOV : 87.5f;
-            scopeUI.SetActive(status);
+
+            if (scopeUI != null)
+                scopeUI.SetActive(status);
+
             model.SetActive(!status);
 
             if (PM != null) PM.weight = status ? gun.ScopeSpeedReduction : gun.Weight;
@@ -511,6 +515,9 @@ namespace Game.GameLogic.ItemSystem.Items.Firearms.Gunplay
 
         private void OnDisable()
         {
+            if (!nsm.hasAuthority)
+                return;
+
             Crosshair.Instance.CrosshairVisibility(true);
             Crosshair.Instance.UpdateError(0f);
             Scope(false);

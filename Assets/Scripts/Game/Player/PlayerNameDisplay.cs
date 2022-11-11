@@ -31,7 +31,10 @@ namespace Game.Player
             if (!string.IsNullOrEmpty(player.playerName))
                 txt.SetText(player.playerName);
 
-            txt.transform.parent.LookAt(cam);
+            if (cam != null)
+                txt.transform.parent.LookAt(cam);
+            else
+                cam = Camera.main.transform;
         }
     }
 }

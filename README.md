@@ -1,1 +1,3 @@
-# SCP_Intrusion
+# Multiplayer FPS
+
+An SCP Based Multiplayer FPS Game
